@@ -25,14 +25,8 @@ namespace :deploy do
     end
   end
 
-  desc "apartment migrate"
-  task :apartment_migrate, roles: :app do
-    run "cd #{current_path}; bundle exec rake RAILS_ENV=#{rails_env} apartment:migrate"
-  end
-  before "deploy:migrate", "deploy:apartment_migrate"
-
   task :setup_config, roles: :app do
-    sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/conf.d/#{application}.conf"
+    sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
     sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
     run "mkdir -p #{shared_path}/config"
     put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
@@ -54,14 +48,4 @@ namespace :deploy do
     end
   end
   before "deploy", "deploy:check_revision"
-
-  desc "reload the database with seed data"
-  task :seed do
-    run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
-  end
-
-  desc "populate the database with random data"
-  task :populate do
-    run "cd #{current_path}; bundle exec rake db:populate RAILS_ENV=#{rails_env}"
-  end
 end
