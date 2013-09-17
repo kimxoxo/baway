@@ -1,0 +1,50 @@
+# == Schema Information
+#
+# Table name: customers
+#
+#  id                 :integer          not null, primary key
+#  name               :string(255)
+#  street             :string(255)
+#  street_number      :integer
+#  tax_number         :string(255)
+#  neighbourhood      :string(255)
+#  postal_code        :string(255)
+#  address_complement :string(255)
+#  tax_number_type    :integer
+#  landline           :string(255)
+#  cellphone          :string(255)
+#  city               :string(255)
+#  rg                 :string(255)
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  street: MyString
+  street_number: 1
+  tax_number: MyString
+  neighbourhood: MyString
+  postal_code: MyString
+  address_complement: MyString
+  tax_number_type: 1
+  landline: MyString
+  cellphone: MyString
+  city: MyString
+  rg: MyString
+
+two:
+  name: MyString
+  street: MyString
+  street_number: 1
+  tax_number: MyString
+  neighbourhood: MyString
+  postal_code: MyString
+  address_complement: MyString
+  tax_number_type: 1
+  landline: MyString
+  cellphone: MyString
+  city: MyString
+  rg: MyString

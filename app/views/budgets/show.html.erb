@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Customer:</b>
+  <%= @budget.customer_id %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @budget.status %>
+</p>
+
+<p>
+  <b>Seller:</b>
+  <%= @budget.seller_id %>
+</p>
+
+<p>
+  <b>Arquitect:</b>
+  <%= @budget.arquitect_id %>
+</p>
+
+<p>
+  <b>Payment condition:</b>
+  <%= @budget.payment_condition_id %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @budget.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_budget_path(@budget) %> |
+<%= link_to 'Back', budgets_path %>

@@ -1,0 +1,23 @@
+# == Schema Information
+#
+# Table name: payment_conditions
+#
+#  id                   :integer          not null, primary key
+#  name                 :string(255)
+#  discount             :float
+#  num_monthly_payments :integer
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  discount: 1.5
+  num_monthly_payments: 1
+
+two:
+  name: MyString
+  discount: 1.5
+  num_monthly_payments: 1

@@ -16,3 +16,10 @@
 //= require bootstrap
 //= require_self
 //= require_tree .
+
+
+//define and tooltips
+$(function() {
+
+  $('#vertical_menu li a').tooltip({placement: 'right'});
+});

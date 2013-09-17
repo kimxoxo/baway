@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @payment_condition.name %>
+</p>
+
+<p>
+  <b>Discount:</b>
+  <%= @payment_condition.discount %>
+</p>
+
+<p>
+  <b>Num monthly payments:</b>
+  <%= @payment_condition.num_monthly_payments %>
+</p>
+
+
+<%= link_to 'Edit', edit_payment_condition_path(@payment_condition) %> |
+<%= link_to 'Back', payment_conditions_path %>

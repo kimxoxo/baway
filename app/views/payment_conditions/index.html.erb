@@ -1,0 +1,27 @@
+<h1>Listing payment_conditions</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Discount</th>
+    <th>Num monthly payments</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @payment_conditions.each do |payment_condition| %>
+  <tr>
+    <td><%= payment_condition.name %></td>
+    <td><%= payment_condition.discount %></td>
+    <td><%= payment_condition.num_monthly_payments %></td>
+    <td><%= link_to 'Show', payment_condition %></td>
+    <td><%= link_to 'Edit', edit_payment_condition_path(payment_condition) %></td>
+    <td><%= link_to 'Destroy', payment_condition, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Payment condition', new_payment_condition_path %>

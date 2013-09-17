@@ -1,0 +1,20 @@
+
+<%# if user_signed_in? %>
+
+
+  <ul id="vertical_menu">
+    
+    <li class="header" style="" >
+    </li>
+
+
+    <%# if can? :see_tickets_menu_link, Ticket %>
+      <li class="first_filter <%#= menu_active_link('tickets') %>" style="margin-top: 13px; ">
+        <%= link_to content_tag(:i, '', class: "icon-book", style: "font-size: 17px; "), suppliers_path, rel: 'tooltip', title: (t :"activerecord.budget").pluralize %>
+      </li>
+    <%# end %>
+
+
+
+  </ul>
+<%# end %>

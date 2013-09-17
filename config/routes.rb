@@ -1,4 +1,22 @@
 Baway::Application.routes.draw do
+  resources :budgets
+
+
+  resources :products
+
+
+  resources :payment_conditions
+
+
+  resources :users
+
+
+  resources :suppliers
+
+
+  resources :customers
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
