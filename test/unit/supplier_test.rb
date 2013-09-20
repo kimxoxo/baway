@@ -12,7 +12,7 @@
 #  cnpj               :string(255)
 #  postal_code        :string(255)
 #  landline           :string(255)
-#  cellphone          :string(255)
+#  mobile             :string(255)
 #  ie                 :string(255)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null

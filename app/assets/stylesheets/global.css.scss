@@ -9,6 +9,25 @@ $blue_global: #3f7db2;
 
 
 
+.success_text {
+  color: #569257;
+}
+
+.info_text {
+  color: #428bca;
+}
+
+.error_text {
+  color: #bf5a58;
+}
+
+.warning_text {
+  color: #c5a162 ;
+}
+
+
+
+
 
 /* header custom */
 header {
@@ -44,6 +63,48 @@ header.navbar-inverse {
       }
     }
 
+
+
+
+  #right_nav {
+    margin-right: 0;
+    margin-top: 25px;
+    padding: 0;
+
+    
+    ul.nav {
+      
+      li.dropdown {
+
+        a {
+          color: #fff;
+          font-size: 13px;
+          font-weight: bold;
+          margin: 0;
+          padding: 5px 5px 5px 20px;
+        }
+
+        ul.dropdown-menu {
+          li {
+            a {
+              color: $blue_global;
+            }
+
+            a:hover {
+              color: #fff;
+            }
+
+            i {
+              padding-right: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+
     nav {
       float: right;
       margin-top: 30px;
@@ -54,6 +115,22 @@ header.navbar-inverse {
   //end navbar-inner   
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

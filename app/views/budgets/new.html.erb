@@ -1,5 +1,111 @@
-<h1>New budget</h1>
+<center>
 
-<%= render 'form' %>
+	<%= simple_form_for @customer, url: new_customer_path, metdod: :get, html: {class: 'form-inline'} do |f| %>
 
-<%= link_to 'Back', budgets_path %>
+		<div id="budget_client_div">
+			<table>
+				<tr>
+					<td>
+						<%= f.input_field :tax_number_type,
+															as: :select,
+															collection: ({(t :"activerecord.customer.tax_number_type1") => 1,
+																						(t :"activerecord.customer.tax_number_type2") => 2}),
+															include_blank: false,
+															style: 'width: 70px; ' %>
+					</td>
+
+					<td colspan="3">
+						<%= f.input_field :tax_number,
+															style: 'width: 90%; ',
+															onblur: 'search_tax_number_and_populate(this.value); ' %>
+						<i id="icon-loading-customer-search" class="info_text"></i>		
+					</td>
+
+					<td align="center">
+						ORÇAMENTO
+					</td>
+				</tr>
+
+
+				<tr>
+					<td width="100px">
+						cliente
+					</td>
+
+					<td colspan="3">
+						<%= f.input_field :name,
+															style: 'width: 90%; ' %>
+					</td>
+
+					<td align="center">
+						123
+					</td>
+				</tr>
+
+
+				<tr>
+					<td>
+						end
+					</td>
+
+					<td colspan="3">
+						<%= f.input_field :street,
+															style: 'width: 90%; ' %>						
+					</td>
+				</tr>
+
+
+
+				<tr>
+					<td>
+						bairro
+					</td>
+
+					<td>
+						<%= f.input_field :neighbourhood,
+															style: 'width: 90%; ' %>						
+					</td>
+
+					<td>
+						cidade
+					</td>
+
+					<td>
+						<%= f.input_field :city,
+															style: 'width: 90%; ' %>						
+					</td>
+
+					<td align="center">
+						DATA
+					</td>				
+				</tr>				
+
+
+
+				<tr>
+					<td>
+						cnpj/cpf
+					</td>
+
+					<td>
+					</td>
+
+					<td>
+						ie/rg
+					</td>
+
+					<td>
+					</td>
+
+					<td>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+	<% end %>
+</center>
+
+<%#= render 'form' %>
+
+<%#= link_to 'Back', budgets_patd %>

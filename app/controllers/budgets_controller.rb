@@ -10,6 +10,10 @@ class BudgetsController < ApplicationController
     end
   end
 
+
+
+
+
   # GET /budgets/1
   # GET /budgets/1.json
   def show
@@ -21,21 +25,44 @@ class BudgetsController < ApplicationController
     end
   end
 
+
+
+
+
+
   # GET /budgets/new
   # GET /budgets/new.json
   def new
     @budget = Budget.new
+    @customer = Customer.new
+
+
+
+    if params[:tax_number]
+      @customer = Customer.where(tax_number: params[:tax_number])
+    end
+
+
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @budget }
+      #format.json { render json: @budget }
+      format.js
     end
   end
+
+
+
+
 
   # GET /budgets/1/edit
   def edit
     @budget = Budget.find(params[:id])
   end
+
+
+
+
 
   # POST /budgets
   # POST /budgets.json
@@ -53,6 +80,12 @@ class BudgetsController < ApplicationController
     end
   end
 
+
+
+
+
+
+
   # PUT /budgets/1
   # PUT /budgets/1.json
   def update
@@ -68,6 +101,11 @@ class BudgetsController < ApplicationController
       end
     end
   end
+
+
+
+
+
 
   # DELETE /budgets/1
   # DELETE /budgets/1.json

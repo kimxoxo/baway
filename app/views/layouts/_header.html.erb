@@ -8,6 +8,30 @@
     <%# if user_signed_in? %>
       <div class="pull-right" id="right_nav">
 
+        <ul class="nav pull-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="icon-plus icon-large" style="color:#f5d91a; "></i>
+                <%= (t :"miscellaneous.add") %>
+            </a>
+
+
+            <ul class="dropdown-menu">
+              <li>
+                <%= link_to (content_tag(:i, '', class: "icon-reorder") + (t :"activerecord.budget.singular")), new_budget_path %>
+              </li>
+
+              <li>
+                <%= link_to (content_tag(:i, '', class: "icon-truck") + (t :"activerecord.supplier.singular")), new_supplier_path %>
+              </li>
+
+              <li>
+                <%= link_to (content_tag(:i, '', class: "icon-gift") + (t :"activerecord.product.singular")), new_product_path %>
+              </li>                                                     
+            </ul>
+          </li>
+        </ul>
+
       </div>     
     <%# end %>
 

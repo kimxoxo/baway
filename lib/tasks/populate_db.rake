@@ -4,11 +4,48 @@ namespace :db do
 
 
 
-    # create admins and operators for the provider company
+
+    # create customers
     10.times do
 
+      name               = Faker::Name.name
+      street             = Faker::Address.street_address
+      street_number      = "111"
+      neighbourhood      = Faker::Name.name
+      city               = Faker::Address.city
+      tax_number         = "99.999.999/9999-99"
+      landline           = Faker::PhoneNumber.phone_number
+      mobile             = Faker::PhoneNumber.phone_number    
+      postal_code        = "234234"
+      address_complement = Faker::Name.name
+      tax_number_type    = [0,1][rand(2)]
+      rg                 = "234234234234"
 
 
+
+      customer = Customer.new(name: name,
+                              street: street,
+                              street_number: street_number,
+                              neighbourhood: neighbourhood,
+                              city: city,
+                              tax_number: tax_number,
+                              landline: landline,
+                              mobile: mobile,
+                              postal_code: postal_code,
+                              address_complement: address_complement,
+                              tax_number_type: tax_number_type,
+                              rg: rg)
+
+      customer.save!
+    end
+
+
+
+
+
+
+    # create suppliers and products
+    10.times do
       name                  = Faker::Name.name
 			street 							  = Faker::Address.street_address
 			street_number				  = "111"
@@ -38,6 +75,36 @@ namespace :db do
 
       #supplier.skip_confirmation!
       supplier.save!
+
+
+      #products
+      20.times do
+        supplier_id = supplier.id
+        description = Faker::Lorem.sentence
+        brand       = Faker::Name.name
+        code        = 10000+rand(89999)
+        supplier_price = 1.23
+        ipi            = 0.99
+        ncm            = 1
+        width          = 6.78
+        um             = true
+
+
+        product = Product.new(supplier_id: supplier_id,
+                      description: description,
+                      brand: brand,
+                      code: code,
+                      supplier_price: supplier_price,
+                      ipi: ipi,
+                      ncm: ncm,
+                      width: width,
+                      um: um)
+
+        product.save!
+
+      end
+
+
 
     end
 
