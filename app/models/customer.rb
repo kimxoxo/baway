@@ -20,7 +20,9 @@
 #
 
 class Customer < ActiveRecord::Base
-  attr_accessible :address_complement, :mobile, :city, :landline, :name, :neighbourhood, :postal_code, :rg, :street, :street_number, :tax_number, :tax_number_type
+  attr_accessible :address_complement, :mobile, :city, :landline, :name,
+  				  :neighbourhood, :postal_code, :rg, :street, :street_number,
+  				  :tax_number, :tax_number_type, :email
 
   belongs_to :budget
 end

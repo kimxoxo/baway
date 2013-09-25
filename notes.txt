@@ -1,0 +1,9 @@
+##acess postgrs command line
+sudo su - postgres
+psql
+
+##drop database
+drop database baway_development;
+
+##create database
+create database <database name> owner <username>

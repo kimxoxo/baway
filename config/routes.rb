@@ -1,4 +1,6 @@
 Baway::Application.routes.draw do
+
+
   resources :budgets
 
 

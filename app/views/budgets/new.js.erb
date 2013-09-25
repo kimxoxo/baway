@@ -1,3 +1,30 @@
 
 
-alert(<%= @customer.id %>);
+
+//customer search using tax_number (cpf/cnpj)
+<% if params[:tax_number] %>
+
+
+	$('#icon-loading-customer-search').removeClass();
+
+	//if customer was found
+	<% if @customer %>
+		$('#icon-loading-customer-search').addClass("icon-ok success_text");
+		$('#customer_name').val('<%= @customer.name %>');
+		$('#customer_street').val('<%= @customer.street %>');
+		$('#customer_street_number').val('<%= @customer.street_number %>');
+		$('#customer_neighbourhood').val('<%= @customer.neighbourhood %>');
+		$('#customer_city').val('<%= @customer.city %>');
+		$('#customer_postal_code').val('<%= @customer.postal_code %>');
+		$('#customer_email').val('<%= @customer.email %>');
+		$('#customer_landline').val('<%= @customer.landline %>');
+		$('#customer_mobile').val('<%= @customer.mobile %>');
+
+
+
+	<% end %>
+
+
+
+<% end %>
+

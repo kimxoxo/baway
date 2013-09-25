@@ -13,13 +13,14 @@ namespace :db do
       street_number      = "111"
       neighbourhood      = Faker::Name.name
       city               = Faker::Address.city
-      tax_number         = "99.999.999/9999-99"
+      tax_number         = (10+rand(59)).to_s + "." + (100+rand(599)).to_s + ".999/9999-99"
       landline           = Faker::PhoneNumber.phone_number
       mobile             = Faker::PhoneNumber.phone_number    
       postal_code        = "234234"
       address_complement = Faker::Name.name
       tax_number_type    = [0,1][rand(2)]
       rg                 = "234234234234"
+      email              = (100000+rand(899999)).to_s + "name@email.com"
 
 
 
@@ -34,7 +35,8 @@ namespace :db do
                               postal_code: postal_code,
                               address_complement: address_complement,
                               tax_number_type: tax_number_type,
-                              rg: rg)
+                              rg: rg,
+                              email: email)
 
       customer.save!
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130920221011) do
+ActiveRecord::Schema.define(:version => 20130921001534) do
 
   create_table "budgets", :force => true do |t|
     t.integer  "customer_id"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20130920221011) do
 
   create_table "customers", :force => true do |t|
     t.string   "name"
+    t.string   "email"
     t.string   "street"
     t.integer  "street_number"
     t.string   "tax_number"
@@ -40,6 +41,9 @@ ActiveRecord::Schema.define(:version => 20130920221011) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end
+
+  add_index "customers", ["email"], :name => "index_customers_on_email", :unique => true
+  add_index "customers", ["tax_number"], :name => "index_customers_on_tax_number", :unique => true
 
   create_table "payment_conditions", :force => true do |t|
     t.string   "name"
@@ -65,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20130920221011) do
 
   create_table "suppliers", :force => true do |t|
     t.string   "name"
+    t.string   "email"
     t.string   "street"
     t.string   "street_number"
     t.string   "neighbourhood"
@@ -90,5 +95,7 @@ ActiveRecord::Schema.define(:version => 20130920221011) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
 end

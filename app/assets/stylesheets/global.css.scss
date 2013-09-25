@@ -27,6 +27,12 @@ $blue_global: #3f7db2;
 
 
 
+.no_borders_shadow {
+  border: 0;
+  -webkit-box-shadow:  0px 0px 0px 0px #000;
+  box-shadow:  0px 0px 0px 0px #000;
+}
+
 
 
 /* header custom */

@@ -39,7 +39,7 @@ class BudgetsController < ApplicationController
 
 
     if params[:tax_number]
-      @customer = Customer.where(tax_number: params[:tax_number])
+      @customer = Customer.find_by_tax_number(params[:tax_number])
     end
 
 

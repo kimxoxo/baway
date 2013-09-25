@@ -299,4 +299,12 @@ $(document).ready(function($) {
 
   })
 
+
+
+
+    $("#customer_postal_code").mask("99999-999");
+    $("#customer_landline").mask("(99) 9999-9999");
+    $("#customer_mobile").mask("(99) 9999-9999");
+
+
 })

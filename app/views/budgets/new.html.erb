@@ -1,11 +1,15 @@
 <center>
 
-	<%= simple_form_for @customer, url: new_customer_path, metdod: :get, html: {class: 'form-inline'} do |f| %>
+	<%= simple_form_for @customer, html: {class: 'form-inline'} do |f| %>
 
-		<div id="budget_client_div">
+		<div id="budget_client_div" class="well no_borders_shadow">
 			<table>
 				<tr>
-					<td>
+					<td align="center" width="100px" class="alert alert-warning no_borders_shadow">
+						<b>orçamento nº</b>
+					</td>
+
+					<td width="80px" class="align_right">
 						<%= f.input_field :tax_number_type,
 															as: :select,
 															collection: ({(t :"activerecord.customer.tax_number_type1") => 1,
@@ -14,42 +18,51 @@
 															style: 'width: 70px; ' %>
 					</td>
 
-					<td colspan="3">
+					<td width="180px">
 						<%= f.input_field :tax_number,
-															style: 'width: 90%; ',
+															style: 'width: 80%; ',
 															onblur: 'search_tax_number_and_populate(this.value); ' %>
 						<i id="icon-loading-customer-search" class="info_text"></i>		
 					</td>
 
-					<td align="center">
-						ORÇAMENTO
+
+					<td class="align_right">
+						nome cliente
+					</td>
+
+					<td style="">
+						<%= f.input_field :name,
+															style: 'width: 96%; ' %>
 					</td>
 				</tr>
+			</table>
 
 
+
+			<table>
 				<tr>
-					<td width="100px">
-						cliente
-					</td>
-
-					<td colspan="3">
-						<%= f.input_field :name,
-															style: 'width: 90%; ' %>
-					</td>
-
-					<td align="center">
+					<td align="center" class="alert alert-warning no_borders_shadow">
 						123
 					</td>
-				</tr>
 
 
-				<tr>
-					<td>
+					<td width="80px" class="align_right">
 						end
 					</td>
 
 					<td colspan="3">
 						<%= f.input_field :street,
+															style: 'width: 96%; ' %>						
+					</td>
+
+
+					<td class="align_right">
+						nº
+					</td>
+
+
+					<td>
+						<%= f.input_field :street_number,
 															style: 'width: 90%; ' %>						
 					</td>
 				</tr>
@@ -57,47 +70,87 @@
 
 
 				<tr>
-					<td>
-						bairro
+					<td align="center" class="alert alert-warning no_borders_shadow">
+						<b>data</b>
+					</td>	
+
+
+					<td class="align_right">
+						cep
 					</td>
 
 					<td>
+						<%= f.input_field :postal_code,
+															style: 'width: 90%; ' %>						
+					</td>
+
+					<td class="align_right">
+						bairro
+					</td>
+
+					<td width="200px">
 						<%= f.input_field :neighbourhood,
 															style: 'width: 90%; ' %>						
 					</td>
 
-					<td>
+					<td width="100px" class="align_right">
 						cidade
 					</td>
 
 					<td>
 						<%= f.input_field :city,
 															style: 'width: 90%; ' %>						
-					</td>
-
-					<td align="center">
-						DATA
-					</td>				
+					</td>			
 				</tr>				
 
 
+				<tr>
+					<td align="center" width="100px" class="alert alert-warning no_borders_shadow">
+						<%= Time.now.strftime("%d") %>
+						<%= I18n.t("date.abbr_month_names")[Time.now.strftime("%m").to_i] %>
+						<%= Time.now.strftime("%Y") %>
+					</td>
+
+
+					<td class="align_right">
+						email
+					</td>
+
+
+					<td>
+						<%= f.input_field :email,
+															style: 'width: 90%; ' %>
+					</td>
+
+
+					<td class="align_right">
+						fixo
+					</td>
+
+
+					<td>
+						<%= f.input_field :landline,
+															style: 'width: 90%; ' %>
+					</td>
+
+
+					<td class="align_right">
+						celular
+					</td>
+
+					<td>
+						<%= f.input_field :mobile,
+															style: 'width: 90%; ' %>
+					</td>
+				</tr>
+
 
 				<tr>
-					<td>
-						cnpj/cpf
-					</td>
-
-					<td>
-					</td>
-
-					<td>
-						ie/rg
-					</td>
-
-					<td>
-					</td>
-
-					<td>
+					<td align="right" colspan="8" style="padding: 10px 10px 0 0; border: 0px solid red; ">
+      			<button class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
+      				<b>confirmar cliente</b>
+      				<i id="icon-loading-confirm-customer" class=""></i>
+      			</button>
 					</td>
 				</tr>
 			</table>
