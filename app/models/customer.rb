@@ -25,4 +25,9 @@ class Customer < ActiveRecord::Base
   				  :tax_number, :tax_number_type, :email
 
   belongs_to :budget
+
+
+	validates :name, :tax_number, :street, :street_number, :email,
+    presence: true
+
 end

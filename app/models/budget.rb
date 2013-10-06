@@ -26,4 +26,12 @@ class Budget < ActiveRecord::Base
 
   has_one  :customer
 
+
+
+  accepts_nested_attributes_for :customer
+
+
+
+
+
 end

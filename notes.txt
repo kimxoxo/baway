@@ -1,3 +1,7 @@
+###access server
+ssh deployer@192.241.247.215
+
+
 ##acess postgrs command line
 sudo su - postgres
 psql
