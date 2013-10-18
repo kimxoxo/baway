@@ -1,21 +1,17 @@
-pt-br:
-  activerecord:
-    budget:
-      singular: orçamento
-      plural: orçamentos
-    supplier: 
-      singular: fornecedor
-      plural: fornecedores
-    product:
-      singular: produto
-      plural: produtos
-    customer:
-      singular: cliente
-      plural: clientes
-      tax_number_type1: cpf
-      tax_number_type2: cnpj
-  miscellaneous:
-    add: adicionar
+pt-BR:
+  "yes": "sim"
+  "no": "não"
+  "true": "verdadeiro"
+  "false": "falso"
+  "add": "adicionar"
+  "update": "atualizar"
+  "fill_all_fields": "preencha campos obrig. e op. sel."
+  "deleted": "apagado"
+  "select": "selecione"
+  "optionals": "opcionais"
+  "to": "PARA"
+  search: pesquisar
+  save: cadastrar
   date:
     abbr_day_names:
     - Dom
@@ -68,3 +64,306 @@ pt-br:
     - :day
     - :month
     - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: apr. 1 hora
+        other: apr. %{count} horas
+      about_x_months:
+        one: apr. 1 mês
+        other: apr. %{count} meses
+      about_x_years:
+        one: apr. 1 ano
+        other: aproximadamente %{count} anos
+      almost_x_years:
+        one: quase 1 ano
+        other: quase %{count} anos
+      half_a_minute: meio min.
+      less_than_x_minutes:
+        one: < 1 min.
+        other: < %{count} min.
+      less_than_x_seconds:
+        one: < 1 seg.
+        other: < %{count} seg.
+      over_x_years:
+        one: mais de 1 ano
+        other: mais de %{count} anos
+      x_days:
+        one: 1 dia
+        other: ! '%{count} dias'
+      x_minutes:
+        one: 1 min.
+        other: ! '%{count} min.'
+      x_months:
+        one: 1 mês
+        other: ! '%{count} meses'
+      x_seconds:
+        one: 1 seg.
+        other: ! '%{count} seg.'
+    prompts:
+      day: Dia
+      hour: Hora
+      minute: min.
+      month: Mês
+      second: seg.
+      year: Ano
+  errors: &errors
+    format: ! '%{attribute} %{message}'
+    messages:
+      accepted: deve ser aceito
+      blank: preencha p.f.
+      confirmation: não está de acordo com a confirmação
+      empty: não pode ficar vazio
+      equal_to: deve ser igual a %{count}
+      even: deve ser par
+      exclusion: não está disponível
+      greater_than: deve ser maior que %{count}
+      greater_than_or_equal_to: deve ser maior ou igual a %{count}
+      inclusion: não está incluído na lista
+      invalid: não é válido
+      less_than: deve ser menor que %{count}
+      less_than_or_equal_to: deve ser menor ou igual a %{count}
+      not_a_number: não é um número
+      not_an_integer: não é um número inteiro
+      odd: deve ser ímpar
+      record_invalid: ! 'a validação falhou: %{errors}'
+      taken: já está em uso
+      too_long: ! 'é muito longo (máximo: %{count} caracteres)'
+      too_short: ! 'é muito curto (mínimo: %{count} caracteres)'
+      wrong_length: não possui o tamanho esperado (%{count} caracteres)
+      expired: 'expirou, por favor solicite um novo'
+      not_found: 'não encontrado'
+      already_confirmed: 'já foi confirmado, por favor tente fazer login'
+      not_locked: 'não estava bloqueado'
+      not_saved:
+        one: "1 erro impediu que %{resource} fosse salvo:"
+        other: "%{count} erros impediram que %{resource} fosse salvo:"
+    template:
+      body: ! 'por favor, verifique o(s) seguinte(s) campo(s):'
+      header:
+        one: ! 'não foi possível gravar %{model}: 1 erro'
+        other: ! 'não foi possível gravar %{model}: %{count} erros.'
+  number:
+    currency:
+      format:
+        delimiter: .
+        format: ! '%u %n'
+        precision: 2
+        separator: ! ','
+        significant: false
+        strip_insignificant_zeros: false
+        unit: R$
+    format:
+      delimiter: .
+      precision: 3
+      separator: ! ','
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion:
+            one: bilhão
+            other: bilhões
+          million:
+            one: milhão
+            other: milhões
+          quadrillion:
+            one: quatrilhão
+            other: quatrilhões
+          thousand: mil
+          trillion:
+            one: trilhão
+            other: trilhões
+          unit: ''
+      format:
+        delimiter: .
+        precision: 2
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n %u'
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: .
+    precision:
+      format:
+        delimiter: .
+  support:
+    array:
+      last_word_connector: ! ' e '
+      two_words_connector: ! ' e '
+      words_connector: ! ', '
+  time:
+    am: ''
+    formats:
+      default: ! '%A, %d de %B de %Y, %H:%M h'
+      long: ! '%A, %d de %B de %Y, %H:%M h'
+      short: ! '%d/%m, %H:%M h'
+    pm: ''
+
+  activemodel:
+    errors:
+      <<: *errors
+
+  devise:
+    failure:
+      already_authenticated: 'você já está logado'
+      unauthenticated: 'você precisa registrar-se ou fazer login para continuar'
+      unconfirmed: 'Aguarde um administrador ativar a sua conta. Receberá um email com essa confirmação.'
+      locked: 'Sua conta foi bloqueada devido a um número excessivo de tentativas de login não sucedidas.'
+      invalid: 'e-mail e/ou senha inválidos'
+      invalid_token: 'Token de autenticação inválido'
+      timeout: 'a sua sessão expirou, por favor faça login novamente para continuar'
+      inactive: 'a sua conta não foi ativada ainda'
+      not_found_in_database: 'e-mail não encontrado'
+    sessions:
+      signed_in: 'autenticado com sucesso'
+      signed_out: 'logout feito com sucesso'
+    passwords:
+      send_instructions: 'você receberá um e-mail com instruções sobre como alterar sua senha'
+      updated: 'sua senha foi alterada com sucesso. Você está logado agora'
+      updated_not_active: 'sua senha foi alterada com sucesso'
+      send_paranoid_instructions: 'caso seu e-mail esteja cadastrado, você receberá um link para recuperação de senha no seu e-mail em poucos minutos'
+      no_token: 'você não pode acessar esta página sem que seja a partir de um e-mail de alteração de senha. Se você chegou aqui através de um e-mail de alteração de senha, por favor verifique se você usou a URL completa que foi informada'
+    confirmations:
+      send_instructions: 'dentro de minutos você receberá um e-mail com instruções para confirmar a sua conta'
+      send_paranoid_instructions: 'caso seu e-mail exista em nossa base, você receberá um e-mail em poucos minutos com instruções sobre como confirmar sua conta'
+      confirmed: 'sua conta foi confirmada com sucesso. Você está logado'
+    registrations:
+      signed_up: 'bem-vindo! Você se registrou com sucesso. Deve agora aguardar que um administrador do sistema ative sua conta'
+      signed_up_but_unconfirmed: 'uma mensagem com um link de confirmação foi enviado para o seu e-mail. Por favor, abra o link para ativar sua conta'
+      signed_up_but_inactive: 'você se cadastrou com sucesso. Porém, sua conta ainda não está ativada'
+      signed_up_but_locked: 'você se cadastrou com sucesso. Porém, sua conta está bloqueada'
+      updated: 'você atualizou sua conta com sucesso'
+      update_needs_confirmation: 'Você atualizou sua conta com sucesso, mas nós precisamos verificar seu endereço de e-mail. Por favor, verifique seus e-mails e clique no link de confirmação para finalizar a criação da sua conta'
+      destroyed: 'até mais! Sua conta foi cancelada com sucesso. Esperamos vê-lo novamente em breve'
+    unlocks:
+      send_instructions: 'você receberá um e-mail em poucos minutos com instruções sobre como desbloquear sua conta'
+      unlocked: 'sua conta foi desbloqueada com sucesso. Por favor, faça login para continuar'
+      send_paranoid_instructions: 'caso sua e-mail exista em nossa base, você receberá um e-mail em poucos minutos com instruções sobre como desbloqueá-la'
+    omniauth_callbacks:
+      success: "autorizado com sucesso pela conta %{kind}"
+      failure: 'não foi possível autorizar você através do %{kind} porque "%{reason}"'
+    mailer:
+      confirmation_instructions:
+        subject: 'instruções para confirmação de conta'
+        greeting: 'bem-vindo %{name}!'
+        body: 'você pode confirmar seu email através do seguinte link:'
+        link_text: confirmar minha conta
+      reset_password_instructions:
+        subject: 'instruções para alteração de senha'
+        greeting: 'olá %{name}!'
+        body: 'você requisitou uma alteração de sua senha. Pode fazê-lo através do seguinte link:'
+        link_text: alterar minha senha
+        didnt_request: 'se você não requisitou que sua senha fosse alterada, por favor ignore esse email.'
+        wont_change: 'sua senha não irá ser alterada até que você siga o link acima e crie uma nova.'
+      unlock_instructions:
+        subject: 'instruções para desbloqueio de conta'
+        greeting: 'olá %{name}!'
+        body: 'sua conta foi bloqueada devido a um número excessivo de tentativas de login não sucedidas.'
+        click_below: 'clique no seguinte link para desbloquear sua conta:'
+        link_text: desbloquear minha conta
+  activerecord:
+    models:
+      budget: orçamento
+      customer: cliente
+      supplier: fornecedor
+      suppliers: fornecedores
+      product: produto
+    attributes:
+      budget:
+        id: ID
+      customer:
+        id: ID
+        name: nome
+        street: rua
+        street_number: nº
+        postal_code: cep
+        neighbourhood: bairro
+        city: cidade
+        email: email
+        landline: fixo
+        mobile: celular
+        tax_number_type1: cpf
+        tax_number_type2: cnpj
+    errors:
+      <<: *errors
+  helpers:
+    select:
+      prompt: por favor selecione
+    submit:
+      create: criar %{model}
+      submit: salvar %{model}
+      update: atualizar %{model}
+      customer:
+        create: cadastrar %{model}
+      user:
+        create: cadastrar %{model}
+    role:
+      webmaster: -1. webmaster
+      provider_admin: 1. admin
+      provider_operator: 2. operador
+      client_admin: 3. cliente admin
+      client_operator: 4. cliente operador
+
+
+  label_text:
+    devise:
+      new_passwd: nova senha
+      passwd_conf: confirmação senha
+
+  dialog_text:
+    confirm: 
+      prompt: confirma?
+
+  will_paginate:
+    previous_label: "&#8592; anterior"
+    next_label: "próximo &#8594;"
+    page_gap: "&hellip;"
+
+  cancan:
+    errors:
+      access_denied: 'acesso negado'
+
+
+  flash_messages:
+    something_wrong: 'algo correu mal. a equipe de desenvolvimento está sendo notificada. as nossas desculpas'
+    feedback:
+      token_invalid: 'código de nota inválido'
+      token_expired: 'código de nota expirado'
+      success: 'nota atribuída com sucesso'
+
+  simple_captcha:
+    placeholder: "<repita o texto da imagem>"
+    label: "repita o texto à direita"
+    message:
+      default: "não coincide"
+      tenant: "não coincide"
+
+  subdomain:
+    validation_messages:
+      too_short: 'mín. 2 letras'
+      too_long: 'máx. 20 letras'
+      not_available: 'não disponível'
+      ok: 'ok'
+
+  number:
+    currency:
+      format:
+        delimiter: .
+        format: ! '%u %n'
+        precision: 2
+        separator: ! ','
+        significant: false
+        strip_insignificant_zeros: false
+        unit: R$

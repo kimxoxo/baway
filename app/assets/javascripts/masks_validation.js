@@ -269,42 +269,47 @@ $(document).ready(function($) {
 
 
   //set mask field
-  if ($("#customer_tax_number_type").val() == 1) {
+  if ($("#budget_customer_attributes_tax_number_type").val() == 1) {
 
-    $("#customer_tax_number").val("");
-    $("#customer_tax_number").mask("99.999.999/9999-99", {reverse: true});
+    $("#budget_customer_attributes_tax_number").val("");
+    $("#budget_customer_attributes_tax_number").mask("99.999.999/9999-99", {reverse: true});
+
   }
-  else if ($("#customer_tax_number_type").val() == 2) {
+  else if ($("#budget_customer_attributes_tax_number_type").val() == 2) {
 
-    $("#customer_tax_number").val("");
-    $("#customer_tax_number").mask("999.999.999-99", {reverse: true});
+    $("#budget_customer_attributes_tax_number").val("");
+    $("#budget_customer_attributes_tax_number").mask("999.999.999-99", {reverse: true});
+
   }
 
 
 
   //set mask field on change
-  $("#customer_tax_number_type").change(function() {
+  $("#budget_customer_attributes_tax_number_type").change(function() {
 
 
-    if ($("#customer_tax_number_type").val() == 1) {
+    if ($("#budget_customer_attributes_tax_number_type").val() == 1) {
 
-      $("#customer_tax_number").val("");
-      $("#customer_tax_number").mask("99.999.999/9999-99", {reverse: true});
+      $("#budget_customer_attributes_tax_number").val("");
+      $("#budget_customer_attributes_tax_number").mask("99.999.999/9999-99", {reverse: true});
+      
+      //hide spinner
+      $("#icon-loading-customer-search").removeClass();
     }
-    else if ($("#customer_tax_number_type").val() == 2) {
+    else if ($("#budget_customer_attributes_tax_number_type").val() == 2) {
 
-      $("#customer_tax_number").val("");
-      $("#customer_tax_number").mask("999.999.999-99", {reverse: true});
+      $("#budget_customer_attributes_tax_number").val("");
+      $("#budget_customer_attributes_tax_number").mask("999.999.999-99", {reverse: true});
+    
+      //hide spinner
+      $("#icon-loading-customer-search").removeClass();
     }
 
   })
 
 
-
-
-    $("#customer_postal_code").mask("99999-999");
-    $("#customer_landline").mask("(99) 9999-9999");
-    $("#customer_mobile").mask("(99) 9999-9999");
-
+  $("#budget_customer_attributes_postal_code").mask("99999-999");
+  $("#budget_customer_attributes_landline").mask("(99) 9999-9999");
+  $("#budget_customer_attributes_mobile").mask("(99) 9999-9999");
 
 })

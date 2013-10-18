@@ -24,10 +24,10 @@ class Customer < ActiveRecord::Base
   				  :neighbourhood, :postal_code, :rg, :street, :street_number,
   				  :tax_number, :tax_number_type, :email
 
-  belongs_to :budget
+  has_many :budgets
 
 
-	validates :name, :tax_number, :street, :street_number, :email,
-    presence: true
+	validates :name,
+    	presence: true
 
 end

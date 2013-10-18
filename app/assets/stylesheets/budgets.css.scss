@@ -4,22 +4,43 @@
 
 
 #budget_client_div {
-	margin-top: 30px;
+	
+	//margin-top: 30px;
 	width: 1050px;
 	//border: 1px solid black;
 
+	/* table */
 	table {
-		width: 100%;
-		text-align: left;
-	
-	td {
-		//border: 1px solid pink;
-		}
 
-	td.align_right {
-		text-align: right;
-		padding-right: 10px;
-		}
+	  margin-top: 2px;
+	  width: 100%;
 
+	  td {
+	  	//border: 1px solid red;
+	  	vertical-align: top;
+
+	  	.control-group {
+	  		//border: 1px solid green;
+	  		margin: 0;
+	  		padding: 0;
+	  	}
+	  }
+
+	  label {
+	    text-align: right;
+	    padding-right: 10px;
+	  }
+
+	  span {
+	    //color: #f00;
+	    display: block;
+	    width: 100%;
+	    text-align: center;
+	    //padding-left: 70px;
+	    //border: 1px solid green;
+	  }
 	}
 }
+
+
+

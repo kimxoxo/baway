@@ -38,11 +38,14 @@ class BudgetsController < ApplicationController
 
 
 
-    if params[:tax_number]
-      @customer = Customer.find_by_tax_number(params[:tax_number])
-    end
+    #if params[:budget]
+      #@customer = Customer.find_by_tax_number(params[:budget][:customer_attributes][:tax_number])
+    #end
 
-
+    #if params[:budget]
+      #@customer = params[:budget][:customer_attributes]
+      #@customer.save
+    #end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -52,16 +55,11 @@ class BudgetsController < ApplicationController
   end
 
 
-
-
-
   # GET /budgets/1/edit
   def edit
     @budget = Budget.find(params[:id])
+
   end
-
-
-
 
 
   # POST /budgets
@@ -69,9 +67,13 @@ class BudgetsController < ApplicationController
   def create
     @budget = Budget.new(params[:budget])
 
+    #@customer = Customer.new(params[:budget][:customer_attributes])
+    #@customer.save!
+
     respond_to do |format|
       if @budget.save
-        format.html { redirect_to @budget, notice: 'Budget was successfully created.' }
+        #format.html { redirect_to @budget, notice: 'Budget was successfully created.' }
+        format.html { redirect_to action: 'edit', id: @budget.id }
         format.json { render json: @budget, status: :created, location: @budget }
       else
         format.html { render action: "new" }

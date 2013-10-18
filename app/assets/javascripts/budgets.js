@@ -5,16 +5,15 @@
 function search_tax_number_and_populate(tax_number) {
   
 
-
-	if($('#customer_tax_number_type').val() == 1) {
+	if($('#budget_customer_attributes_tax_number_type').val() == 1) {
 		tax_number_length = 18
 	}
-	else if($('#customer_tax_number_type').val() == 2) {
+	else if($('#budget_customer_attributes_tax_number_type').val() == 2) {
 		tax_number_length = 14
 	}
 
 
-	if($('#customer_tax_number').val().length == tax_number_length) {
+	if($('#budget_customer_attributes_tax_number').val().length == tax_number_length) {
 
 		//enable spinner
 		$("#icon-loading-customer-search").addClass("icon-spinner icon-spin icon-large");

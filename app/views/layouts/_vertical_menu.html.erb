@@ -10,20 +10,20 @@
 
 
     <li class="first_filter <%#= menu_active_link('tickets') %>" style="">
-      <%= link_to content_tag(:i, '', class: "icon-reorder", style: "font-size: 15px; "), budgets_path, rel: 'tooltip', title: (t :"activerecord.budget.plural") %>
+      <%= link_to content_tag(:i, '', class: "icon-reorder", style: "font-size: 15px; "), budgets_path, rel: 'tooltip', title: (t :"activerecord.models.budget").pluralize %>
     </li>
 
 
     <%# if can? :see_tickets_menu_link, Ticket %>
       <li class="first_filter <%#= menu_active_link('tickets') %>" style="margin-top: 13px; ">
-        <%= link_to content_tag(:i, '', class: "icon-truck", style: "font-size: 18px; "), suppliers_path, rel: 'tooltip', title: (t :"activerecord.supplier.plural") %>
+        <%= link_to content_tag(:i, '', class: "icon-truck", style: "font-size: 18px; "), suppliers_path, rel: 'tooltip', title: (t :"activerecord.models.suppliers") %>
       </li>
     <%# end %>
 
 
 
     <li class="first_filter <%#= menu_active_link('tickets') %>" style="">
-      <%= link_to content_tag(:i, '', class: "icon-gift", style: "font-size: 20px; "), products_path, rel: 'tooltip', title: (t :"activerecord.product.plural") %>
+      <%= link_to content_tag(:i, '', class: "icon-gift", style: "font-size: 20px; "), products_path, rel: 'tooltip', title: (t :"activerecord.models.product").pluralize %>
     </li>
 
   </ul>
