@@ -28,6 +28,16 @@ class BudgetsController < ApplicationController
 
 
 
+  def products_search
+    @products = Product.all
+
+    respond_to do |format|
+      format.js
+    end        
+  end
+
+
+
 
 
   # GET /budgets/new
@@ -58,7 +68,8 @@ class BudgetsController < ApplicationController
   # GET /budgets/1/edit
   def edit
     @budget = Budget.find(params[:id])
-
+    @product = Product.new
+    @products = []
   end
 
 

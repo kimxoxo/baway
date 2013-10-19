@@ -2,7 +2,7 @@
 
 	<!--<h1>Editing budget</h1>-->
 
-	<div style="width: 1090px; margin: 20px 0 10px 0; padding: 0; border: 0px solid red; ">
+	<div class="wrapper" style="margin: 20px 0 10px 0; padding: 0; border: 0px solid red; ">
 		<div style="float: left; padding:0; margin:0; " class="well no_borders_shadow">
 			<table class="" style="float: left; ">
 				<tr>
@@ -35,13 +35,53 @@
 
 		<div class="clearfix"></div>
 
+
+
+		<%= render 'form' %>
+
+
+
+		<div class="alert alert-info" style="float:left; width: 500px; ">
+			<%= simple_form_for @product,
+													url: {controller: 'budgets', action: 'products_search'},
+													method: :get,
+													remote: true,
+													html: {class: '', style: '',
+													id: "ticket-solution-form-#{@product.id}"} do |f| %>
+
+      	<%= f.input :id %>
+
+        <%#= f.input :solution,
+                          as: :text,
+                          label: false,
+                          wrapper: 'basic',
+                          error: false,
+                          input_html: {style: 'width: 220px; ', rows: 5} %>
+
+        <%= button_tag(type: 'submit',
+                             class: 'btn btn-primary btn-small',
+                             onclick: "",
+                             style: 'float: left; margin-left: 200px; ') do %>
+          ok
+				<% end %>              
+			<% end %>
+
+
+
+			<div id="products">
+			  <%= render 'products' %>
+			</div>
+
+
+		</div>
+
+
+
+
 	</div>
 
 
-	<%= render 'form' %>
 
-
-
-	<%= link_to 'Show', @budget %> |
-	<%= link_to 'Back', budgets_path %>
+	<%#= link_to 'Show', @budget %> 
+	<%#= link_to 'Back', budgets_path %>
 </center>
