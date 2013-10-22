@@ -22,3 +22,18 @@ function search_tax_number_and_populate(tax_number) {
   }
 
 }
+
+
+function enable_form() {
+
+	$('#budget_client_div_show').hide();
+	$('#budget_client_div').fadeIn(1000);;
+}
+
+
+
+
+jQuery(document).ready(function($) {
+
+	
+});

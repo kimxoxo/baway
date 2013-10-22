@@ -2,7 +2,13 @@ Baway::Application.routes.draw do
 
 
   resources :budgets do
-    get "budgets/products_search", on: :collection
+    collection do
+      get 'products_search'
+    end
+
+    collection do
+      get 'add_product'
+    end    
   end
 
 

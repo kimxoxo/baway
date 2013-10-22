@@ -39,45 +39,83 @@
 
 		<%= render 'form' %>
 
-
-
-		<div class="alert alert-info" style="float:left; width: 500px; ">
-			<%= simple_form_for @product,
-													url: {controller: 'budgets', action: 'products_search'},
-													method: :get,
-													remote: true,
-													html: {class: '', style: '',
-													id: "ticket-solution-form-#{@product.id}"} do |f| %>
-
-      	<%= f.input :id %>
-
-        <%#= f.input :solution,
-                          as: :text,
-                          label: false,
-                          wrapper: 'basic',
-                          error: false,
-                          input_html: {style: 'width: 220px; ', rows: 5} %>
-
-        <%= button_tag(type: 'submit',
-                             class: 'btn btn-primary btn-small',
-                             onclick: "",
-                             style: 'float: left; margin-left: 200px; ') do %>
-          ok
-				<% end %>              
-			<% end %>
+		<%= render 'budget_customer_view' %>
 
 
 
-			<div id="products">
-			  <%= render 'products' %>
+		<div id="products_search_div" style="">
+			<div id="products_search_form" class="no_borders_shadow">
+				<%= simple_form_for @product,
+														url: {controller: 'budgets', action: 'products_search'},
+														method: :get,
+														remote: true,
+														html: {class: '',
+																	 style: '',
+																	 id: "ticket-solution-form-#{@product.id}"} do |f| %>
+
+
+					<%= f.input :id,
+											placeholder: 'código/nome do produto',
+											label: false,
+											wrapper: :append,
+											class: "inline" do %>
+				    
+				    <%= f.input_field :id,
+	      											placeholder: 'código/nome do produto',
+	      											style: 'width: 260px; ' %>
+
+						<%= f.submit 'procurar',
+	        						 	 class: 'btn btn-primary btn-small',
+	        						   style: 'font-weight: bold; padding: 4px 10px 4px 10px' %>
+
+		      <% end %>
+
+				<% end %>
+
+				<div class="clearfix"></div>
+
 			</div>
 
 
+			<div id="products_search_results_div" class=" no_borders_shadow">
+				
+				<div id="products">
+				  <%= render 'products' %>
+				</div>
+
+			</div>
 		</div>
 
 
+		<div id="budgets_products_list" class="well no_borders_shadow">
+			<table id="table_products_list">
+				<tr>
+					<th class="border_left">
+						código
+					</th>
 
+					<th>
+						fornecedor
+					</th>
 
+					<th>
+						code
+					</th>
+
+					<th>
+						preço fornecedor
+					</th>
+
+					<th class="border_right">
+						ipi
+					</th>
+				</tr>
+			</table>
+		</div>
+
+		
+
+		<div class="clearfix"></div>
 	</div>
 
 
@@ -85,3 +123,8 @@
 	<%#= link_to 'Show', @budget %> 
 	<%#= link_to 'Back', budgets_path %>
 </center>
+
+
+<script type="text/javascript">
+	$('#budget_client_div').hide();
+</script>

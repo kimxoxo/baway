@@ -3,7 +3,7 @@
 
     <%= f.simple_fields_for :customer, @customer do |c| %>
 
-      <div id="budget_client_div" class="well no_borders_shadow">
+      <div style="" id="budget_client_div" class="well no_borders_shadow">
       <%#= f.error_notification class: "alert alert-error" %>
 
         <table>
@@ -105,26 +105,10 @@
 
 
 
-
-    <div style="width: 1090px; margin: 20px 0 10px 0; padding: 0; border: 1px solid red; ">
-      <%= f.simple_fields_for :product, @customer do |c| %>
-
-      <% end %>
-
-      <div class="clearfix"></div>
-    </div>
-
-
-
-
-
-
-
-
-    <div style="width: 1090px; border: 0px solid red; ">
+    <!--<div style="border: 0px solid red; ">
       <table style="float: right; border: 0px solid red; ">
         <tr>
-          <td align="right" colspan="8" style="padding: 15px 1px 0 0; border: 0px solid red; ">
+          <td align="right" colspan="8" style="">
             <button class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
               <b>confirmar cliente</b>
               <i id="icon-loading-confirm-customer" class=""></i>
@@ -134,6 +118,6 @@
       </table>
 
       <div class="clearfix"></div>
-    </div>
+    </div>-->
 
   <% end %>

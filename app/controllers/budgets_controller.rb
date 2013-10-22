@@ -38,6 +38,14 @@ class BudgetsController < ApplicationController
 
 
 
+  def add_product
+    @product = Product.find(params[:id])
+
+    respond_to do |format|
+      format.js
+    end     
+  end
+
 
 
   # GET /budgets/new
