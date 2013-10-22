@@ -54,13 +54,14 @@
 																	 id: "ticket-solution-form-#{@product.id}"} do |f| %>
 
 
-					<%= f.input :id,
+					<%= f.input :search_phrase,
 											placeholder: 'código/nome do produto',
 											label: false,
 											wrapper: :append,
 											class: "inline" do %>
 				    
-				    <%= f.input_field :id,
+				    <%= f.input_field :search_phrase,
+				    									as: :string,
 	      											placeholder: 'código/nome do produto',
 	      											style: 'width: 260px; ' %>
 

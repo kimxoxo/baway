@@ -29,7 +29,8 @@ class BudgetsController < ApplicationController
 
 
   def products_search
-    @products = Product.all
+    @products = Product.where("code(description) LIKE ?", "%#{params[:product][:search_phrase]}%")
+    @products = Product.where("lower(description) LIKE ?", "%#{params[:product][:search_phrase]}%")
 
     respond_to do |format|
       format.js
