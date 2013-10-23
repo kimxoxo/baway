@@ -29,8 +29,13 @@ class BudgetsController < ApplicationController
 
 
   def products_search
-    @products = Product.where("code(description) LIKE ?", "%#{params[:product][:search_phrase]}%")
-    @products = Product.where("lower(description) LIKE ?", "%#{params[:product][:search_phrase]}%")
+
+    #view_context to include the function from aplication helper
+    if view_context.is_numeric?(params[:product][:search_phrase])
+      @products = Product.where("code LIKE ?", "#{params[:product][:search_phrase]}%")
+    else
+      @products = Product.where("lower(description) LIKE ?", "%#{params[:product][:search_phrase]}%")
+    end
 
     respond_to do |format|
       format.js
@@ -39,7 +44,7 @@ class BudgetsController < ApplicationController
 
 
 
-  def add_product
+  def update_products_list
     @product = Product.find(params[:id])
 
     respond_to do |format|

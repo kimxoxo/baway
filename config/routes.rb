@@ -7,7 +7,7 @@ Baway::Application.routes.draw do
     end
 
     collection do
-      get 'add_product'
+      get 'update_products_list'
     end    
   end
 

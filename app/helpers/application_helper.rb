@@ -16,4 +16,11 @@ module ApplicationHelper
     return not_present
   end
 
+
+
+	def is_numeric?(string)
+	  true if Float(string) rescue false
+	end
+
+
 end
