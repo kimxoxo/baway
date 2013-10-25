@@ -20,9 +20,10 @@ class Product < ActiveRecord::Base
   attr_accessible :brand, :code, :description, :ipi, :ncm, :supplier_id, :supplier_price, :um, :width
 
 
-	attr_accessor :search_phrase
+	attr_accessor :search_phrase, :budget_id
 
-  belongs_to :budget
+	has_and_belongs_to_many :budgets
+
   belongs_to :supplier
 
 end

@@ -1,0 +1,25 @@
+//alert("<%= @product.description %>");
+
+
+
+
+<% if !flash.now[:success].blank? %>
+
+	$('#table_products_list').append('<%= escape_javascript(render("budget_list_row")) %>');
+
+	$('#flash_messages').find('td').show();
+
+	$('#flash_messages').find('td').find('div').removeClass();
+	$('#flash_messages').find('td').find('div').addClass('alert alert-success');
+	$('#flash_messages').find('td').find('div').html('<%= flash.now[:success] %>');	
+<% end %>
+
+
+<% if !flash.now[:error].blank? %>
+
+	$('#flash_messages').find('td').show();
+	
+	$('#flash_messages').find('td').find('div').removeClass();
+	$('#flash_messages').find('td').find('div').addClass('alert alert-error');
+	$('#flash_messages').find('td').find('div').html('<%= flash.now[:error] %>');
+<% end %>

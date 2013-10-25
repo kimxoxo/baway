@@ -1,5 +1,6 @@
 <center>
 
+	
 	<!--<h1>Editing budget</h1>-->
 
 	<div class="wrapper" style="margin: 20px 0 10px 0; padding: 0; border: 0px solid red; ">
@@ -54,6 +55,10 @@
 																	 id: "ticket-solution-form-#{@product.id}"} do |f| %>
 
 
+					<%= f.hidden_field :budget_id,
+														 value: @budget.id %>
+
+
 					<%= f.input :search_phrase,
 											placeholder: 'código/nome do produto',
 											label: false,
@@ -81,6 +86,7 @@
 			<div id="products_search_results_div" class=" no_borders_shadow">
 				
 				<div id="products">
+
 				  <%= render 'products' %>
 				</div>
 
@@ -89,7 +95,7 @@
 
 
 		<div id="budgets_products_list" class="well no_borders_shadow">
-			<table id="table_products_list">
+			<table id="table_products_list" style="border-collapse:separate; ">
 				<tr>
 					<th class="border_left">
 						código
@@ -104,13 +110,47 @@
 					</th>
 
 					<th>
-						preço fornecedor
+						preço
 					</th>
 
 					<th class="border_right">
 						ipi
 					</th>
 				</tr>
+
+
+
+				<tr id="flash_messages">
+					<td colspan="5" style="display: none; border: 0; padding-top: 10px; ">
+						<div class="alert" style="padding: 2px; margin: 0; ">
+							
+						</div>
+					</td>
+				</tr>
+
+
+
+
+				<% @products.each do |product| %>
+					<tr>
+						<td>
+							<%= product.code %>
+						</td>
+
+						<td>
+							<%= product.supplier.name %>
+						</td>
+
+						<td>
+							<%= product.description %>
+						</td>
+
+						<td>
+							<%= product.supplier_price %>
+						</td>
+					</tr>
+				<% end %>
+
 			</table>
 		</div>
 

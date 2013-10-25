@@ -32,10 +32,12 @@ class BudgetsController < ApplicationController
 
     #view_context to include the function from aplication helper
     if view_context.is_numeric?(params[:product][:search_phrase])
-      @products = Product.where("code LIKE ?", "#{params[:product][:search_phrase]}%")
+      @products_search_list = Product.where("code LIKE ?", "#{params[:product][:search_phrase]}%")
     else
-      @products = Product.where("lower(description) LIKE ?", "%#{params[:product][:search_phrase]}%")
+      @products_search_list = Product.where("lower(description) LIKE ?", "%#{params[:product][:search_phrase]}%")
     end
+
+    @budget = Budget.find(params[:product][:budget_id])
 
     respond_to do |format|
       format.js
@@ -45,11 +47,25 @@ class BudgetsController < ApplicationController
 
 
   def update_products_list
-    @product = Product.find(params[:id])
+    @budget  = Budget.find(params[:budget_id])
+    @product = Product.find(params[:product_id])
+
+    #if the product already in the list, display a message
+    if @budget.products.find_by_id(params[:product_id])
+
+      flash.now[:error] = (t :"flash_messages.adding_existing_product_to_budget_list")
+
+    #if the procuct does not exist for that budget, then save and follow the "regular" track
+    else
+      @product.budgets << @budget
+
+      flash.now[:success] = (t :"flash_messages.added_product_to_budget_list_successfully")  
+    end
+  
 
     respond_to do |format|
       format.js
-    end     
+    end
   end
 
 
@@ -83,7 +99,8 @@ class BudgetsController < ApplicationController
   def edit
     @budget = Budget.find(params[:id])
     @product = Product.new
-    @products = []
+    @products = @budget.products
+    @products_search_list = []
   end
 
 

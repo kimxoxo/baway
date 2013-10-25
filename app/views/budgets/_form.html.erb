@@ -1,123 +1,125 @@
-  <%= simple_form_for @budget, html: {class: 'form-inline'} do |f| %>
+  
+  <div style="" id="budget_client_div" class="well no_borders_shadow">
+
+    <%= simple_form_for @budget, html: {class: 'form-inline'} do |f| %>
 
 
-    <%= f.simple_fields_for :customer, @customer do |c| %>
+      <%= f.simple_fields_for :customer, @customer do |c| %>
 
-      <div style="" id="budget_client_div" class="well no_borders_shadow">
-      <%#= f.error_notification class: "alert alert-error" %>
+        <%#= f.error_notification class: "alert alert-error" %>
 
-        <table>
+          <table>
+            <tr>
+              <td width="68px" class="">
+                <%= c.input :tax_number_type,
+                            as: :select,
+                            collection: ({(t :"activerecord.attributes.customer.tax_number_type1") => 1,
+                                          (t :"activerecord.attributes.customer.tax_number_type2") => 2}),
+                            include_blank: false,
+                            label: false,
+                            input_html: {style: 'width: 60px; '},
+                            wrapper_html: {style: ''},
+                            style: 'width: 70px; ' %>
+              </td>
+
+              <td width="">
+                <%= c.input :tax_number,
+                            label: false,
+                            input_html: {style: 'width: 130px; ',
+                                         onblur: 'search_tax_number_and_populate(this.value); '},
+                            error_html: {style: 'display: inline; '} %>
+                  
+                  <i style="position:absolute; margin-left: 150px; margin-top: -22px; " id="icon-loading-customer-search" class="info_text"></i>
+              </td>
+            </tr>
+          </table>
+
+
+
+          <table>
+            <tr>
+              <td width="480px">
+                <%= c.input :name,
+                            label_html: {style: 'width: 60px; '},
+                            input_html: {style: 'width: 330px; '},
+                            error_html: {style: 'display: inline; '} %>
+              </td>
+            </tr>
+          </table>
+
+          <table>
+            <tr>
+              <td width="420px">
+                <%= c.input :street,
+                            input_html: {style: 'width: 330px; '},
+                            label_html: {style: 'width: 60px; '} %>           
+              </td>
+
+              <td width="90px">
+                <%= c.input :street_number,
+                            as: :string,
+                            label_html: {style: 'width: 22px; '},
+                            input_html: {style: 'width: 40px; '} %>           
+              </td>
+
+              <td width="128px">
+                <%= c.input :postal_code,
+                            input_html: {style: 'width: 70px; '} %>           
+              </td>
+
+              <td width="">
+                <%= c.input :neighbourhood,
+                            input_html: {style: 'width: 130px; '} %>            
+              </td>
+
+              <td width="">
+                <%= c.input :city,
+                            input_html: {style: 'width: 130px; '},
+                            wrapper_html: {style: 'text-align: right; '} %>           
+              </td>     
+            </tr>       
+          </table>
+
+          <table>
+            <tr>
+              <td width="420px">
+                <%= c.input :email,
+                            label_html: {style: 'width: 60px; '} %>
+              </td>
+
+
+              <td width="215px">
+                <%= c.input :landline,
+                            input_html: {style: 'width: 165px; '} %>
+              </td>
+
+
+              <td>
+                <%= c.input :mobile,
+                            input_html: {style: 'width: 130px; '} %>
+              </td>
+            </tr>
+          </table>
+        <% end %>
+
+
+
+
+
+      <!--<div style="border: 0px solid red; ">
+        <table style="float: right; border: 0px solid red; ">
           <tr>
-            <td width="68px" class="">
-              <%= c.input :tax_number_type,
-                          as: :select,
-                          collection: ({(t :"activerecord.attributes.customer.tax_number_type1") => 1,
-                                        (t :"activerecord.attributes.customer.tax_number_type2") => 2}),
-                          include_blank: false,
-                          label: false,
-                          input_html: {style: 'width: 60px; '},
-                          wrapper_html: {style: ''},
-                          style: 'width: 70px; ' %>
-            </td>
-
-            <td width="">
-              <%= c.input :tax_number,
-                          label: false,
-                          input_html: {style: 'width: 130px; ',
-                                       onblur: 'search_tax_number_and_populate(this.value); '},
-                          error_html: {style: 'display: inline; '} %>
-                
-                <i style="position:absolute; margin-left: 150px; margin-top: -22px; " id="icon-loading-customer-search" class="info_text"></i>
+            <td align="right" colspan="8" style="">
+              <button class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
+                <b>confirmar cliente</b>
+                <i id="icon-loading-confirm-customer" class=""></i>
+              </button>
             </td>
           </tr>
         </table>
 
+        <div class="clearfix"></div>
+      </div>-->
 
-
-        <table>
-          <tr>
-            <td width="480px">
-              <%= c.input :name,
-                          label_html: {style: 'width: 60px; '},
-                          input_html: {style: 'width: 330px; '},
-                          error_html: {style: 'display: inline; '} %>
-            </td>
-          </tr>
-        </table>
-
-        <table>
-          <tr>
-            <td width="420px">
-              <%= c.input :street,
-                          input_html: {style: 'width: 330px; '},
-                          label_html: {style: 'width: 60px; '} %>           
-            </td>
-
-            <td width="90px">
-              <%= c.input :street_number,
-                          as: :string,
-                          label_html: {style: 'width: 22px; '},
-                          input_html: {style: 'width: 40px; '} %>           
-            </td>
-
-            <td width="128px">
-              <%= c.input :postal_code,
-                          input_html: {style: 'width: 70px; '} %>           
-            </td>
-
-            <td width="">
-              <%= c.input :neighbourhood,
-                          input_html: {style: 'width: 130px; '} %>            
-            </td>
-
-            <td width="">
-              <%= c.input :city,
-                          input_html: {style: 'width: 130px; '},
-                          wrapper_html: {style: 'text-align: right; '} %>           
-            </td>     
-          </tr>       
-        </table>
-
-        <table>
-          <tr>
-            <td width="420px">
-              <%= c.input :email,
-                          label_html: {style: 'width: 60px; '} %>
-            </td>
-
-
-            <td width="215px">
-              <%= c.input :landline,
-                          input_html: {style: 'width: 165px; '} %>
-            </td>
-
-
-            <td>
-              <%= c.input :mobile,
-                          input_html: {style: 'width: 130px; '} %>
-            </td>
-          </tr>
-        </table>
-      </div>
-    <% end %>
-
-
-
-
-
-    <!--<div style="border: 0px solid red; ">
-      <table style="float: right; border: 0px solid red; ">
-        <tr>
-          <td align="right" colspan="8" style="">
-            <button class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
-              <b>confirmar cliente</b>
-              <i id="icon-loading-confirm-customer" class=""></i>
-            </button>
-          </td>
-        </tr>
-      </table>
-
-      <div class="clearfix"></div>
-    </div>-->
-
-  <% end %>
+      <% end %>
+    </div>
