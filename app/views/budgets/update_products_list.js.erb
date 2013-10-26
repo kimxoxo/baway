@@ -1,20 +1,16 @@
-//alert("<%= @product.description %>");
-
-
-
-
+//when the product is sucessefully added to the list
 <% if !flash.now[:success].blank? %>
 
-	$('#table_products_list').append('<%= escape_javascript(render("budget_list_row")) %>');
+	$('#table_products_list_just_added').append('<%= escape_javascript(render partial: "budget_list_row", locals: {product: @product, budget: @budget}) %>');
 
-	$('#flash_messages').find('td').show();
+	$('#flash_messages').find('td').show();																									
 
 	$('#flash_messages').find('td').find('div').removeClass();
 	$('#flash_messages').find('td').find('div').addClass('alert alert-success');
 	$('#flash_messages').find('td').find('div').html('<%= flash.now[:success] %>');	
 <% end %>
 
-
+//when the product already exists in the list
 <% if !flash.now[:error].blank? %>
 
 	$('#flash_messages').find('td').show();
@@ -23,3 +19,20 @@
 	$('#flash_messages').find('td').find('div').addClass('alert alert-error');
 	$('#flash_messages').find('td').find('div').html('<%= flash.now[:error] %>');
 <% end %>
+
+
+//when you remove a product from the list
+<% if params[:delete] %>
+	
+	$('#flash_messages').find('td').show();
+	
+	$('#flash_messages').find('td').find('div').removeClass();
+	$('#flash_messages').find('td').find('div').addClass('alert');
+	$('#flash_messages').find('td').find('div').html('<%= flash.now[:notice] %>');
+
+	$('#product_id_<%= @product.id %>').hide();
+
+<% end %>
+
+
+make_td_same_width_for_budget_tables();

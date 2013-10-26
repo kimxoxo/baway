@@ -339,7 +339,8 @@ pt-BR:
   flash_messages:
     something_wrong: 'algo correu mal. a equipe de desenvolvimento está sendo notificada. as nossas desculpas'
     adding_existing_product_to_budget_list: este produto já se encontra na lista
-    added_product_to_budget_list_successfully: produto adicionado com sucesso    
+    added_product_to_budget_list_successfully: produto adicionado com sucesso
+    removed_product_from_the_list_successfully: produto removido da lista com sucesso
     feedback:
       token_invalid: 'código de nota inválido'
       token_expired: 'código de nota expirado'

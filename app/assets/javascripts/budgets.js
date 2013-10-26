@@ -2,6 +2,24 @@
 // All this logic will automatically be available in application.js.
 
 
+function make_td_same_width_for_budget_tables() {
+
+	table_products_list_just_added = $('#table_products_list_just_added');
+
+	$('#table_products_list_just_added td').each(function() {
+
+   	var id = $(this).attr("id"); 
+
+   	alert(id);
+
+	});
+
+
+}
+
+
+
+
 function search_tax_number_and_populate(tax_number) {
   
 

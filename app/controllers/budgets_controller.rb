@@ -50,18 +50,29 @@ class BudgetsController < ApplicationController
     @budget  = Budget.find(params[:budget_id])
     @product = Product.find(params[:product_id])
 
-    #if the product already in the list, display a message
-    if @budget.products.find_by_id(params[:product_id])
 
-      flash.now[:error] = (t :"flash_messages.adding_existing_product_to_budget_list")
 
-    #if the procuct does not exist for that budget, then save and follow the "regular" track
+    #delete product from budget list
+    if params[:delete]
+      @budget.products.find(@product.id).destroy      
+
+      flash.now[:notice] = (t :"flash_messages.removed_product_from_the_list_successfully")
+
+    #else if not params[:delete]
     else
-      @product.budgets << @budget
 
-      flash.now[:success] = (t :"flash_messages.added_product_to_budget_list_successfully")  
+      #if the product already in the list, display a message
+      if @budget.products.find_by_id(params[:product_id])
+
+        flash.now[:error] = (t :"flash_messages.adding_existing_product_to_budget_list")
+
+      #if the procuct does not exist for that budget, then save and follow the "regular" track
+      else
+        @product.budgets << @budget
+
+        flash.now[:success] = (t :"flash_messages.added_product_to_budget_list_successfully")  
+      end
     end
-  
 
     respond_to do |format|
       format.js

@@ -1,18 +1,45 @@
+						<tr id='<%= "product_id_#{product.id}" %>'>
+							<td class="td_code">
+								<%= product.code %>
+							</td>
 
-<tr>
-	<td>
-		<%= @product.code %>
-	</td>
+							<td class="td_supplier">
+								<%= product.supplier.name %>
+							</td>
 
-	<td>
-		<%= @product.supplier.name %>
-	</td>
+							<td class="td_description">
+								<%= product.description %>
+							</td>
 
-	<td>
-		<%= @product.description %>
-	</td>
+							<td class="td_supplier_price">
+								<%= number_to_currency(product.supplier_price) %>
+							</td>
 
-	<td>
-		<%= @product.supplier_price %>
-	</td>
-</tr>
+							<td class="td_width">
+								<%= product.width %>
+							</td>
+
+
+							<td class="td_quantity">
+								<%#= product.quantity %>23
+							</td>
+
+
+							<td class="td_ipi">
+								<%= product.ipi %>
+							</td>
+
+
+							<td class="td_markup">
+								<%#= product.markup %>10%
+							</td>
+
+
+							<td class="td_delete">
+								<%= link_to content_tag(:i, '', class: "icon-trash"),
+	                    			update_products_list_budgets_path(budget_id: @budget.id,
+	                    																				product_id: product.id,
+	                    																				delete: true),
+	                    			remote: true %>
+	 						</td>
+						</tr>

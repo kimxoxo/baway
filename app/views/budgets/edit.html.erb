@@ -44,119 +44,126 @@
 
 
 
-		<div id="products_search_div" style="">
-			<div id="products_search_form" class="no_borders_shadow">
-				<%= simple_form_for @product,
-														url: {controller: 'budgets', action: 'products_search'},
-														method: :get,
-														remote: true,
-														html: {class: '',
-																	 style: '',
-																	 id: "ticket-solution-form-#{@product.id}"} do |f| %>
-
-
-					<%= f.hidden_field :budget_id,
-														 value: @budget.id %>
-
-
-					<%= f.input :search_phrase,
-											placeholder: 'código/nome do produto',
-											label: false,
-											wrapper: :append,
-											class: "inline" do %>
-				    
-				    <%= f.input_field :search_phrase,
-				    									as: :string,
-	      											placeholder: 'código/nome do produto',
-	      											style: 'width: 260px; ' %>
-
-						<%= f.submit 'procurar',
-	        						 	 class: 'btn btn-primary btn-small',
-	        						   style: 'font-weight: bold; padding: 4px 10px 4px 10px' %>
-
-		      <% end %>
-
-				<% end %>
-
-				<div class="clearfix"></div>
-
-			</div>
-
-
-			<div id="products_search_results_div" class=" no_borders_shadow">
-				
-				<div id="products">
-
-				  <%= render 'products' %>
-				</div>
-
-			</div>
-		</div>
 
 
 		<div id="budgets_products_list" class="well no_borders_shadow">
-			<table id="table_products_list" style="border-collapse:separate; ">
+			<table>
 				<tr>
-					<th class="border_left">
+					<th class="td_code border_left">
 						código
 					</th>
 
-					<th>
+					<th class="td_supplier">
 						fornecedor
 					</th>
 
-					<th>
-						code
+					<th class="td_description">
+						descrição
 					</th>
 
-					<th>
-						preço
+					<th class="td_supplier_price">
+						preço custo
 					</th>
 
-					<th class="border_right">
+					<th class="td_width">
+						medida
+					</th>
+
+					<th class="td_quantity">
+						quantidade
+					</th>
+
+					<th class="td_ipi">
 						ipi
+					</th>
+
+					<th class="td_markup">
+						markup
+					</th>					
+
+					<th class="td_delete border_right">
+						<%= content_tag(:i, '', class: "icon-trash") %>
 					</th>
 				</tr>
 
 
-
 				<tr id="flash_messages">
-					<td colspan="5" style="display: none; border: 0; padding-top: 10px; ">
-						<div class="alert" style="padding: 2px; margin: 0; ">
+					<td colspan="6" style="display: none; border: 0; padding-top: 10px; ">
+						<div class="alert" style="text-align:center; padding: 2px; margin: 0; ">
 							
 						</div>
 					</td>
 				</tr>
-
-
-
-
-				<% @products.each do |product| %>
-					<tr>
-						<td>
-							<%= product.code %>
-						</td>
-
-						<td>
-							<%= product.supplier.name %>
-						</td>
-
-						<td>
-							<%= product.description %>
-						</td>
-
-						<td>
-							<%= product.supplier_price %>
-						</td>
-					</tr>
-				<% end %>
-
 			</table>
+
+
+			<div id="products_list">	
+				<table id="table_products_list_just_added">
+					<!-- filled by javascript/ajax -->
+				</table>
+
+
+				<table id="table_products_list">
+					<% @products.each do |product| %>
+						<%= render partial: 'budget_list_row.html',
+											 locals: {product: product,
+											 				  budget: @budget} %>
+					<% end %>
+				</table>
+			</div>
 		</div>
 
 		
 
 		<div class="clearfix"></div>
+
+		<div id="products_search_results_div" class=" no_borders_shadow">
+			<div id="products_search_div" style="">
+				<div id="products_search_form" class="no_borders_shadow">
+					<%= simple_form_for @product,
+															url: {controller: 'budgets', action: 'products_search'},
+															method: :get,
+															remote: true,
+															html: {class: '',
+																		 style: '',
+																		 id: "ticket-solution-form-#{@product.id}"} do |f| %>
+
+
+						<%= f.hidden_field :budget_id,
+															 value: @budget.id %>
+
+
+						<%= f.input :search_phrase,
+												placeholder: 'código/nome do produto',
+												label: false,
+												wrapper: :append,
+												class: "inline" do %>
+					    
+					    <%= f.input_field :search_phrase,
+					    									as: :string,
+		      											placeholder: 'código/nome do produto',
+		      											style: 'width: 260px; ' %>
+
+							<%= f.submit 'procurar',
+		        						 	 class: 'btn btn-primary btn-small',
+		        						   style: 'font-weight: bold; padding: 4px 10px 4px 10px' %>
+
+			      <% end %>
+
+					<% end %>
+
+					<div class="clearfix"></div>
+
+				</div>
+
+			
+				<div id="products">
+					<%= render 'products' %>
+				</div>
+		</div>
+
+
+
 	</div>
 
 
