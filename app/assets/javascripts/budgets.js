@@ -4,13 +4,23 @@
 
 function make_td_same_width_for_budget_tables() {
 
-	table_products_list_just_added = $('#table_products_list_just_added');
 
-	$('#table_products_list_just_added td').each(function() {
+	first_tr = $('#table_products_list').find('tr').first();
 
-   	var id = $(this).attr("id"); 
+	first_tr.find('td').each(function() {
 
-   	alert(id);
+
+
+
+	 	td_class = $(this).attr('class'); 
+	 	td_width = $(this).width();
+
+
+	 	
+
+	 	$('.'+td_class).css('width', td_width);
+
+	 	alert(td_class + td_width);
 
 	});
 

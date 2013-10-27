@@ -1,7 +1,7 @@
 //when the product is sucessefully added to the list
 <% if !flash.now[:success].blank? %>
 
-	$('#table_products_list_just_added').append('<%= escape_javascript(render partial: "budget_list_row", locals: {product: @product, budget: @budget}) %>');
+	$('#table_products_list').prepend('<%= escape_javascript(render partial: "budget_list_row", locals: {product: @product, budget: @budget}) %>');
 
 	$('#flash_messages').find('td').show();																									
 

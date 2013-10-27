@@ -98,14 +98,9 @@
 
 
 			<div id="products_list">	
-				<table id="table_products_list_just_added">
-					<!-- filled by javascript/ajax -->
-				</table>
-
-
 				<table id="table_products_list">
 					<% @products.each do |product| %>
-						<%= render partial: 'budget_list_row.html',
+						<%= render partial: 'budget_list_row',
 											 locals: {product: product,
 											 				  budget: @budget} %>
 					<% end %>
@@ -175,4 +170,6 @@
 
 <script type="text/javascript">
 	$('#budget_client_div').hide();
+
+	make_td_same_width_for_budget_tables();
 </script>
