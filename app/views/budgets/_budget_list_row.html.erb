@@ -20,8 +20,25 @@
 							</td>
 
 
-							<td class="td_quantity">
-								<%#= product.quantity %>23
+
+							<td class="td_quantity" style="padding: 0; margin:0; ">
+		            <%= simple_form_for product, url: update_product_attributes_budgets_path,
+		            														 method: :get,
+		            														 remote: true,
+		            														 html: {class: '',
+		            														 				style: 'margin: 0;
+		            														 								padding: 0;
+		            														 								border: 0px solid red;
+		            														 								width: 40px; ',
+		            														 				id: "#{product.id}"} do |f| %>
+
+		              <%= f.hidden_field :id %>
+
+		              <%= f.input_field :quantity,
+		                          			as: :string,
+		                       					onblur: '$(this).closest("form").submit(); ',
+		                          			style: 'width: 30px; margin:0; padding:2px;  ' %>          
+		            <% end %>
 							</td>
 
 
@@ -31,7 +48,7 @@
 
 
 							<td class="td_markup">
-								<%#= product.markup %>10%
+								<%= product.markup %>
 							</td>
 
 

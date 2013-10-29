@@ -8,7 +8,11 @@ Baway::Application.routes.draw do
 
     collection do
       get 'update_products_list'
-    end    
+    end
+
+    collection do
+      get 'update_product_attributes'
+    end      
   end
 
 

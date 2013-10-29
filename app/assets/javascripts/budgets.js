@@ -5,24 +5,37 @@
 function make_td_same_width_for_budget_tables() {
 
 
-	first_tr = $('#table_products_list').find('tr').first();
+ 	first_tr = $('#table_products_list').find('tr').first();
 
-	first_tr.find('td').each(function() {
+ 	first_tr.find('td').each(function() {
+
+ 	 	td_class = $(this).attr('class'); 
+ 		td_width = $(this).width();
+
+ 		if(td_class != "") {
+ 	 		$('.'+td_class).css('width', td_width);
+
+ 	 		//alert(td_class + td_width);
+ 			//alert('k');
+
+	 		second_tr = $('#budgets_products_list table').find('tr').first();
+
+	 		td_width2 = second_tr.find('.'+td_class).width();
+
+	 		//alert(td_width2);
+
+	 		if(td_width2 > td_width) {
+ 	 			$('.'+td_class).css('width', td_width2);
+	 		}
+
+ 		}
 
 
 
-
-	 	td_class = $(this).attr('class'); 
-	 	td_width = $(this).width();
+ 	});
 
 
-	 	
 
-	 	$('.'+td_class).css('width', td_width);
-
-	 	alert(td_class + td_width);
-
-	});
 
 
 }

@@ -81,6 +81,16 @@ class BudgetsController < ApplicationController
 
 
 
+  def update_product_attributes
+
+    
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+
   # GET /budgets/new
   # GET /budgets/new.json
   def new
@@ -110,7 +120,7 @@ class BudgetsController < ApplicationController
   def edit
     @budget = Budget.find(params[:id])
     @product = Product.new
-    @products = @budget.products
+    @products = @budget.products.order('created_at DESC')
     @products_search_list = []
   end
 
