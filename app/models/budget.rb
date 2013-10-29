@@ -18,7 +18,13 @@ class Budget < ActiveRecord::Base
   				  :seller_id, :status, :customer_attributes
 
 
-  has_and_belongs_to_many :products
+
+  #this is similar to has_and_belongs_to_many
+  #this way we can use extra attributes in the budgets_products
+  has_many :budgets_products
+  has_many :products, through: :budgets_products
+
+
 
   has_many :users
 

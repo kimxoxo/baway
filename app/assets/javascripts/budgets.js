@@ -20,6 +20,7 @@ function make_td_same_width_for_budget_tables() {
 
 	 		second_tr = $('#budgets_products_list table').find('tr').first();
 
+
 	 		td_width2 = second_tr.find('.'+td_class).width();
 
 	 		//alert(td_width2);

@@ -87,13 +87,14 @@ $blue_global: #3f7db2;
 			padding: 5px;
 			text-align: left;
 			//margin-bottom: 10px;
-			//border: 1px solid red;
+			border: 1px solid red;
+			white-space: nowrap;
 		}
 
 		td {
 			text-align: left;
 			padding: 5px;
-			//border: 1px solid #e1e1e1;
+			border: 1px solid #e1e1e1;
 		}
 	}
 

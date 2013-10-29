@@ -14,7 +14,6 @@
 #  um             :boolean
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  quantity       :integer
 #
 
 class Product < ActiveRecord::Base
@@ -23,7 +22,14 @@ class Product < ActiveRecord::Base
 
 	attr_accessor :search_phrase, :budget_id
 
-	has_and_belongs_to_many :budgets
+
+  #this is similar to has_and_belongs_to_many
+  #this way we can use extra attributes in the budgets_products
+  has_many :budgets_products
+  has_many :budgets, through: :budgets_products
+
+
+
 
   belongs_to :supplier
 

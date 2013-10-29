@@ -11,44 +11,61 @@
 								<%= product.description %>
 							</td>
 
-							<td width="100px" class="td_supplier_price">
-								<%= number_to_currency(product.supplier_price) %>
-							</td>
-
-							<td width="50px" class="td_width">
+							<td class="td_width">
 								<%= product.width %>
 							</td>
 
+							<td class="td_supplier_price">
+								<%= number_to_currency(product.supplier_price) %>
+							</td>
 
 
-							<td class="td_quantity" style="padding: 0; margin:0; ">
-		            <%= simple_form_for product, url: update_product_attributes_budgets_path,
-		            														 method: :get,
-		            														 remote: true,
-		            														 html: {class: '',
-		            														 				style: 'margin: 0;
-		            														 								padding: 0;
-		            														 								border: 0px solid red;
-		            														 								width: 40px; ',
-		            														 				id: "#{product.id}"} do |f| %>
+							<td class="td_quantity" style="padding: 0 5px 0 5px; margin:0; ">
+		            <%= simple_form_for BudgetsProduct.find_by_product_id(product.id), url: update_product_attributes_budgets_path,
+							            														  method: :get,
+							            														  remote: true,
+							            														  html: {class: '',
+							            														 				 style: 'margin: 0;
+							            														 								 padding: 0;
+							            														 								 border: 0px solid red; ',
+							            														 				 id: "#{product.id}"} do |f| %>
 
 		              <%= f.hidden_field :id %>
 
 		              <%= f.input_field :quantity,
 		                          			as: :string,
 		                       					onblur: '$(this).closest("form").submit(); ',
-		                          			style: 'width: 30px; margin:0; padding:2px;  ' %>          
+		                          			style: 'float: left; width: 30px; margin:0; padding:2px;  ' %>          
 		            <% end %>
+
+		            <i class="icon" style="float: left; margin-top: 10px; margin-left: 5px; font-size: 14px; "></i>
+							</td>
+
+
+							<td class="td_ipi" style="padding: 0 5px 0 5px; margin:0; ">
+		            <%= simple_form_for BudgetsProduct.find_by_product_id(product.id), url: update_product_attributes_budgets_path,
+							            														  method: :get,
+							            														  remote: true,
+							            														  html: {class: '',
+							            														 				 style: 'margin: 0;
+							            														 								 padding: 0;
+							            														 								 border: 0px solid red; ',
+							            														 				 id: "#{product.id}"} do |f| %>
+
+		              <%= f.hidden_field :id %>
+
+		              <%= f.input_field :markup,
+		                          			as: :string,
+		                       					onblur: '$(this).closest("form").submit(); ',
+		                          			style: 'float: left; width: 30px; margin:0; padding:2px;  ' %>          
+		            <% end %>
+
+		            <i class="icon" style="float: left; margin-top: 10px; margin-left: 5px; font-size: 14px; "></i>
 							</td>
 
 
 							<td class="td_ipi">
-								<%= product.ipi %>
-							</td>
-
-
-							<td class="td_markup">
-								<%= product.markup %>
+								<%#= product.markup %>10%
 							</td>
 
 
