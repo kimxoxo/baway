@@ -1,3 +1,5 @@
+						<% @budgets_product = BudgetsProduct.find_by_product_id(product.id) %>
+
 						<tr id='<%= "product_id_#{product.id}" %>'>
 							<td class="td_code">
 								<%= product.code %>
@@ -20,15 +22,23 @@
 							</td>
 
 
+							<td>
+								<a href="#" onclick='<%= "enable_this_tr_forms(#{product.id}); " %>'>
+									<i class="icon icon-pencil"></i>
+								</a>
+							</td>
+
+
 							<td class="td_quantity" style="padding: 0 5px 0 5px; margin:0; ">
-		            <%= simple_form_for BudgetsProduct.find_by_product_id(product.id), url: update_product_attributes_budgets_path,
-							            														  method: :get,
-							            														  remote: true,
-							            														  html: {class: '',
-							            														 				 style: 'margin: 0;
-							            														 								 padding: 0;
-							            														 								 border: 0px solid red; ',
-							            														 				 id: "#{product.id}"} do |f| %>
+		            <%= simple_form_for @budgets_product,
+		            										url: update_product_attributes_budgets_path,
+							            					method: :get,
+							            					remote: true,
+							            					html: {class: 'hide_this_form',
+							            					style: 'margin: 0;
+							            									padding: 0;
+							            									border: 0px solid red; ',
+																		id: "#{product.id}"} do |f| %>
 
 		              <%= f.hidden_field :id %>
 
@@ -38,19 +48,24 @@
 		                          			style: 'float: left; width: 30px; margin:0; padding:2px;  ' %>          
 		            <% end %>
 
+								<span>
+									<%= @budgets_product.quantity %>
+								</span>
+
 		            <i class="icon" style="float: left; margin-top: 10px; margin-left: 5px; font-size: 14px; "></i>
 							</td>
 
 
 							<td class="td_ipi" style="padding: 0 5px 0 5px; margin:0; ">
-		            <%= simple_form_for BudgetsProduct.find_by_product_id(product.id), url: update_product_attributes_budgets_path,
-							            														  method: :get,
-							            														  remote: true,
-							            														  html: {class: '',
-							            														 				 style: 'margin: 0;
-							            														 								 padding: 0;
-							            														 								 border: 0px solid red; ',
-							            														 				 id: "#{product.id}"} do |f| %>
+		            <%= simple_form_for @budgets_product,
+		            										url: update_product_attributes_budgets_path,
+							            					method: :get,
+							            					remote: true,
+							            					html: {class: 'hide_this_form',
+							            								 style: 'margin: 0;
+							            					  						 padding: 0;
+							            												 border: 0px solid red; ',
+							            					id: "#{product.id}"} do |f| %>
 
 		              <%= f.hidden_field :id %>
 
@@ -59,6 +74,10 @@
 		                       					onblur: '$(this).closest("form").submit(); ',
 		                          			style: 'float: left; width: 30px; margin:0; padding:2px;  ' %>          
 		            <% end %>
+
+								<span>
+									<%= @budgets_product.markup %>
+								</span>
 
 		            <i class="icon" style="float: left; margin-top: 10px; margin-left: 5px; font-size: 14px; "></i>
 							</td>

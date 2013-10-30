@@ -2,6 +2,30 @@
 // All this logic will automatically be available in application.js.
 
 
+
+
+function enable_this_tr_forms(tr_id) {
+
+
+	$('#budgets_products_list table tr form').hide();
+	$('#budgets_products_list table tr td span').fadeIn(500);
+	$('#budgets_products_list table tr').css('background-color', 'transparent');
+
+
+
+	$('#product_id_'+tr_id).find('form').fadeIn(500);
+	$('#product_id_'+tr_id).find('span').hide();
+
+	$('#product_id_'+tr_id).find('td').first().addClass('border_left');
+	$('#product_id_'+tr_id).find('td').last().addClass('border_right');
+
+	$('#product_id_'+tr_id).css('background-color', '#f5f5f5');
+	$('#product_id_'+tr_id).css('background-color', '#f5f5f5');
+
+}
+
+
+
 function make_td_same_width_for_budget_tables() {
 
 
@@ -30,8 +54,6 @@ function make_td_same_width_for_budget_tables() {
 	 		}
 
  		}
-
-
 
  	});
 
@@ -69,7 +91,7 @@ function search_tax_number_and_populate(tax_number) {
 function enable_form() {
 
 	$('#budget_client_div_show').hide();
-	$('#budget_client_div').fadeIn(1000);;
+	$('#budget_client_div').fadeIn(1000);
 }
 
 
