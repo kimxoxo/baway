@@ -22,7 +22,7 @@
 							</td>
 
 
-							<td>
+							<td class="td_pencil">
 								<a href="#" onclick='<%= "enable_this_tr_forms(#{product.id}); " %>'>
 									<i class="icon icon-pencil"></i>
 								</a>
@@ -51,12 +51,10 @@
 								<span>
 									<%= @budgets_product.quantity %>
 								</span>
-
-		            <i class="icon" style="float: left; margin-top: 10px; margin-left: 5px; font-size: 14px; "></i>
 							</td>
 
 
-							<td class="td_ipi" style="padding: 0 5px 0 5px; margin:0; ">
+							<td class="td_markup" style="padding: 0 5px 0 5px; margin:0; ">
 		            <%= simple_form_for @budgets_product,
 		            										url: update_product_attributes_budgets_path,
 							            					method: :get,
@@ -78,14 +76,19 @@
 								<span>
 									<%= @budgets_product.markup %>
 								</span>
-
-		            <i class="icon" style="float: left; margin-top: 10px; margin-left: 5px; font-size: 14px; "></i>
 							</td>
 
 
 							<td class="td_ipi">
 								<%#= product.markup %>10%
 							</td>
+
+
+							<td class="td_price">
+								<span></span>
+								<i class="icon" style="float: left; margin-top: 10px; margin-left: 5px; font-size: 14px; "></i>
+							</td>
+
 
 
 							<td class="td_delete">

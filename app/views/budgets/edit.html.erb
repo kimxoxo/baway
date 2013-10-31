@@ -69,7 +69,7 @@
 						preço custo
 					</th>
 
-					<th>
+					<th class="td_pencil">
 						<i class="icon icon-pencil"></i>
 					</th>
 
@@ -85,19 +85,24 @@
 						ipi
 					</th>					
 
+					<th class="td_price">
+						preço
+					</th>
+
+
 					<th class="td_delete border_right">
 						<%= content_tag(:i, '', class: "icon-trash") %>
 					</th>
 				</tr>
 
 
-				<!--<tr id="flash_messages">
-					<td colspan="6" style="display: none; border: 0; padding-top: 10px; ">
+				<tr id="flash_messages">
+					<td colspan="11" style="display: none; border: 0; padding-top: 10px; ">
 						<div class="alert" style="text-align:center; padding: 2px; margin: 0; ">
 							
 						</div>
 					</td>
-				</tr>-->
+				</tr>
 			</table>
 
 
@@ -178,4 +183,5 @@
 	$('.hide_this_form').hide();
 
 	make_td_same_width_for_budget_tables();
+
 </script>

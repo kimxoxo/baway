@@ -85,6 +85,8 @@ class BudgetsController < ApplicationController
 
     @budgetsproduct = BudgetsProduct.find(params[:budgets_product][:id])
 
+    @product = Product.find(@budgetsproduct.product_id)
+
     @budgetsproduct.update_attributes(params[:budgets_product])
 
     respond_to do |format|

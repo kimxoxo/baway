@@ -1,8 +1,18 @@
-alert('<%= @budgetsproduct.id %>');
 
 
 <% if params[:budgets_product][:markup] %>
 
-	$('#product_id_43').css('background-color', 'red');
+	//$('#product_id_<%= @budgetsproduct.product_id %>').css('background-color', 'red');
+
+
+	<% price = compute_price(@product.supplier_price, @product.ipi, @budgetsproduct.markup) %>
+
+
+	$('#product_id_<%= @budgetsproduct.product_id %>').find('.td_price').find('span').html('<%= number_to_currency(price) %>');
+	$('#product_id_<%= @budgetsproduct.product_id %>').find('.td_price').find('i').addClass('icon-ok success_text');
 
 <% end %>
+
+
+
+make_td_same_width_for_budget_tables();

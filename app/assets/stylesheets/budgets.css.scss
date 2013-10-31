@@ -95,6 +95,7 @@ $blue_global: #3f7db2;
 			text-align: left;
 			padding: 8px 5px 8px 5px;
 			//border: 1px solid #e1e1e1;
+			white-space: nowrap;
 		}
 	}
 
@@ -106,7 +107,7 @@ $blue_global: #3f7db2;
 
 
 	#products_list {
-		height: 430px;
+		height: 300px;
 		overflow: auto;
 	}
 
