@@ -77,6 +77,16 @@ $blue_global: #3f7db2;
 	//border: 1px solid red;
 	//overflow: auto;
 
+
+	table#table_results {
+		th {
+			background-color: transparent;
+			color: $blue_global;
+			//border: 1px solid red;
+			padding: 5px;
+		}
+	}
+
 	table {
 		width: 100%;
 
@@ -103,7 +113,7 @@ $blue_global: #3f7db2;
 		td {
 			//border: 1px solid red;
 		}
-	}
+}
 
 
 	#products_list {

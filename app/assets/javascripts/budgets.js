@@ -2,23 +2,27 @@
 // All this logic will automatically be available in application.js.
 
 
+function hide_all_forms() {
+	$('#budgets_products_list table tr form').hide();
+	$('#budgets_products_list table tr').css('background-color', 'transparent');
+}
+
+function show_spans() {
+	$('#budgets_products_list table tr td span').fadeIn(500);
+}
 
 function enable_this_tr_forms(tr_id) {
+	
+	hide_all_forms();
 
+	show_spans();
 
-	$('#budgets_products_list table tr form').hide();
-	$('#budgets_products_list table tr td span').fadeIn(500);
-	$('#budgets_products_list table tr').css('background-color', 'transparent');
-
-
-
-	$('#product_id_'+tr_id).find('form').fadeIn(500);
-	$('#product_id_'+tr_id).find('span').hide();
+	$('#product_id_'+tr_id).find('form').first().fadeIn(500);
+	$('#product_id_'+tr_id).find('span').first().hide();
 
 	$('#product_id_'+tr_id).find('td').first().addClass('border_left');
 	$('#product_id_'+tr_id).find('td').last().addClass('border_right');
 
-	$('#product_id_'+tr_id).css('background-color', '#f5f5f5');
 	$('#product_id_'+tr_id).css('background-color', '#f5f5f5');
 
 }
@@ -27,7 +31,7 @@ function enable_this_tr_forms(tr_id) {
 
 function make_td_same_width_for_budget_tables() {
 
-	//first iteration
+	//first iteration, fit all TDs to text, using width = 1px
 	first_tr = $('#table_products_list').find('tr').first();
  	first_tr.find('td').each(function() {
 
@@ -39,7 +43,8 @@ function make_td_same_width_for_budget_tables() {
 
 	})
 
- 	//second iterarion
+ 	//second iterarion, after all TDs fit, td_description will get the remain available with
+ 	//so lets make the THs same with of TDs
  	first_tr.find('td').each(function() {
 
  		td_width = $(this).width();
@@ -54,7 +59,7 @@ function make_td_same_width_for_budget_tables() {
 
 
 
- 	//third iterarion
+ 	//third iterarion, if after all the THs are bigger than it's TDs, lets make TDs same with as THs
 	first_tr = $('#table_products_list').find('tr').first();
  	first_tr.find('td').each(function() {	
 
@@ -68,6 +73,33 @@ function make_td_same_width_for_budget_tables() {
  		}
 
 	})
+
+
+ 	//fourth iterarion, for table results
+	first_tr = $('#table_results').find('tr').first();
+ 	first_tr.find('th').each(function() {	
+
+ 		
+ 		td_class = $(this).attr('class'); 
+
+		td_width = $('#table_products_list').find('td.'+td_class).width();
+
+
+
+ 		if(td_class != "td_description") {
+
+ 			$(this).width(td_width);
+ 		}
+
+	})
+
+
+g = $('#products_list').height();
+h = $('#table_products_list').height();
+
+alert(h);
+
+
 
 }
 

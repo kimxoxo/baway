@@ -106,13 +106,59 @@
 			</table>
 
 
-			<div id="products_list">	
-				<table id="table_products_list">
+			<div id="products_list" style="border: 1px solid red; ">	
+				<table id="table_products_list"  style="border: 1px solid green; ">
+					<% @price_total = 0 %>
+					<% @quantity_total = 0 %>
+
+
+
 					<% @products.each do |product| %>
 						<%= render partial: 'budget_list_row',
 											 locals: {product: product,
 											 				  budget: @budget} %>
 					<% end %>
+				</table>
+			</div>
+
+			<div>
+				<table id="table_results">
+					<tr>
+						<th class="td_code">
+						</th>
+
+						<th class="td_supplier">
+						</th>
+
+						<th class="td_description">
+						</th>
+
+						<th class="td_width">
+						</th>
+
+						<th class="td_supplier_price">
+						</th>
+
+						<th class="td_pencil">
+						</th>
+
+						<th class="td_quantity">
+							<%= @quantity_total %>
+						</th>
+
+						<th class="td_markup">
+						</th>
+
+						<th class="td_ipi">
+						</th>					
+
+						<th class="td_price" align="left">
+							<%= number_to_currency(@price_total) %>
+						</th>
+
+						<th class="td_delete">
+						</th>	
+					</tr>
 				</table>
 			</div>
 		</div>

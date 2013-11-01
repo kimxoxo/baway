@@ -50,6 +50,11 @@
 
 								<span>
 									<%= @budgets_product.quantity %>
+
+									<!-- compute totals for quantity column -->
+									<% if(@budgets_product.quantity) %>
+										<% @quantity_total = @quantity_total + @budgets_product.quantity %>
+									<% end %>
 								</span>
 							</td>
 
@@ -85,8 +90,17 @@
 
 
 							<td class="td_price">
-								<span></span>
-								<i class="icon" style="float: left; margin-top: 10px; margin-left: 5px; font-size: 14px; "></i>
+								<span>
+									<% if(product.supplier_price && product.ipi && @budgets_product.markup && @budgets_product.quantity) %>
+										<% price = compute_price(product.supplier_price, product.ipi, @budgets_product.markup, @budgets_product.quantity) %>
+										<%= number_to_currency(price) %>
+
+										<!-- compute totals for price column -->
+										<% @price_total = @price_total + price %>
+									<% end %>
+								</span>
+
+								<i class="icon" style="font-size: 14px; "></i>
 							</td>
 
 
