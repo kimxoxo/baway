@@ -39,70 +39,60 @@ function make_td_same_width_for_budget_tables() {
 
  		if(td_class != "td_description") {
  			$(this).width('1px');
+ 			$('#budgets_products_list table tr th.'+td_class).width('1px');
+ 			$('#table_results th.'+td_class).width('1px');
  		}
-
 	})
 
- 	//second iterarion, after all TDs fit, td_description will get the remain available with
- 	//so lets make the THs same with of TDs
- 	first_tr.find('td').each(function() {
-
- 		td_width = $(this).width();
- 		td_class = $(this).attr('class');
-
-
- 		if(td_class != "td_description") {
- 			$('#budgets_products_list').find('th.'+td_class).width(td_width);
- 		}
-
- 	})
 
 
 
- 	//third iterarion, if after all the THs are bigger than it's TDs, lets make TDs same with as THs
-	first_tr = $('#table_products_list').find('tr').first();
- 	first_tr.find('td').each(function() {	
+	//first iteration, fit all TDs to text, using width = 1px
+	first_tr = $('#budgets_products_list table').first().find('tr');
+ 	first_tr.find('th').each(function() {
 
  		td_class = $(this).attr('class'); 
 
-
-		td_width = $('#budgets_products_list').find('th.'+td_class).width();
-
- 		if(td_class != "td_description") {
- 			$(this).width(td_width);
- 		}
-
-	})
-
-
- 	//fourth iterarion, for table results
-	first_tr = $('#table_results').find('tr').first();
- 	first_tr.find('th').each(function() {	
-
- 		
- 		td_class = $(this).attr('class'); 
-
-		td_width = $('#table_products_list').find('td.'+td_class).width();
-
-
-
  		if(td_class != "td_description") {
 
- 			$(this).width(td_width);
+ 			td_width1 = $(this).width();
+ 			td_width2 = $('#table_products_list tr').first().find('.'+td_class).width();
+ 			td_width3 = $('#table_results th.'+td_class).width();
+
+
+
+			max_td_width = Math.max(td_width1, td_width2, td_width3);
+
+			$(this).width(max_td_width);
+			$('#table_products_list tr').first().find('.'+td_class).width(max_td_width);
+			$('#table_results th.'+td_class).width(max_td_width);
+
  		}
 
+
+ 		if(td_class == "td_delete") {
+
+			products_list_height = $('#products_list').height();
+			table_products_list_height = $('#table_products_list').height();
+
+
+			if(table_products_list_height > products_list_height) {
+				
+				$('#budgets_products_list table tr th.'+td_class).first().width('27px');
+				$('#table_results th.td_delete').width('27px');
+				$('#table_products_list tr').first().find('.td_delete').width('10px');
+
+			} else if(table_products_list_height < products_list_height) {
+				
+				$('#budgets_products_list table').first().find('th.td_delete').width(max_td_width);
+				$('#table_results th.td_delete').width(max_td_width);
+
+			}
+		}
+
 	})
-
-
-g = $('#products_list').height();
-h = $('#table_products_list').height();
-
-alert(h);
-
-
 
 }
-
 
 
 
