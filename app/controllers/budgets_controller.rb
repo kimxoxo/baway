@@ -100,8 +100,8 @@ class BudgetsController < ApplicationController
   def new
     @budget = Budget.new
     @customer = Customer.new
-
-
+    @arquitect = User.new
+    @arquitects = User.all
 
     #if params[:budget]
       #@customer = Customer.find_by_tax_number(params[:budget][:customer_attributes][:tax_number])

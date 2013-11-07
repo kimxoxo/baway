@@ -100,13 +100,30 @@
               </td>
             </tr>
           </table>
+
         <% end %>
 
 
+        <table style="margin-top: 20px; ">
+          <tr>
+            <td>
+              <%= f.input :markup,
+                          as: :string,
+                          label_html: {style: 'width: 60px; '} %>
+            </td>
 
 
+            <%= f.simple_fields_for :user, @arquitect do |a| %>
+              <td>
+                <%= a.input :name,
+                            as: :select,
+                            collection: @arquitects %>
+              </td>
+            <% end %>
+          </tr>
+        </table>     
 
-      <!--<div style="border: 0px solid red; ">
+      <div style="border: 0px solid red; ">
         <table style="float: right; border: 0px solid red; ">
           <tr>
             <td align="right" colspan="8" style="">
@@ -119,7 +136,7 @@
         </table>
 
         <div class="clearfix"></div>
-      </div>-->
+      </div>
 
       <% end %>
     </div>

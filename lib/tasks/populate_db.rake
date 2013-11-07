@@ -46,6 +46,34 @@ namespace :db do
 
 
 
+    # create customers
+    10.times do
+
+      name     = Faker::Name.name
+      surname  = Faker::Name.name
+      landline = Faker::PhoneNumber.phone_number
+      mobile   = Faker::PhoneNumber.phone_number    
+      email    = (100000+rand(899999)).to_s + "name@email.com"
+      role     = rand(1..2)
+
+
+      user = User.new(name:     name,
+                      surname:  surname,
+                      landline: landline,
+                      mobile:   mobile,
+                      email:    email,
+                      role:     role)
+
+      user.save!
+    end
+
+
+
+
+
+
+
+
     # create suppliers and products
     10.times do
       name                  = Faker::Name.name

@@ -283,6 +283,7 @@ pt-BR:
     attributes:
       budget:
         id: ID
+        markup: markup
       customer:
         id: ID
         name: nome
@@ -296,6 +297,7 @@ pt-BR:
         mobile: celular
         tax_number_type1: cpf
         tax_number_type2: cnpj
+      arquitect:
     errors:
       <<: *errors
   helpers:

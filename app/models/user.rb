@@ -17,6 +17,10 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :encrypted_password, :landline, :mobile, :name, :role, :surname
 
-  belongs_to :budget
+  has_many :budgets
+
+
+  validates :name,
+    	presence: true
 
 end
