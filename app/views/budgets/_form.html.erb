@@ -1,4 +1,4 @@
-  
+
   <div style="" id="budget_client_div" class="well no_borders_shadow">
 
     <%= simple_form_for @budget, html: {class: 'form-inline'} do |f| %>
@@ -113,22 +113,30 @@
             </td>
 
 
-            <%= f.simple_fields_for :user, @arquitect do |a| %>
-              <td>
-                <%= a.input :name,
+            <%#= f.simple_fields_for :user, @arquitect do |a| %>
+              <!--<td>
+                <%#= a.input :id,
                             as: :select,
-                            collection: @arquitects %>
-              </td>
-            <% end %>
+                            label: 'profissional' %>
+              </td>-->
+            <%# end %>
+            <td>
+              <%= f.input :arquitect_id,
+                          as: :select,
+                          collection: User.find_all_by_role(1),
+                          label: 'profissional',
+                          prompt: 'selecione',
+                          label_html: {style: ''} %>
+            </td>
           </tr>
-        </table>     
+        </table>
 
       <div style="border: 0px solid red; ">
         <table style="float: right; border: 0px solid red; ">
           <tr>
             <td align="right" colspan="8" style="">
               <button class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
-                <b>confirmar cliente</b>
+                <b>confirmar</b>
                 <i id="icon-loading-confirm-customer" class=""></i>
               </button>
             </td>

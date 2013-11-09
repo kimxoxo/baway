@@ -3,6 +3,7 @@
 						<tr id='<%= "product_id_#{product.id}" %>'>
 							<td class="td_code">
 								<%= product.code %>
+								<%= @budgets_product.id %>
 							</td>
 
 							<td class="td_supplier">
@@ -45,7 +46,10 @@
 		              <%= f.input_field :quantity,
 		                          			as: :string,
 		                       					onblur: '$(this).closest("form").submit(); ',
-		                          			style: 'float: left; width: 30px; margin:0; padding:2px;  ' %>          
+		                          			style: 'float: left;
+		                          							width: 30px;
+		                          							margin:0;
+		                          							padding:2px;  ' %>          
 		            <% end %>
 
 								<span>
@@ -60,9 +64,16 @@
 
 
 							<td class="td_markup" style="padding: 0 5px 0 5px; margin:0; ">
+								<% if budget.markup %>
+									<% markup_value = budget.markup %>
+								<% else %>
+									<% markup_value = @budgets_product.markup %>
+								<% end %>
+
 		            <%= simple_form_for @budgets_product,
 		            										url: update_product_attributes_budgets_path,
 							            					method: :get,
+							            					value: markup_value,
 							            					remote: true,
 							            					html: {class: 'hide_this_form',
 							            								 style: 'margin: 0;
@@ -79,7 +90,7 @@
 		            <% end %>
 
 								<span>
-									<%= @budgets_product.markup %>
+									<%= "#{markup_value}%" %>
 								</span>
 							</td>
 

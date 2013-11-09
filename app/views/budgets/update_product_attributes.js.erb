@@ -1,33 +1,21 @@
 
 
+alert("<%= @budgets_product.markup %>");
+
 <% if params[:budgets_product][:quantity] %>
-	
-	<% price = compute_price(@product.supplier_price, @product.ipi, @budgetsproduct.markup, @budgetsproduct.quantity) %>
 
+	<% price = compute_price(@product.supplier_price, @product.ipi, @budgets_product.quantity, @budgets_product.quantity) %>
 
-	$('#product_id_<%= @budgetsproduct.product_id %>').find('.td_quantity').html('<%= @budgetsproduct.quantity %>');
-	$('#product_id_<%= @budgetsproduct.product_id %>').find('.td_price').find('span').html('<%= number_to_currency(price) %>');
-	$('#product_id_<%= @budgetsproduct.product_id %>').find('.td_price').find('i').addClass('icon-ok success_text');
-
-	hide_all_forms();
-	show_spans();
-
-<% end %>
-
-
-
-
-<% if params[:budgets_product][:markup] %>
-
-	<%# price = compute_price(@product.supplier_price, @product.ipi, @budgetsproduct.markup, @budgets_product.quantity) %>
-
-
-	$('#product_id_<%= @budgetsproduct.product_id %>').find('.td_price').find('span').html('<%= number_to_currency(price) %>');
-	$('#product_id_<%= @budgetsproduct.product_id %>').find('.td_price').find('i').addClass('icon-ok success_text');
+	$('#product_id_<%= @budgets_product.product_id %>').find('.td_quantity').html('<%= @budgets_product.quantity %>');
+	$('#product_id_<%= @budgets_product.product_id %>').find('.td_price').find('span').html('<%= number_to_currency(price) %>');
+	$('#product_id_<%= @budgets_product.product_id %>').find('.td_price').find('i').addClass('icon-ok success_text');
 
 	hide_all_forms();
 	show_spans();
 
 <% end %>
+
+
+
 
 make_td_same_width_for_budget_tables();

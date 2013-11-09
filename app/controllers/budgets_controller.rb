@@ -83,16 +83,24 @@ class BudgetsController < ApplicationController
 
   def update_product_attributes
 
-    @budgetsproduct = BudgetsProduct.find(params[:budgets_product][:id])
+    @budgets_product = BudgetsProduct.find(params[:budgets_product][:id])
 
-    @product = Product.find(@budgetsproduct.product_id)
+    @budget = Budget.find(@budgets_product.budget_id)
 
-    @budgetsproduct.update_attributes(params[:budgets_product])
+    @product = Product.find(@budgets_product.product_id)
+
+
+    if !@budgets_product.markup
+      @budgets_product.markup = @budget.markup
+    end
+
+    @budgets_product.update_attributes(params[:budgets_product])
 
     respond_to do |format|
       format.js
     end
   end
+
 
 
   # GET /budgets/new
@@ -101,7 +109,6 @@ class BudgetsController < ApplicationController
     @budget = Budget.new
     @customer = Customer.new
     @arquitect = User.new
-    @arquitects = User.all
 
     #if params[:budget]
       #@customer = Customer.find_by_tax_number(params[:budget][:customer_attributes][:tax_number])
@@ -133,7 +140,6 @@ class BudgetsController < ApplicationController
   # POST /budgets.json
   def create
     @budget = Budget.new(params[:budget])
-
     #@customer = Customer.new(params[:budget][:customer_attributes])
     #@customer.save!
 
@@ -144,7 +150,7 @@ class BudgetsController < ApplicationController
         format.json { render json: @budget, status: :created, location: @budget }
       else
         format.html { render action: "new" }
-        format.json { render json: @budget.errors, status: :unprocessable_entity }
+        #format.json { render json: @budget.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -162,10 +168,11 @@ class BudgetsController < ApplicationController
 
     respond_to do |format|
       if @budget.update_attributes(params[:budget])
-        format.html { redirect_to @budget, notice: 'Budget was successfully updated.' }
+        #format.html { redirect_to @budget, notice: 'Budget was successfully updated.' }
+        format.html { redirect_to action: 'edit', id: @budget.id }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { redirect_to action: 'edit', id: @budget.id }
         format.json { render json: @budget.errors, status: :unprocessable_entity }
       end
     end
