@@ -5,23 +5,36 @@
 <% if params[:tax_number] %>
 
 
+alert('k');
+
 	$('#icon-loading-customer-search').removeClass();
 
 	//if customer was found
 	<% if @customer %>
+
 		$('#icon-loading-customer-search').addClass("icon-ok success_text");
-		$('#customer_name').val('<%= @customer.name %>');
-		$('#customer_street').val('<%= @customer.street %>');
-		$('#customer_street_number').val('<%= @customer.street_number %>');
-		$('#customer_neighbourhood').val('<%= @customer.neighbourhood %>');
-		$('#customer_city').val('<%= @customer.city %>');
-		$('#customer_postal_code').val('<%= @customer.postal_code %>');
-		$('#customer_email').val('<%= @customer.email %>');
-		$('#customer_landline').val('<%= @customer.landline %>');
-		$('#customer_mobile').val('<%= @customer.mobile %>');
+		$('#budget_customer_attributes_name').val('<%= @customer.name %>');
+		$('#budget_customer_attributes_street').val('<%= @customer.street %>');
+		$('#budget_customer_attributes_street_number').val('<%= @customer.street_number %>');
+		$('#budget_customer_attributes_neighbourhood').val('<%= @customer.neighbourhood %>');
+		$('#budget_customer_attributes_city').val('<%= @customer.city %>');
+		$('#budget_customer_attributes_postal_code').val('<%= @customer.postal_code %>');
+		$('#budget_customer_attributes_email').val('<%= @customer.email %>');
+		$('#budget_customer_attributes_landline').val('<%= @customer.landline %>');
+		$('#budget_customer_attributes_mobile').val('<%= @customer.mobile %>');
 
-
-
+	<% else %>
+	
+		$('#icon-loading-customer-search').removeClass();
+		$('#budget_customer_attributes_name').val('');
+		$('#budget_customer_attributes_street').val('');
+		$('#budget_customer_attributes_street_number').val('');
+		$('#budget_customer_attributes_neighbourhood').val('');
+		$('#budget_customer_attributes_city').val('');
+		$('#budget_customer_attributes_postal_code').val('');
+		$('#budget_customer_attributes_email').val('');
+		$('#budget_customer_attributes_landline').val('');
+		$('#budget_customer_attributes_mobile').val('');
 	<% end %>
 
 

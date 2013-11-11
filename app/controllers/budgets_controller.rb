@@ -1,4 +1,6 @@
 class BudgetsController < ApplicationController
+
+
   # GET /budgets
   # GET /budgets.json
   def index
@@ -84,11 +86,9 @@ class BudgetsController < ApplicationController
   def update_product_attributes
 
     @budgets_product = BudgetsProduct.find(params[:budgets_product][:id])
-
     @budget = Budget.find(@budgets_product.budget_id)
-
+    @products = @budget.products
     @product = Product.find(@budgets_product.product_id)
-
 
     if !@budgets_product.markup
       @budgets_product.markup = @budget.markup
@@ -110,9 +110,9 @@ class BudgetsController < ApplicationController
     @customer = Customer.new
     @arquitect = User.new
 
-    #if params[:budget]
-      #@customer = Customer.find_by_tax_number(params[:budget][:customer_attributes][:tax_number])
-    #end
+    if params[:tax_number]
+      @customer = Customer.find_by_tax_number(params[:tax_number])
+    end
 
     #if params[:budget]
       #@customer = params[:budget][:customer_attributes]
@@ -133,6 +133,8 @@ class BudgetsController < ApplicationController
     @product = Product.new
     @products = @budget.products.order('created_at DESC')
     @products_search_list = []
+
+    @budget_products = @budget.budgets_products
   end
 
 

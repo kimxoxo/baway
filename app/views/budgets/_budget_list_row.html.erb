@@ -1,9 +1,8 @@
-						<% @budgets_product = BudgetsProduct.find_by_product_id(product.id) %>
+						<% budget_product = budget.budgets_products.find_by_product_id(product.id) %>
 
 						<tr id='<%= "product_id_#{product.id}" %>'>
 							<td class="td_code">
 								<%= product.code %>
-								<%= @budgets_product.id %>
 							</td>
 
 							<td class="td_supplier">
@@ -31,7 +30,7 @@
 
 
 							<td class="td_quantity" style="padding: 0 5px 0 5px; margin:0; ">
-		            <%= simple_form_for @budgets_product,
+		            <%= simple_form_for budget_product,
 		            										url: update_product_attributes_budgets_path,
 							            					method: :get,
 							            					remote: true,
@@ -53,12 +52,7 @@
 		            <% end %>
 
 								<span>
-									<%= @budgets_product.quantity %>
-
-									<!-- compute totals for quantity column -->
-									<% if(@budgets_product.quantity) %>
-										<% @quantity_total = @quantity_total + @budgets_product.quantity %>
-									<% end %>
+									<%= budget_product.quantity %>
 								</span>
 							</td>
 
@@ -67,10 +61,10 @@
 								<% if budget.markup %>
 									<% markup_value = budget.markup %>
 								<% else %>
-									<% markup_value = @budgets_product.markup %>
+									<% markup_value = budget_product.markup %>
 								<% end %>
 
-		            <%= simple_form_for @budgets_product,
+		            <%= simple_form_for budget_product,
 		            										url: update_product_attributes_budgets_path,
 							            					method: :get,
 							            					value: markup_value,
@@ -96,19 +90,17 @@
 
 
 							<td class="td_ipi">
-								<%#= product.markup %>10%
+								<%= "#{product.ipi}%" %>
 							</td>
 
 
 							<td class="td_price">
+								<% if(product.supplier_price && product.ipi && budget_product.markup && budget_product.quantity) %>
+									
+									<% price = compute_price(product.supplier_price, product.ipi, budget_product.markup, budget_product.quantity) %>
+								<% end %>
 								<span>
-									<% if(product.supplier_price && product.ipi && @budgets_product.markup && @budgets_product.quantity) %>
-										<% price = compute_price(product.supplier_price, product.ipi, @budgets_product.markup, @budgets_product.quantity) %>
-										<%= number_to_currency(price) %>
-
-										<!-- compute totals for price column -->
-										<% @price_total = @price_total + price %>
-									<% end %>
+									<%= number_to_currency(price) %>
 								</span>
 
 								<i class="icon" style="font-size: 14px; "></i>
@@ -121,6 +113,6 @@
 	                    			update_products_list_budgets_path(budget_id: @budget.id,
 	                    																				product_id: product.id,
 	                    																				delete: true),
-	                    			remote: true %>
+	                    																				remote: true %>
 	 						</td>
 						</tr>

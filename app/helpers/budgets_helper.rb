@@ -10,4 +10,19 @@ module BudgetsHelper
 	
 	end
 
+
+
+  def currency_to_number(currency)
+
+    #converts currency x.xxx,xx type to decimal
+
+    currency = currency.gsub('.', '')
+    currency = currency.gsub(',', '.')
+    currency = currency.to_f
+
+    return currency
+  end
+
+
+
 end

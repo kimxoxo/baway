@@ -1,6 +1,6 @@
 
 
-alert("<%= @budgets_product.markup %>");
+//alert("<%= @budgets_product.markup %>");
 
 <% if params[:budgets_product][:quantity] %>
 
@@ -14,6 +14,13 @@ alert("<%= @budgets_product.markup %>");
 	show_spans();
 
 <% end %>
+
+
+
+
+
+
+	$('#div_table_results').html('<%= escape_javascript(render partial: "table_results") %>');
 
 
 

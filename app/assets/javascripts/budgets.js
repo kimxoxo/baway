@@ -7,9 +7,13 @@ function hide_all_forms() {
 	$('#budgets_products_list table tr').css('background-color', 'transparent');
 }
 
+
+
 function show_spans() {
 	$('#budgets_products_list table tr td span').fadeIn(500);
 }
+
+
 
 function enable_this_tr_forms(tr_id) {
 	
