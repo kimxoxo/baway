@@ -45,6 +45,10 @@ function make_td_same_width_for_budget_tables() {
  			$(this).width('1px');
  			$('#budgets_products_list table tr th.'+td_class).width('1px');
  			$('#table_results th.'+td_class).width('1px');
+
+ 			g = $(this).width();
+
+ 			//alert(g);
  		}
 	})
 

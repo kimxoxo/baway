@@ -50,9 +50,6 @@ ActiveRecord::Schema.define(:version => 20131107173006) do
     t.datetime "updated_at",         :null => false
   end
 
-  add_index "customers", ["email"], :name => "index_customers_on_email", :unique => true
-  add_index "customers", ["tax_number"], :name => "index_customers_on_tax_number", :unique => true
-
   create_table "payment_conditions", :force => true do |t|
     t.string   "name"
     t.float    "discount"

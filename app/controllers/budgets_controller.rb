@@ -141,6 +141,7 @@ class BudgetsController < ApplicationController
   # POST /budgets
   # POST /budgets.json
   def create
+
     @budget = Budget.new(params[:budget])
     #@customer = Customer.new(params[:budget][:customer_attributes])
     #@customer.save!
@@ -168,13 +169,19 @@ class BudgetsController < ApplicationController
   def update
     @budget = Budget.find(params[:id])
 
+    @product = Product.new    
+    @products = @budget.products.order('created_at DESC')
+    @products_search_list = []
+    @budget_products = @budget.budgets_products
+
+
     respond_to do |format|
       if @budget.update_attributes(params[:budget])
         #format.html { redirect_to @budget, notice: 'Budget was successfully updated.' }
-        format.html { redirect_to action: 'edit', id: @budget.id }
+        format.html { render action: 'edit' }
         format.json { head :no_content }
-      else
-        format.html { redirect_to action: 'edit', id: @budget.id }
+      elsif !@budget.update_attributes(params[:budget])
+        format.html { render action: 'edit' }
         format.json { render json: @budget.errors, status: :unprocessable_entity }
       end
     end
