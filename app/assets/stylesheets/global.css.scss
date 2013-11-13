@@ -302,6 +302,41 @@ ul#vertical_menu {
 
 
 
+/* table */
+.table {
+
+  white-space: normal;
+
+  tbody tr:hover td {
+    background-color: inherit;
+  }
+
+  tbody tr:hover th {
+    background-color: $blue_global;
+  }
+
+  th.fit_to_text {
+    width: 1px;
+  }
+
+  th {
+    background-color: $blue_global;
+    color: #fff;
+  }
+
+  td {
+    border: 0;
+  }
+}
+
+
+
+
+
+
+
+
+
 
 
 

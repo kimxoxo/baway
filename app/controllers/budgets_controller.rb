@@ -4,7 +4,7 @@ class BudgetsController < ApplicationController
   # GET /budgets
   # GET /budgets.json
   def index
-    @budgets = Budget.all
+    @budgets = Budget.paginate(page: params[:page], per_page: 10).order('created_at DESC')
 
     respond_to do |format|
       format.html # index.html.erb

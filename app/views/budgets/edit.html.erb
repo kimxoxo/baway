@@ -70,7 +70,7 @@
 					</th>
 
 					<th class="td_pencil">
-						<i class="icon icon-pencil"></i>
+						<i class="icon icon-pencil icon-white"></i>
 					</th>
 
 					<th class="td_quantity">
@@ -91,7 +91,7 @@
 
 
 					<th class="td_delete">
-						<%= content_tag(:i, '', class: "icon-trash") %>
+						<%= content_tag(:i, '', class: "icon-trash icon-white") %>
 					</th>
 				</tr>
 
@@ -106,8 +106,8 @@
 			</table>
 
 
-			<div id="products_list" style="border: 1px solid red; ">	
-				<table id="table_products_list"  style="border: 1px solid green; ">
+			<div id="products_list" style="border: 0px solid red; ">	
+				<table id="table_products_list"  style="border: 0px solid green; ">
 					<% @products.each do |product| %>
 						<%= render partial: 'budget_list_row',
 											 locals: {product: product,
@@ -125,14 +125,14 @@
 
 		<div class="clearfix"></div>
 
-		<div id="products_search_results_div" class=" no_borders_shadow">
-			<div id="products_search_div" style="">
-				<div id="products_search_form" class="no_borders_shadow">
+		<div id="products_search_results_div" class=" no_borders_shadow" style="margin-top: 10px; border: 0px solid red; ">
+			<div id="products_search_div" style="border: 0px solid red; ">
+				<div id="products_search_form" class="no_borders_shadow" style="border: 0px solid green; ">
 					<%= simple_form_for @product,
 															url: {controller: 'budgets', action: 'products_search'},
 															method: :get,
 															remote: true,
-															html: {class: '',
+															html: {class: 'pull-right',
 																		 style: '',
 																		 id: "ticket-solution-form-#{@product.id}"} do |f| %>
 
@@ -163,15 +163,46 @@
 					<div class="clearfix"></div>
 
 				</div>
-
 			
 				<div id="products">
-					<%= render 'products' %>
+					<table>
+						<tr>
+							<th>
+								código
+							</th>
+
+							<th>
+								fornecedor
+							</th>
+
+							<th>
+								descrição
+							</th>
+
+							<th>
+								preço custo
+							</th>
+
+							<th>
+								ipi
+							</th>
+
+							<th>
+								<%= content_tag(:i, '', class: "icon-plus") %>
+							</th>
+
+						</tr>
+					</table>
+
+
+					<% @products_search_list.each do |product| %>
+						<%= render 'products' %>
+					<% end %>
 				</div>
-		</div>
 
+			</div>
 
-
+		<div class="clearfix"></div>
 	</div>
 
 

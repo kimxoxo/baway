@@ -1,28 +1,3 @@
-<% @products_search_list.each do |product| %>
-
-	<table>
-		<tr>
-			<th>
-				código
-			</th>
-
-			<th>
-				fornecedor
-			</th>
-
-			<th>
-				descrição
-			</th>
-
-			<th>
-				preço fornecedor
-			</th>
-
-			<th>
-				ipi
-			</th>
-		</tr>
-
 
 		<tr>
 			<td>
@@ -40,17 +15,18 @@
 
 
 			<td>
-				<%= product.supplier_price %>
+				<%= number_to_currency(product.supplier_price) %>
 			</td>
 
 
 			<td>
+				<%= "#{product.ipi}%" %>
+			</td>
+
+			<td>
 				<%#= product.ipi %>
-				<%= link_to content_tag(:i, '', class: "icon-arrow-right"),
-                    update_products_list_budgets_path(budget_id: budget.id, product_id: product.id),
+				<%= link_to content_tag(:i, '', class: "icon-plus"),
+                    update_products_list_budgets_path(budget_id: @budget.id, product_id: product.id),
                     remote: true %>
 			</td>
 		</tr>
-	</table>
-
-<% end %>

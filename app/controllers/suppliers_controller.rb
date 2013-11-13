@@ -2,7 +2,7 @@ class SuppliersController < ApplicationController
   # GET /suppliers
   # GET /suppliers.json
   def index
-    @suppliers = Supplier.all
+    @suppliers = Supplier.paginate(page: params[:page], per_page: 10).order('name ASC')
 
     respond_to do |format|
       format.html # index.html.erb

@@ -1,34 +1,50 @@
+<div class="left_menu">
 
-<h1>Listing budgets</h1>
+  <ul id="filter_list">
+    <li class="header">
+      header
+    </li>
+  </ul>
 
-<table>
-  <tr>
-    <th>Customer</th>
-    <th>Status</th>
-    <th>Seller</th>
-    <th>Arquitect</th>
-    <th>Payment condition</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+</div>
 
-<% @budgets.each do |budget| %>
-  <tr>
-    <td><%= budget.customer_id %></td>
-    <td><%= budget.status %></td>
-    <td><%= budget.seller_id %></td>
-    <td><%= budget.arquitect_id %></td>
-    <td><%= budget.payment_condition_id %></td>
-    <td><%= budget.description %></td>
-    <td><%= link_to 'Show', budget %></td>
-    <td><%= link_to 'Edit', edit_budget_path(budget) %></td>
-    <td><%= link_to 'Destroy', budget, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
 
-<br />
 
-<%= link_to 'New Budget', new_budget_path %>
+<div class="main_content">
+  <table class="table">
+    <tr>
+      <th>Id</th>
+      <th>Customer</th>
+      <th>Status</th>
+      <th>Seller</th>
+      <th>Arquitect</th>
+      <th>Payment condition</th>
+      <th>Description</th>
+      <!--<th></th>-->
+      <th><%= content_tag(:i, '', class: "icon-pencil") %></th>
+      <!--<th></th>-->
+    </tr>
+
+  <% @budgets.each do |budget| %>
+    <tr>
+      <td><%= budget.id %></td>
+      <td><%= budget.customer.name %></td>
+      <td><%= budget.status %></td>
+      <td><%= budget.seller_id %></td>
+      <td><%= User.find(budget.arquitect_id).name if budget.arquitect_id %></td>
+      <td><%= budget.payment_condition_id %></td>
+      <td><%= budget.description %></td>
+      <!--<td><%= link_to 'Show', budget %></td>-->
+      <td><%= link_to content_tag(:i, '', class: "icon-pencil"), edit_budget_path(budget) %></td>
+      <!--<td><%= link_to 'Destroy', budget, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+    </tr>
+  <% end %>
+
+    <tr>
+      <td colspan="12" align="center" style="text-align: center; ">
+        <%= will_paginate @budgets, inner_window: 1, outer_window: 0 %>
+      </td>
+    </tr>
+
+  </table>
+</div>

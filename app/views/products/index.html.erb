@@ -22,26 +22,33 @@
       <th>Ncm</th>
       <th>Width</th>
       <th>Um</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <!--<th></th>-->
+      <th><%= content_tag(:i, '', class: "icon-pencil") %></th>
+      <!--<th></th>-->
     </tr>
 
   <% @products.each do |product| %>
     <tr>
-      <td><%= product.supplier_id %></td>
+      <td><%= product.supplier.name %></td>
       <td><%= product.description %></td>
       <td><%= product.brand %></td>
       <td><%= product.code %></td>
-      <td><%= product.supplier_price %></td>
-      <td><%= product.ipi %></td>
+      <td><%= number_to_currency(product.supplier_price) %></td>
+      <td><%= "#{product.ipi}%" %></td>
       <td><%= product.ncm %></td>
       <td><%= product.width %></td>
       <td><%= product.um %></td>
-      <td><%= link_to 'Show', product %></td>
-      <td><%= link_to 'Edit', edit_product_path(product) %></td>
-      <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <!--<td><%#= link_to 'Show', product %></td>-->
+      <td><%= link_to content_tag(:i, '', class: "icon-pencil"), edit_product_path(product) %></td>
+      <!--<td><%#= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
     </tr>
   <% end %>
+
+
+    <tr>
+      <td colspan="12" align="center" style="text-align: center; ">
+        <%= will_paginate @products, inner_window: 1, outer_window: 0 %>
+      </td>
+    </tr>
   </table>
 </div>

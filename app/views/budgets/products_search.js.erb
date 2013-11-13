@@ -1,2 +1,5 @@
-$('#products').html('<%= escape_javascript(render partial: "products", locals: {budget: @budget}) %>');
+<% @products_search_list.each do |product| %>
 
+	$('#products table').append('<%= escape_javascript(render partial: "products", locals: {product: product}) %>');
+
+<% end %>

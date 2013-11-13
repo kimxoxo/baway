@@ -15,40 +15,46 @@
   <table class="table">
     <tr>
       <th>Name</th>
-      <th>Street</th>
-      <th>Street number</th>
-      <th>Neighbourhood</th>
+      <!--<th>Street</th>-->
+      <!--<th>Street number</th>-->
+      <!--<th>Neighbourhood</th>-->
       <th>City</th>
-      <th>Address complement</th>
+      <!--<th>complement</th>-->
       <th>Cnpj</th>
-      <th>Postal code</th>
+      <!--<th>Postal code</th>-->
       <th>Landline</th>
       <th>Cellphone</th>
       <th>Ie</th>
+      <!--<th></th>-->
       <th></th>
-      <th></th>
-      <th></th>
+      <!--<th></th>-->
     </tr>
 
   <% @suppliers.each do |supplier| %>
     <tr>
       <td><%= supplier.name %></td>
-      <td><%= supplier.street %></td>
-      <td><%= supplier.street_number %></td>
-      <td><%= supplier.neighbourhood %></td>
+      <!--<td><%= supplier.street %></td>-->
+      <!--<td><%= supplier.street_number %></td>-->
+      <!--<td><%#= supplier.neighbourhood %></td>-->
       <td><%= supplier.city %></td>
-      <td><%= supplier.address_complement %></td>
+      <!--<td><%#= supplier.address_complement %></td>-->
       <td><%= supplier.cnpj %></td>
-      <td><%= supplier.postal_code %></td>
+      <!--<td><%#= supplier.postal_code %></td>-->
       <td><%= supplier.landline %></td>
       <td><%= supplier.mobile %></td>
       <td><%= supplier.ie %></td>
-      <td><%= link_to 'Show', supplier %></td>
-      <td><%= link_to 'Edit', edit_supplier_path(supplier) %></td>
-      <td><%= link_to 'Destroy', supplier, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <!--<td><%#= link_to 'Show', supplier %></td>-->
+      <td><%= link_to content_tag(:i, '', class: "icon-pencil"), edit_supplier_path(supplier) %></td>
+      <!--<td><%#= link_to 'Destroy', supplier, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
     </tr>
   <% end %>
 
+
+    <tr>
+      <td colspan="12" align="center" style="text-align: center; ">
+        <%= will_paginate @budgets, inner_window: 1, outer_window: 0 %>
+      </td>
+    </tr>
   </table>
 
 

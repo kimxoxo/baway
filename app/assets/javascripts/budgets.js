@@ -45,10 +45,6 @@ function make_td_same_width_for_budget_tables() {
  			$(this).width('1px');
  			$('#budgets_products_list table tr th.'+td_class).width('1px');
  			$('#table_results th.'+td_class).width('1px');
-
- 			g = $(this).width();
-
- 			//alert(g);
  		}
 	})
 
@@ -67,6 +63,8 @@ function make_td_same_width_for_budget_tables() {
  			td_width2 = $('#table_products_list tr').first().find('.'+td_class).width();
  			td_width3 = $('#table_results th.'+td_class).width();
 
+
+ 			//alert("1:"+td_width1+"-2:"+td_width2+"-3:"+td_width3);
 
 
 			max_td_width = Math.max(td_width1, td_width2, td_width3);
