@@ -1,3 +1,10 @@
+
+$('#products table tr:not(:first)').remove();
+
+$('#products table tr').first().show();
+
+
+
 <% @products_search_list.each do |product| %>
 
 	$('#products table').append('<%= escape_javascript(render partial: "products", locals: {product: product}) %>');

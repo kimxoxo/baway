@@ -41,17 +41,19 @@ function make_td_same_width_for_budget_tables() {
 
  		td_class = $(this).attr('class'); 
 
+ 		//alert(td_class);
+
+
  		if(td_class != "td_description") {
- 			$(this).width('1px');
- 			$('#budgets_products_list table tr th.'+td_class).width('1px');
- 			$('#table_results th.'+td_class).width('1px');
+ 			$(this).width('1%');
+ 			$('#budgets_products_list table tr th.'+td_class).width('1%');
+ 			$('#table_results th.'+td_class).width('1%');
  		}
 	})
 
 
 
 
-	//first iteration, fit all TDs to text, using width = 1px
 	first_tr = $('#budgets_products_list table').first().find('tr');
  	first_tr.find('th').each(function() {
 
@@ -59,12 +61,13 @@ function make_td_same_width_for_budget_tables() {
 
  		if(td_class != "td_description") {
 
+
  			td_width1 = $(this).width();
  			td_width2 = $('#table_products_list tr').first().find('.'+td_class).width();
  			td_width3 = $('#table_results th.'+td_class).width();
 
 
- 			//alert("1:"+td_width1+"-2:"+td_width2+"-3:"+td_width3);
+ 			//alert(td_class+"--a:"+td_width1+"-b:"+td_width2+"-c:"+td_width3);
 
 
 			max_td_width = Math.max(td_width1, td_width2, td_width3);
@@ -72,7 +75,6 @@ function make_td_same_width_for_budget_tables() {
 			$(this).width(max_td_width);
 			$('#table_products_list tr').first().find('.'+td_class).width(max_td_width);
 			$('#table_results th.'+td_class).width(max_td_width);
-
  		}
 
 

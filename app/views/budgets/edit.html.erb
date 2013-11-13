@@ -74,7 +74,7 @@
 					</th>
 
 					<th class="td_quantity">
-						quant.
+						qt
 					</th>
 
 					<th class="td_markup">
@@ -166,7 +166,7 @@
 			
 				<div id="products">
 					<table>
-						<tr>
+						<tr style="display: none; ">
 							<th>
 								código
 							</th>
@@ -190,7 +190,6 @@
 							<th>
 								<%= content_tag(:i, '', class: "icon-plus") %>
 							</th>
-
 						</tr>
 					</table>
 
@@ -221,7 +220,6 @@
 
 
 <script type="text/javascript">
-	//$('#budget_client_div').hide();
 
 	$('.hide_this_form').hide();
 	make_td_same_width_for_budget_tables();
