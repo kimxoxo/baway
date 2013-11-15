@@ -1,7 +1,7 @@
 
-  <div style="" id="budget_client_div" class="well no_borders_shadow">
+  <div id="budget_client_div" class="well no_borders_shadow">
 
-    <%= simple_form_for @budget, html: {class: 'form-inline'} do |f| %>
+    <%= simple_form_for @budget, html: {class: 'form-inline', style: 'margin: 0; padding: 0; '} do |f| %>
 
 
       <%= f.simple_fields_for :customer, @customer do |c| %>
@@ -38,10 +38,10 @@
 
           <table>
             <tr>
-              <td width="480px">
+              <td width="350px">
                 <%= c.input :name,
                             label_html: {style: 'width: 60px; '},
-                            input_html: {style: 'width: 330px; '},
+                            input_html: {style: 'width: 260px; '},
                             error_html: {style: 'display: inline; '} %>
               </td>
             </tr>
@@ -49,17 +49,17 @@
 
           <table>
             <tr>
-              <td width="420px">
+              <td width="350px">
                 <%= c.input :street,
-                            input_html: {style: 'width: 330px; '},
+                            input_html: {style: 'width: 260px; '},
                             label_html: {style: 'width: 60px; '} %>           
               </td>
 
-              <td width="90px">
+              <td width="80px">
                 <%= c.input :street_number,
                             as: :string,
                             label_html: {style: 'width: 22px; '},
-                            input_html: {style: 'width: 40px; '} %>           
+                            input_html: {style: 'width: 30px; '} %>           
               </td>
 
               <td width="128px">
@@ -69,12 +69,13 @@
 
               <td width="">
                 <%= c.input :neighbourhood,
+                            label_html: {style: 'width: 45px; '},
                             input_html: {style: 'width: 130px; '} %>            
               </td>
 
               <td width="">
                 <%= c.input :city,
-                            input_html: {style: 'width: 130px; '},
+                            input_html: {style: 'width: 120px; '},
                             wrapper_html: {style: 'text-align: right; '} %>           
               </td>     
             </tr>       
@@ -82,20 +83,23 @@
 
           <table>
             <tr>
-              <td width="420px">
+              <td width="350px">
                 <%= c.input :email,
-                            label_html: {style: 'width: 60px; '} %>
+                            label_html: {style: 'width: 60px; '},
+                            input_html: {style: 'width: 260px; '} %>
               </td>
 
 
-              <td width="215px">
-                <%= c.input :landline,
-                            input_html: {style: 'width: 165px; '} %>
-              </td>
-
-
-              <td>
+              <td width="212px">
                 <%= c.input :mobile,
+                            input_html: {style: 'width: 135px; '} %>
+              </td>
+
+
+
+              <td width="">
+                <%= c.input :landline,
+                            label_html: {style: 'width: 42px; '},
                             input_html: {style: 'width: 130px; '} %>
               </td>
             </tr>
@@ -104,12 +108,15 @@
         <% end %>
 
 
-        <table style="margin-top: 20px; ">
+        <hr style="margin: 10px; padding: 0; " />
+
+
+        <table style="">
           <tr>
-            <td>
+            <td width="115px">
               <%= f.input :markup,
                           as: :string,
-                          label_html: {style: 'width: 60px; '} %>
+                          input_html: {style: 'width: 30px; '} %>
             </td>
 
 
@@ -120,31 +127,25 @@
                             label: 'profissional' %>
               </td>-->
             <%# end %>
-            <td>
+            <td width="240px">
               <%= f.input :arquitect_id,
                           as: :select,
                           collection: User.find_all_by_role(1),
                           label: 'profissional',
                           prompt: 'selecione',
-                          label_html: {style: ''} %>
+                          input_html: {style: 'width: 135px; '} %>
             </td>
-          </tr>
-        </table>
 
-      <div style="border: 0px solid red; ">
-        <table style="float: right; border: 0px solid red; ">
-          <tr>
-            <td align="right" colspan="8" style="">
-              <button class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
+            <td>
+              <button style="float: right; " class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
                 <b>confirmar</b>
                 <i id="icon-loading-confirm-customer" class=""></i>
               </button>
-            </td>
+            </td> 
           </tr>
         </table>
 
         <div class="clearfix"></div>
-      </div>
 
       <% end %>
     </div>
