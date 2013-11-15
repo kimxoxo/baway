@@ -1,61 +1,47 @@
-<%= simple_form_for (@supplier) do |f| %>
-  <% if @supplier.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@supplier.errors.count, "error") %> prohibited this supplier from being saved:</h2>
+<%= simple_form_for(@supplier, html: { class: "form-horizontal" }) do |f| %>
 
-      <ul>
-      <% @supplier.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+  <%= f.input :name %>
+
+
+  <%= f.input :street %>
+
+
+  <%= f.input :street_number %>
+
+
+  <%= f.input :neighbourhood %>
+
+
+  <%= f.input :city %>
+
+
+  <%= f.input :address_complement %>
+
+
+  <%= f.input :cnpj %>
+
+
+  <%= f.input :neighbourhood %>
+
+  <%= f.input :postal_code %>
+
+
+  <%= f.input :landline %>
+
+
+  <%= f.input :mobile %>
+
+
+  <%= f.input :ie %>
+
+
+  <%= button_tag(type: 'submit',
+                class: 'btn btn-primary',
+                style: 'margin-top: 10px;
+                        margin-left: 175px;
+                        width: 220px;
+                        font-weight: bold; ') do %>
+        cadastrar
+        <i id="icon-loading"></i>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :street %><br />
-    <%= f.text_field :street %>
-  </div>
-  <div class="field">
-    <%= f.label :street_number %><br />
-    <%= f.text_field :street_number %>
-  </div>
-  <div class="field">
-    <%= f.label :neighbourhood %><br />
-    <%= f.text_field :neighbourhood %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br />
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :address_complement %><br />
-    <%= f.text_field :address_complement %>
-  </div>
-  <div class="field">
-    <%= f.label :cnpj %><br />
-    <%= f.text_field :cnpj %>
-  </div>
-  <div class="field">
-    <%= f.label :postal_code %><br />
-    <%= f.text_field :postal_code %>
-  </div>
-  <div class="field">
-    <%= f.label :landline %><br />
-    <%= f.text_field :landline %>
-  </div>
-  <div class="field">
-    <%= f.input :mobile %><br />
-    <%#= f.text_field :mobile %>
-  </div>
-  <div class="field">
-    <%= f.label :ie %><br />
-    <%= f.text_field :ie %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>

@@ -4,7 +4,7 @@ gem 'rails', '3.2.14'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'simple_form'
-#gem 'devise'
+gem 'devise'
 #gem 'cancan'
 #made faker global to use with heroku
 gem 'faker'

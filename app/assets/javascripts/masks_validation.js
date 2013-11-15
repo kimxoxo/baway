@@ -312,4 +312,18 @@ $(document).ready(function($) {
   $("#budget_customer_attributes_landline").mask("(99) 9999-9999");
   $("#budget_customer_attributes_mobile").mask("(99) 9999-9999");
 
+
+
+  $("#product_supplier_price").mask("0.000,00", {reverse: true});
+
+
+  $("#supplier_cnpj").mask("999.999.999-99", {reverse: true});
+
+  $("#supplier_postal_code").mask("99999-999");
+
+
+  $("#supplier_landline").mask("(99) 9999-9999");
+  $("#supplier_mobile").mask("(99) 9999-9999");
+
+
 })

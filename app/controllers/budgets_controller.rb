@@ -1,5 +1,8 @@
 class BudgetsController < ApplicationController
 
+  before_filter :authenticate_user!
+
+
 
   # GET /budgets
   # GET /budgets.json

@@ -31,6 +31,7 @@ GEM
     annotate (2.5.0)
       rake
     arel (3.0.2)
+    bcrypt-ruby (3.1.2)
     bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
     bootstrap-will_paginate (0.0.10)
@@ -42,6 +43,11 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
+    devise (3.0.3)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.0.2)
     faker (1.2.0)
@@ -71,6 +77,7 @@ GEM
     net-ssh (2.7.0)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
+    orm_adapter (0.4.0)
     pg (0.17.0)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -125,6 +132,8 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    warden (1.2.3)
+      rack (>= 1.0)
     will_paginate (3.0.5)
 
 PLATFORMS
@@ -135,6 +144,7 @@ DEPENDENCIES
   bootstrap-sass (~> 2.3.2.2)
   bootstrap-will_paginate
   capistrano (= 2.9.0)
+  devise
   faker
   font-awesome-rails (= 3.2.0)
   jquery-rails

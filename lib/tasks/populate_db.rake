@@ -51,16 +51,21 @@ namespace :db do
 
       name     = Faker::Name.name
       surname  = Faker::Name.name
-      landline = Faker::PhoneNumber.phone_number
-      mobile   = Faker::PhoneNumber.phone_number    
+      password = "123456789"
+      password_confirmation = "123456789"
+
+      #landline = Faker::PhoneNumber.phone_number
+      #mobile   = Faker::PhoneNumber.phone_number    
       email    = (100000+rand(899999)).to_s + "name@email.com"
       role     = rand(1..2)
 
 
       user = User.new(name:     name,
                       surname:  surname,
-                      landline: landline,
-                      mobile:   mobile,
+                      password: password,
+                      password_confirmation: password_confirmation,
+                      #landline: landline,
+                      #mobile:   mobile,
                       email:    email,
                       role:     role)
 

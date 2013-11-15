@@ -34,8 +34,10 @@ $width_budget_divs: 1050px;
 }
 
 
-.wrapper {
-  width: 1100px;
+#wrapper {
+  min-width: 1100px;
+  padding-bottom: 20px;
+  //border: 1px solid red;
 }
 
 
@@ -331,9 +333,32 @@ ul#vertical_menu {
 
 
 
+nav#login_nav {
+  ul {
+    li {
+      a {
+        color: #fff;
+        font-weight: bold;
+        font-size: 12px;
+      }
+    }
+  }
+}
 
 
 
+
+
+
+.form-horizontal {
+
+  label {
+    padding-right: 15px;
+  }
+
+
+
+}
 
 
 

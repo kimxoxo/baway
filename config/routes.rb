@@ -1,6 +1,11 @@
 Baway::Application.routes.draw do
 
 
+  root :to => redirect("/budgets")
+
+
+  devise_for :users
+
   resources :budgets do
     collection do
       get 'products_search'

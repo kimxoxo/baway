@@ -9,14 +9,18 @@
 <body>
 
 
-<%= render 'layouts/header' %>
+<div id="wrapper">
+
+	<%= render 'layouts/header' %>
 
 
-<%= yield %>
+	<%= yield %>
 
-<%= render partial: 'layouts/vertical_menu' %>
+	<%= render partial: 'layouts/vertical_menu' %>
 
-<%= render 'layouts/footer' %>
+	<%= render 'layouts/footer' %>
+
+</div>
 
 </body>
 </html>

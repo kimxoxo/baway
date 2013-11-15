@@ -15,12 +15,26 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :email, :encrypted_password, :landline, :mobile, :name, :role, :surname
 
-  has_many :budgets
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me,
+                  :name, :surname, :role
+  # attr_accessible :title, :body
 
 
-  validates :name,
+
+  #attr_accessible :email, :encrypted_password, :landline, :mobile, :name, :role, :surname
+
+  #has_many :budgets
+
+
+  validates :name, :surname, :role,
     	presence: true
 
 end

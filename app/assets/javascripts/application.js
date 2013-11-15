@@ -18,8 +18,34 @@
 //= require_tree .
 
 
+
+function sets_filter_div_height() {
+	//when the table with the form with check boxes is longer than body executes the following
+	height_table_right = $('.main_content').height();
+	body_height = $('body').height();
+	window_height = $(window).height();
+
+
+	if (body_height > window_height) {
+
+		$('#filter_list').css("height", height_table_right);
+		$('#vertical_menu').css("height", height_table_right);
+
+	}
+}
+
+
+
 //define and tooltips
 $(function() {
 
   $('#vertical_menu li a').tooltip({placement: 'right'});
+
+
+
+	sets_filter_div_height();
+
+
 });
+
+

@@ -1,53 +1,41 @@
-<%= form_for(@product) do |f| %>
-  <% if @product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+<%= simple_form_for(@product, html: { class: "form-horizontal" }) do |f| %>
+ 
 
-      <ul>
-      <% @product.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+  <%= f.input :supplier_id,
+              as: :select,
+              collection: Supplier.all,
+              prompt: 'selecione',
+              label_html: {style: ''} %>
+
+
+
+  <%= f.input :code %>
+
+  <%= f.input :brand %>
+
+  <%= f.input :description,
+              input_html: { rows: 3 } %>
+
+  <%= f.input :supplier_price,
+              as: :string %>
+
+  <%= f.input :ipi,
+              as: :string %>
+
+  <%= f.input :ncm %>
+
+  <%= f.input :width,
+              as: :string %>
+
+  <%= f.input :um %>
+
+  <%= button_tag(type: 'submit',
+                class: 'btn btn-primary',
+                style: 'margin-top: 10px;
+                        margin-left: 175px;
+                        width: 220px;
+                        font-weight: bold; ') do %>
+        cadastrar
+        <i id="icon-loading"></i>
   <% end %>
-
-  <div class="field">
-    <%= f.label :supplier_id %><br />
-    <%= f.text_field :supplier_id %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :brand %><br />
-    <%= f.text_field :brand %>
-  </div>
-  <div class="field">
-    <%= f.label :code %><br />
-    <%= f.text_field :code %>
-  </div>
-  <div class="field">
-    <%= f.label :supplier_price %><br />
-    <%= f.text_field :supplier_price %>
-  </div>
-  <div class="field">
-    <%= f.label :ipi %><br />
-    <%= f.text_field :ipi %>
-  </div>
-  <div class="field">
-    <%= f.label :ncm %><br />
-    <%= f.number_field :ncm %>
-  </div>
-  <div class="field">
-    <%= f.label :width %><br />
-    <%= f.text_field :width %>
-  </div>
-  <div class="field">
-    <%= f.label :um %><br />
-    <%= f.check_box :um %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>

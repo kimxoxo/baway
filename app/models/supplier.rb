@@ -25,7 +25,7 @@ class Supplier < ActiveRecord::Base
   has_many :products
 
 
-validates :mobile,
+validates :name, :street, :street_number, :city, :cnpj, :postal_code, :mobile,
     	presence: true
 
 
