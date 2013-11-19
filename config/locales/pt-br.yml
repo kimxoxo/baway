@@ -282,7 +282,12 @@ pt-BR:
       product: produto
     attributes:
       budget:
-        id: ID
+        id: nº
+        customer_id: cliente
+        status: estado
+        seller: vendedora
+        arquitect_id: arquiteto
+        description: descrição
         markup: markup
       supplier:
         name: nome
@@ -295,6 +300,7 @@ pt-BR:
         mobile: celular
         cnpj: cnpj
         postal_code: cep
+        ie: ie
       customer:
         id: ID
         name: nome
