@@ -284,6 +284,17 @@ pt-BR:
       budget:
         id: ID
         markup: markup
+      supplier:
+        name: nome
+        street: rua
+        street_number: nº
+        neighbourhood: bairro
+        city: cidade
+        address_complement: complemento
+        landline: fixo
+        mobile: celular
+        cnpj: cnpj
+        postal_code: cep
       customer:
         id: ID
         name: nome
@@ -297,6 +308,17 @@ pt-BR:
         mobile: celular
         tax_number_type1: cpf
         tax_number_type2: cnpj
+      product:
+        code: código
+        supplier_id: fornecedor
+        brand: marca
+        description: descrição
+        supplier_price: preço forn.
+        width: medida
+        ncm: ncm
+        um: uni. med.
+        um1: rolo
+        um2: tecido
       arquitect:
     errors:
       <<: *errors

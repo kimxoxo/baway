@@ -33,8 +33,8 @@ class Product < ActiveRecord::Base
   belongs_to :supplier
 
 
-  #validates :code, :description, :ipi, :supplier_id, :supplier_price
-      #presence: true
+  validates :code, :description, :ipi, :supplier_id, :supplier_price, :um, :width,
+      presence: true
 
 
 end
