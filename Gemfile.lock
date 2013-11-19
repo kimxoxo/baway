@@ -37,7 +37,7 @@ GEM
     bootstrap-will_paginate (0.0.10)
       will_paginate
     builder (3.0.4)
-    capistrano (2.9.0)
+    capistrano (2.15.5)
       highline
       net-scp (>= 1.0.0)
       net-sftp (>= 2.0.0)
@@ -128,7 +128,7 @@ GEM
     uglifier (2.3.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    unicorn (4.7.0)
+    unicorn (4.6.3)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
@@ -143,7 +143,7 @@ DEPENDENCIES
   annotate
   bootstrap-sass (~> 2.3.2.2)
   bootstrap-will_paginate
-  capistrano (= 2.9.0)
+  capistrano (= 2.15.5)
   devise
   faker
   font-awesome-rails (= 3.2.0)
@@ -154,5 +154,5 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   simple_form
   uglifier (>= 1.0.3)
-  unicorn
+  unicorn (= 4.6.3)
   will_paginate

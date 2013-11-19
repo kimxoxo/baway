@@ -70,10 +70,10 @@ end
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-gem 'unicorn'
+gem 'unicorn', '=4.6.3'
 
 # Deploy with Capistrano
-gem 'capistrano', '=2.9.0'
+gem 'capistrano', '=2.15.5'
 
 # To use debugger
 # gem 'debugger'
