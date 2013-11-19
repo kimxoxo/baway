@@ -139,6 +139,12 @@ header.navbar-inverse {
 
 
 
+.main_content_indexes {
+  overflow: hidden;
+  //margin-top: 20px;
+  margin-left: 35px;
+  //width: 990px;
+  }
 
 
 
@@ -148,7 +154,9 @@ header.navbar-inverse {
 
 .main_content {
   overflow: hidden;
-  margin-left: 120px;
+  margin-top: 20px;
+  margin-left: 35px;
+  width: 990px;
   }
 
 
@@ -325,6 +333,7 @@ ul#vertical_menu {
   th {
     background-color: $blue_global;
     color: #fff;
+    white-space: nowrap;
   }
 
   td {

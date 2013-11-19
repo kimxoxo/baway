@@ -5,7 +5,7 @@ module ApplicationHelper
 
 
   def filter_list_not_present
-    if (params[:action] == 'new' || params[:action] == 'edit' || params[:action] == 'show' || params[:action] == 'edit_user_from_newuser_ticket')
+    if (params[:action] == 'new' || params[:action] == 'edit' || params[:action] == 'show' || params[:action] == 'update')
       not_present = true
 
     else

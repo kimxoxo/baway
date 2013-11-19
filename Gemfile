@@ -8,6 +8,7 @@ gem 'devise'
 #gem 'cancan'
 #made faker global to use with heroku
 gem 'faker'
+gem 'roo'
 
 #gem 'action_mailer_tls'
 #gem 'tlsmail'

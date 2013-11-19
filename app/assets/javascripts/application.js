@@ -25,6 +25,8 @@ function sets_filter_div_height() {
 	body_height = $('body').height();
 	window_height = $(window).height();
 
+	//alert(window_height);
+
 
 	if (body_height > window_height) {
 

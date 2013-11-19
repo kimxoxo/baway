@@ -22,7 +22,7 @@ Baway::Application.routes.draw do
 
 
   resources :products
-
+  
 
   resources :payment_conditions
 

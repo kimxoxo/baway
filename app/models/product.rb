@@ -17,6 +17,8 @@
 #
 
 class Product < ActiveRecord::Base
+
+
   attr_accessible :brand, :code, :description, :ipi, :ncm, :supplier_id, :supplier_price, :um, :width
 
 
@@ -28,9 +30,11 @@ class Product < ActiveRecord::Base
   has_many :budgets_products
   has_many :budgets, through: :budgets_products
 
-
-
-
   belongs_to :supplier
+
+
+  validates :code, :description, :ipi, :supplier_id, :supplier_price
+      presence: true
+
 
 end
