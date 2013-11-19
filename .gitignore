@@ -15,5 +15,6 @@
 /tmp
 
 
+/config/database.yml
 
 notes.txt
