@@ -37,7 +37,7 @@ class Product < ActiveRecord::Base
       presence: true
 
 
-
+	validates :supplier_price, numericality: { greater_than: 0 }
 
 
 	def self.import(file)
@@ -45,6 +45,16 @@ class Product < ActiveRecord::Base
 
       product_hash = row.to_hash # exclude the price field
       product = Product.find_by_code(row["code"])
+
+
+      #format price
+      kim = product_hash["supplier_price"].gsub(/[^0-9,]/, '')
+      kim1 = kim.gsub(',', '.')
+
+
+      product_hash["description"] = kim
+product_hash["supplier_price"] = kim1
+
 
       if product
         product.update_attributes!(product_hash)
