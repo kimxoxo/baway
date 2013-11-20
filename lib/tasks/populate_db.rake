@@ -134,9 +134,9 @@ namespace :db do
                       ncm: ncm,
                       width: width,
                       um: um)
-
-        product.save!
-
+        ##
+        ##product.save!
+        ##
       end
 
 

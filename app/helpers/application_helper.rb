@@ -2,8 +2,6 @@ module ApplicationHelper
 
 
 
-
-
   def filter_list_not_present
     if (params[:action] == 'new' || params[:action] == 'edit' || params[:action] == 'show' || params[:action] == 'update' || params[:action] == 'create')
       not_present = true

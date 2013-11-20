@@ -18,6 +18,9 @@
 
 class Product < ActiveRecord::Base
 
+	#get access to helper
+	extend ProductsHelper
+
 
   attr_accessible :brand, :code, :description, :ipi, :ncm, :supplier_id, :supplier_price, :um, :width
 
@@ -40,7 +43,12 @@ class Product < ActiveRecord::Base
 	validates :supplier_price, numericality: { greater_than: 0 }
 
 
+
+
+
 	def self.import(file)
+
+
     CSV.foreach(file.path, headers: true) do |row|
 
       product_hash = row.to_hash # exclude the price field
@@ -48,12 +56,13 @@ class Product < ActiveRecord::Base
 
 
       #format price
-      kim = product_hash["supplier_price"].gsub(/[^0-9,]/, '')
-      kim1 = kim.gsub(',', '.')
+      product_hash["supplier_price"] = string_to_float(product_hash["supplier_price"])
+      #format ipi
+      product_hash["ipi"] = string_to_float(product_hash["ipi"])
+      #format width
+      product_hash["width"] = string_to_float(product_hash["width"])
 
 
-      product_hash["description"] = kim
-product_hash["supplier_price"] = kim1
 
 
       if product

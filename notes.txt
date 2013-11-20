@@ -1,6 +1,6 @@
 ###access server
 ssh deployer@192.241.247.215
-
+pass: Kimxoxo1979
 
 ##acess postgrs command line
 sudo su - postgres
@@ -11,3 +11,6 @@ drop database baway_development;
 
 ##create database
 create database <database name> owner <username>
+
+
+cd ~/apps/baway/current && RAILS_ENV=production bundle exec rails console
