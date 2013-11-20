@@ -37,4 +37,24 @@ class Product < ActiveRecord::Base
       presence: true
 
 
+
+
+
+	def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|
+
+      product_hash = row.to_hash # exclude the price field
+      product = Product.find_by_code(row["code"])
+
+      if product
+        product.update_attributes!(product_hash)
+      else
+        Product.create!(product_hash)
+      end
+    end
+  end
+
+
+
+
 end

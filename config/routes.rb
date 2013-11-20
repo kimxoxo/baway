@@ -21,8 +21,11 @@ Baway::Application.routes.draw do
   end
 
 
-  resources :products
-  
+	resources :products do
+	  collection { post :import }
+	end
+
+
 
   resources :payment_conditions
 

@@ -1,11 +1,19 @@
 class ProductsController < ApplicationController
 
 
+	def import
+	  Product.import(params[:file])
+	  redirect_to products_path, notice: "Products imported."
+	end
+
+
+
+
 
   # GET /products
   # GET /products.json
   def index
-    @products = Product.paginate(page: params[:page], per_page: 10)
+    @products = Product.paginate(page: params[:page], per_page: 10).order('created_at DESC')
 
     respond_to do |format|
       format.html # index.html.erb

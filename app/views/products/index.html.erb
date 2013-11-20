@@ -13,10 +13,10 @@
 <div class="main_content_indexes">
   <table class="table">
     <tr>
+    	<th><%= t :"activerecord.attributes.product.code" %></th>
       <th><%= t :"activerecord.attributes.product.supplier_id" %></th>
       <th><%= t :"activerecord.attributes.product.description" %></th>
       <th><%= t :"activerecord.attributes.product.brand" %></th>
-      <th><%= t :"activerecord.attributes.product.code" %></th>
       <th><%= t :"activerecord.attributes.product.supplier_price" %></th>
       <th><%= t :"activerecord.attributes.product.ipi" %></th>
       <th><%= t :"activerecord.attributes.product.ncm" %></th>
@@ -29,10 +29,10 @@
 
   <% @products.each do |product| %>
     <tr>
+    	<td><%= product.code %></td>
       <td><%= product.supplier.name %></td>
       <td><%= product.description %></td>
       <td><%= product.brand %></td>
-      <td><%= product.code %></td>
       <td><%= number_to_currency(product.supplier_price) %></td>
       <td><%= "#{product.ipi}%" %></td>
       <td><%= product.ncm %></td>
@@ -51,4 +51,14 @@
       </td>
     </tr>
   </table>
+
+
+
+<h2><%= @row_hash %></h2>
+
+<%= form_tag import_products_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+
 </div>
