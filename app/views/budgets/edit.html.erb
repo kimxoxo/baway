@@ -210,18 +210,24 @@
 	<%#= link_to 'Back', budgets_path %>
 </center>
 
-<% if @budget.customer.errors.count == 0 %>
+<% if @budget.customer.errors.count > 0 %>
+
+	<script type="text/javascript">
+		$('#budget_client_div_show').hide();
+	</script>
+
+<% else %>
 
 	<script type="text/javascript">
 		$('#budget_client_div').hide();
 	</script>
-
+	
 <% end %>
 
 
 <script type="text/javascript">
 
-	$('.hide_this_form').hide();
+	//$('.hide_this_form').hide();
 	make_td_same_width_for_budget_tables();
 
 </script>
