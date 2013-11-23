@@ -28,6 +28,9 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
 
+  has_many :budgets, foreign_key: :arquitect_id, dependent: :destroy
+
+
 
   #attr_accessible :email, :encrypted_password, :landline, :mobile, :name, :role, :surname
 

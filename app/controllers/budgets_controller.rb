@@ -23,11 +23,14 @@ class BudgetsController < ApplicationController
   # GET /budgets/1.json
   def show
     @budget = Budget.find(params[:id])
+    
+    prawnto prawn: {page_size: "A4", page_layout: :portrait}, inline: true
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @budget }
-    end
+
+    #respond_to do |format|
+      #format.html # show.html.erb
+      #format.json { render json: @budget }
+    #end
   end
 
 

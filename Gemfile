@@ -10,6 +10,12 @@ gem 'devise'
 gem 'faker'
 #gem 'roo'
 
+
+#gem 'prawn'
+gem 'prawn', :git => "https://github.com/prawnpdf/prawn.git", :ref => '8028ca0cd2'
+gem "prawnto_2", :require => "prawnto"
+
+
 #gem 'action_mailer_tls'
 #gem 'tlsmail'
 #gem "paperclip", "~> 3.0"
