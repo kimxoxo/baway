@@ -35,7 +35,9 @@ pdf.table(budget_customer_cells,
 	budget_customer_cell.column(2).font_style = :bold
 	budget_customer_cell.column(4).font_style = :bold
 
-	budget_customer_cell.row(0).border_width = 0	
+	budget_customer_cell.row(0).border_width = 0
+
+	budget_customer_cell.row(0).style(:background_color => "F4F3F3")
 end
 
 
@@ -54,7 +56,9 @@ pdf.table(budget_customer_cells,
 	budget_customer_cell.column(2).font_style = :bold
 	budget_customer_cell.column(4).font_style = :bold
 
-	budget_customer_cell.row(0).border_width = 0	
+	budget_customer_cell.row(0).border_width = 0
+
+	budget_customer_cell.row(0).style(:background_color => "F4F3F3")
 end
 
 
@@ -79,13 +83,18 @@ pdf.table(budget_customer_cells,
 		  column_widths: {0 => 50, 1 => 90, 2 => 50, 3 => 120, 4 => 40},
  		  header: true) do |budget_customer_cell|
 
+
 	budget_customer_cell.column(0).align = :right
+	budget_customer_cell.column(2).align = :right
+	budget_customer_cell.column(4).align = :right
 
 	budget_customer_cell.column(0).font_style = :bold
 	budget_customer_cell.column(2).font_style = :bold
 	budget_customer_cell.column(4).font_style = :bold
 
 	budget_customer_cell.row(0).border_width = 0
+
+	budget_customer_cell.row(0).style(:background_color => "F4F3F3")
 end
 
 
@@ -104,52 +113,77 @@ pdf.table(budget_customer_cells,
 		  column_widths: {0 => 50, 1 => 90, 2 => 50, 3 => 120, 4 => 40 },
  		  header: true) do |budget_customer_cell|
 
+
+
 	budget_customer_cell.column(0).align = :right
-	
+	budget_customer_cell.column(2).align = :right
+	budget_customer_cell.column(4).align = :right
+
+
 	budget_customer_cell.column(0).font_style = :bold
 	budget_customer_cell.column(2).font_style = :bold
 	budget_customer_cell.column(4).font_style = :bold
 
 	budget_customer_cell.row(0).border_width = 0
+
+	budget_customer_cell.row(0).style(:background_color => "F4F3F3")
 end
 
 
 ###END CUSTOMER TABLES###
 
+pdf.move_down 40
+
+
+
+
+###PRODUCTS TABLE###
+products = [["código",
+						"fornecedor",
+						"descrição",
+						"medida",
+						"preço",
+						"qt"]]
 
 
 
 
 
 
-pdf.move_down 1000
+
+products += @budget.products.map do |product|
 
 
-pdf.float do
-	pdf.text "<b>cliente:</b> #{@budget.customer.name}", style: :normal, align: :left, inline_format: true
-	#pdf.move_down 5
-	pdf.text "<b>endereço:</b> #{@budget.customer.street}, #{@budget.customer.street_number}", style: :normal, align: :left, inline_format: true
-	pdf.text "<b>cep:</b> #{@budget.customer.postal_code}", style: :normal, align: :left, inline_format: true
-	pdf.text "<b>cidade:</b> #{@budget.customer.city}", style: :normal, align: :left, inline_format: true
-	pdf.text "<b>tel:</b> #{@budget.customer.mobile}", style: :normal, align: :left, inline_format: true
-	pdf.text "<b>email:</b> #{@budget.customer.mobile}", style: :normal, align: :left, inline_format: true
-	pdf.text "<b>arquiteto(a):</b> #{User.find(@budget.arquitect_id).name}", style: :normal, align: :left, inline_format: true
+	budget_product = @budget.budgets_products.find_by_product_id(product.id)
+
+	price = compute_price(product.supplier_price, product.ipi, budget_product.markup, budget_product.quantity)
+
 	
-
-	#pdf.text @budget.customer.name, style: :normal, align: :left
-	#pdf.text "#{@budget.customer.street}, #{@budget.customer.street_number}", style: :normal, align: :left
-	#pdf.text "#{@budget.customer.neighbourhood}, #{@budget.customer.postal_code}", style: :normal, align: :left
+	[
+		product.code,
+		product.supplier.name,
+		product.description,
+		"#{product.width} cm",
+		number_to_currency(price),
+		budget_product.quantity
+	]
 end
 
-pdf.font_size = 8
 
 
-pdf.float do
-	pdf.text 'Emporio do Arquiteto', style: :normal, align: :right, inline_format: true
-	pdf.move_down 5
-	pdf.text 'Avenida Senador Filinto Müller, 920', style: :normal, align: :right
-	pdf.text 'Goiabeiras | Cuiabá | MT | 78043-400', style: :normal, align: :right
-	pdf.text '+55 65 3321-1257', style: :normal, align: :right
+pdf.table(products, width: 523,
+		  row_colors: ["FFFFFF","F4F3F3"],
+		  column_widths: {0 => 50,
+					  				  1 => 100},
+ 		  header: true) do |product|
+
+	product.row(0).font_style = :bold
+	#ticket.row(0).column(0).align = :right
+
 end
-###END HEADER###
-###END HEADER###
+
+###END PRODUCTS TABLE###
+
+
+
+
