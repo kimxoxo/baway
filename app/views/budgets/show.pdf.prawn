@@ -187,3 +187,19 @@ end
 
 
 
+
+
+
+
+
+
+
+###FOOTER###
+pdf.float do
+
+	number_pages "BAWAY - gestão de orçamentos inteligente", { :start_count_at => 0, :page_filter => :all, :at => [bounds.left + 45, 0], :align => :left, :size => 8 }
+	number_pages "página <page> de <total>", { :start_count_at => 0, :page_filter => :all, :at => [bounds.right - 50, 0], :align => :right, :size => 8 }
+end
+###END FOOTER###
+
+

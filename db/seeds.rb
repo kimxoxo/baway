@@ -13,7 +13,7 @@ user = User.new( name:                  'Web Master',
                  email:                 'webmaster@baway.com', 
                  password:              'Kimxoxo1979', 
                  password_confirmation: 'Kimxoxo1979', 
-                 role:                  1 )
+                 role:                  -1 )
 
 
 user.save!
