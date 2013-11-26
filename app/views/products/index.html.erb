@@ -16,14 +16,14 @@
     	<th><%= t :"activerecord.attributes.product.code" %></th>
       <th><%= t :"activerecord.attributes.product.supplier_id" %></th>
       <th><%= t :"activerecord.attributes.product.description" %></th>
-      <th><%= t :"activerecord.attributes.product.brand" %></th>
+      <!--<th><%= t :"activerecord.attributes.product.brand" %></th>-->
       <th><%= t :"activerecord.attributes.product.supplier_price" %></th>
       <th><%= t :"activerecord.attributes.product.ipi" %></th>
-      <th><%= t :"activerecord.attributes.product.ncm" %></th>
+      <!--<th><%= t :"activerecord.attributes.product.ncm" %></th>-->
       <th><%= t :"activerecord.attributes.product.width" %></th>
       <th><%= t :"activerecord.attributes.product.um" %></th>
       <!--<th></th>-->
-      <th><%= content_tag(:i, '', class: "icon-pencil") %></th>
+      <!--<th><%= content_tag(:i, '', class: "icon-pencil") %></th>-->
       <!--<th></th>-->
     </tr>
 
@@ -32,14 +32,14 @@
     	<td><%= product.code %></td>
       <td><%= product.supplier.name %></td>
       <td><%= product.description %></td>
-      <td><%= product.brand %></td>
+      <!--<td><%= product.brand %></td>-->
       <td><%= number_to_currency(product.supplier_price) %></td>
       <td><%= "#{product.ipi}%" %></td>
-      <td><%= product.ncm %></td>
+      <!--<td><%= product.ncm %></td>-->
       <td><%= "#{product.width} cm" %></td>
       <td><%= product.um %></td>
       <!--<td><%#= link_to 'Show', product %></td>-->
-      <td><%= link_to content_tag(:i, '', class: "icon-pencil"), edit_product_path(product) %></td>
+      <!--<td><%= link_to content_tag(:i, '', class: "icon-pencil"), edit_product_path(product) %></td>-->
       <!--<td><%#= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
     </tr>
   <% end %>
@@ -53,10 +53,11 @@
   </table>
 
 
-
-	<%= form_tag import_products_path, multipart: true do %>
-	  <%= file_field_tag :file %>
-	  <%= submit_tag "Import" %>
+	<% if current_user.role == -1 %>	  
+		<%= form_tag import_products_path, multipart: true do %>
+		  <%= file_field_tag :file %>
+		  <%= submit_tag "Import" %>
+		<% end %>
 	<% end %>
 
 </div>

@@ -149,8 +149,7 @@ class BudgetsController < ApplicationController
   def create
 
     @budget = Budget.new(params[:budget])
-    #@customer = Customer.new(params[:budget][:customer_attributes])
-    #@customer.save!
+    @budget.status = 1
 
     respond_to do |format|
       if @budget.save

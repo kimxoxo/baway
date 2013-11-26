@@ -6,6 +6,9 @@
 
       <%= f.simple_fields_for :customer, @customer do |c| %>
 
+				<%= f.hidden_field :seller_id,
+														value: current_user.id %>
+
         <%#= f.error_notification class: "alert alert-error" %>
 
           <table>

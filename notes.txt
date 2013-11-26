@@ -18,3 +18,7 @@ cd ~/apps/baway/current && RAILS_ENV=production bundle exec rails console
 
 ##manual backup on vps
 backup perform --trigger baway_dropbox_backup
+
+
+###to replicate remote DB to local DB
+./script/db_replicate.sh

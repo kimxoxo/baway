@@ -29,6 +29,7 @@ function enable_this_tr_forms(tr_id) {
 
 	$('#product_id_'+tr_id).css('background-color', '#f5f5f5');
 
+	$('#product_id_'+tr_id).find('form').first().find('input').focus();
 }
 
 
@@ -108,10 +109,10 @@ function search_tax_number_and_populate(tax_number) {
   
 
 	if($('#budget_customer_attributes_tax_number_type').val() == 1) {
-		tax_number_length = 18
+		tax_number_length = 14
 	}
 	else if($('#budget_customer_attributes_tax_number_type').val() == 2) {
-		tax_number_length = 14
+		tax_number_length = 18
 	}
 
 

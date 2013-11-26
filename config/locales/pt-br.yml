@@ -285,10 +285,13 @@ pt-BR:
         id: nº
         customer_id: cliente
         status: estado
-        seller: vendedora
-        arquitect_id: arquiteto
+        seller: vendedor(a)
+        arquitect_id: arquiteto(a)
         description: descrição
         markup: markup
+        status1: iniciado
+        status2: submetido
+        status3: pedido
       supplier:
         name: nome
         street: rua

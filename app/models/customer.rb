@@ -35,8 +35,8 @@ class Customer < ActiveRecord::Base
   validates :tax_number,
             presence: true
 
-  validates_length_of :tax_number, is: 18, :if => Proc.new { |c| c.tax_number_type == 1 }
-  validates_length_of :tax_number, is: 14, :if => Proc.new { |c| c.tax_number_type == 2 }
+  validates_length_of :tax_number, is: 14, :if => Proc.new { |c| c.tax_number_type == 1 }
+  validates_length_of :tax_number, is: 18, :if => Proc.new { |c| c.tax_number_type == 2 }
 
 
 end

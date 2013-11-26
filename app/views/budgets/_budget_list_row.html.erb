@@ -64,7 +64,7 @@
 									<% markup_value = budget_product.markup %>
 								<% end %>
 
-		            <%= simple_form_for budget_product,
+		            <%#= simple_form_for budget_product,
 		            										url: update_product_attributes_budgets_path,
 							            					method: :get,
 							            					value: markup_value,
@@ -75,13 +75,13 @@
 							            												 border: 0px solid red; ',
 							            					id: "#{product.id}"} do |f| %>
 
-		              <%= f.hidden_field :id %>
+		              <%#= f.hidden_field :id %>
 
-		              <%= f.input_field :markup,
+		              <%#= f.input_field :markup,
 		                          			as: :string,
 		                       					onblur: '$(this).closest("form").submit(); ',
 		                          			style: 'float: left; width: 30px; margin:0; padding:2px;  ' %>          
-		            <% end %>
+		            <%# end %>
 
 								<span>
 									<%= "#{markup_value}%" %>

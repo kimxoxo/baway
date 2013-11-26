@@ -5,7 +5,7 @@
 
 	<% price = compute_price(@product.supplier_price, @product.ipi, @budgets_product.quantity, @budgets_product.quantity) %>
 
-	$('#product_id_<%= @budgets_product.product_id %>').find('.td_quantity').html('<%= @budgets_product.quantity %>');
+	$('#product_id_<%= @budgets_product.product_id %>').find('.td_quantity').find('span').html('<%= @budgets_product.quantity %>');
 	$('#product_id_<%= @budgets_product.product_id %>').find('.td_price').find('span').html('<%= number_to_currency(price) %>');
 	$('#product_id_<%= @budgets_product.product_id %>').find('.td_price').find('i').addClass('icon-ok success_text');
 

@@ -272,14 +272,12 @@ $(document).ready(function($) {
   if ($("#budget_customer_attributes_tax_number_type").val() == 1) {
 
     //$("#budget_customer_attributes_tax_number").val("");
-    $("#budget_customer_attributes_tax_number").mask("99.999.999/9999-99", {reverse: true});
-
+    $("#budget_customer_attributes_tax_number").mask("999.999.999-99", {reverse: true});
   }
   else if ($("#budget_customer_attributes_tax_number_type").val() == 2) {
 
     //$("#budget_customer_attributes_tax_number").val("");
-    $("#budget_customer_attributes_tax_number").mask("999.999.999-99", {reverse: true});
-
+    $("#budget_customer_attributes_tax_number").mask("99.999.999/9999-99", {reverse: true});
   }
 
 
