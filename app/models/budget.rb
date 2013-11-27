@@ -15,7 +15,7 @@
 
 class Budget < ActiveRecord::Base
   attr_accessible :arquitect_id, :customer_id, :description, :payment_condition_id,
-  				  :seller_id, :status, :customer_attributes, :markup, :user
+  				  :seller_id, :status, :customer_attributes, :user
 
 
 
@@ -42,8 +42,8 @@ class Budget < ActiveRecord::Base
       presence: true
 
 
-  validates :markup,
-      presence: true,
-      numericality: { greater_than: 0, less_than_or_equal_to: 100 }
+  #validates :markup,
+      #presence: true,
+      #numericality: { greater_than: 0, less_than_or_equal_to: 100 }
 
 end

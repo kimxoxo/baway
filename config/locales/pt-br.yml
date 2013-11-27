@@ -289,9 +289,9 @@ pt-BR:
         arquitect_id: arquiteto(a)
         description: descrição
         markup: markup
-        status1: iniciado
-        status2: submetido
-        status3: pedido
+        status1: aberto
+        status2: fechado
+        status3: encerrado
       supplier:
         name: nome
         street: rua

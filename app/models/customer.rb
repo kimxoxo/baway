@@ -28,12 +28,9 @@ class Customer < ActiveRecord::Base
   has_many :budgets
 
 
-	validates :name, :street, :street_number, :postal_code, :city, :mobile,
+	validates :name, :street, :street_number, :postal_code, :city, :mobile, :tax_number, :neighbourhood,
     	presence: true
 
-
-  validates :tax_number,
-            presence: true
 
   validates_length_of :tax_number, is: 14, :if => Proc.new { |c| c.tax_number_type == 1 }
   validates_length_of :tax_number, is: 18, :if => Proc.new { |c| c.tax_number_type == 2 }

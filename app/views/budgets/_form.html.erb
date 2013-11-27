@@ -72,7 +72,7 @@
 
               <td width="">
                 <%= c.input :neighbourhood,
-                            label_html: {style: 'width: 45px; '},
+                            label_html: {style: 'width: 50px; '},
                             input_html: {style: 'width: 130px; '} %>            
               </td>
 
@@ -102,7 +102,7 @@
 
               <td width="">
                 <%= c.input :landline,
-                            label_html: {style: 'width: 42px; '},
+                            label_html: {style: 'width: 47px; '},
                             input_html: {style: 'width: 130px; '} %>
               </td>
             </tr>
@@ -116,25 +116,11 @@
 
         <table style="">
           <tr>
-            <td width="115px">
-              <%= f.input :markup,
-                          as: :string,
-                          input_html: {style: 'width: 30px; '} %>
-            </td>
-
-
-            <%#= f.simple_fields_for :user, @arquitect do |a| %>
-              <!--<td>
-                <%#= a.input :id,
-                            as: :select,
-                            label: 'profissional' %>
-              </td>-->
-            <%# end %>
-            <td width="240px">
+            <td>
               <%= f.input :arquitect_id,
                           as: :select,
                           collection: User.find_all_by_role(2),
-                          label: 'profissional',
+                          
                           prompt: 'selecione',
                           input_html: {style: 'width: 135px; '} %>
             </td>
