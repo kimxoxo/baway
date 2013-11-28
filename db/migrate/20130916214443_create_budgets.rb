@@ -4,9 +4,10 @@ class CreateBudgets < ActiveRecord::Migration
       t.integer :customer_id
       t.integer :status
       t.integer :seller_id
-      t.integer :arquitect_id
+      t.integer :architect_id
       t.integer :payment_condition_id
-      t.text :description
+      t.text    :description
+      t.decimal :discount
 
       t.timestamps
     end

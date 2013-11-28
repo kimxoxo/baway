@@ -18,7 +18,7 @@
       <th width="1px"></th>
       <th><%= t :"activerecord.attributes.budget.status" %></th>
       <th><%= t :"activerecord.attributes.budget.seller" %></th>
-      <th><%= t :"activerecord.attributes.budget.arquitect_id" %></th>
+      <th><%= t :"activerecord.attributes.budget.architect_id" %></th>
       <!--<th>Payment condition</th>-->
       <!--<th><%= t :"activerecord.attributes.budget.description" %></th>-->
       <th>pdf</th>
@@ -41,7 +41,7 @@
       	<%= (t :"activerecord.attributes.budget.status#{budget.status}") %>
      	</td>
       <td><%= User.find(budget.seller_id).name %></td>
-      <td><%= User.find(budget.arquitect_id).name if budget.arquitect_id %></td>
+      <td><%= User.find(budget.architect_id).name if budget.architect_id %></td>
       <!--<td><%= budget.payment_condition_id %></td>-->
       <!--<td><%= budget.description %></td>-->
       <td>

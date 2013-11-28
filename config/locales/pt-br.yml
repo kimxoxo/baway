@@ -286,7 +286,7 @@ pt-BR:
         customer_id: cliente
         status: estado
         seller: vendedor(a)
-        arquitect_id: arquiteto(a)
+        architect_id: arquiteto(a)
         description: descrição
         markup: markup
         status1: aberto
@@ -318,17 +318,31 @@ pt-BR:
         tax_number_type1: cpf
         tax_number_type2: cnpj
       product:
+        product_type: tipo
+        product_type1: pp
+        product_type2: tp
+        product_type3: cr      
         code: código
         supplier_id: fornecedor
         brand: marca
         description: descrição
         supplier_price: preço forn.
-        width: medida
+        width: larg
+        height: alt
         ncm: ncm
         um: uni. med.
         um1: rolo
         um2: tecido
-      arquitect:
+        quantity: qt
+        price: preço
+        house_area: ambiente
+      user:
+        name: nome
+        surname: sobrenome
+        role: nível de acesso
+        email: email
+        password: senha
+        password_confirmation: confirme senha
     errors:
       <<: *errors
   helpers:

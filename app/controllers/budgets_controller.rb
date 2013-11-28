@@ -96,9 +96,6 @@ class BudgetsController < ApplicationController
     @products = @budget.products
     @product = Product.find(@budgets_product.product_id)
 
-    if !@budgets_product.markup
-      @budgets_product.markup = @budget.markup
-    end
 
     @budgets_product.update_attributes(params[:budgets_product])
 
@@ -114,7 +111,7 @@ class BudgetsController < ApplicationController
   def new
     @budget = Budget.new
     @customer = Customer.new
-    @arquitect = User.new
+    @architect = User.new
 
     if params[:tax_number]
       @customer = Customer.find_by_tax_number(params[:tax_number])

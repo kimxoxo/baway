@@ -11,7 +11,7 @@
 						orçamento nº
 					</th>
 
-					<td style="">
+					<td style="padding: 5px; ">
 						<%= @budget.id %>
 					</td>
 				</tr>
@@ -21,11 +21,7 @@
 		<div style="float: right; padding:0; margin:0; " class="well no_borders_shadow">
 			<table class="" style="float: left; ">
 				<tr>
-					<th width="" style="padding: 5px 5px 5px 5px; ">
-						data
-					</th>
-
-					<td style="padding: 5px 15px 5px 5px; ">
+					<td style="padding: 5px 5px 5px 5px; ">
 						<%= Time.now.strftime("%d") %>
 						<%= I18n.t("date.abbr_month_names")[Time.now.strftime("%m").to_i] %>
 						<%= Time.now.strftime("%Y") %>
@@ -50,45 +46,48 @@
 			<table>
 				<tr>
 					<th class="td_code">
-						código
+						<%= t :"activerecord.attributes.product.code" %>
+					</th>
+
+					<th class="td_product_type">
+						<%= t :"activerecord.attributes.product.product_type" %>
 					</th>
 
 					<th class="td_supplier">
-						fornecedor
+						<%= t :"activerecord.attributes.product.supplier_id" %>
 					</th>
 
 					<th class="td_description">
-						descrição
+						<%= t :"activerecord.attributes.product.description" %>
+					</th>
+
+					<th class="td_pencil_house_area">
+						<i class="icon icon-pencil icon-white"></i>
+					</th>
+
+					<th class="td_house_area">
+						<%= t :"activerecord.attributes.product.house_area" %>
 					</th>
 
 					<th class="td_width">
-						medida
+						<%= t :"activerecord.attributes.product.width" %>
 					</th>
 
-					<th class="td_supplier_price">
-						preço custo
+					<th class="td_height">
+						<%= t :"activerecord.attributes.product.height" %>
 					</th>
 
-					<th class="td_pencil">
+					<th class="td_pencil_quantity">
 						<i class="icon icon-pencil icon-white"></i>
 					</th>
 
 					<th class="td_quantity">
-						qt
+						<%= t :"activerecord.attributes.product.quantity" %>
 					</th>
-
-					<th class="td_markup">
-						markup
-					</th>
-
-					<th class="td_ipi">
-						ipi
-					</th>					
 
 					<th class="td_price">
-						preço
+						<%= t :"activerecord.attributes.product.price" %>
 					</th>
-
 
 					<th class="td_delete">
 						<%= content_tag(:i, '', class: "icon-trash icon-white") %>
@@ -167,23 +166,19 @@
 					<table>
 						<tr style="display: none; ">
 							<th>
-								código
+								<%= t :"activerecord.attributes.product.code" %>
 							</th>
 
 							<th>
-								fornecedor
+								<%= t :"activerecord.attributes.product.supplier_id" %>
 							</th>
 
 							<th>
-								descrição
+								<%= t :"activerecord.attributes.product.description" %>
 							</th>
 
 							<th>
-								preço custo
-							</th>
-
-							<th>
-								ipi
+								<%= t :"activerecord.attributes.product.price" %>
 							</th>
 
 							<th>

@@ -9,7 +9,7 @@ end
 
 pdf.move_down 30
 
-architech_name = User.find(@budget.arquitect_id).name
+architech_name = User.find(@budget.architect_id).name
 
 
 pdf.float do

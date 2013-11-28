@@ -5,6 +5,10 @@
 								<%= product.code %>
 							</td>
 
+							<td class="td_product_type">
+								<%= t :"activerecord.attributes.product.product_type#{product.product_type}" %>
+							</td>
+
 							<td class="td_supplier">
 								<%= product.supplier.name %>
 							</td>
@@ -13,17 +17,62 @@
 								<%= product.description %>
 							</td>
 
+
+
+							<td class="td_pencil_house_area">
+								<a href="#" onclick='<%= "enable_this_tr_forms(#{product.id}, 'house_area'); " %>'>
+									<i class="icon icon-pencil"></i>
+								</a>
+							</td>
+
+
+
+							<td class="td_house_area" style="padding: 0 5px 0 5px; margin:0; ">
+		            <%= simple_form_for budget_product,
+		            										url: update_product_attributes_budgets_path,
+							            					method: :get,
+							            					remote: true,
+							            					html: {class: 'hide_this_form',
+							            					style: 'margin: 0;
+							            									padding: 0;
+							            									border: 0px solid red; ',
+																		id: "form_house_area_#{product.id}"} do |f| %>
+
+		              <%= f.hidden_field :id %>
+
+		              <%= f.input_field :house_area,
+		                          			as: :string,
+		                       					onblur: '$(this).closest("form").submit(); ',
+		                          			style: 'float: left;
+		                          							width: 70px;
+		                          							margin:0;
+		                          							padding:2px;  ' %>          
+		            <% end %>
+
+								<span>
+									<%= budget_product.house_area %>
+								</span>
+							</td>
+
+
+
+
 							<td class="td_width">
-								<%= product.width %>
-							</td>
-
-							<td class="td_supplier_price">
-								<%= number_to_currency(product.supplier_price) %>
+								<%= "#{product.width} cm" %>
 							</td>
 
 
-							<td class="td_pencil">
-								<a href="#" onclick='<%= "enable_this_tr_forms(#{product.id}); " %>'>
+							<td class="td_height">
+								<% if product.height > 0  %>
+									<%= "#{product.height} cm" %>
+								<% else %>
+									---
+								<% end %>
+							</td>
+
+
+							<td class="td_pencil_quantity">
+								<a href="#" onclick='<%= "enable_this_tr_forms(#{product.id}, 'quantity'); " %>'>
 									<i class="icon icon-pencil"></i>
 								</a>
 							</td>
@@ -38,7 +87,7 @@
 							            					style: 'margin: 0;
 							            									padding: 0;
 							            									border: 0px solid red; ',
-																		id: "#{product.id}"} do |f| %>
+																		id: "form_quantity_#{product.id}"} do |f| %>
 
 		              <%= f.hidden_field :id %>
 
@@ -57,47 +106,13 @@
 							</td>
 
 
-							<td class="td_markup" style="padding: 0 5px 0 5px; margin:0; ">
-								<% if budget.markup %>
-									<% markup_value = budget.markup %>
-								<% else %>
-									<% markup_value = budget_product.markup %>
-								<% end %>
-
-		            <%#= simple_form_for budget_product,
-		            										url: update_product_attributes_budgets_path,
-							            					method: :get,
-							            					value: markup_value,
-							            					remote: true,
-							            					html: {class: 'hide_this_form',
-							            								 style: 'margin: 0;
-							            					  						 padding: 0;
-							            												 border: 0px solid red; ',
-							            					id: "#{product.id}"} do |f| %>
-
-		              <%#= f.hidden_field :id %>
-
-		              <%#= f.input_field :markup,
-		                          			as: :string,
-		                       					onblur: '$(this).closest("form").submit(); ',
-		                          			style: 'float: left; width: 30px; margin:0; padding:2px;  ' %>          
-		            <%# end %>
-
-								<span>
-									<%= "#{markup_value}%" %>
-								</span>
-							</td>
-
-
-							<td class="td_ipi">
-								<%= "#{product.ipi}%" %>
-							</td>
-
-
 							<td class="td_price">
-								<% if(product.supplier_price && product.ipi && budget_product.markup && budget_product.quantity) %>
+								<% if(product.supplier_price && product.ipi && product.markup && budget_product.quantity) %>
 									
-									<% price = compute_price(product.supplier_price, product.ipi, budget_product.markup, budget_product.quantity) %>
+									<% price = compute_price(product.supplier_price,
+																					 product.ipi,
+																					 product.markup,
+																					 budget_product.quantity) %>
 								<% end %>
 								<span>
 									<%= number_to_currency(price) %>

@@ -3,7 +3,7 @@
 
 <% if params[:budgets_product][:quantity] %>
 
-	<% price = compute_price(@product.supplier_price, @product.ipi, @budgets_product.quantity, @budgets_product.quantity) %>
+	<% price = compute_price(@product.supplier_price, @product.ipi, @product.markup, @budgets_product.quantity) %>
 
 	$('#product_id_<%= @budgets_product.product_id %>').find('.td_quantity').find('span').html('<%= @budgets_product.quantity %>');
 	$('#product_id_<%= @budgets_product.product_id %>').find('.td_price').find('span').html('<%= number_to_currency(price) %>');
@@ -14,6 +14,18 @@
 
 <% end %>
 
+
+
+
+<% if params[:budgets_product][:house_area] %>
+
+	$('#product_id_<%= @budgets_product.product_id %>').find('.td_house_area').find('span').html('<%= @budgets_product.house_area %>');
+	$('#product_id_<%= @budgets_product.product_id %>').find('.td_price').find('i').addClass('icon-ok success_text');
+
+	hide_all_forms();
+	show_spans();
+
+<% end %>
 
 
 

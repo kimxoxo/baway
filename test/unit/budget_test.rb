@@ -6,11 +6,12 @@
 #  customer_id          :integer
 #  status               :integer
 #  seller_id            :integer
-#  arquitect_id         :integer
+#  architect_id         :integer
 #  payment_condition_id :integer
 #  description          :text
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  markup               :float
 #
 
 require 'test_helper'

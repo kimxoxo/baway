@@ -10,7 +10,7 @@
 #
 
 class BudgetsProduct < ActiveRecord::Base
-	attr_accessible :quantity, :markup
+	attr_accessible :quantity, :house_area
 
 
 

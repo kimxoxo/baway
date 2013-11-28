@@ -6,11 +6,12 @@
 #  customer_id          :integer
 #  status               :integer
 #  seller_id            :integer
-#  arquitect_id         :integer
+#  architect_id         :integer
 #  payment_condition_id :integer
 #  description          :text
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  markup               :float
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
@@ -19,7 +20,7 @@ one:
   customer_id: 1
   status: 1
   seller_id: 1
-  arquitect_id: 1
+  architect_id: 1
   payment_condition_id: 1
   description: MyText
 
@@ -27,6 +28,6 @@ two:
   customer_id: 1
   status: 1
   seller_id: 1
-  arquitect_id: 1
+  architect_id: 1
   payment_condition_id: 1
   description: MyText

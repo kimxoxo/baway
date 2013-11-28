@@ -1,4 +1,9 @@
 
+		<% price_computed = compute_price(product.supplier_price,
+																			product.ipi,
+																			product.markup,
+																			1) %>
+
 		<tr>
 			<td>
 				<%= product.code %>
@@ -15,13 +20,9 @@
 
 
 			<td>
-				<%= number_to_currency(product.supplier_price) %>
+				<%= number_to_currency(price_computed) %>
 			</td>
 
-
-			<td>
-				<%= "#{product.ipi}%" %>
-			</td>
 
 			<td>
 				<%#= product.ipi %>

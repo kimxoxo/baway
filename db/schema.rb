@@ -17,19 +17,20 @@ ActiveRecord::Schema.define(:version => 20131120002247) do
     t.integer  "customer_id"
     t.integer  "status"
     t.integer  "seller_id"
-    t.integer  "arquitect_id"
+    t.integer  "architect_id"
     t.integer  "payment_condition_id"
     t.text     "description"
+    t.decimal  "discount"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
-    t.float    "markup"
   end
 
   create_table "budgets_products", :force => true do |t|
     t.integer "budget_id"
     t.integer "product_id"
+    t.string  "house_area"
     t.integer "quantity"
-    t.float   "markup"
+    t.integer "days_to_delivery"
   end
 
   create_table "customers", :force => true do |t|
@@ -67,7 +68,9 @@ ActiveRecord::Schema.define(:version => 20131120002247) do
     t.decimal  "ipi"
     t.integer  "ncm"
     t.decimal  "width"
-    t.boolean  "um"
+    t.decimal  "height"
+    t.integer  "product_type"
+    t.decimal  "markup"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end

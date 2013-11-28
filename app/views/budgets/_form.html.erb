@@ -116,11 +116,11 @@
 
         <table style="">
           <tr>
-            <td>
-              <%= f.input :arquitect_id,
+            <td width="400px">
+              <%= f.input :architect_id,
                           as: :select,
                           collection: User.find_all_by_role(2),
-                          
+                          label_method: lambda { |user| "#{user.name} #{user.surname}" },
                           prompt: 'selecione',
                           input_html: {style: 'width: 135px; '} %>
             </td>

@@ -18,7 +18,7 @@ class BudgetsControllerTest < ActionController::TestCase
 
   test "should create budget" do
     assert_difference('Budget.count') do
-      post :create, budget: { arquitect_id: @budget.arquitect_id, customer_id: @budget.customer_id, description: @budget.description, payment_condition_id: @budget.payment_condition_id, seller_id: @budget.seller_id, status: @budget.status }
+      post :create, budget: { architect_id: @budget.architect_id, customer_id: @budget.customer_id, description: @budget.description, payment_condition_id: @budget.payment_condition_id, seller_id: @budget.seller_id, status: @budget.status }
     end
 
     assert_redirected_to budget_path(assigns(:budget))
@@ -35,7 +35,7 @@ class BudgetsControllerTest < ActionController::TestCase
   end
 
   test "should update budget" do
-    put :update, id: @budget, budget: { arquitect_id: @budget.arquitect_id, customer_id: @budget.customer_id, description: @budget.description, payment_condition_id: @budget.payment_condition_id, seller_id: @budget.seller_id, status: @budget.status }
+    put :update, id: @budget, budget: { architect_id: @budget.architect_id, customer_id: @budget.customer_id, description: @budget.description, payment_condition_id: @budget.payment_condition_id, seller_id: @budget.seller_id, status: @budget.status }
     assert_redirected_to budget_path(assigns(:budget))
   end
 

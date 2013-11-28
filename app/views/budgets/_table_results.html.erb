@@ -10,9 +10,9 @@
 
 
 
-					<% if(product.supplier_price && product.ipi && budget_product.markup && budget_product.quantity) %>
+					<% if(product.supplier_price && product.ipi && product.markup && budget_product.quantity) %>
 										
-						<% price = compute_price(product.supplier_price, product.ipi, budget_product.markup, budget_product.quantity) %>
+						<% price = compute_price(product.supplier_price, product.ipi, product.markup, budget_product.quantity) %>
 
 						<!-- compute totals for price column -->
 						<% @price_total = @price_total + price %>
@@ -28,8 +28,10 @@
 
 				<table id="table_results">
 					<tr>
+						<th class="product_type">
+						</th>
+
 						<th class="td_code" width="1px">
-							<%#= budget_product.length %>
 						</th>
 
 						<th class="td_supplier">
@@ -38,24 +40,24 @@
 						<th class="td_description">
 						</th>
 
+						<th class="td_pencil_house_area">
+						</th>
+
+						<th class="td_house_area">
+						</th>
+
 						<th class="td_width">
 						</th>
 
-						<th class="td_supplier_price">
+						<th class="td_height">
 						</th>
 
-						<th class="td_pencil">
+						<th class="td_pencil_quantity">
 						</th>
 
 						<th class="td_quantity" style="">
 							<%= @quantity_total %>
 						</th>
-
-						<th class="td_markup">
-						</th>
-
-						<th class="td_ipi">
-						</th>					
 
 						<th class="td_price" align="left">
 							<%= number_to_currency(@price_total) %>

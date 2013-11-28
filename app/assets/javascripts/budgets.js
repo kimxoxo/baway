@@ -15,21 +15,21 @@ function show_spans() {
 
 
 
-function enable_this_tr_forms(tr_id) {
+function enable_this_tr_forms(tr_id, attr) {
 	
 	hide_all_forms();
 
 	show_spans();
 
-	$('#product_id_'+tr_id).find('form').first().fadeIn(500);
-	$('#product_id_'+tr_id).find('span').first().hide();
+	$('#form_'+ attr + '_' + tr_id).fadeIn(500);
+	$('#form_'+ attr + '_' + tr_id).parent('td').find('span').hide();
 
-	$('#product_id_'+tr_id).find('td').first().addClass('border_left');
-	$('#product_id_'+tr_id).find('td').last().addClass('border_right');
+	$('#form_'+ attr + '_' + tr_id).find('td').first().addClass('border_left');
+	$('#form_'+ attr + '_' + tr_id).find('td').last().addClass('border_right');
 
-	$('#product_id_'+tr_id).css('background-color', '#f5f5f5');
+	$('#form_'+ attr + '_' + tr_id).css('background-color', '#f5f5f5');
 
-	$('#product_id_'+tr_id).find('form').first().find('input').focus();
+	$('#form_'+ attr + '_' + tr_id).find('input').focus();
 }
 
 

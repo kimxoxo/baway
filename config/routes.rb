@@ -7,17 +7,9 @@ Baway::Application.routes.draw do
   devise_for :users
 
   resources :budgets do
-    collection do
-      get 'products_search'
-    end
-
-    collection do
-      get 'update_products_list'
-    end
-
-    collection do
-      get 'update_product_attributes'
-    end      
+    collection { get :products_search }
+    collection { get :update_products_list }
+    collection { get :update_product_attributes }   
   end
 
 
@@ -30,7 +22,10 @@ Baway::Application.routes.draw do
   resources :payment_conditions
 
 
-  resources :users
+  resources :users do
+    collection { get :new_architect }
+    collection { get :create_architect }
+  end
 
 
   resources :suppliers

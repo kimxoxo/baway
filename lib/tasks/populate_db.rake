@@ -18,7 +18,7 @@ namespace :db do
       mobile             = Faker::PhoneNumber.phone_number    
       postal_code        = "234234"
       address_complement = Faker::Name.name
-      tax_number_type    = [0,1][rand(2)]
+      tax_number_type    = 2
       rg                 = "234234234234"
       email              = (100000+rand(899999)).to_s + "name@email.com"
 
@@ -46,7 +46,7 @@ namespace :db do
 
 
 
-    # create customers
+    # create users
     10.times do
 
       name     = Faker::Name.name
@@ -122,7 +122,6 @@ namespace :db do
         ipi            = 0.99
         ncm            = 1
         width          = 6.78
-        um             = true
 
 
         product = Product.new(supplier_id: supplier_id,
@@ -132,8 +131,7 @@ namespace :db do
                       supplier_price: supplier_price,
                       ipi: ipi,
                       ncm: ncm,
-                      width: width,
-                      um: um)
+                      width: width)
         ##
         ##product.save!
         ##

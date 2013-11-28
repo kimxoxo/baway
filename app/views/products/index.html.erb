@@ -13,34 +13,36 @@
 <div class="main_content_indexes">
   <table class="table">
     <tr>
+    	<th><%= t :"activerecord.attributes.product.product_type" %></th>
     	<th><%= t :"activerecord.attributes.product.code" %></th>
       <th><%= t :"activerecord.attributes.product.supplier_id" %></th>
       <th><%= t :"activerecord.attributes.product.description" %></th>
-      <!--<th><%= t :"activerecord.attributes.product.brand" %></th>-->
-      <th><%= t :"activerecord.attributes.product.supplier_price" %></th>
-      <th><%= t :"activerecord.attributes.product.ipi" %></th>
-      <!--<th><%= t :"activerecord.attributes.product.ncm" %></th>-->
       <th><%= t :"activerecord.attributes.product.width" %></th>
-      <th><%= t :"activerecord.attributes.product.um" %></th>
-      <!--<th></th>-->
-      <!--<th><%= content_tag(:i, '', class: "icon-pencil") %></th>-->
-      <!--<th></th>-->
+      <th><%= t :"activerecord.attributes.product.height" %></th>
+      <th><%= t :"activerecord.attributes.product.price" %></th>
     </tr>
 
   <% @products.each do |product| %>
+		
+		<% price_computed = compute_price(product.supplier_price,
+																			product.ipi,
+																			product.markup,
+																			1) %>
+
     <tr>
+    	<td><%= t :"activerecord.attributes.product.product_type#{product.product_type}" %></td>
     	<td><%= product.code %></td>
       <td><%= product.supplier.name %></td>
       <td><%= product.description %></td>
-      <!--<td><%= product.brand %></td>-->
-      <td><%= number_to_currency(product.supplier_price) %></td>
-      <td><%= "#{product.ipi}%" %></td>
-      <!--<td><%= product.ncm %></td>-->
       <td><%= "#{product.width} cm" %></td>
-      <td><%= product.um %></td>
-      <!--<td><%#= link_to 'Show', product %></td>-->
-      <!--<td><%= link_to content_tag(:i, '', class: "icon-pencil"), edit_product_path(product) %></td>-->
-      <!--<td><%#= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+      <td>
+				<% if product.height > 0  %>
+					<%= "#{product.height} cm" %>
+				<% else %>
+					---
+				<% end %>
+			</td>
+      <td><%= number_to_currency(price_computed) %></td>
     </tr>
   <% end %>
 

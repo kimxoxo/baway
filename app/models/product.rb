@@ -11,7 +11,6 @@
 #  ipi            :decimal(, )
 #  ncm            :integer
 #  width          :decimal(, )
-#  um             :boolean
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
@@ -22,7 +21,8 @@ class Product < ActiveRecord::Base
 	extend ProductsHelper
 
 
-  attr_accessible :brand, :code, :description, :ipi, :ncm, :supplier_id, :supplier_price, :um, :width
+  attr_accessible :brand, :code, :description, :ipi, :ncm,
+  								:supplier_id, :supplier_price, :width, :height, :product_type, :markup
 
 
 	attr_accessor :search_phrase, :budget_id
@@ -36,7 +36,7 @@ class Product < ActiveRecord::Base
   belongs_to :supplier
 
 
-  validates :code, :description, :ipi, :supplier_id, :supplier_price, :um, :width,
+  validates :code, :description, :ipi, :supplier_id, :supplier_price, :width, :height, :product_type,
       presence: true
 
 
