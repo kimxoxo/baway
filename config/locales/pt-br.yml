@@ -292,6 +292,7 @@ pt-BR:
         status1: aberto
         status2: fechado
         status3: encerrado
+        discount: desconto
       supplier:
         name: nome
         street: rua
@@ -336,6 +337,7 @@ pt-BR:
         quantity: qt
         price: preço
         house_area: ambiente
+        days_to_delivery: ent
       user:
         name: nome
         surname: sobrenome

@@ -50,8 +50,53 @@
 		            <% end %>
 
 								<span>
-									<%= budget_product.house_area %>
+									<% if !budget_product.house_area.blank? %>
+										<%= budget_product.house_area %>
+									<% else %>
+										<span style="color: red; ">p</span>
+									<% end %>
 								</span>
+
+								<i class="icon" style="font-size: 14px; "></i>
+							</td>
+
+
+							<td class="td_pencil_days_to_delivery">
+								<a href="#" onclick='<%= "enable_this_tr_forms(#{product.id}, 'days_to_delivery'); " %>'>
+									<i class="icon icon-pencil"></i>
+								</a>
+							</td>
+
+							<td class="td_days_to_delivery" style="padding: 0 5px 0 5px; margin:0; ">
+		            <%= simple_form_for budget_product,
+		            										url: update_product_attributes_budgets_path,
+							            					method: :get,
+							            					remote: true,
+							            					html: {class: 'hide_this_form',
+							            					style: 'margin: 0;
+							            									padding: 0;
+							            									border: 0px solid red; ',
+																		id: "form_days_to_delivery_#{product.id}"} do |f| %>
+
+		              <%= f.hidden_field :id %>
+
+		              <%= f.input_field :days_to_delivery,
+		                          			as: :string,
+		                       					onblur: '$(this).closest("form").submit(); ',
+		                          			style: 'float: left;
+		                          							width: 20px;
+		                          							margin:0;
+		                          							padding:2px;  ' %>          
+		            <% end %>
+
+								<span>
+									<% if budget_product.days_to_delivery %>
+										<%= "#{budget_product.days_to_delivery} d" %>
+									<% else %>
+										<span style="color: red; ">p</span>
+									<% end %>
+								</span>
+								<i class="icon" style="font-size: 14px; "></i>
 							</td>
 
 
@@ -100,8 +145,13 @@
 		                          							padding:2px;  ' %>          
 		            <% end %>
 
+
 								<span>
-									<%= budget_product.quantity %>
+									<% if budget_product.quantity %>
+										<%= budget_product.quantity %>
+									<% else %>
+										<span style="color: red; ">p</span>
+									<% end %>
 								</span>
 							</td>
 
@@ -114,9 +164,16 @@
 																					 product.markup,
 																					 budget_product.quantity) %>
 								<% end %>
+
 								<span>
-									<%= number_to_currency(price) %>
+									<% if price %>
+										<%= number_to_currency(price) %>
+									<% else %>
+										<span style="color: red; ">p</span>
+									<% end %>
 								</span>
+
+
 
 								<i class="icon" style="font-size: 14px; "></i>
 							</td>

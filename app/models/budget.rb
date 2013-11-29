@@ -16,7 +16,7 @@
 
 class Budget < ActiveRecord::Base
   attr_accessible :architect_id, :customer_id, :description, :payment_condition_id,
-  				  :seller_id, :status, :customer_attributes, :user
+  				  :seller_id, :status, :customer_attributes, :user, :discount
 
 
 

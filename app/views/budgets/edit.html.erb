@@ -69,6 +69,17 @@
 						<%= t :"activerecord.attributes.product.house_area" %>
 					</th>
 
+
+					<th class="td_pencil_days_to_delivery">
+						<i class="icon icon-pencil icon-white"></i>
+					</th>
+
+
+					<th class="td_days_to_delivery">
+						<%= t :"activerecord.attributes.product.days_to_delivery" %>
+					</th>
+
+
 					<th class="td_width">
 						<%= t :"activerecord.attributes.product.width" %>
 					</th>
@@ -96,9 +107,8 @@
 
 
 				<tr id="flash_messages">
-					<td colspan="11" style="display: none; border: 0; padding-top: 10px; ">
+					<td colspan="14" style="display: none; border: 0; padding-top: 10px; ">
 						<div class="alert" style="text-align:center; padding: 2px; margin: 0; ">
-							
 						</div>
 					</td>
 				</tr>
@@ -115,7 +125,7 @@
 				</table>
 			</div>
 
-			<div id="div_table_results">
+			<div id="div_table_results" style="border: 0px solid green; ">
 				<%= render partial: 'table_results' %>
 			</div>
 		</div>
@@ -124,45 +134,16 @@
 
 		<div class="clearfix"></div>
 
-		<div id="products_search_results_div" class=" no_borders_shadow" style="margin-top: 10px; border: 0px solid red; ">
+		<div id="products_search_results_div" class=" no_borders_shadow" style="border: 0px solid red; ">
 			<div id="products_search_div" style="border: 0px solid red; ">
 				<div id="products_search_form" class="no_borders_shadow" style="border: 0px solid green; ">
-					<%= simple_form_for @product,
-															url: {controller: 'budgets', action: 'products_search'},
-															method: :get,
-															remote: true,
-															html: {class: 'pull-right',
-																		 style: '',
-																		 id: "ticket-solution-form-#{@product.id}"} do |f| %>
-
-
-						<%= f.hidden_field :budget_id,
-															 value: @budget.id %>
-
-
-						<%= f.input :search_phrase,
-												label: false,
-												wrapper: :append,
-												class: "inline" do %>
-					    
-					    <%= f.input_field :search_phrase,
-					    									as: :string,
-																placeholder: 'código/descrição do produto',
-		      											style: 'width: 260px; ' %>
-
-							<%= f.submit 'procurar',
-		        						 	 class: 'btn btn-primary btn-small',
-		        						   style: 'font-weight: bold; padding: 4px 10px 4px 10px' %>
-
-			      <% end %>
-
-					<% end %>
+					
 
 					<div class="clearfix"></div>
 
 				</div>
 			
-				<div id="products">
+				<div id="products" style="border: 0px solid black; ">
 					<table>
 						<tr style="display: none; ">
 							<th>

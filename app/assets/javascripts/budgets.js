@@ -101,6 +101,13 @@ function make_td_same_width_for_budget_tables() {
 
 	})
 
+
+	w = $('#table_results th.td_price').width();
+	$('#table_results2 th.td_price').width(w);
+
+	w = $('#table_results th.td_delete').width();
+	$('#table_results2 th.td_delete').width(w);
+
 }
 
 

@@ -26,7 +26,7 @@
 
 
 
-				<table id="table_results">
+				<table id="table_results" style="border: 0px solid green; ">
 					<tr>
 						<th class="product_type">
 						</th>
@@ -46,6 +46,12 @@
 						<th class="td_house_area">
 						</th>
 
+						<th class="td_pencil_days_to_delivery">
+						</th>
+
+						<th class="td_days_to_delivery">
+						</th>
+
 						<th class="td_width">
 						</th>
 
@@ -61,6 +67,78 @@
 
 						<th class="td_price" align="left">
 							<%= number_to_currency(@price_total) %>
+						</th>
+
+						<th class="td_delete" width="1px">
+						</th>	
+					</tr>
+				</table>
+
+
+				<table id="table_results2" style="margin: 0; padding: 0; margin-top: 4px; ">
+					<tr>
+						<th style="border: 0px solid red; margin: 0; padding: 0;" colspan="14">
+							<span style="float: left; ">
+								<%= simple_form_for @product,
+																	url: {controller: 'budgets',
+																				action: 'products_search'},
+																	method: :get,
+																	remote: true,
+																	html: {class: '',
+																				 style: 'float: left; height: 10px; border: 0px solid green; ',
+																				 id: "products_search_form_#{@product.id}"} do |f| %>
+
+
+									<%= f.hidden_field :budget_id,
+																		 value: @budget.id %>
+
+
+									<%= f.input :search_phrase,
+															label: false,
+															wrapper: :append,
+															style: 'margin: 0; padding: 0; ',
+															class: "inline" do %>
+								    
+								    <%= f.input_field :search_phrase,
+								    									as: :string,
+																			placeholder: 'código/descrição do produto',
+					      											style: 'width: 260px; ' %>
+
+										<%= f.submit 'procurar',
+					        						 	 class: 'btn btn-primary btn-small',
+					        						   style: 'font-weight: bold; padding: 4px 10px 4px 10px; ' %>
+
+						      <% end %>
+								<% end %>
+							</span>
+
+
+							<span style="float: right; ">
+								<%= simple_form_for @budget,
+			            									url: budget_path(@budget.id),
+								            				remote: true,
+								            				html: {class: 'hide_this_form_ form-horizontal',
+								            				style: 'margin: 0;
+								            								padding: 0;
+								            								float: left;
+								            								height: 10px;
+								            								border: 0px solid red; ',
+																		id: "form_house_area_"} do |f| %>
+
+									<%= f.input :discount,
+			                        as: :string,
+			                        wrapper: :basic,
+			                        label: (t :"activerecord.attributes.budget.discount"),
+			                     		onblur: '$(this).closest("form").submit(); ',
+			                        input_html: { style: 'float: ;
+			                        											width: 65px;
+			                        											margin: 0;
+			                        											padding: 2px; ' } %>          
+			          <% end %>
+			        </span>
+						</th>
+
+						<th class="td_price" style="">
 						</th>
 
 						<th class="td_delete" width="1px">

@@ -312,8 +312,8 @@ $(document).ready(function($) {
   $("#budget_customer_attributes_mobile").mask("(99) 9999-9999");
 
 
-
   $("#product_supplier_price").mask("0.000,00", {reverse: true});
+  $("#budget_discount").mask("0.000,00", {reverse: true});
 
 
   $("#supplier_cnpj").mask("999.999.999-99", {reverse: true});

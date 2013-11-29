@@ -94,6 +94,20 @@ $blue_global: #3f7db2;
 		}
 	}
 
+
+	table#table_results2 {
+
+		background-color: transparent;
+
+		th {
+			background-color: transparent;
+			color: $blue_global;
+			//border: 1px solid red;
+			padding: 5px;
+		}
+	}
+
+
 	table {
 		width: 100%;
 
@@ -110,15 +124,14 @@ $blue_global: #3f7db2;
 
 		td {
 			text-align: left;
-			padding: 8px 5px 8px 5px;
+			padding: 7px 5px 7px 5px;
 			//border: 1px solid #e1e1e1;
 			white-space: nowrap;
 		}
 	}
 
 	table#table_products_list {
-
-}
+	}
 
 
 	#products_list {
