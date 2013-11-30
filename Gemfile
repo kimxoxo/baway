@@ -37,7 +37,7 @@ group :development, :test do
   #gem 'guard-rspec'
   #gem 'factory_girl_rails'
   gem 'annotate'
-  #gem 'hirb'
+  gem 'hirb'
   #gem 'thin'
 end
  

@@ -95,7 +95,7 @@ class BudgetsController < ApplicationController
 
     @budgets_product = BudgetsProduct.find(params[:budgets_product][:id])
     @budget = Budget.find(@budgets_product.budget_id)
-    @products = @budget.products
+    @budgets_products = @budget.budgets_products
     @product = Product.find(@budgets_product.product_id)
 
 
@@ -139,7 +139,7 @@ class BudgetsController < ApplicationController
     @products = @budget.products.order('created_at DESC')
     @products_search_list = []
 
-    @budget_products = @budget.budgets_products
+    @budgets_products = @budget.budgets_products.order('id ASC')
   end
 
 
@@ -173,17 +173,19 @@ class BudgetsController < ApplicationController
   def update
     @budget = Budget.find(params[:id])
 
+		params[:budget][:discount] = view_context.currency_to_number(params[:budget][:discount])
+
     @product = Product.new    
     @products = @budget.products.order('created_at DESC')
     @products_search_list = []
-    @budget_products = @budget.budgets_products
+    @budgets_products = @budget.budgets_products
 
 
     respond_to do |format|
       if @budget.update_attributes(params[:budget])
         #format.html { redirect_to @budget, notice: 'Budget was successfully updated.' }
         format.html { render action: 'edit' }
-        format.json { head :no_content }
+        format.js
       elsif !@budget.update_attributes(params[:budget])
         format.html { render action: 'edit' }
         format.json { render json: @budget.errors, status: :unprocessable_entity }

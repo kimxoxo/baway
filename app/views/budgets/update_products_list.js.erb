@@ -1,5 +1,10 @@
+alert("<%= @budgets_products %>");
+
+
+
 //when the product is sucessefully added to the list
 <% if !flash.now[:success].blank? %>
+
 
 	$('#table_products_list').prepend('<%= escape_javascript(render partial: "budget_list_row", locals: {product: @product, budget: @budget}) %>');
 

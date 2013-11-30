@@ -3,8 +3,9 @@
 
 
 function hide_all_forms() {
-	$('#budgets_products_list table tr form').hide();
-	$('#budgets_products_list table tr').css('background-color', 'transparent');
+	//$('#table_budgets_products_list tr form').hide();
+	$('.hide_this_form').hide();
+	$('#table_budgets_products_list tr').css('background-color', 'transparent');
 }
 
 
@@ -15,21 +16,43 @@ function show_spans() {
 
 
 
+function show_pencils() {
+	$('#budgets_products_list table tr td a i').fadeIn(500);
+}
+
+
+
 function enable_this_tr_forms(tr_id, attr) {
 	
 	hide_all_forms();
 
 	show_spans();
 
-	$('#form_'+ attr + '_' + tr_id).fadeIn(500);
-	$('#form_'+ attr + '_' + tr_id).parent('td').find('span').hide();
 
-	$('#form_'+ attr + '_' + tr_id).find('td').first().addClass('border_left');
-	$('#form_'+ attr + '_' + tr_id).find('td').last().addClass('border_right');
+	$('#form_' + attr + '_' + tr_id).fadeIn(500);
+	$('#form_' + attr + '_' + tr_id).parent('td').find('span').hide();
 
-	$('#form_'+ attr + '_' + tr_id).css('background-color', '#f5f5f5');
+	$('#form_' + attr + '_' + tr_id).find('td').first().addClass('border_left');
+	$('#form_' + attr + '_' + tr_id).find('td').last().addClass('border_right');
+
+	$('#form_' + attr + '_' + tr_id).css('background-color', '#f5f5f5');
+
+
+	$('#product_id_' + tr_id + ' .td_pencil_' + attr).find('a').first().find('i').hide();
 
 	$('#form_'+ attr + '_' + tr_id).find('input').focus();
+}
+
+
+
+function enable_this_form_discount() {
+
+	$('#form_budget_discount').show();
+
+	$('#span_discount_show').hide();
+
+	$('#span_pencil_discount_show').hide();
+
 }
 
 

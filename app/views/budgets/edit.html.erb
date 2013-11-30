@@ -40,10 +40,8 @@
 
 
 
-
-
 		<div id="budgets_products_list" class="well no_borders_shadow">
-			<table>
+			<table id="table_budgets_products_list">
 				<tr>
 					<th class="td_code">
 						<%= t :"activerecord.attributes.product.code" %>
@@ -117,10 +115,12 @@
 
 			<div id="products_list" style="border: 0px solid red; ">	
 				<table id="table_products_list"  style="border: 0px solid green; ">
-					<% @products.each do |product| %>
+
+					<% @budgets_products.each do |budget_product| %>
 						<%= render partial: 'budget_list_row',
-											 locals: {product: product,
+											 locals: {budget_product: budget_product,
 											 				  budget: @budget} %>
+											 				  <%#= budgets_product.product_id %>
 					<% end %>
 				</table>
 			</div>

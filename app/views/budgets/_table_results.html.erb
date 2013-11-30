@@ -3,10 +3,10 @@
 				<% @quantity_total = 0 %>
 
 
-				<% @products.each do |product| %>
+				<% @budgets_products.each do |budget_product| %>
 
 
-					<% budget_product = @budget.budgets_products.find_by_product_id(product.id) %>
+					<% product = Product.find(budget_product.product_id) %>
 
 
 
@@ -86,7 +86,7 @@
 																	remote: true,
 																	html: {class: '',
 																				 style: 'float: left; height: 10px; border: 0px solid green; ',
-																				 id: "products_search_form_#{@product.id}"} do |f| %>
+																				 id: ""} do |f| %>
 
 
 									<%= f.hidden_field :budget_id,
@@ -113,32 +113,62 @@
 							</span>
 
 
+
+			        <span style="float: right; padding-left: 40px; ">
+			        	TOTAL
+			        </span>
+
+
+							<span id="span_discount_show" style="float: right; ">
+			          <%= number_to_currency(@budget.discount) %>
+							</span>
+
 							<span style="float: right; ">
 								<%= simple_form_for @budget,
 			            									url: budget_path(@budget.id),
 								            				remote: true,
-								            				html: {class: 'hide_this_form_ form-horizontal',
+								            				html: {class: 'hide_this_form form-horizontal',
 								            				style: 'margin: 0;
 								            								padding: 0;
 								            								float: left;
+								            								display: none;
 								            								height: 10px;
 								            								border: 0px solid red; ',
-																		id: "form_house_area_"} do |f| %>
+																		id: "form_budget_discount"} do |f| %>
 
 									<%= f.input :discount,
 			                        as: :string,
 			                        wrapper: :basic,
-			                        label: (t :"activerecord.attributes.budget.discount"),
-			                     		onblur: '$(this).closest("form").submit(); ',
-			                        input_html: { style: 'float: ;
-			                        											width: 65px;
+			                        label: false,
+			                        input_html: { style: 'width: 65px;
 			                        											margin: 0;
-			                        											padding: 2px; ' } %>          
+			                        											padding: 2px; ',
+			                        							onblur: '$(this).closest("form").submit(); ',
+			                        							value: number_to_currency(@budget.discount) } %>          
 			          <% end %>
+			        </span>
+
+
+			        <span id="span_pencil_discount_show" style="float: right; font-weight: normal; padding-right: 10px; ">
+								<a href="#" onclick='<%= "enable_this_form_discount(); " %>'>
+									<i class="icon icon-pencil"></i>
+								</a>
+			        </span>
+
+
+
+
+			        <span style="float: right; font-weight: normal; padding-right: 10px; ">
+			        	<%= (t :"activerecord.attributes.budget.discount") %>
 			        </span>
 						</th>
 
+
+						<% price_total_with_discount = @price_total - @budget.discount %>
+
+
 						<th class="td_price" style="">
+							<%= number_to_currency(price_total_with_discount) %>
 						</th>
 
 						<th class="td_delete" width="1px">

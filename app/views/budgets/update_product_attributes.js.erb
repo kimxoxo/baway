@@ -5,9 +5,12 @@
 
 	<% price = compute_price(@product.supplier_price, @product.ipi, @product.markup, @budgets_product.quantity) %>
 
-	$('#product_id_<%= @budgets_product.product_id %>').find('.td_quantity').find('span').html('<%= @budgets_product.quantity %>');
-	$('#product_id_<%= @budgets_product.product_id %>').find('.td_price').find('span').html('<%= number_to_currency(price) %>');
-	$('#product_id_<%= @budgets_product.product_id %>').find('.td_price').find('i').addClass('icon-ok success_text');
+	$('#product_id_<%= @budgets_product.id %>').find('.td_quantity').find('span').html('<%= @budgets_product.quantity %>');
+	$('#product_id_<%= @budgets_product.id %>').find('.td_price').find('span').html('<%= number_to_currency(price) %>');
+	$('#product_id_<%= @budgets_product.id %>').find('.td_price').find('i').addClass('icon-ok success_text');
+
+	$('#product_id_<%= @budgets_product.id %>').find('.td_price').find('span').css('color', '');
+
 
 	hide_all_forms();
 	show_spans();
@@ -19,24 +22,32 @@
 
 <% if params[:budgets_product][:house_area] %>
 
-	$('#product_id_<%= @budgets_product.product_id %>').find('.td_house_area').find('span').html('<%= @budgets_product.house_area %>');
-	$('#product_id_<%= @budgets_product.product_id %>').find('.td_house_area').find('i').addClass('icon-ok success_text');
+	$('#product_id_<%= @budgets_product.id %>').find('.td_house_area').find('span').html('<%= @budgets_product.house_area %>');
+	$('#product_id_<%= @budgets_product.id %>').find('.td_house_area').find('i').addClass('icon-ok success_text');
 
-	hide_all_forms();
-	show_spans();
+	$('#product_id_<%= @budgets_product.id %>').find('.td_house_area').find('span').css('color', '');
+
 
 <% end %>
 
 
 <% if params[:budgets_product][:days_to_delivery] %>
 
-	$('#product_id_<%= @budgets_product.product_id %>').find('.td_days_to_delivery').find('span').html('<%= @budgets_product.days_to_delivery %>');
-	$('#product_id_<%= @budgets_product.product_id %>').find('.td_days_to_delivery').find('i').addClass('icon-ok success_text');
+	$('#product_id_<%= @budgets_product.id %>').find('.td_days_to_delivery').find('span').html('<%= @budgets_product.days_to_delivery %>');
+	$('#product_id_<%= @budgets_product.id %>').find('.td_days_to_delivery').find('i').addClass('icon-ok success_text');
 
-	hide_all_forms();
-	show_spans();
+	$('#product_id_<%= @budgets_product.id %>').find('.td_days_to_delivery').find('span').css('color', '');
+
+
+
 
 <% end %>
+
+
+
+hide_all_forms();
+show_spans();
+show_pencils();
 
 
 $('#div_table_results').html('<%= escape_javascript(render partial: "table_results") %>');

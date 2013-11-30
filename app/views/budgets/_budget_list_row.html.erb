@@ -1,8 +1,8 @@
-						<% budget_product = budget.budgets_products.find_by_product_id(product.id) %>
+						<% product = Product.find(budget_product.product_id) %>
 
-						<tr id='<%= "product_id_#{product.id}" %>'>
+						<tr id='<%= "product_id_#{budget_product.id}" %>'>
 							<td class="td_code">
-								<%= product.code %>
+								<%= product.code %>-<%= budget_product.id %>
 							</td>
 
 							<td class="td_product_type">
@@ -20,7 +20,7 @@
 
 
 							<td class="td_pencil_house_area">
-								<a href="#" onclick='<%= "enable_this_tr_forms(#{product.id}, 'house_area'); " %>'>
+								<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'house_area'); " %>'>
 									<i class="icon icon-pencil"></i>
 								</a>
 							</td>
@@ -36,9 +36,9 @@
 							            					style: 'margin: 0;
 							            									padding: 0;
 							            									border: 0px solid red; ',
-																		id: "form_house_area_#{product.id}"} do |f| %>
+																		id: "form_house_area_#{budget_product.id}"} do |f| %>
 
-		              <%= f.hidden_field :id %>
+		              <%= f.hidden_field :id, value: budget_product.id %>
 
 		              <%= f.input_field :house_area,
 		                          			as: :string,
@@ -49,20 +49,22 @@
 		                          							padding:2px;  ' %>          
 		            <% end %>
 
-								<span>
-									<% if !budget_product.house_area.blank? %>
+								<% if !budget_product.house_area.blank? %>
+									<span>
 										<%= budget_product.house_area %>
-									<% else %>
-										<span style="color: red; ">p</span>
-									<% end %>
-								</span>
+									</span>
+								<% else %>
+									<span style="color: red; ">
+										p
+									</span>
+								<% end %>
 
 								<i class="icon" style="font-size: 14px; "></i>
 							</td>
 
 
 							<td class="td_pencil_days_to_delivery">
-								<a href="#" onclick='<%= "enable_this_tr_forms(#{product.id}, 'days_to_delivery'); " %>'>
+								<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'days_to_delivery'); " %>'>
 									<i class="icon icon-pencil"></i>
 								</a>
 							</td>
@@ -76,7 +78,7 @@
 							            					style: 'margin: 0;
 							            									padding: 0;
 							            									border: 0px solid red; ',
-																		id: "form_days_to_delivery_#{product.id}"} do |f| %>
+																		id: "form_days_to_delivery_#{budget_product.id}"} do |f| %>
 
 		              <%= f.hidden_field :id %>
 
@@ -89,13 +91,17 @@
 		                          							padding:2px;  ' %>          
 		            <% end %>
 
-								<span>
-									<% if budget_product.days_to_delivery %>
-										<%= "#{budget_product.days_to_delivery} d" %>
-									<% else %>
-										<span style="color: red; ">p</span>
-									<% end %>
-								</span>
+
+								<% if budget_product.days_to_delivery %>
+									<span>
+										<%= budget_product.days_to_delivery %>
+									</span>
+								<% else %>
+									<span style="color: red; ">
+										p
+									</span>
+								<% end %>
+
 								<i class="icon" style="font-size: 14px; "></i>
 							</td>
 
@@ -117,7 +123,7 @@
 
 
 							<td class="td_pencil_quantity">
-								<a href="#" onclick='<%= "enable_this_tr_forms(#{product.id}, 'quantity'); " %>'>
+								<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'quantity'); " %>'>
 									<i class="icon icon-pencil"></i>
 								</a>
 							</td>
@@ -132,7 +138,7 @@
 							            					style: 'margin: 0;
 							            									padding: 0;
 							            									border: 0px solid red; ',
-																		id: "form_quantity_#{product.id}"} do |f| %>
+																		id: "form_quantity_#{budget_product.id}"} do |f| %>
 
 		              <%= f.hidden_field :id %>
 
@@ -146,13 +152,15 @@
 		            <% end %>
 
 
-								<span>
-									<% if budget_product.quantity %>
+								<% if budget_product.quantity %>
+									<span>
 										<%= budget_product.quantity %>
-									<% else %>
-										<span style="color: red; ">p</span>
-									<% end %>
-								</span>
+									</span>
+								<% else %>
+									<span style="color: red; ">
+										p
+									</span>
+								<% end %>
 							</td>
 
 
