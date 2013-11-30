@@ -144,7 +144,7 @@
 			                        											margin: 0;
 			                        											padding: 2px; ',
 			                        							onblur: '$(this).closest("form").submit(); ',
-			                        							value: number_to_currency(@budget.discount) } %>          
+			                        							value: number_to_currency(@budget.discount).gsub(/[^0-9,.]/, '') } %>          
 			          <% end %>
 			        </span>
 
@@ -167,7 +167,7 @@
 						<% price_total_with_discount = @price_total - @budget.discount %>
 
 
-						<th class="td_price" style="">
+						<th class="td_price" style="font-size: 15px; ">
 							<%= number_to_currency(price_total_with_discount) %>
 						</th>
 

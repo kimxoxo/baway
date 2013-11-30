@@ -1,12 +1,8 @@
-alert("<%= @budgets_products %>");
-
-
 
 //when the product is sucessefully added to the list
 <% if !flash.now[:success].blank? %>
 
-
-	$('#table_products_list').prepend('<%= escape_javascript(render partial: "budget_list_row", locals: {product: @product, budget: @budget}) %>');
+	$('#table_products_list').prepend('<%= escape_javascript(render partial: "budget_list_row", locals: {budget_product: @budget_product, budget: @budget}) %>');
 
 	$('#flash_messages').find('td').show();																									
 
@@ -40,7 +36,7 @@ alert("<%= @budgets_products %>");
 	$('#flash_messages').find('td').find('div').addClass('alert');
 	$('#flash_messages').find('td').find('div').html('<%= flash.now[:notice] %>');
 
-	$('#product_id_<%= @product.id %>').remove();
+	$('#product_id_<%= params[:budget_product_id] %>').remove();
 
 <% end %>
 

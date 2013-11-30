@@ -2,7 +2,7 @@
 
 						<tr id='<%= "product_id_#{budget_product.id}" %>'>
 							<td class="td_code">
-								<%= product.code %>-<%= budget_product.id %>
+								<%= product.code %>
 							</td>
 
 							<td class="td_product_type">
@@ -192,6 +192,7 @@
 								<%= link_to content_tag(:i, '', class: "icon-trash"),
 	                    			update_products_list_budgets_path(budget_id: @budget.id,
 	                    																				product_id: product.id,
+	                    																				budget_product_id: budget_product.id,
 	                    																				delete: true),
 	                    																				remote: true %>
 	 						</td>
