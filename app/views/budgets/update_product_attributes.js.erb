@@ -9,7 +9,7 @@
 	$('#product_id_<%= @budgets_product.id %>').find('.td_price').find('span').html('<%= number_to_currency(price) %>');
 	$('#product_id_<%= @budgets_product.id %>').find('.td_price').find('i').addClass('icon-ok success_text');
 
-	$('#product_id_<%= @budgets_product.id %>').find('.td_price').find('span').css('color', '');
+	$('#product_id_<%= @budgets_product.id %>').find('.td_quantity').find('span').css('color', '');
 
 
 	hide_all_forms();
@@ -33,7 +33,7 @@
 
 <% if params[:budgets_product][:days_to_delivery] %>
 
-	$('#product_id_<%= @budgets_product.id %>').find('.td_days_to_delivery').find('span').html('<%= @budgets_product.days_to_delivery %>');
+	$('#product_id_<%= @budgets_product.id %>').find('.td_days_to_delivery').find('span').html('<%= "#{@budgets_product.days_to_delivery} d" %>');
 	$('#product_id_<%= @budgets_product.id %>').find('.td_days_to_delivery').find('i').addClass('icon-ok success_text');
 
 	$('#product_id_<%= @budgets_product.id %>').find('.td_days_to_delivery').find('span').css('color', '');

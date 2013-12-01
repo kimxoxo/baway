@@ -55,7 +55,7 @@
 									</span>
 								<% else %>
 									<span style="color: red; ">
-										p
+										<%= t :"activerecord.attributes.product.please_fill" %>
 									</span>
 								<% end %>
 
@@ -94,11 +94,11 @@
 
 								<% if budget_product.days_to_delivery %>
 									<span>
-										<%= budget_product.days_to_delivery %>
+										<%= "#{budget_product.days_to_delivery} d" %>
 									</span>
 								<% else %>
 									<span style="color: red; ">
-										p
+										<%= t :"activerecord.attributes.product.please_fill" %>
 									</span>
 								<% end %>
 
@@ -158,7 +158,7 @@
 									</span>
 								<% else %>
 									<span style="color: red; ">
-										p
+										<%= t :"activerecord.attributes.product.please_fill" %>r
 									</span>
 								<% end %>
 							</td>

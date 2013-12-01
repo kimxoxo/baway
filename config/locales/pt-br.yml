@@ -338,6 +338,8 @@ pt-BR:
         price: preço
         house_area: ambiente
         days_to_delivery: ent
+        please_fill: pf
+        freight: frete
       user:
         name: nome
         surname: sobrenome

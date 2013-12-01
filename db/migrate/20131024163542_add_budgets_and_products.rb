@@ -5,6 +5,7 @@ class AddBudgetsAndProducts < ActiveRecord::Migration
       t.string :house_area
       t.integer :quantity
       t.integer :days_to_delivery
+      t.decimal :freight
     end
   end
 
