@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20131120002247) do
     t.integer "days_to_delivery"
     t.decimal "freight"
     t.decimal "height"
+    t.decimal "width"
   end
 
   create_table "customers", :force => true do |t|

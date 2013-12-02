@@ -1,9 +1,23 @@
-<% if(@product.supplier_price && @product.ipi && @product.markup && @budgets_product.quantity && @budgets_product.freight) %>
+<% if(@product.product_type && @product.supplier_price && @product.ipi && @product.markup && @budgets_product.quantity && @budgets_product.freight && @budgets_product.width && @budgets_product.height) %>
 
-	<% price = compute_price(@product.supplier_price, @product.ipi, @product.markup, @budgets_product.quantity, @budgets_product.freight) %>
+	<% price = compute_price(@product.product_type, @product.supplier_price, @product.ipi, @product.markup, @budgets_product.quantity, @budgets_product.freight, @budgets_product.width, @budgets_product.height) %>
 
 	$('#product_id_<%= @budgets_product.id %>').find('.td_price').find('span').html('<%= number_to_currency(price) %>');
 	$('#product_id_<%= @budgets_product.id %>').find('.td_price').find('i').addClass('icon-ok success_text');
+
+<% end %>
+
+
+
+
+<% if params[:budgets_product][:width] %>
+
+	$('#product_id_<%= @budgets_product.id %>').find('.td_width').find('span').html('<%= "#{@budgets_product.width} cm" %>');
+	$('#product_id_<%= @budgets_product.id %>').find('.td_width').find('span').css('color', '');
+	$('#product_id_<%= @budgets_product.id %>').find('.td_width').find('i').addClass('icon-ok success_text');
+
+	hide_all_forms();
+	show_spans();
 
 <% end %>
 
@@ -15,7 +29,6 @@
 	$('#product_id_<%= @budgets_product.id %>').find('.td_height').find('span').html('<%= "#{@budgets_product.height} cm" %>');
 	$('#product_id_<%= @budgets_product.id %>').find('.td_height').find('span').css('color', '');
 	$('#product_id_<%= @budgets_product.id %>').find('.td_height').find('i').addClass('icon-ok success_text');
-
 
 	hide_all_forms();
 	show_spans();
@@ -30,7 +43,6 @@
 	$('#product_id_<%= @budgets_product.id %>').find('.td_freight').find('span').html('<%= number_to_currency(@budgets_product.freight) %>');
 	$('#product_id_<%= @budgets_product.id %>').find('.td_freight').find('span').css('color', '');
 	$('#product_id_<%= @budgets_product.id %>').find('.td_freight').find('i').addClass('icon-ok success_text');
-
 
 	hide_all_forms();
 	show_spans();
@@ -56,7 +68,6 @@
 	$('#product_id_<%= @budgets_product.id %>').find('.td_house_area').find('span').html('<%= @budgets_product.house_area %>');
 	$('#product_id_<%= @budgets_product.id %>').find('.td_house_area').find('i').addClass('icon-ok success_text');
 	$('#product_id_<%= @budgets_product.id %>').find('.td_house_area').find('span').css('color', '');
-
 
 <% end %>
 

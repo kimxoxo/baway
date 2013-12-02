@@ -10,9 +10,9 @@
 
 
 
-					<% if(product.supplier_price && product.ipi && product.markup && budget_product.quantity && budget_product.freight) %>
+					<% if(product.product_type && product.supplier_price && product.ipi && product.markup && budget_product.quantity && budget_product.freight && budget_product.width && budget_product.height) %>
 										
-						<% price = compute_price(product.supplier_price, product.ipi, product.markup, budget_product.quantity, budget_product.freight) %>
+						<% price = compute_price(product.product_type, product.supplier_price, product.ipi, product.markup, budget_product.quantity, budget_product.freight, budget_product.width, budget_product.height) %>
 
 						<!-- compute totals for price column -->
 						<% @price_total = @price_total + price %>
@@ -50,6 +50,9 @@
 						</th>
 
 						<th class="td_days_to_delivery">
+						</th>
+
+						<th class="td_pencil_width">
 						</th>
 
 						<th class="td_width">

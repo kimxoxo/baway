@@ -183,9 +183,65 @@
 
 
 
-							<td class="td_width">
-								<%= "#{product.width} cm" %>
+							<td class="td_pencil_width">
+								<% if product.product_type == 1 %>
+
+								<% else %>
+									<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'width'); " %>'>
+										<i class="icon icon-pencil"></i>
+									</a>
+								<% end %>
 							</td>
+
+
+
+
+							<td class="td_width">
+								<% if product.product_type == 1 %>
+									
+									<%= "#{product.width} cm" %>
+								
+								<% else %>
+
+			            <%= simple_form_for budget_product,
+			            										url: update_product_attributes_budgets_path,
+								            					method: :get,
+								            					remote: true,
+								            					html: {class: 'hide_this_form',
+								            					style: 'margin: 0;
+								            									padding: 0;
+								            									border: 0px solid red; ',
+																			id: "form_width_#{budget_product.id}"} do |f| %>
+
+			              <%= f.hidden_field :id %>
+
+			              <%= f.input_field :width,
+			                          			as: :string,
+			                          			class: 'product_width_input',
+			                       					onblur: '$(this).closest("form").submit(); ',
+			                          			style: 'float: left;
+			                          							width: 50px;
+			                          							margin:0;
+			                          							padding:2px;  ' %>          
+			            <% end %>
+
+
+									<% if budget_product.width %>
+										<span>
+											<%= "#{budget_product.width} cm" %>
+										</span>
+									<% else %>
+										<span style="color: red; ">
+											<%= t :"activerecord.attributes.product.please_fill" %>
+										</span>
+									<% end %>
+
+								<% end %>
+
+								<i class="icon" style="font-size: 14px; "></i>
+
+							</td>
+
 
 
 							<td class="td_pencil_height">
@@ -228,7 +284,7 @@
 			                          			class: 'product_height_input',
 			                       					onblur: '$(this).closest("form").submit(); ',
 			                          			style: 'float: left;
-			                          							width: 40px;
+			                          							width: 50px;
 			                          							margin:0;
 			                          							padding:2px;  ' %>          
 			            <% end %>
@@ -297,13 +353,16 @@
 
 
 							<td class="td_price">
-								<% if(product.supplier_price && product.ipi && product.markup && budget_product.quantity && budget_product.freight) %>
+								<% if(product.product_type && product.supplier_price && product.ipi && product.markup && budget_product.quantity && budget_product.freight && budget_product.width && budget_product.height) %>
 									
-									<% price = compute_price(product.supplier_price,
+									<% price = compute_price(product.product_type,
+																					 product.supplier_price,
 																					 product.ipi,
 																					 product.markup,
 																					 budget_product.quantity,
-																					 budget_product.freight) %>
+																					 budget_product.freight,
+																					 budget_product.width,
+																					 budget_product.height) %>
 								<% end %>
 
 								<span>
