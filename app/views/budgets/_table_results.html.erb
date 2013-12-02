@@ -10,9 +10,9 @@
 
 
 
-					<% if(product.supplier_price && product.ipi && product.markup && budget_product.quantity) %>
+					<% if(product.supplier_price && product.ipi && product.markup && budget_product.quantity && budget_product.freight) %>
 										
-						<% price = compute_price(product.supplier_price, product.ipi, product.markup, budget_product.quantity) %>
+						<% price = compute_price(product.supplier_price, product.ipi, product.markup, budget_product.quantity, budget_product.freight) %>
 
 						<!-- compute totals for price column -->
 						<% @price_total = @price_total + price %>
@@ -53,6 +53,9 @@
 						</th>
 
 						<th class="td_width">
+						</th>
+
+						<th class="td_pencil_height">
 						</th>
 
 						<th class="td_height">
@@ -123,6 +126,14 @@
 			          <%= number_to_currency(@budget.discount) %>
 							</span>
 
+
+
+							<% if @budget.discount %>
+								<% discount_input_value = @budget.discount %>
+							<% else %>
+								<% discount_input_value = 0 %>
+							<% end %>
+
 							<span style="float: right; ">
 								<%= simple_form_for @budget,
 			            									url: budget_path(@budget.id),
@@ -144,7 +155,7 @@
 			                        											margin: 0;
 			                        											padding: 2px; ',
 			                        							onblur: '$(this).closest("form").submit(); ',
-			                        							value: number_to_currency(@budget.discount).gsub(/[^0-9,.]/, '') } %>          
+			                        							value: number_to_currency(discount_input_value).gsub(/[^0-9,.]/, '') } %>          
 			          <% end %>
 			        </span>
 
@@ -163,7 +174,7 @@
 			        </span>
 						</th>
 
-
+						<% @budget.discount = 0 if !@budget.discount %>
 						<% price_total_with_discount = @price_total - @budget.discount %>
 
 

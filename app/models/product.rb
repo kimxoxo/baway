@@ -22,7 +22,7 @@ class Product < ActiveRecord::Base
 
 
   attr_accessible :brand, :code, :description, :ipi, :ncm,
-  								:supplier_id, :supplier_price, :width, :height, :product_type, :markup
+  								:supplier_id, :supplier_price, :width, :product_type, :markup
 
 
 	attr_accessor :search_phrase, :budget_id
@@ -36,7 +36,7 @@ class Product < ActiveRecord::Base
   belongs_to :supplier
 
 
-  validates :code, :description, :ipi, :supplier_id, :supplier_price, :width, :height, :product_type,
+  validates :code, :description, :ipi, :supplier_id, :supplier_price, :width, :product_type,
       presence: true
 
 

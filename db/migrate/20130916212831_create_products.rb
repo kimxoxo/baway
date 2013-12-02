@@ -9,7 +9,6 @@ class CreateProducts < ActiveRecord::Migration
       t.decimal :ipi
       t.integer :ncm
       t.decimal :width
-      t.decimal :height
       t.integer :product_type
       t.decimal :markup
 

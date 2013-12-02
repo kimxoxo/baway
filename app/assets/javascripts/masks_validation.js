@@ -316,6 +316,9 @@ $(document).ready(function($) {
   $("#budget_discount").mask("0.000,00", {reverse: true});
 
 
+	$(".product_freight_input").mask("0.000,00", {reverse: true});
+
+
   $("#supplier_cnpj").mask("999.999.999-99", {reverse: true});
 
   $("#supplier_postal_code").mask("99999-999");
@@ -323,6 +326,8 @@ $(document).ready(function($) {
 
   $("#supplier_landline").mask("(99) 9999-9999");
   $("#supplier_mobile").mask("(99) 9999-9999");
+
+  $(".product_height_input").mask("999999.99", {reverse: true});
 
 
 })

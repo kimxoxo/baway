@@ -6,6 +6,7 @@ class AddBudgetsAndProducts < ActiveRecord::Migration
       t.integer :quantity
       t.integer :days_to_delivery
       t.decimal :freight
+      t.decimal :height
     end
   end
 

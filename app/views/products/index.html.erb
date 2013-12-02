@@ -18,7 +18,6 @@
       <th><%= t :"activerecord.attributes.product.supplier_id" %></th>
       <th><%= t :"activerecord.attributes.product.description" %></th>
       <th><%= t :"activerecord.attributes.product.width" %></th>
-      <th><%= t :"activerecord.attributes.product.height" %></th>
       <th><%= t :"activerecord.attributes.product.price" %></th>
     </tr>
 
@@ -27,7 +26,8 @@
 		<% price_computed = compute_price(product.supplier_price,
 																			product.ipi,
 																			product.markup,
-																			1) %>
+																			1,
+																			0) %>
 
     <tr>
     	<td><%= t :"activerecord.attributes.product.product_type#{product.product_type}" %></td>
@@ -35,13 +35,6 @@
       <td><%= product.supplier.name %></td>
       <td><%= product.description %></td>
       <td><%= "#{product.width} cm" %></td>
-      <td>
-				<% if product.height > 0  %>
-					<%= "#{product.height} cm" %>
-				<% else %>
-					---
-				<% end %>
-			</td>
       <td><%= number_to_currency(price_computed) %></td>
     </tr>
   <% end %>

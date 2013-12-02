@@ -75,7 +75,14 @@ class BudgetsController < ApplicationController
 
 	    flash.now[:success] = (t :"flash_messages.added_product_to_budget_list_successfully")
 
+
 			@budget_product = @budget.budgets_products.order("id DESC").find_by_product_id(@product.id)
+
+
+			#in case product is a carpet only width and height will be add, quantity must be 1 and not editable
+			if @product.product_type == 2
+		    @budget_product.update_attributes(quantity: 1)
+			end
 
     end
 
@@ -93,6 +100,9 @@ class BudgetsController < ApplicationController
     @budgets_products = @budget.budgets_products
     @product = Product.find(@budgets_product.product_id)
 
+    if !params[:budgets_product][:freight].blank?
+			params[:budgets_product][:freight] = view_context.currency_to_number(params[:budgets_product][:freight])
+		end
 
     @budgets_product.update_attributes(params[:budgets_product])
 

@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(:version => 20131120002247) do
     t.string  "house_area"
     t.integer "quantity"
     t.integer "days_to_delivery"
+    t.decimal "freight"
+    t.decimal "height"
   end
 
   create_table "customers", :force => true do |t|
@@ -68,7 +70,6 @@ ActiveRecord::Schema.define(:version => 20131120002247) do
     t.decimal  "ipi"
     t.integer  "ncm"
     t.decimal  "width"
-    t.decimal  "height"
     t.integer  "product_type"
     t.decimal  "markup"
     t.datetime "created_at",     :null => false

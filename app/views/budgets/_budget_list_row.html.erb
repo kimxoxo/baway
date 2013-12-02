@@ -6,7 +6,9 @@
 							</td>
 
 							<td class="td_product_type">
-								<%= t :"activerecord.attributes.product.product_type#{product.product_type}" %>
+								<b>
+									<%= t :"activerecord.attributes.product.product_type#{product.product_type}" %>
+								</b>
 							</td>
 
 							<td class="td_supplier">
@@ -63,6 +65,79 @@
 							</td>
 
 
+
+
+
+
+
+							<td class="td_pencil_freight">
+								<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'freight'); " %>'>
+									<i class="icon icon-pencil"></i>
+								</a>
+							</td>
+
+
+							<% if budget_product.freight %>
+								<% freight_input_value = budget_product.freight %>
+							<% else %>
+								<% freight_input_value = 0 %>
+							<% end %>
+
+
+							<td class="td_freight" style="padding: 0 5px 0 5px; margin:0; ">
+		            <%= simple_form_for budget_product,
+		            										url: update_product_attributes_budgets_path,
+							            					method: :get,
+							            					remote: true,
+							            					html: {class: 'hide_this_form',
+							            					style: 'margin: 0;
+							            									padding: 0;
+							            									border: 0px solid red; ',
+																		id: "form_freight_#{budget_product.id}"} do |f| %>
+
+		              <%= f.hidden_field :id %>
+
+		              <%= f.input_field :freight,
+		                          			as: :string,
+		                          			class: 'product_freight_input',
+		                       					onblur: '$(this).closest("form").submit(); ',
+		                       					value: number_to_currency(freight_input_value).gsub(/[^0-9,.]/, ''),
+		                          			style: 'float: left;
+		                          							width: 58px;
+		                          							margin:0;
+		                          							padding:2px;  ' %>          
+		            <% end %>
+
+
+								<% if budget_product.freight %>
+									<span>
+										<%= number_to_currency(budget_product.freight) %>
+									</span>
+								<% else %>
+									<span style="color: red; ">
+										<%= t :"activerecord.attributes.product.please_fill" %>
+									</span>
+								<% end %>
+
+								<i class="icon" style="font-size: 14px; "></i>
+							</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 							<td class="td_pencil_days_to_delivery">
 								<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'days_to_delivery'); " %>'>
 									<i class="icon icon-pencil"></i>
@@ -113,19 +188,76 @@
 							</td>
 
 
-							<td class="td_height">
-								<% if product.height > 0  %>
-									<%= "#{product.height} cm" %>
+							<td class="td_pencil_height">
+								<% if product.product_type == 1 %>
+
 								<% else %>
-									---
+									<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'height'); " %>'>
+										<i class="icon icon-pencil"></i>
+									</a>
 								<% end %>
 							</td>
 
 
+
+							<td class="td_height">
+								<% if product.product_type == 1 %>
+									
+									<%# if product.height > 0  %>
+										<%#= "#{product.height} cm" %>
+									<%# else %>
+									n/a	
+									<%# end %>
+								
+								<% else %>
+
+			            <%= simple_form_for budget_product,
+			            										url: update_product_attributes_budgets_path,
+								            					method: :get,
+								            					remote: true,
+								            					html: {class: 'hide_this_form',
+								            					style: 'margin: 0;
+								            									padding: 0;
+								            									border: 0px solid red; ',
+																			id: "form_height_#{budget_product.id}"} do |f| %>
+
+			              <%= f.hidden_field :id %>
+
+			              <%= f.input_field :height,
+			                          			as: :string,
+			                          			class: 'product_height_input',
+			                       					onblur: '$(this).closest("form").submit(); ',
+			                          			style: 'float: left;
+			                          							width: 40px;
+			                          							margin:0;
+			                          							padding:2px;  ' %>          
+			            <% end %>
+
+
+									<% if budget_product.height %>
+										<span>
+											<%= "#{budget_product.height} cm" %>
+										</span>
+									<% else %>
+										<span style="color: red; ">
+											<%= t :"activerecord.attributes.product.please_fill" %>
+										</span>
+									<% end %>
+
+								<% end %>
+
+								<i class="icon" style="font-size: 14px; "></i>
+							</td>
+
+
 							<td class="td_pencil_quantity">
-								<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'quantity'); " %>'>
-									<i class="icon icon-pencil"></i>
-								</a>
+								<% if product.product_type == 2 %>
+								
+								<% else %>
+									<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'quantity'); " %>'>
+										<i class="icon icon-pencil"></i>
+									</a>
+								<% end %>
 							</td>
 
 
@@ -158,26 +290,29 @@
 									</span>
 								<% else %>
 									<span style="color: red; ">
-										<%= t :"activerecord.attributes.product.please_fill" %>r
+										<%= t :"activerecord.attributes.product.please_fill" %>
 									</span>
 								<% end %>
 							</td>
 
 
 							<td class="td_price">
-								<% if(product.supplier_price && product.ipi && product.markup && budget_product.quantity) %>
+								<% if(product.supplier_price && product.ipi && product.markup && budget_product.quantity && budget_product.freight) %>
 									
 									<% price = compute_price(product.supplier_price,
 																					 product.ipi,
 																					 product.markup,
-																					 budget_product.quantity) %>
+																					 budget_product.quantity,
+																					 budget_product.freight) %>
 								<% end %>
 
 								<span>
 									<% if price %>
 										<%= number_to_currency(price) %>
 									<% else %>
-										<span style="color: red; ">p</span>
+										<span style="color: red; ">
+											<%= t :"activerecord.attributes.product.please_fill" %>
+										</span>
 									<% end %>
 								</span>
 
@@ -189,7 +324,7 @@
 
 
 							<td class="td_delete">
-								<%= link_to content_tag(:i, '', class: "icon-trash"),
+								<%= link_to content_tag(:i, '', class: "icon-trash", style: "font-size: 14px; "),
 	                    			update_products_list_budgets_path(budget_id: @budget.id,
 	                    																				product_id: product.id,
 	                    																				budget_product_id: budget_product.id,

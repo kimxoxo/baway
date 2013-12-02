@@ -10,7 +10,7 @@
 #
 
 class BudgetsProduct < ActiveRecord::Base
-	attr_accessible :quantity, :house_area, :days_to_delivery
+	attr_accessible :quantity, :house_area, :days_to_delivery, :freight, :height
 
 
 
