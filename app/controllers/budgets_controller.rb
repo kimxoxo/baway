@@ -104,6 +104,7 @@ class BudgetsController < ApplicationController
 			params[:budgets_product][:freight] = view_context.currency_to_number(params[:budgets_product][:freight])
 		end
 
+
     @budgets_product.update_attributes(params[:budgets_product])
 
     respond_to do |format|

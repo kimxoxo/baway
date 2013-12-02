@@ -352,22 +352,15 @@
 							</td>
 
 
-							<td class="td_price">
-								<% if(product.product_type && product.supplier_price && product.ipi && product.markup && budget_product.quantity && budget_product.freight && budget_product.width && budget_product.height) %>
-									
-									<% price = compute_price(product.product_type,
-																					 product.supplier_price,
-																					 product.ipi,
-																					 product.markup,
-																					 budget_product.quantity,
-																					 budget_product.freight,
-																					 budget_product.width,
-																					 budget_product.height) %>
-								<% end %>
+							<%= render partial: 'compute_price',
+												 locals: {product: product,
+											 	   			  budget_product: budget_product} %>
 
+
+							<td class="td_price">
 								<span>
-									<% if price %>
-										<%= number_to_currency(price) %>
+									<% if @price %>
+										<%= number_to_currency(@price) %>
 									<% else %>
 										<span style="color: red; ">
 											<%= t :"activerecord.attributes.product.please_fill" %>

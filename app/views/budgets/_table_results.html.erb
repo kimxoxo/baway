@@ -5,25 +5,18 @@
 
 				<% @budgets_products.each do |budget_product| %>
 
-
 					<% product = Product.find(budget_product.product_id) %>
 
-
-
-					<% if(product.product_type && product.supplier_price && product.ipi && product.markup && budget_product.quantity && budget_product.freight && budget_product.width && budget_product.height) %>
-										
-						<% price = compute_price(product.product_type, product.supplier_price, product.ipi, product.markup, budget_product.quantity, budget_product.freight, budget_product.width, budget_product.height) %>
+					<%= render partial: 'compute_price',
+										 locals: {product: product,
+									 	   			  budget_product: budget_product} %>
 
 						<!-- compute totals for price column -->
-						<% @price_total = @price_total + price %>
+						<% (@price_total = @price_total + @price) if @price %>
 
-						<% @quantity_total = @quantity_total + budget_product.quantity %>
-
-					<% end %>
-
+						<% (@quantity_total = @quantity_total + budget_product.quantity) if budget_product.quantity %>
 
 				<% end %>
-
 
 
 				<table id="table_results" style="border: 0px solid green; ">
@@ -149,6 +142,11 @@
 								            								height: 10px;
 								            								border: 0px solid red; ',
 																		id: "form_budget_discount"} do |f| %>
+
+
+									<%# f.hidden_field :id,
+																		value: @budget.id %>
+
 
 									<%= f.input :discount,
 			                        as: :string,
