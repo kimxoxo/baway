@@ -342,7 +342,11 @@
 
 								<% if budget_product.quantity %>
 									<span>
-										<%= budget_product.quantity %>
+										<% if product.product_type == 3 %>
+											<%= "#{budget_product.quantity} folh" %>
+										<% else %>
+											<%= budget_product.quantity %>
+										<% end %>
 									</span>
 								<% else %>
 									<span style="color: red; ">
@@ -384,3 +388,6 @@
 	                    																				remote: true %>
 	 						</td>
 						</tr>
+
+
+

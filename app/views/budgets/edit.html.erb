@@ -38,6 +38,7 @@
 
 		<%= render 'budget_customer_view' %>
 
+		<%= render 'budget_details' %>
 
 
 		<div id="budgets_products_list" class="well no_borders_shadow">
@@ -127,7 +128,7 @@
 
 
 				<tr id="flash_messages">
-					<td colspan="17" style="display: none; border: 0; padding-top: 10px; ">
+					<td colspan="18" style="display: none; border: 0; padding-top: 10px; ">
 						<div class="alert" style="text-align:center; padding: 2px; margin: 0; ">
 						</div>
 					</td>
@@ -141,7 +142,6 @@
 						<%= render partial: 'budget_list_row',
 											 locals: {budget_product: budget_product,
 											 				  budget: @budget} %>
-											 				  <%#= budgets_product.product_id %>
 					<% end %>
 				</table>
 			</div>

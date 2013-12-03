@@ -19,10 +19,13 @@ ActiveRecord::Schema.define(:version => 20131120002247) do
     t.integer  "seller_id"
     t.integer  "architect_id"
     t.integer  "payment_condition_id"
-    t.text     "description"
+    t.text     "observations"
+    t.text     "instalation_observations"
     t.decimal  "discount"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.boolean  "freight"
+    t.boolean  "instalation"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
   create_table "budgets_products", :force => true do |t|

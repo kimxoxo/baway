@@ -1,0 +1,38 @@
+      <div style="padding: 0; margin: 0; " id="" class="well no_borders_shadow">
+   	    <%= simple_form_for @budget, html: {class: 'form-inline', style: 'margin: 0; padding: 0; '} do |f| %>
+
+        <table style="padding: 0; margin: 0; border: 1px solid red; width: 100%; ">
+          <tr>
+            <td width="70px">
+              <%= f.input :freight,
+              						wrapper: :basic %>
+            </td>
+
+            <td width="90px">
+              <%= f.input :instalation,
+              						wrapper: :basic %>
+            </td>
+
+
+            <td width="" style="border: 0px solid red; ">
+              <%= f.input :instalation_observations,
+              						wrapper: :basic,
+              						label_html: { style: 'width: 150px;
+              																	text-align: right; '},
+              						input_html: { rows: 2,
+              													style: 'width: 400px; ' } %>
+            </td>
+
+
+
+
+            <td style="text-align: right; ">
+              <a href="#" onclick="enable_form(); ">  
+                <i style="cursor: pointer; " class="icon icon-pencil" onclick="enable_form(); "></i>
+              </a>
+            </td>
+          </tr>
+        </table>
+
+       	<% end %>
+      </div>
