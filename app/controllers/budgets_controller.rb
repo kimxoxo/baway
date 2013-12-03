@@ -105,11 +105,6 @@ class BudgetsController < ApplicationController
 		end
 
 
-    #create 4 payment conditions for each budget
-    #@budget.payment_conditions << Payment_condition.new(name: 'teste')
-
-
-
     @budgets_product.update_attributes(params[:budgets_product])
 
     respond_to do |format|
@@ -167,6 +162,14 @@ class BudgetsController < ApplicationController
 
     respond_to do |format|
       if @budget.save
+
+      	#create 4 payment conditions for each budget
+    		PaymentCondition.new(budget_id: @budget.id, num_monthly_payments: "1x").save
+        PaymentCondition.new(budget_id: @budget.id, num_monthly_payments: "2x").save
+    		PaymentCondition.new(budget_id: @budget.id, num_monthly_payments: "3x").save
+    		PaymentCondition.new(budget_id: @budget.id, num_monthly_payments: "").save
+    
+
         #format.html { redirect_to @budget, notice: 'Budget was successfully created.' }
         format.html { redirect_to action: 'edit', id: @budget.id }
         format.json { render json: @budget, status: :created, location: @budget }

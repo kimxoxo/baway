@@ -58,9 +58,8 @@ ActiveRecord::Schema.define(:version => 20131120002247) do
 
   create_table "payment_conditions", :force => true do |t|
     t.integer  "budget_id"
-    t.string   "name"
-    t.float    "discount"
     t.integer  "num_monthly_payments"
+    t.boolean  "active"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
   end
