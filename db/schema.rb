@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(:version => 20131120002247) do
     t.integer  "status"
     t.integer  "seller_id"
     t.integer  "architect_id"
-    t.integer  "payment_condition_id"
     t.text     "observations"
     t.text     "instalation_observations"
     t.decimal  "discount"
@@ -58,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20131120002247) do
   end
 
   create_table "payment_conditions", :force => true do |t|
+    t.integer  "budget_id"
     t.string   "name"
     t.float    "discount"
     t.integer  "num_monthly_payments"

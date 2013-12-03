@@ -42,8 +42,8 @@
      	</td>
       <td><%= User.find(budget.seller_id).name %></td>
       <td><%= User.find(budget.architect_id).name if budget.architect_id %></td>
-      <!--<td><%= budget.payment_condition_id %></td>-->
-      <!--<td><%= budget.description %></td>-->
+      <!--<td><%#= budget.payment_condition_id %></td>-->
+      <!--<td><%#= budget.description %></td>-->
       <td>
 				<% if !budget.id %>
           <%=  %>

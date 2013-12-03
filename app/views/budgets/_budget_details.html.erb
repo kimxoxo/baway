@@ -1,38 +1,81 @@
-      <div style="padding: 0; margin: 0; " id="" class="well no_borders_shadow">
+  		<% @price_total = 0 %>
+			<% @quantity_total = 0 %>
+
+
+			<% @budgets_products.each do |budget_product| %>
+
+				<% product = Product.find(budget_product.product_id) %>
+
+				<%= render partial: 'compute_price',
+									 locals: {product: product,
+								 	   			  budget_product: budget_product} %>
+
+					<!-- compute totals for price column -->
+					<% (@price_total = @price_total + @price) if @price %>
+
+					<% (@quantity_total = @quantity_total + budget_product.quantity) if budget_product.quantity %>
+
+			<% end %>
+
+
+
+      <div style="padding: 5px; margin: 0; margin-bottom: 5px; display: none_; " id="div_budget_more_details_edit" class="well no_borders_shadow">
    	    <%= simple_form_for @budget, html: {class: 'form-inline', style: 'margin: 0; padding: 0; '} do |f| %>
+	        <table style="padding: 0; margin: 0; border: 0px solid red; width: 100%; ">
+	          <tr>
+	            <td width="70px">
+	              <%= f.input :freight,
+	              						wrapper: :basic %>
+	            </td>
 
-        <table style="padding: 0; margin: 0; border: 1px solid red; width: 100%; ">
-          <tr>
-            <td width="70px">
-              <%= f.input :freight,
-              						wrapper: :basic %>
-            </td>
-
-            <td width="90px">
-              <%= f.input :instalation,
-              						wrapper: :basic %>
-            </td>
-
-
-            <td width="" style="border: 0px solid red; ">
-              <%= f.input :instalation_observations,
-              						wrapper: :basic,
-              						label_html: { style: 'width: 150px;
-              																	text-align: right; '},
-              						input_html: { rows: 2,
-              													style: 'width: 400px; ' } %>
-            </td>
+	            <td width="90px">
+	              <%= f.input :instalation,
+	              						wrapper: :basic %>
+	            </td>
 
 
+	            <td width="" style="border: 0px solid red; ">
+	              <%= f.input :instalation_observations,
+	              						wrapper: :basic,
+	              						label_html: { style: 'width: 150px;
+	              																	padding-right: 10px;
+	              																	text-align: right; '},
+	              						input_html: { rows: 1,
+	              													style: 'width: 640px; ' } %>
+	            </td>
+	          </tr>
+	        </table>
 
 
-            <td style="text-align: right; ">
-              <a href="#" onclick="enable_form(); ">  
-                <i style="cursor: pointer; " class="icon icon-pencil" onclick="enable_form(); "></i>
-              </a>
-            </td>
-          </tr>
-        </table>
 
+		      <%= f.simple_fields_for :payment_condition, @payment_condition do |p| %>
+
+
+						<table style="width: 100%; ">
+							<tr>
+								<td style="border: 1px solid red; ">
+									<%= t :"activerecord.attributes.budget.payment_condition" %>
+								</td>
+
+
+
+								<td>
+									<%= @price_total %>
+								</td>
+
+
+		            <td>
+		              <button style="float: right; " class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
+		                <b>confirmar</b>
+		                <i id="icon-loading-confirm-customer" class=""></i>
+		              </button>
+		            </td>
+
+
+							</tr>
+						</table>
+
+
+					<% end %>
        	<% end %>
       </div>

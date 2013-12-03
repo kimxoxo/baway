@@ -5,7 +5,6 @@ class CreateBudgets < ActiveRecord::Migration
       t.integer :status
       t.integer :seller_id
       t.integer :architect_id
-      t.integer :payment_condition_id
       t.text    :observations
       t.text    :instalation_observations      
       t.decimal :discount

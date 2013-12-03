@@ -295,7 +295,8 @@ pt-BR:
         discount: desconto
         freight: frete
         instalation: instalação
-        instalation_observations: condições instalação
+        instalation_observations: cond. instalação
+        payment_condition: cond. pagamento
       supplier:
         name: nome
         street: rua

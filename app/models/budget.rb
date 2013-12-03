@@ -16,7 +16,7 @@
 
 class Budget < ActiveRecord::Base
   attr_accessible :architect_id, :customer_id, :description, :payment_condition_id,
-  				  :seller_id, :status, :customer_attributes, :user, :discount
+  				  :seller_id, :status, :customer_attributes, :user, :discount, :freight, :instalation, :instalation_observations
 
 
 
@@ -29,7 +29,7 @@ class Budget < ActiveRecord::Base
 
   belongs_to :user, foreign_key: :architect_id
 
-  has_one  :payment_condition
+  has_many  :payment_conditions
 
   belongs_to :customer
 

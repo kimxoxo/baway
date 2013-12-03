@@ -105,6 +105,11 @@ class BudgetsController < ApplicationController
 		end
 
 
+    #create 4 payment conditions for each budget
+    #@budget.payment_conditions << Payment_condition.new(name: 'teste')
+
+
+
     @budgets_product.update_attributes(params[:budgets_product])
 
     respond_to do |format|
@@ -155,6 +160,10 @@ class BudgetsController < ApplicationController
 
     @budget = Budget.new(params[:budget])
     @budget.status = 1
+
+
+
+
 
     respond_to do |format|
       if @budget.save
