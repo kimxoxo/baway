@@ -19,7 +19,8 @@
 
 
 
-      <div style="padding: 5px; margin: 0; margin-bottom: 5px; display: none_; " id="div_budget_more_details_edit" class="well no_borders_shadow">
+    <div style="padding: 5px; margin: 0; margin-bottom: 5px; display: _none; " id="div_budget_more_details_edit" class="well no_borders_shadow">
+
    	    <%= simple_form_for @budget, html: {class: 'form-inline', style: 'margin: 0; padding: 0; '} do |f| %>
 	        <table style="padding: 0; margin: 0; border: 0px solid red; width: 100%; ">
 	          <tr>
@@ -48,34 +49,71 @@
 
 
 
-		      <%= f.simple_fields_for :payment_condition, @payment_condition do |p| %>
+
+					<table style="width: 100%; margin-top: 5px; ">
+						<tr>
+							<td width="140px" style="border: 0px solid red; ">
+								<%= t :"activerecord.attributes.budget.payment_condition" %>
+							</td>
+
+							<% @budget.payment_conditions.each do |payment_condition| %>
+		      			<%= f.simple_fields_for "payment_condition[]", payment_condition do |p| %>
 
 
-						<table style="width: 100%; ">
-							<tr>
-								<td style="border: 1px solid red; ">
-									<%= t :"activerecord.attributes.budget.payment_condition" %>
-								</td>
+		      				<% @price_per_month = @price_total / payment_condition.num_monthly_payments if payment_condition.num_monthly_payments %>
+
+		      				<% if payment_condition.num_monthly_payments %>
+										<% label1 = "#{payment_condition.num_monthly_payments}x #{number_to_currency(@price_per_month)}" %>
+										<% label2 = false %>
+									<% else %>
+										<% label1 = false %>
+										<% label2 = "x" %>
+									<% end %>
+
+									<td>
+										<%= p.input :active,
+																wrapper: :basic,
+																label: label1 %>
+
+										<% if !payment_condition.num_monthly_payments %>
+											<%= p.input :num_monthly_payments,
+																	wrapper: :basic,
+																	input_html: { style: 'width: 10px; ' },
+																	label: false %>
+										<% end %>
+
+										<% if !payment_condition.num_monthly_payments %>
+											<span>
+												<%= label2 %>
+											</span>
+										<% end %>
+
+										<a href="#" onclick="">
+											<i class="icon icon-pencil icon-white"></i>
+										</a>
+									</td>
+
+								<% end %>
+							<% end %>
 
 
-
-								<td>
-									<%= @price_total %>
-								</td>
-
-
-		            <td>
-		              <button style="float: right; " class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
-		                <b>confirmar</b>
-		                <i id="icon-loading-confirm-customer" class=""></i>
-		              </button>
-		            </td>
+							<td>
+								<%#= p.input %>
+								<%#= @payment_condition1.num_monthly_payments %>
+								<%#= @payment_condition2.num_monthly_payments %>
+								<%#= @payment_condition3.num_monthly_payments %>
+								<%#= @payment_condition4.num_monthly_payments %>
+							</td>
 
 
-							</tr>
-						</table>
-
-
-					<% end %>
+	            <td>
+	              <button style="float: right; " class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
+	                <b>confirmar</b>
+	                <i id="icon-loading-confirm-customer" class=""></i>
+	              </button>
+	            </td>
+						</tr>
+					</table>
+					
        	<% end %>
       </div>

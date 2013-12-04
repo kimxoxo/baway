@@ -16,7 +16,8 @@
 
 class Budget < ActiveRecord::Base
   attr_accessible :architect_id, :customer_id, :description, :payment_condition_id,
-  				  :seller_id, :status, :customer_attributes, :user, :discount, :freight, :instalation, :instalation_observations
+  				  			:seller_id, :status, :customer_attributes, :user, :discount, :freight,
+  				  			:instalation, :instalation_observations, :payment_condition
 
 
 
@@ -36,7 +37,7 @@ class Budget < ActiveRecord::Base
   accepts_nested_attributes_for :customer
 
 
-  attr_accessor :user
+  attr_accessor :user, :payment_condition
 
 	
   validates :architect_id,

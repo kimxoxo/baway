@@ -146,6 +146,13 @@ class BudgetsController < ApplicationController
     @products_search_list = []
 
     @budgets_products = @budget.budgets_products.order('id ASC')
+
+
+    #@payment_condition1 = @budget.payment_conditions.order('id ASC').first
+    #@payment_condition2 = @budget.payment_conditions.order('id ASC').second
+    #@payment_condition3 = @budget.payment_conditions.order('id ASC').third
+    #@payment_condition4 = @budget.payment_conditions.order('id ASC').fourth
+
   end
 
 
@@ -155,9 +162,6 @@ class BudgetsController < ApplicationController
 
     @budget = Budget.new(params[:budget])
     @budget.status = 1
-
-
-
 
 
     respond_to do |format|
@@ -197,6 +201,9 @@ class BudgetsController < ApplicationController
     @products = @budget.products.order('created_at DESC')
     @products_search_list = []
     @budgets_products = @budget.budgets_products
+
+
+		PaymentCondition.update(params[:budget][:payment_condition].keys, params[:budget][:payment_condition].values)
 
 
     respond_to do |format|

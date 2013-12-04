@@ -1,9 +1,10 @@
 
+
+$('#div_budget_more_details_edit').replaceWith('<%= escape_javascript(render partial: "budget_details", locals: {budget_product: @budgets_product, budget: @budget}) %>');
+
 $('#product_id_<%= @budgets_product.id %>').replaceWith('<%= escape_javascript(render partial: "budget_list_row", locals: {budget_product: @budgets_product, budget: @budget}) %>');
 
 $('#product_id_<%= @budgets_product.id %>').find('.td_price').find('i').addClass('icon-ok success_text');
-
-
 
 
 hide_all_forms();

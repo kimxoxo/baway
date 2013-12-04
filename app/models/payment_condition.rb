@@ -11,7 +11,7 @@
 #
 
 class PaymentCondition < ActiveRecord::Base
-  attr_accessible :budget_id, :discount, :name, :num_monthly_payments
+  attr_accessible :budget_id, :discount, :name, :num_monthly_payments, :active
 
 
   belongs_to :budget
