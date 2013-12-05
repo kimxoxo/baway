@@ -202,9 +202,9 @@ class BudgetsController < ApplicationController
     @products_search_list = []
     @budgets_products = @budget.budgets_products
 
-
-		PaymentCondition.update(params[:budget][:payment_condition].keys, params[:budget][:payment_condition].values)
-
+    if params[:budget][:payment_condition]
+			PaymentCondition.update(params[:budget][:payment_condition].keys, params[:budget][:payment_condition].values)
+		end
 
     respond_to do |format|
       if @budget.update_attributes(params[:budget])
@@ -219,6 +219,24 @@ class BudgetsController < ApplicationController
   end
 
 
+
+
+	def validate_budget
+ 	
+
+		@budget = Budget.find(params[:budget][:id])
+
+
+
+
+
+
+
+    respond_to do |format|
+      format.js
+    end
+
+	end
 
 
 

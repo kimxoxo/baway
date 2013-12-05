@@ -19,7 +19,7 @@
 
 
 
-    <div style="padding: 5px; margin: 0; margin-bottom: 5px; display: _none; " id="div_budget_more_details_edit" class="well no_borders_shadow">
+    <div style="padding: 5px; margin: 0; margin-bottom: 5px; display: none; " id="div_budget_more_details_edit" class="well no_borders_shadow">
 
    	    <%= simple_form_for @budget, html: {class: 'form-inline', style: 'margin: 0; padding: 0; '} do |f| %>
 	        <table style="padding: 0; margin: 0; border: 0px solid red; width: 100%; ">
@@ -70,7 +70,7 @@
 										<% label2 = "x" %>
 									<% end %>
 
-									<td>
+									<td style="border: 0px solid red; ">
 										<%= p.input :active,
 																wrapper: :basic,
 																label: label1 %>
@@ -88,8 +88,8 @@
 											</span>
 										<% end %>
 
-										<a href="#" onclick="">
-											<i class="icon icon-pencil icon-white"></i>
+										<a href="#">
+											<i class="icon icon-pencil icon-white" onclick="enable_payment_condition_input(); "></i>
 										</a>
 									</td>
 

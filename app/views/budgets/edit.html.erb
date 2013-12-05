@@ -43,12 +43,12 @@
       <table style="padding: 0; margin: 0; border: 0px solid red; width: 100%; ">
         <tr>
         	<td>
-        		<span style="color: #3f7db2; ">+ detalhes</span>
+        		<span style="color: #3f7db2; padding-left: 5px; ">+ detalhes</span>
         	</td>
 
           <td style="text-align: right; ">
             <a href="#" onclick="enable_form_budget_more_details(); ">  
-              <i style="cursor: pointer; " class="icon icon-pencil"></i>
+              <i style="cursor: pointer; padding-right: 5px; " class="icon icon-pencil"></i>
             </a>
           </td>
         </tr>
@@ -218,6 +218,25 @@
 			</div>
 
 		<div class="clearfix"></div>
+
+		<div style="margin-top: 10px; ">
+	    <%= simple_form_for @budget,
+	    										url: {controller: 'budgets', action: 'validate_budget'},
+	    										method: :get,
+	    										remote: true,
+	    										html: {class: 'form-inline', style: 'margin: 0; padding: 0; '} do |f| %>
+
+	    	<%= f.hidden_field :id %>
+
+
+				<button style="float: right; " class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
+	      	<b>fechar orçamento</b>
+	        <i id="icon-loading-confirm-customer" class=""></i>
+	      </button>
+
+	    <% end %>
+		</div>
+
 	</div>
 
 

@@ -3,6 +3,17 @@
 
 
 
+function enable_payment_condition_input() {
+
+
+
+		h = $(this).parent('a').parent('td').find('span').attr('class');
+
+alert(h);
+}
+
+
+
 function enable_form_budget_more_details() {
 
 	$('#div_budget_more_details_show').hide();
