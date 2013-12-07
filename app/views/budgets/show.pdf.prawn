@@ -2,49 +2,54 @@
 ###HEADER###
 pdf.font_size = 10
 
-pdf.float do
-	pdf.text "<b>Orçamento nº</b> #{@budget.id}", style: :normal, align: :center, inline_format: true
-end
 
 
-pdf.move_down 30
+
+	pdf.float do
+		pdf.text "<b>Orçamento nº</b> #{@budget.id}", style: :normal, align: :left, inline_format: true
+
+		pdf.image "#{Rails.root}/app/assets/images/emporio_logo.png", at: [670, 530], width: 100
+	end
+
+
+
+pdf.move_down 20
 
 architech_name = User.find(@budget.architect_id).name
 
 
 pdf.float do
 	pdf.text "Cliente", style: :bold, align: :left, inline_format: true
-	pdf.move_down 10
+	#pdf.move_down 10
 	pdf.text @budget.customer.name, style: :normal, align: :left
 	pdf.text "#{@budget.customer.street}, #{@budget.customer.street_number}", style: :normal, align: :left
 	pdf.text "#{@budget.customer.city}, #{@budget.customer.postal_code} #{@budget.customer.neighbourhood}", style: :normal, align: :left
 	pdf.text "#{@budget.customer.mobile} #{@budget.customer.landline}", style: :normal, align: :left
 	pdf.text "#{@budget.customer.email}", style: :normal, align: :left
 	pdf.move_down 5
-	pdf.text "Arquiteto(a)", style: :bold, align: :left, inline_format: true
-	pdf.text "#{architech_name}", style: :normal, align: :left, inline_format: true
+	#pdf.text "Arquiteto(a)", style: :bold, align: :left, inline_format: true
+	#pdf.text "#{architech_name}", style: :normal, align: :left, inline_format: true
 end
 
 
 seller_name = User.find(@budget.seller_id).name
 
 pdf.float do
-	pdf.text "Cuiabá, #{@budget.updated_at.strftime('%d/%m/%Y')}", style: :normal, align: :right, inline_format: true
+	#pdf.text "Cuiabá, #{@budget.updated_at.strftime('%d/%m/%Y')}", style: :normal, align: :right, inline_format: true
 	pdf.move_down 10
-	pdf.text "Emporio do Arquiteto", style: :normal, align: :right, inline_format: true
+	#pdf.text "Emporio do Arquiteto", style: :normal, align: :right, inline_format: true
 	pdf.text "Avenida Senador Filinto Müller, 920", style: :normal, align: :right, inline_format: true
 	pdf.text "Cuiabá, MT, 78043-400, Goiabeiras", style: :normal, align: :right, inline_format: true
 	pdf.text "(65) 3321-1257", style: :normal, align: :right, inline_format: true 
 	pdf.move_down 5
-	pdf.text "Vendedor(a)", style: :bold, align: :right, inline_format: true
-	pdf.text "#{seller_name}", style: :normal, align: :right, inline_format: true
-
+	#pdf.text "Vendedor(a)", style: :bold, align: :right, inline_format: true
+	#pdf.text "#{seller_name}", style: :normal, align: :right, inline_format: true
 end
 
 
 
 
-pdf.move_down 105
+pdf.move_down 70
 
 
 totals_quantity = 0
@@ -54,45 +59,109 @@ totals_price = 0
 products = [["código",
 						"fornecedor",
 						"descrição",
-						"medida",
+						"tipo",
+						"ambiente",
+						"entrega",
+						"larg",
+						"alt",
 						"qt",
 						"preço"]]
 
 
-products += @budget.products.map do |product|
+products += @budget.budgets_products.map do |budget_product|
 
-	budget_product = @budget.budgets_products.find_by_product_id(product.id)
+	product = Product.find(budget_product.product_id)
 
-	price = compute_price(product.supplier_price, product.ipi, budget_product.markup, budget_product.quantity)
-	#compute totals quantity
-	totals_quantity = totals_quantity + budget_product.quantity
-	#compute totals price
-	totals_price = totals_price + price
+
+
+	#define width
+	if product.width != 0
+		product_width = "#{product.width} cm"
+	else
+		product_width = "#{budget_product.width} cm"
+	end
+
+
+	#define height
+	if budget_product.height
+		product_height = "#{budget_product.height} cm"
+	else
+		product_height = "n/a"
+	end
+
+
+	#compute price
+	@price = nil
+
+ 	if product.product_type == 1
+
+		if(product.supplier_price && product.ipi && product.markup && budget_product.quantity && budget_product.freight)
+		
+			@price = compute_price_product_type_1(product.supplier_price,
+																					  product.ipi,
+																					  product.markup,
+																					  budget_product.quantity,
+																					  budget_product.freight)
+		end
+
+		elsif product.product_type == 2
+
+
+			if(product.supplier_price && product.ipi && product.markup && budget_product.quantity && budget_product.freight && budget_product.width && budget_product.height)
+									
+				@price = compute_price_product_type_2(product.supplier_price,
+																						  product.ipi,
+																						  product.markup,
+																						  budget_product.quantity,
+																						  budget_product.freight,
+																						  budget_product.width,
+																						  budget_product.height)
+
+			end
+
+		elsif product.product_type == 3
+
+		end
+
+
+		#compute totals_quantity
+		totals_quantity = totals_quantity + budget_product.quantity
+
+		#compute totals_price
+		totals_price = totals_price + @price
+
 	
 	[
 		product.code,
 		product.supplier.name,
 		product.description,
-		"#{product.width} cm",
+		(t :"activerecord.attributes.product.product_type_full_#{product.product_type}"),
+		budget_product.house_area,
+		"#{budget_product.days_to_delivery} dia(s)",
+		product_width,
+		product_height,		
 		budget_product.quantity,
-		number_to_currency(price)
+		number_to_currency(@price)
 	]
 end
 
 
 
-pdf.table(products, width: 523,
+pdf.table(products, width: 770,
 				  column_widths: {0 => 50,
 							  				  1 => 100,
-							  				  3 => 50,
-							  				  4 => 30,
-							  				  5 => 70},
+							  				  3 => 70,
+							  				  5 => 50,
+							  				  6 => 50,
+							  				  7 => 60,
+							  				  8 => 30,
+							  				  9 => 80},
 		 		  header: true) do |product|
 
 	#product.row(0).font_style = :bold
 	#ticket.row(0).column(0).align = :right
 
-	product.column(0..5).border_width = 0
+	product.column(0..9).border_width = 0
 	product.row(0).style(:background_color => "F4F3F3")
 end
 
@@ -108,26 +177,18 @@ pdf.move_down 10
 
 ###PRODUCTS TOTALS TABLE###	
 products_totals = [[
-										"",
-										"",
-										"",
-										"",
 										totals_quantity,
 										number_to_currency(totals_price)
 									]]
 
 
 
-
 pdf.table(products_totals,
-					width: 523,
+					width: 110,
 				  row_colors: ["FFFFFF","F4F3F3"],
-				  column_widths:  {0 => 50,
-									  				  1 => 100,
-									  				  3 => 50,
-									  				  4 => 30,
-									  				  5 => 70},
-		 		  header: false) do |products_totals_cell|
+				  column_widths:  {0 => 30,
+							  				  1 => 80},
+		 		  header: false, position: :right) do |products_totals_cell|
 
 	products_totals_cell.row(0).font_style = :bold
 	#ticket.row(0).column(0).align = :right
@@ -149,7 +210,7 @@ end
 ###FOOTER###
 pdf.float do
 
-	number_pages " - gestão de orçamentos inteligente", { :start_count_at => 0, :page_filter => :all, :at => [bounds.left + 45, 0], :align => :left, :size => 8 }
+	number_pages "gestão de orçamentos inteligente", { :start_count_at => 0, :page_filter => :all, :at => [bounds.left + 55, 1], :align => :left, :size => 8 }
 	number_pages "página <page> de <total>", { :start_count_at => 0, :page_filter => :all, :at => [bounds.right - 50, 0], :align => :right, :size => 8 }
 end
 ###END FOOTER###

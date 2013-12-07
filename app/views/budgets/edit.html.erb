@@ -217,7 +217,17 @@
 
 		<div class="clearfix"></div>
 
+		
+		
+
+
 		<div style="margin-top: 10px; ">
+
+			<button style="float: right; " id="button_see_pdf" class="btn btn-small btn-success" name="commit" type="submit" onclick="">
+	     	<%= link_to 'ver pdf', budget_path(@budget.id, format: 'pdf'), style: 'color: #fff; ', target: '_blank' %>
+	  	</button>
+
+
 	    <%= simple_form_for @budget,
 	    										url: {controller: 'budgets', action: 'validate_budget'},
 	    										method: :get,
@@ -229,12 +239,12 @@
 	    	<%= f.hidden_field :status,
 	    										 value: 2 %>
 
-				<button style="float: right; " class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
+				<button style="float: right; " id="button_close_budget" class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
 	      	<b>fechar orçamento</b>
 	        <i id="icon-loading-confirm-customer" class=""></i>
 	      </button>
 
-	    <% end %>
+		  <% end %>
 		</div>
 
 	</div>
@@ -244,6 +254,23 @@
 	<%#= link_to 'Show', @budget %> 
 	<%#= link_to 'Back', budgets_path %>
 </center>
+
+<% if @budget.status > 1 %>
+
+	<script type="text/javascript">
+		$('#button_see_pdf').show();
+		$('#button_close_budget').hide();
+	</script>
+
+<% else %>
+
+	<script type="text/javascript">
+		$('#button_see_pdf').hide();
+		$('#button_close_budget').show();
+	</script>
+
+<% end %>
+
 
 <% if @budget.customer.errors.count > 0 %>
 

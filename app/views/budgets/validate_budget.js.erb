@@ -8,6 +8,13 @@
 
 <% else %>
 
-	$('#flash_messages').find('td').hide();
+	$('#flash_messages').find('td').show();
+	
+	$('#flash_messages').find('td').find('div').removeClass();
+	$('#flash_messages').find('td').find('div').addClass('alert alert-success');
+	$('#flash_messages').find('td').find('div').html('<%= t :"budget_closed_successfully" %>');
+
+	$('#button_see_pdf').show();
+	$('#button_close_budget').hide();
 
 <% end %>

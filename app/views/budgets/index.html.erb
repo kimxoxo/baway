@@ -45,7 +45,7 @@
       <!--<td><%#= budget.payment_condition_id %></td>-->
       <!--<td><%#= budget.description %></td>-->
       <td>
-				<% if !budget.id %>
+				<% if budget.status < 2 %>
           <%=  %>
         <% else %>
           <%= link_to content_tag(:i, '', class: "icon-download", style: 'font-size: 19px; '), budget_path(budget.id, format: 'pdf'), target: '_blank' %>

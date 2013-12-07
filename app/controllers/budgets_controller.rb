@@ -7,7 +7,13 @@ class BudgetsController < ApplicationController
   # GET /budgets
   # GET /budgets.json
   def index
-    @budgets = Budget.paginate(page: params[:page], per_page: 10).order('created_at DESC')
+
+		#if params[:budget_id]
+			@budgets = Budget.paginate(page: params[:page], per_page: 10).order('created_at DESC')
+		#else
+    	#@budgets = Budget.paginate(page: params[:page], per_page: 10).order('created_at DESC')
+		#end
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,7 +30,7 @@ class BudgetsController < ApplicationController
   def show
     @budget = Budget.find(params[:id])
     
-    prawnto prawn: {page_size: "A4", page_layout: :portrait}, inline: true
+    prawnto prawn: {page_size: "A4", page_layout: :landscape}, inline: true
 
 
     #respond_to do |format|
@@ -70,6 +76,9 @@ class BudgetsController < ApplicationController
 
     #else if not params[:delete]
     else
+    	#budget details changed so status must be always = 1
+    	@budget.status = 1
+    	@budget.save
 
 	    @product.budgets << @budget
 
@@ -103,6 +112,11 @@ class BudgetsController < ApplicationController
     if !params[:budgets_product][:freight].blank?
 			params[:budgets_product][:freight] = view_context.currency_to_number(params[:budgets_product][:freight])
 		end
+
+
+    #budget details changed so status must be always = 1
+    @budget.status = 1
+    @budget.save
 
 
     @budgets_product.update_attributes(params[:budgets_product])
@@ -223,17 +237,13 @@ class BudgetsController < ApplicationController
 
 	def validate_budget
  	
-
 		@budget = Budget.find(params[:budget][:id])
 
-
-    respond_to do |format|
-      if @budget.update_attributes(params[:budget])
-        format.html
-      else
-        format.js
-      end
-    end
+    if @budget.update_attributes(params[:budget])
+    	respond_to do |format|
+    	  format.js
+    	end
+    end  
 
 	end
 

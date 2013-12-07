@@ -60,8 +60,19 @@ class Budget < ActiveRecord::Base
     
     self.budgets_products.each do |bp|
       if bp.house_area.blank?
-        errors.add(:servicetag_id, "preencha area da casa")
+        errors.add(:house_area, "")
       end
+
+      if bp.quantity.nil?
+        errors.add(:quantity, "")
+      end
+
+      if bp.freight.nil?
+        errors.add(:freight, "")
+      end
+
+
+
     end
 
   end

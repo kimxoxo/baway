@@ -11,6 +11,7 @@ pt-BR:
   "optionals": "opcionais"
   "to": "PARA"
   "fix_budget_errors": "corriga erros"
+  "budget_closed_successfully": "orçamento fechado com sucesso"
   search: pesquisar
   save: cadastrar
   date:
@@ -327,7 +328,10 @@ pt-BR:
         product_type: tipo
         product_type1: pp
         product_type2: tp
-        product_type3: cr      
+        product_type3: cr
+        product_type_full_1: papel parede
+        product_type_full_2: tapete
+        product_type_full_3: cortina    
         code: código
         supplier_id: fornecedor
         brand: marca
