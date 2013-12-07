@@ -227,13 +227,12 @@ class BudgetsController < ApplicationController
 		@budget = Budget.find(params[:budget][:id])
 
 
-
-
-
-
-
     respond_to do |format|
-      format.js
+      if @budget.update_attributes(params[:budget])
+        format.html
+      else
+        format.js
+      end
     end
 
 	end

@@ -16,4 +16,5 @@ class BudgetsProduct < ActiveRecord::Base
 
   belongs_to :budget
   belongs_to :product
+
 end

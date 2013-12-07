@@ -48,4 +48,26 @@ class Budget < ActiveRecord::Base
       #presence: true,
       #numericality: { greater_than: 0, less_than_or_equal_to: 100 }
 
+
+
+
+
+  validate :budget_is_valid?, :if => Proc.new { |b| b.status == 2 }
+
+
+
+  def budget_is_valid?
+    
+    self.budgets_products.each do |bp|
+      if bp.house_area.blank?
+        errors.add(:servicetag_id, "preencha area da casa")
+      end
+    end
+
+  end
+
+
+
+
+
 end

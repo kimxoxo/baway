@@ -1,1 +1,13 @@
-alert('kim');
+<% if @budget.errors.count > 0 %>
+
+	$('#flash_messages').find('td').show();
+	
+	$('#flash_messages').find('td').find('div').removeClass();
+	$('#flash_messages').find('td').find('div').addClass('alert');
+	$('#flash_messages').find('td').find('div').html('<%= t :"fix_budget_errors" %>');
+
+<% else %>
+
+	$('#flash_messages').find('td').hide();
+
+<% end %>
