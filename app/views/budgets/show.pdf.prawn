@@ -5,11 +5,12 @@ pdf.font_size = 10
 
 
 
-	pdf.float do
-		pdf.text "<b>Orçamento nº</b> #{@budget.id}", style: :normal, align: :left, inline_format: true
+pdf.float do
+	pdf.text "<b>Orçamento nº</b> #{@budget.id}", style: :normal, align: :left, inline_format: true
+	pdf.text "#{@budget.updated_at.strftime('%d/%m/%Y')}", style: :normal, align: :left, inline_format: true
 
-		pdf.image "#{Rails.root}/app/assets/images/emporio_logo.png", at: [670, 530], width: 100
-	end
+	pdf.image "#{Rails.root}/app/assets/images/emporio_logo.png", at: [670, 530], width: 100
+end
 
 
 
@@ -19,9 +20,9 @@ architech_name = User.find(@budget.architect_id).name
 
 
 pdf.float do
-	pdf.text "Cliente", style: :bold, align: :left, inline_format: true
-	#pdf.move_down 10
-	pdf.text @budget.customer.name, style: :normal, align: :left
+	#pdf.text "Cliente", style: :bold, align: :left, inline_format: true
+	pdf.move_down 10
+	pdf.text "Cliente: #{@budget.customer.name}", style: :normal, align: :left
 	pdf.text "#{@budget.customer.street}, #{@budget.customer.street_number}", style: :normal, align: :left
 	pdf.text "#{@budget.customer.city}, #{@budget.customer.postal_code} #{@budget.customer.neighbourhood}", style: :normal, align: :left
 	pdf.text "#{@budget.customer.mobile} #{@budget.customer.landline}", style: :normal, align: :left
@@ -175,28 +176,146 @@ pdf.move_down 10
 
 
 
-###PRODUCTS TOTALS TABLE###	
-products_totals = [[
-										totals_quantity,
-										number_to_currency(totals_price)
-									]]
+pdf.float do
+
+	###PRODUCTS TOTALS TABLE###	
+	users = [[
+						"Arquiteto(a)",
+						 architech_name
+						]]
+
+	users += [[
+						"Vendedor(a)",
+						current_user.name
+						]]
+
+
+	users += [[
+						"entrada",
+						"R$ 100,00"
+						]]
+
+	users += [[
+						"opções pag",
+						"R$ 100,00"
+						]]
 
 
 
-pdf.table(products_totals,
-					width: 110,
-				  row_colors: ["FFFFFF","F4F3F3"],
-				  column_widths:  {0 => 30,
-							  				  1 => 80},
-		 		  header: false, position: :right) do |products_totals_cell|
+	pdf.table(users,
+						width: 300,
+					  column_widths:  {0 => 70},
+			 		  header: false, position: :left) do |users_cell|
 
-	products_totals_cell.row(0).font_style = :bold
-	#ticket.row(0).column(0).align = :right
+		users_cell.row(0).border_width = 0
+		users_cell.row(1).border_width = 0
+		users_cell.row(2).border_width = 0
+		users_cell.row(3).border_width = 0
 
-	products_totals_cell.row(0).border_width = 0
-	#products_totals_cell.column(4..5).style(:background_color => "F4F3F3")
+		users_cell.column(0).font_style = :bold
+	end
 end
 
+
+
+
+
+pdf.float do
+
+
+	###PRODUCTS TOTALS TABLE###	
+	products_totals = [[
+											"quantidade itens",
+											totals_quantity
+										]]
+
+
+	products_totals += [[
+											"sub-total",
+											number_to_currency(totals_price)
+										]]
+
+
+	if @budget.discount > 0
+
+		###PRODUCTS TOTALS TABLE###	
+		products_totals += [[
+												"desconto",
+												number_to_currency(@budget.discount)
+											]]
+
+		
+
+
+
+		###PRODUCTS TOTALS TABLE###	
+		budget_total = 0
+
+		budget_total = totals_price - @budget.discount
+
+
+		products_totals += [[
+												"total",
+												number_to_currency(budget_total)
+											]]
+
+	end
+
+
+
+
+	pdf.table(products_totals,
+						width: 300,
+					  column_widths:  {1 => 80},
+			 		  header: false, position: :right) do |products_totals_cell|
+
+		products_totals_cell.row(0).font_style = :bold
+		products_totals_cell.row(3).font_style = :bold
+
+		products_totals_cell.column(0).align = :right
+
+		products_totals_cell.row(0).border_width = 0
+		products_totals_cell.row(1).border_width = 0
+		products_totals_cell.row(2).border_width = 0
+		products_totals_cell.row(3).border_width = 0
+	end
+end
+
+
+
+pdf.move_down 90
+
+
+
+pdf.float do
+
+
+
+		###PAYMENT CONDITIONS TABLE###
+		payment_conditions = [["condições de pagamento",
+													 ""]]
+
+		payment_conditions += @budget.payment_conditions.map do |payment_condition|
+
+			[
+			"condições de pagamento",
+			payment_condition.id
+			]
+		end
+
+
+		pdf.table(payment_conditions,
+							width: 200,
+						  row_colors: ["FFFFFF","F4F3F3"],
+						  column_widths:  {},
+				 		  header: true, position: :left) do |payment_conditions_cell|
+
+			payment_conditions_cell.row(0).font_style = :bold
+			payment_conditions_cell.column(0).align = :right
+
+			payment_conditions_cell.row(0).border_width = 0
+		end
+	end
 
 
 
