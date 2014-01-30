@@ -319,7 +319,7 @@ $(document).ready(function($) {
 	$(".product_freight_input").mask("0.000,00", {reverse: true});
 
 
-  $("#supplier_cnpj").mask("999.999.999-99", {reverse: true});
+  $("#supplier_cnpj").mask("99.999.999/9999-99", {reverse: true});
 
   $("#supplier_postal_code").mask("99999-999");
 
