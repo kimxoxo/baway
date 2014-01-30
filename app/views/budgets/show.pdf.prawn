@@ -190,16 +190,22 @@ pdf.float do
 						]]
 
 
-	users += [[
-						"entrada",
-						"R$ 100,00"
-						]]
+	# users += [[
+	# 					"entrada",
+	# 					"R$ 100,00"
+	# 					]]
 
-	users += [[
-						"opções pag",
-						"R$ 100,00"
-						]]
+	# users += [[
+	# 					"opções pag",
+	# 					"R$ 100,00"
+	# 					]]
 
+
+
+	# users += [[
+	# 					"opções pag",
+	# 					"R$ 100,00"
+	# 					]]
 
 
 	pdf.table(users,
@@ -269,7 +275,7 @@ pdf.float do
 					  column_widths:  {1 => 80},
 			 		  header: false, position: :right) do |products_totals_cell|
 
-		products_totals_cell.row(0).font_style = :bold
+		#products_totals_cell.row(0).font_style = :bold
 		products_totals_cell.row(3).font_style = :bold
 
 		products_totals_cell.column(0).align = :right
@@ -287,35 +293,35 @@ pdf.move_down 90
 
 
 
-pdf.float do
+# pdf.float do
 
 
 
-		###PAYMENT CONDITIONS TABLE###
-		payment_conditions = [["condições de pagamento",
-													 ""]]
+# 		###PAYMENT CONDITIONS TABLE###
+# 		payment_conditions = [["condições de pagamento",
+# 													 ""]]
 
-		payment_conditions += @budget.payment_conditions.map do |payment_condition|
+# 		payment_conditions += @budget.payment_conditions.map do |payment_condition|
 
-			[
-			"condições de pagamento",
-			payment_condition.id
-			]
-		end
+# 			[
+# 			"condições de pagamento",
+# 			payment_condition.id
+# 			]
+# 		end
 
 
-		pdf.table(payment_conditions,
-							width: 200,
-						  row_colors: ["FFFFFF","F4F3F3"],
-						  column_widths:  {},
-				 		  header: true, position: :left) do |payment_conditions_cell|
+# 		pdf.table(payment_conditions,
+# 							width: 200,
+# 						  row_colors: ["FFFFFF","F4F3F3"],
+# 						  column_widths:  {},
+# 				 		  header: true, position: :left) do |payment_conditions_cell|
 
-			payment_conditions_cell.row(0).font_style = :bold
-			payment_conditions_cell.column(0).align = :right
+# 			payment_conditions_cell.row(0).font_style = :bold
+# 			payment_conditions_cell.column(0).align = :right
 
-			payment_conditions_cell.row(0).border_width = 0
-		end
-	end
+# 			payment_conditions_cell.row(0).border_width = 0
+# 		end
+# 	end
 
 
 
