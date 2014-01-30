@@ -1,5 +1,9 @@
 <%= simple_form_for(@supplier, html: { class: "form-horizontal" }) do |f| %>
 
+
+  <%= f.input :cnpj %>
+
+
   <%= f.input :name %>
 
 
@@ -12,18 +16,13 @@
   <%= f.input :neighbourhood %>
 
 
-  <%= f.input :city %>
+  <%= f.input :postal_code %>
 
 
   <%= f.input :address_complement %>
 
 
-  <%= f.input :cnpj %>
-
-
-  <%= f.input :neighbourhood %>
-
-  <%= f.input :postal_code %>
+  <%= f.input :city %>
 
 
   <%= f.input :landline %>
