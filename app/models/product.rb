@@ -63,11 +63,13 @@ class Product < ActiveRecord::Base
       #format width
       product_hash["width"] = string_to_float(product_hash["width"])
 
-      if product
-        product.update_attributes!(product_hash)
-      else
+      #if product
+      	#if product.supplier_id == product_hash["supplier_id"].to_i
+        	#product.update_attributes!(product_hash)
+        #end
+      #else
         Product.create!(product_hash)
-      end
+      #end
     end
   end
 
