@@ -14,10 +14,11 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
 
+#@products_search_list = Product.where("lower(description) LIKE ?", "%#{params[:product][:search_phrase]}%")
 
 
   	if params[:product]
-    	@products = Product.where(code: params[:product][:code]).paginate(page: params[:page], per_page: 12)
+    	@products = Product.where("lower(code) LIKE ?", "%#{params[:product][:code]}%").paginate(page: params[:page], per_page: 12)
   	else
     	@products = Product.paginate(page: params[:page], per_page: 10).order('created_at DESC')
     end
