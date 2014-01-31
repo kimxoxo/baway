@@ -63,6 +63,10 @@ class Product < ActiveRecord::Base
       product_hash["ipi"] = string_to_float(product_hash["ipi"])
       #format width
       product_hash["width"] = string_to_float(product_hash["width"])
+      #format width
+      product_hash["supplier_table_discount"] = string_to_float(product_hash["supplier_table_discount"])
+
+
 
       if product
       	if product.supplier_id == product_hash["supplier_id"]
