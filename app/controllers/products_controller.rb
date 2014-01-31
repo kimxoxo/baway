@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
 
 
   	if params[:product]
-    	@products = Product.where("lower(code) LIKE ?", "%#{params[:product][:code].downcase}%").paginate(page: params[:page], per_page: 12)
+    	@products = Product.where("lower(code) LIKE ?", "#{params[:product][:code].downcase}").paginate(page: params[:page], per_page: 12)
   	else
     	@products = Product.paginate(page: params[:page], per_page: 10).order('created_at DESC')
     end

@@ -22,7 +22,8 @@ class Product < ActiveRecord::Base
 
 
   attr_accessible :brand, :code, :description, :ipi, :ncm,
-  								:supplier_id, :supplier_price, :width, :product_type, :markup
+  								:supplier_id, :supplier_price, :width, :product_type, :markup,
+  								:supplier_table_discount
 
 
 	attr_accessor :search_phrase, :budget_id

@@ -337,6 +337,7 @@ pt-BR:
         brand: marca
         description: descrição
         supplier_price: preço forn.
+        supplier_table_discount: disc. tab.
         width: larg
         height: alt
         ncm: ncm
