@@ -338,6 +338,7 @@ pt-BR:
         description: descrição
         supplier_price: preço forn.
         supplier_table_discount: disc. tab.
+        markup: markup
         width: larg
         height: alt
         ncm: ncm
