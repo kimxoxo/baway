@@ -1,11 +1,20 @@
 <div class="left_menu">
 
-  <ul id="filter_list">
+  <ul id="filter_list" style="">
     <li class="header">
       header
     </li>
-  </ul>
 
+    <li class="first_filter">
+      <%= simple_form_for @product , html: {id: "", style: ""}, url: products_path, method: :get do |f| %>
+        <%= f.input_field :code,
+        						      wrapper: 'basic',
+        									style: 'width: 175px; box-shadow: none; ',
+        									placeholder: (t :"activerecord.attributes.product.filters.product_code") %>
+      <% end %>
+    </li>
+
+  </ul>
 </div>
 
 
@@ -38,7 +47,7 @@
       <td><%= product.description %></td>
       <td><%= "#{product.width} cm" %></td>
       <td><%= product.markup %></td>
-      <td><%= product.ipi %></td>
+      <td><%= "#{product.ipi}%" %></td>
       <td><%= number_to_currency(product.supplier_price) %></td>
     </tr>
   <% end %>

@@ -326,9 +326,9 @@ pt-BR:
         tax_number_type2: cnpj
       product:
         product_type: tipo
-        product_type1: pp
-        product_type2: tp
-        product_type3: cr
+        product_type1: PP
+        product_type2: TP
+        product_type3: TC
         product_type_full_1: papel parede
         product_type_full_2: tapete
         product_type_full_3: cortina    
@@ -349,6 +349,8 @@ pt-BR:
         days_to_delivery: ent
         please_fill: pf
         freight: frete
+        filters:
+          product_code: código prod.
       user:
         name: nome
         surname: sobrenome

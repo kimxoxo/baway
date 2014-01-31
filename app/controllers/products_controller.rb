@@ -13,7 +13,18 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.paginate(page: params[:page], per_page: 10).order('created_at DESC')
+
+
+
+  	if params[:product]
+    	@products = Product.where(code: params[:product][:code]).paginate(page: params[:page], per_page: 12)
+  	else
+    	@products = Product.paginate(page: params[:page], per_page: 10).order('created_at DESC')
+    end
+
+
+
+    @product = Product.new
 
     respond_to do |format|
       format.html # index.html.erb

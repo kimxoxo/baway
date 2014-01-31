@@ -54,16 +54,14 @@ class Product < ActiveRecord::Base
       product_hash = row.to_hash # exclude the price field
       product = Product.find_by_code(row["code"])
 
-
+      #format ipi
+      product_hash["markup"] = string_to_float(product_hash["markup"])
       #format price
       product_hash["supplier_price"] = string_to_float(product_hash["supplier_price"])
       #format ipi
       product_hash["ipi"] = string_to_float(product_hash["ipi"])
       #format width
       product_hash["width"] = string_to_float(product_hash["width"])
-
-
-
 
       if product
         product.update_attributes!(product_hash)
