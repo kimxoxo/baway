@@ -55,17 +55,33 @@ class Product < ActiveRecord::Base
       product_hash = row.to_hash # exclude the price field
       product = Product.find_by_code(row["code"])
 
+
+      #format code
+      product_hash["code"] = product_hash["code"].strip
+
       #format ipi
+      product_hash["markup"] = product_hash["markup"].strip
       product_hash["markup"] = string_to_float(product_hash["markup"])
+
       #format price
+      product_hash["supplier_price"] = product_hash["supplier_price"].strip
       product_hash["supplier_price"] = string_to_float(product_hash["supplier_price"])
+
       #format ipi
+      product_hash["ipi"] = product_hash["ipi"].strip
       product_hash["ipi"] = string_to_float(product_hash["ipi"])
+
       #format width
+      product_hash["width"] = product_hash["width"].strip
       product_hash["width"] = string_to_float(product_hash["width"])
+
       #format width
+      product_hash["supplier_table_discount"] = product_hash["supplier_table_discount"].strip
       product_hash["supplier_table_discount"] = string_to_float(product_hash["supplier_table_discount"])
 
+      #format description, remove left spaces
+      product_hash["description"] = product_hash["description"].strip
+      
 
 
       if product

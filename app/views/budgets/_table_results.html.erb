@@ -92,6 +92,13 @@
 																		 value: @budget.id %>
 
 
+									<%= f.input_field :supplier_id,
+					                          as: :select,
+					                          collection: @suppliers,
+					                          prompt: 'selecione',
+					                          input_html: {style: 'width: 135px; '} %>
+
+
 									<%= f.input :search_phrase,
 															label: false,
 															wrapper: :append,

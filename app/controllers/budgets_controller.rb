@@ -45,11 +45,11 @@ class BudgetsController < ApplicationController
   def products_search
 
     #view_context to include the function from aplication helper
-    if view_context.is_numeric?(params[:product][:search_phrase])
-      @products_search_list = Product.where("code LIKE ?", "#{params[:product][:search_phrase]}%")
-    else
-      @products_search_list = Product.where("lower(description) LIKE ?", "%#{params[:product][:search_phrase]}%")
-    end
+    #if view_context.is_numeric?(params[:product][:search_phrase])
+      @products_search_list = Product.where(supplier_id: "#{params[:product][:supplier_id]}")
+    #else
+      #@products_search_list = Product.where("supplier_id = #{params[:product][:supplier_id]} AND lower(description) LIKE ?", "%#{params[:product][:search_phrase]}%")
+    #end
 
     @budget = Budget.find(params[:product][:budget_id])
 
@@ -161,6 +161,7 @@ class BudgetsController < ApplicationController
 
     @budgets_products = @budget.budgets_products.order('id ASC')
 
+    @suppliers = Supplier.all
 
     #@payment_condition1 = @budget.payment_conditions.order('id ASC').first
     #@payment_condition2 = @budget.payment_conditions.order('id ASC').second

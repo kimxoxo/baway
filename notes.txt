@@ -22,3 +22,7 @@ backup perform --trigger baway_dropbox_backup
 
 ###to replicate remote DB to local DB
 ./script/db_replicate.sh
+
+
+###rails console remove array objects
+Record.all.each { |r| r.destroy }

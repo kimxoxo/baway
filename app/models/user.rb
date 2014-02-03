@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   #has_many :budgets
 
 
-  validates :name, :surname, :role,
+  validates :name, :surname, :role, :email, :password, :password_confirmation,
     	presence: true
 
 
