@@ -1,8 +1,18 @@
 
-$('#products table tr:not(:first)').remove();
+
+//when a search is executed, before rendering results removes previous search results
+$('#products table tr:gt(1)').remove();
+
 
 $('#products table tr').first().show();
 
+
+//if the search returns no result shows the "error" message, else hides it
+<% if @products_search_list.count == 0 %>
+	$('#products_tr_no_results').show();
+<% else %>
+	$('#products_tr_no_results').hide();
+<% end %>
 
 
 <% @products_search_list.each do |product| %>

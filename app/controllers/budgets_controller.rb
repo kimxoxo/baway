@@ -46,10 +46,17 @@ class BudgetsController < ApplicationController
 
     #view_context to include the function from aplication helper
     #if view_context.is_numeric?(params[:product][:search_phrase])
-      @products_search_list = Product.where(supplier_id: "#{params[:product][:supplier_id]}")
     #else
-      #@products_search_list = Product.where("supplier_id = #{params[:product][:supplier_id]} AND lower(description) LIKE ?", "%#{params[:product][:search_phrase]}%")
     #end
+
+    ##query for code
+    @products_search_list1 = Product.where(supplier_id: params[:product][:supplier_id]).where("lower(code) LIKE ? ", "#{params[:product][:search_phrase].downcase}%").limit(25)
+    ##query for description
+    @products_search_list2 = Product.where(supplier_id: params[:product][:supplier_id]).where("lower(description) LIKE ?", "%#{params[:product][:search_phrase].downcase}%").limit(25)
+
+    ##merge results
+		@products_search_list = (@products_search_list1 + @products_search_list2).uniq
+
 
     @budget = Budget.find(params[:product][:budget_id])
 
@@ -108,6 +115,9 @@ class BudgetsController < ApplicationController
     @budget = Budget.find(@budgets_product.budget_id)
     @budgets_products = @budget.budgets_products
     @product = Product.find(@budgets_product.product_id)
+
+    @suppliers = Supplier.all
+
 
     if !params[:budgets_product][:freight].blank?
 			params[:budgets_product][:freight] = view_context.currency_to_number(params[:budgets_product][:freight])

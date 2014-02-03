@@ -92,11 +92,16 @@
 																		 value: @budget.id %>
 
 
-									<%= f.input_field :supplier_id,
+									
+									<%= f.input :supplier_id,
 					                          as: :select,
+					                          label: false,
+					                          wrapper: 'basic',
 					                          collection: @suppliers,
-					                          prompt: 'selecione',
-					                          input_html: {style: 'width: 135px; '} %>
+					                          include_blank: 'selecione fornecedor',
+					                          input_html: {style: 'width: 200px; float: left; '} %>
+
+
 
 
 									<%= f.input :search_phrase,
@@ -105,10 +110,12 @@
 															style: 'margin: 0; padding: 0; ',
 															class: "inline" do %>
 								    
+
+
 								    <%= f.input_field :search_phrase,
 								    									as: :string,
 																			placeholder: 'código/descrição do produto',
-					      											style: 'width: 260px; ' %>
+					      											style: 'width: 200px; margin-left: 10px; ' %>
 
 										<%= f.submit 'procurar',
 					        						 	 class: 'btn btn-primary btn-small',
