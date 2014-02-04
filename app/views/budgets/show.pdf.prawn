@@ -288,24 +288,32 @@ pdf.float do
 	end
 
 
+	#set budget observations
+	if @budget.instalation_observations.blank?
+		budget_instalation = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx sem condições xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+	else
+		budget_instalation = "- #{@budget.instalation_observations}"
+	end
+
 	###PRODUCTS TOTALS TABLE###	
 	users = [[
 						"Condições de instalação:",
-						"frete",
-						"instalação"
+						"",
+						""
 						]]
 
 
 	users += [[
 						"Fica o cliente que para as devidas instalações dos produtos acima deverá tomar as seguintes providências:",
-						budget_freight,
-						budget_instalation
+						"",
+						""
 						]]
 
 
 
 	users += [[
-						"- #{@budget.instalation_observations}",
+						budget_instalation,
 						"",
 						""
 						]]
@@ -326,6 +334,12 @@ pdf.float do
 						]]
 
 
+
+	users += [[
+						"assinatura:",
+						"",
+						""
+						]]
 
 
 
@@ -349,10 +363,10 @@ pdf.float do
 
 
 	pdf.table(users,
-						width: 380,
+						width: 780,
 					  column_widths: {
-					  								1 => 40,
-					  								2 => 60
+					  								1 => 200,
+					  								2 => 200
 					  								},
 			 		  header: false, position: :left) do |users_cell|
 
@@ -360,6 +374,9 @@ pdf.float do
 		users_cell.row(1).border_width = 0
 		users_cell.row(2).border_width = 0
 		users_cell.row(3).border_width = 0
+		users_cell.row(4).border_width = 0
+		users_cell.row(5).border_width = 0
+
 
 
 		users_cell.row(0).padding_top = 0
@@ -373,77 +390,21 @@ pdf.float do
 		users_cell.row(2).padding_top = 7
 
 		users_cell.row(0).font_style = :bold
+		users_cell.row(3).font_style = :bold
+		users_cell.row(5).font_style = :bold
+
+
+		users_cell.row(0).border_top_width = 1
+		users_cell.row(5).border_bottom_width = 1
+		users_cell.column(0).border_left_width = 1
+		users_cell.column(0).border_right_width = 1
+		users_cell.column(1).border_right_width = 1
+		users_cell.column(2).border_right_width = 1
+		users_cell.column(0).row(3).border_bottom_width = 1
+
 
 	end
 end
-
-
-
-
-
-
-
-pdf.float do
-
-
-	###PRODUCTS TOTALS TABLE###	
-	products_totals = [[
-											"quantidade itens",
-											totals_quantity
-										]]
-
-
-	products_totals += [[
-											"sub-total",
-											number_to_currency(totals_price)
-										]]
-
-
-	if @budget.discount > 0
-
-		###PRODUCTS TOTALS TABLE###	
-		products_totals += [[
-												"desconto",
-												number_to_currency(@budget.discount)
-											]]
-
-		
-
-
-
-		###PRODUCTS TOTALS TABLE###	
-		budget_total = 0
-
-		budget_total = totals_price - @budget.discount
-
-
-		products_totals += [[
-												"total",
-												number_to_currency(budget_total)
-											]]
-
-	end
-
-
-
-
-	pdf.table(products_totals,
-						width: 300,
-					  column_widths:  {1 => 80},
-			 		  header: false, position: :right) do |products_totals_cell|
-
-		#products_totals_cell.row(0).font_style = :bold
-		products_totals_cell.row(3).font_style = :bold
-
-		products_totals_cell.column(0).align = :right
-
-		products_totals_cell.row(0).border_width = 0
-		products_totals_cell.row(1).border_width = 0
-		products_totals_cell.row(2).border_width = 0
-		products_totals_cell.row(3).border_width = 0
-	end
-end
-
 
 
 
