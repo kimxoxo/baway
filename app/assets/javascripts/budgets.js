@@ -5,8 +5,6 @@
 
 function enable_payment_condition_input() {
 
-
-
 		h = $(this).parent('a').parent('td').find('span').attr('class');
 
 alert(h);
@@ -183,6 +181,8 @@ function enable_form() {
 	$('#budget_client_div_show').hide();
 	$('#budget_client_div').fadeIn(1000);
 }
+
+
 
 
 

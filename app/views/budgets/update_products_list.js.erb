@@ -13,7 +13,6 @@
 	enable_this_tr_forms('<%= @product.id %>');
 
 
-	$('#budgets_product_quantity').focus();
 <% end %>
 
 //when the product already exists in the list
@@ -41,8 +40,8 @@
 <% end %>
 
 
-$('#button_see_pdf').show();
-$('#button_close_budget').hide();
+$('#button_see_pdf').hide();
+$('#button_close_budget').show();
 
 make_td_same_width_for_budget_tables();
 

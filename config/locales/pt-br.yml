@@ -348,6 +348,7 @@ pt-BR:
         quantity: qt
         price: preço
         house_area: ambiente
+        product_observations: observações
         days_to_delivery: ent
         please_fill: pf
         freight: frete

@@ -78,6 +78,18 @@
 						<%= t :"activerecord.attributes.product.description" %>
 					</th>
 
+
+
+					<th class="td_pencil_product_observations">
+						<i class="icon icon-pencil icon-white"></i>
+					</th>
+
+					<th class="td_product_observations">
+						<%= t :"activerecord.attributes.product.product_observations" %>
+					</th>
+
+
+
 					<th class="td_pencil_house_area">
 						<i class="icon icon-pencil icon-white"></i>
 					</th>
@@ -146,7 +158,7 @@
 
 
 				<tr id="flash_messages">
-					<td colspan="18" style="display: none; border: 0; padding-top: 10px; ">
+					<td colspan="20" style="display: none; border: 0; padding-top: 10px; ">
 						<div class="alert" style="text-align:center; padding: 2px; margin: 0; ">
 						</div>
 					</td>
@@ -215,6 +227,10 @@
 						<tr style="display: none; ">
 							<th>
 								<%= t :"activerecord.attributes.product.code" %>
+							</th>
+
+							<th>
+								<%= t :"activerecord.attributes.product.product_type" %>
 							</th>
 
 							<th>
@@ -300,5 +316,12 @@
 
 	$('.hide_this_form').hide();
 	make_td_same_width_for_budget_tables();
+
+</script>
+
+
+<script type="text/javascript">
+
+	vertical_menu_height_fix();
 
 </script>

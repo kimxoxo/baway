@@ -21,6 +21,55 @@
 
 
 
+
+							<td class="td_pencil_product_observations">
+								<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'product_observations'); " %>'>
+									<i class="icon icon-pencil"></i>
+								</a>
+							</td>
+
+
+
+							<td class="td_product_observations" style="padding: 0 5px 0 5px; margin:0; ">
+		            <%= simple_form_for budget_product,
+		            										url: update_product_attributes_budgets_path,
+							            					method: :get,
+							            					remote: true,
+							            					html: {class: 'hide_this_form',
+							            					style: 'margin: 0;
+							            									padding: 0;
+							            									border: 0px solid red; ',
+																		id: "form_product_observations_#{budget_product.id}"} do |f| %>
+
+		              <%= f.hidden_field :id, value: budget_product.id %>
+
+		              <%= f.input_field :product_observations,
+		                          			as: :string,
+		                          			maxlength: 10,
+		                       					onblur: '$(this).closest("form").submit(); ',
+		                          			style: 'float: left;
+		                          							width: 70px;
+		                          							margin:0;
+		                          							padding:2px; ' %>          
+		            <% end %>
+
+								<% if !budget_product.product_observations.blank? %>
+									<span>
+										<%= budget_product.product_observations %>
+									</span>
+								<% else %>
+									<span style="color: red; ">
+										<%= t :"activerecord.attributes.product.please_fill" %>
+									</span>
+								<% end %>
+
+								<i class="icon" style="font-size: 14px; "></i>
+							</td>
+
+
+
+
+
 							<td class="td_pencil_house_area">
 								<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'house_area'); " %>'>
 									<i class="icon icon-pencil"></i>
@@ -44,11 +93,12 @@
 
 		              <%= f.input_field :house_area,
 		                          			as: :string,
+		                          			maxlength: 10,
 		                       					onblur: '$(this).closest("form").submit(); ',
 		                          			style: 'float: left;
 		                          							width: 70px;
 		                          							margin:0;
-		                          							padding:2px;  ' %>          
+		                          							padding:2px; ' %>          
 		            <% end %>
 
 								<% if !budget_product.house_area.blank? %>
@@ -105,7 +155,7 @@
 		                          			style: 'float: left;
 		                          							width: 58px;
 		                          							margin:0;
-		                          							padding:2px;  ' %>          
+		                          							padding:2px; ' %>          
 		            <% end %>
 
 
@@ -184,7 +234,7 @@
 
 
 							<td class="td_pencil_width">
-								<% if product.product_type == 1 %>
+								<% if (product.product_type == 1 || product.product_type == 3) %>
 
 								<% else %>
 									<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'width'); " %>'>
@@ -197,7 +247,7 @@
 
 
 							<td class="td_width">
-								<% if product.product_type == 1 %>
+								<% if (product.product_type == 1 || product.product_type == 3) %>
 									
 									<%= "#{product.width} m" %>
 								
@@ -245,7 +295,7 @@
 
 
 							<td class="td_pencil_height">
-								<% if product.product_type == 1 %>
+								<% if (product.product_type == 1 || product.product_type == 3) %>
 
 								<% else %>
 									<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'height'); " %>'>
@@ -257,14 +307,8 @@
 
 
 							<td class="td_height">
-								<% if product.product_type == 1 %>
-									
-									<%# if product.height > 0  %>
-										<%#= "#{product.height} cm" %>
-									<%# else %>
-									n/a	
-									<%# end %>
-								
+								<% if (product.product_type == 1 || product.product_type == 3) %>
+									n/a							
 								<% else %>
 
 			            <%= simple_form_for budget_product,
@@ -286,7 +330,7 @@
 			                          			style: 'float: left;
 			                          							width: 50px;
 			                          							margin:0;
-			                          							padding:2px;  ' %>          
+			                          							padding:2px; ' %>          
 			            <% end %>
 
 
@@ -336,17 +380,13 @@
 		                          			style: 'float: left;
 		                          							width: 30px;
 		                          							margin:0;
-		                          							padding:2px;  ' %>          
+		                          							padding:2px; ' %>          
 		            <% end %>
 
 
 								<% if budget_product.quantity %>
 									<span>
-										<% if product.product_type == 3 %>
-											<%= "#{budget_product.quantity} folh" %>
-										<% else %>
-											<%= budget_product.quantity %>
-										<% end %>
+										<%= budget_product.quantity %>
 									</span>
 								<% else %>
 									<span style="color: red; ">
@@ -371,8 +411,6 @@
 										</span>
 									<% end %>
 								</span>
-
-
 
 								<i class="icon" style="font-size: 14px; "></i>
 							</td>

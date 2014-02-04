@@ -2,13 +2,14 @@
 								<!-- unset @price variable -->
 								<% @price = nil %> 								
 
- 								<% if product.product_type == 1 %>
+ 								<% if product.product_type == 1 || product.product_type == 3 %>
 
-									<% if(product.supplier_price && product.ipi && product.markup && budget_product.quantity && budget_product.freight) %>
+									<% if(product.supplier_price && product.ipi && product.markup && product.supplier_table_discount && budget_product.quantity && budget_product.freight) %>
 									
 										<% @price = compute_price_product_type_1(product.supplier_price,
 																													  product.ipi,
 																													  product.markup,
+																													  product.supplier_table_discount,
 																													  budget_product.quantity,
 																													  budget_product.freight) %>
 
@@ -29,7 +30,7 @@
 
 									<% end %>
 
-								<% elsif product.product_type == 3 %>
+								<%# elsif product.product_type == 3 %>
 
 									
 

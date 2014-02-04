@@ -58,6 +58,7 @@ class Budget < ActiveRecord::Base
 
   def budget_is_valid?
     
+    #for the given budget validates product by product
     self.budgets_products.each do |bp|
       if bp.house_area.blank?
         errors.add(:house_area, "")
@@ -70,9 +71,11 @@ class Budget < ActiveRecord::Base
       if bp.freight.nil?
         errors.add(:freight, "")
       end
+    end
 
-
-
+    #has at least one product
+    if self.budgets_products.count == 0
+			self.errors.add(:errors ,"")
     end
 
   end

@@ -96,11 +96,12 @@ products += @budget.budgets_products.map do |budget_product|
 
  	if product.product_type == 1
 
-		if(product.supplier_price && product.ipi && product.markup && budget_product.quantity && budget_product.freight)
+		if(product.supplier_price && product.ipi && product.markup && product.supplier_table_discount && budget_product.quantity && budget_product.freight)
 		
 			@price = compute_price_product_type_1(product.supplier_price,
 																					  product.ipi,
 																					  product.markup,
+																					  product.supplier_table_discount,
 																					  budget_product.quantity,
 																					  budget_product.freight)
 		end

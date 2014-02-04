@@ -1,9 +1,9 @@
 module BudgetsHelper
 
 
-	def compute_price_product_type_1 (supplier_price, ipi, markup, quantity, freight)
+	def compute_price_product_type_1 (supplier_price, ipi, markup, supplier_table_discount, quantity, freight)
 			
-		price_per_unit = (supplier_price + (supplier_price * (ipi/100))) * markup
+		price_per_unit = ((supplier_price - (supplier_price * (supplier_table_discount/100))) + (supplier_price * (ipi/100))) * markup
 		price = price_per_unit * quantity
 		
 
@@ -28,7 +28,19 @@ module BudgetsHelper
 	end
 
 
+	def compute_price_product_type_3 (supplier_price, ipi, markup, quantity, freight, width, height)
 
+
+		size_square_meters = (width * height)
+
+		price_per_square_meter = size_square_meters * supplier_price
+
+		price_per_unit = (price_per_square_meter + (price_per_square_meter * (ipi/100))) * markup
+
+		price_plus_freight = price_per_unit + freight
+
+		return price_plus_freight
+	end
 
 
 
