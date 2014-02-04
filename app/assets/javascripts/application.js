@@ -22,13 +22,14 @@
 function sets_filter_div_height() {
 	//when the table with the form with check boxes is longer than body executes the following
 	header_height = $('header').height();
-	body_height = $('body').height();
+	body_height = $(document).height();
 	footer_height = $('footer').height();
 
 	// -1 for the border, otherwise the scrollbar would always be there
-	computed_height = body_height - header_height + footer_height - 1
+	computed_height = body_height - header_height - footer_height
 
 	$('#vertical_menu').css("height", computed_height);
+
 }
 
 
@@ -38,10 +39,7 @@ $(function() {
 
   $('#vertical_menu li a').tooltip({placement: 'right'});
 
-
-
 	sets_filter_div_height();
-
 
 });
 

@@ -16,7 +16,7 @@ end
 
 pdf.move_down 20
 
-architech_name = User.find(@budget.architect_id).name
+architech_name = User.find(@budget.architect_id).name + ' ' + User.find(@budget.architect_id).surname
 
 
 pdf.float do
@@ -57,10 +57,11 @@ totals_quantity = 0
 totals_price = 0
 
 ###PRODUCTS TABLE###
-products = [["código",
+products = [[
+						"tipo",
+						"código",
 						"fornecedor",
 						"descrição",
-						"tipo",
 						"ambiente",
 						"entrega",
 						"larg",
@@ -91,68 +92,36 @@ products += @budget.budgets_products.map do |budget_product|
 	end
 
 
-	#compute price
-	@price = nil
-
- 	if product.product_type == 1
-
-		if(product.supplier_price && product.ipi && product.markup && product.supplier_table_discount && budget_product.quantity && budget_product.freight)
-		
-			@price = compute_price_product_type_1(product.supplier_price,
-																					  product.ipi,
-																					  product.markup,
-																					  product.supplier_table_discount,
-																					  budget_product.quantity,
-																					  budget_product.freight)
-		end
-
-		elsif product.product_type == 2
-
-
-			if(product.supplier_price && product.ipi && product.markup && budget_product.quantity && budget_product.freight && budget_product.width && budget_product.height)
-									
-				@price = compute_price_product_type_2(product.supplier_price,
-																						  product.ipi,
-																						  product.markup,
-																						  budget_product.quantity,
-																						  budget_product.freight,
-																						  budget_product.width,
-																						  budget_product.height)
-
-			end
-
-		elsif product.product_type == 3
-
-		end
 
 
 		#compute totals_quantity
 		totals_quantity = totals_quantity + budget_product.quantity
 
 		#compute totals_price
-		totals_price = totals_price + @price
+		totals_price = totals_price + budget_product.computed_price
 
 	
 	[
+		(t :"activerecord.attributes.product.product_type#{product.product_type}"),
 		product.code,
 		product.supplier.name,
 		product.description,
-		(t :"activerecord.attributes.product.product_type_full_#{product.product_type}"),
 		budget_product.house_area,
 		"#{budget_product.days_to_delivery} dia(s)",
 		product_width,
 		product_height,		
 		budget_product.quantity,
-		number_to_currency(@price)
+		number_to_currency(budget_product.computed_price)
 	]
 end
 
 
 
 pdf.table(products, width: 770,
-				  column_widths: {0 => 50,
-							  				  1 => 100,
-							  				  3 => 70,
+				  column_widths: {0 => 30,
+				  								1 => 80,
+							  				  2 => 100,
+							  				  4 => 70,
 							  				  5 => 50,
 							  				  6 => 50,
 							  				  7 => 60,

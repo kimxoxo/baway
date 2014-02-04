@@ -136,6 +136,42 @@ class BudgetsController < ApplicationController
     @budget.save
 
 
+
+ 		if (@product.product_type == 1 || @product.product_type == 3)
+
+			if (@product.supplier_price && @product.ipi && @product.markup && @product.supplier_table_discount && @budgets_product.quantity && @budgets_product.freight)
+									
+			@budgets_product.computed_price = view_context.compute_price_product_type_1(@product.supplier_price,
+																				@product.ipi,
+																				@product.markup,
+																				@product.supplier_table_discount,
+																				@budgets_product.quantity,
+																				@budgets_product.freight)
+
+			end
+
+		elsif @product.product_type == 2
+
+			if(@product.supplier_price && @product.ipi && @product.markup && @budgets_product.quantity && @budgets_product.freight && @budgets_product.width && @budgets_product.height)
+									
+				@budgets_product.computed_price = view_context.compute_price_product_type_2(@product.supplier_price,
+																					@product.ipi,
+																					@product.markup,
+																					@budgets_product.quantity,
+																					@budgets_product.freight,
+																					@budgets_product.width,
+																					@budgets_product.height)
+
+				end
+
+		elsif @product.product_type == 3
+
+		end
+
+
+
+
+
     @budgets_product.update_attributes(params[:budgets_product])
 
     respond_to do |format|
@@ -194,7 +230,7 @@ class BudgetsController < ApplicationController
 
     @budget = Budget.new(params[:budget])
     @budget.status = 1
-
+    @budget.discount = 0
 
     respond_to do |format|
       if @budget.save

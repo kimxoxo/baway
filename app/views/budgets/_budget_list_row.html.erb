@@ -58,8 +58,8 @@
 										<%= budget_product.product_observations %>
 									</span>
 								<% else %>
-									<span style="color: red; ">
-										<%= t :"activerecord.attributes.product.please_fill" %>
+									<span style="">
+										<%= '...' %>
 									</span>
 								<% end %>
 
@@ -128,9 +128,9 @@
 
 
 							<% if budget_product.freight %>
-								<% freight_input_value = budget_product.freight %>
+								<% freight_input_value = number_to_currency(budget_product.freight).gsub(/[^0-9,.]/, '') %>
 							<% else %>
-								<% freight_input_value = 0 %>
+								<% freight_input_value = nil %>
 							<% end %>
 
 
@@ -151,7 +151,7 @@
 		                          			as: :string,
 		                          			class: 'product_freight_input',
 		                       					onblur: '$(this).closest("form").submit(); ',
-		                       					value: number_to_currency(freight_input_value).gsub(/[^0-9,.]/, ''),
+		                       					value: freight_input_value,
 		                          			style: 'float: left;
 		                          							width: 58px;
 		                          							margin:0;
@@ -159,7 +159,7 @@
 		            <% end %>
 
 
-								<% if budget_product.freight %>
+								<% if !budget_product.freight.nil? %>
 									<span>
 										<%= number_to_currency(budget_product.freight) %>
 									</span>
@@ -396,15 +396,15 @@
 							</td>
 
 
-							<%= render partial: 'compute_price',
+							<%#= render partial: 'compute_price',
 												 locals: {product: product,
 											 	   			  budget_product: budget_product} %>
 
 
 							<td class="td_price">
 								<span>
-									<% if @price %>
-										<%= number_to_currency(@price) %>
+									<% if budget_product.computed_price %>
+										<%= number_to_currency(budget_product.computed_price) %>
 									<% else %>
 										<span style="color: red; ">
 											<%= t :"activerecord.attributes.product.please_fill" %>
