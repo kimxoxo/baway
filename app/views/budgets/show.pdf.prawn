@@ -21,7 +21,7 @@ architech_name = User.find(@budget.architect_id).name + ' ' + User.find(@budget.
 
 pdf.float do
 	#pdf.text "Cliente", style: :bold, align: :left, inline_format: true
-	pdf.move_down 10
+	pdf.move_down 15
 	pdf.text "Cliente: #{@budget.customer.name}", style: :normal, align: :left
 	pdf.text "#{@budget.customer.street}, #{@budget.customer.street_number}", style: :normal, align: :left
 	pdf.text "#{@budget.customer.city}, #{@budget.customer.postal_code} #{@budget.customer.neighbourhood}", style: :normal, align: :left
@@ -37,7 +37,7 @@ seller_name = User.find(@budget.seller_id).name
 
 pdf.float do
 	#pdf.text "Cuiabá, #{@budget.updated_at.strftime('%d/%m/%Y')}", style: :normal, align: :right, inline_format: true
-	pdf.move_down 10
+	pdf.move_down 15
 	#pdf.text "Emporio do Arquiteto", style: :normal, align: :right, inline_format: true
 	pdf.text "Avenida Senador Filinto Müller, 920", style: :normal, align: :right, inline_format: true
 	pdf.text "Cuiabá, MT, 78043-400, Goiabeiras", style: :normal, align: :right, inline_format: true
@@ -50,11 +50,13 @@ end
 
 
 
-pdf.move_down 70
+pdf.move_down 80
 
 
 totals_quantity = 0
 totals_price = 0
+
+
 
 ###PRODUCTS TABLE###
 products = [[
@@ -195,6 +197,191 @@ end
 
 
 
+pdf.float do
+
+
+	###PRODUCTS TOTALS TABLE###	
+	products_totals = [[
+											"quantidade itens",
+											totals_quantity
+										]]
+
+
+	products_totals += [[
+											"sub-total",
+											number_to_currency(totals_price)
+										]]
+
+
+	if @budget.discount > 0
+
+		###PRODUCTS TOTALS TABLE###	
+		products_totals += [[
+												"desconto",
+												number_to_currency(@budget.discount)
+											]]
+
+		
+
+
+
+		###PRODUCTS TOTALS TABLE###	
+		budget_total = 0
+
+		budget_total = totals_price - @budget.discount
+
+
+		products_totals += [[
+												"total",
+												number_to_currency(budget_total)
+											]]
+
+	end
+
+
+
+
+	pdf.table(products_totals,
+						width: 300,
+					  column_widths:  {1 => 80},
+			 		  header: false, position: :right) do |products_totals_cell|
+
+		#products_totals_cell.row(0).font_style = :bold
+		products_totals_cell.row(3).font_style = :bold
+
+		products_totals_cell.column(0).align = :right
+
+		products_totals_cell.row(0).border_width = 0
+		products_totals_cell.row(1).border_width = 0
+		products_totals_cell.row(2).border_width = 0
+		products_totals_cell.row(3).border_width = 0
+	end
+end
+
+
+
+
+
+
+pdf.move_down 90
+
+
+
+
+
+
+pdf.float do
+
+	#set freight
+	if @budget.freight
+		budget_freight = "sim"
+	else
+		budget_freight = ""
+	end
+
+
+	#set instalation
+	if @budget.instalation
+		budget_instalation = "não"
+	else
+		budget_instalation = ""
+	end
+
+
+	###PRODUCTS TOTALS TABLE###	
+	users = [[
+						"Condições de instalação:",
+						"frete",
+						"instalação"
+						]]
+
+
+	users += [[
+						"Fica o cliente que para as devidas instalações dos produtos acima deverá tomar as seguintes providências:",
+						budget_freight,
+						budget_instalation
+						]]
+
+
+
+	users += [[
+						"- #{@budget.instalation_observations}",
+						"",
+						""
+						]]
+
+
+	users += [[
+						"assinatura:",
+						"",
+						""
+						]]
+
+
+
+	users += [[
+						"recibo: recebi a importância de R$                       , referente a aquisição dos produtos acima, conforme condição acordada em cima.",
+						"",
+						""
+						]]
+
+
+
+
+
+
+	# users += [[
+	# 					"entrada",
+	# 					"R$ 100,00"
+	# 					]]
+
+	# users += [[
+	# 					"opções pag",
+	# 					"R$ 100,00"
+	# 					]]
+
+
+
+	# users += [[
+	# 					"opções pag",
+	# 					"R$ 100,00"
+	# 					]]
+
+
+	pdf.table(users,
+						width: 380,
+					  column_widths: {
+					  								1 => 40,
+					  								2 => 60
+					  								},
+			 		  header: false, position: :left) do |users_cell|
+
+		users_cell.row(0).border_width = 0
+		users_cell.row(1).border_width = 0
+		users_cell.row(2).border_width = 0
+		users_cell.row(3).border_width = 0
+
+
+		users_cell.row(0).padding_top = 0
+		users_cell.row(0).padding_bottom = 0
+
+
+		users_cell.row(1).padding_top = 0
+		users_cell.row(1).padding_bottom = 0
+
+
+		users_cell.row(2).padding_top = 7
+
+		users_cell.row(0).font_style = :bold
+
+	end
+end
+
+
+
+
+
+
 
 pdf.float do
 
@@ -259,6 +446,14 @@ end
 
 
 
+
+
+
+
+
+
+
+
 pdf.move_down 90
 
 
@@ -303,9 +498,10 @@ end
 
 
 ###FOOTER###
-pdf.float do
+pdf.bounding_box([0,0], :width =>780) do
 
-	number_pages "gestão de orçamentos inteligente", { :start_count_at => 0, :page_filter => :all, :at => [bounds.left + 55, 1], :align => :left, :size => 8 }
+
+	number_pages "gestão de orçamentos inteligente", { :start_count_at => 0, :page_filter => :all, :at => [bounds.left + 45, 0], :align => :left, :size => 8 }
 	number_pages "página <page> de <total>", { :start_count_at => 0, :page_filter => :all, :at => [bounds.right - 50, 0], :align => :right, :size => 8 }
 end
 ###END FOOTER###
