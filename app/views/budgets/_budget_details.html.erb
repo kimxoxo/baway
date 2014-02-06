@@ -19,7 +19,7 @@
 
 
 
-    <div style="padding: 5px; margin: 0; margin-bottom: 5px; display: none; " id="div_budget_more_details_edit" class="well no_borders_shadow">
+    <div style="padding: 5px; margin: 0; margin-bottom: 5px; display: none_; " id="div_budget_more_details_edit" class="well no_borders_shadow">
 
    	    <%= simple_form_for @budget, html: {class: 'form-inline', style: 'margin: 0; padding: 0; '} do |f| %>
 	        <table style="padding: 0; margin: 0; border: 0px solid red; width: 100%; ">
@@ -49,18 +49,38 @@
 
 
 
+				<% if @budget.initial_payment %>
+					<% budget_initial_payment = number_to_currency(@budget.initial_payment).gsub(/[^0-9,.]/, '') %>
+				<% else %>
+					<% budget_initial_payment = nil %>
+				<% end %>
+
+
 
 					<table style="width: 100%; margin-top: 5px; ">
 						<tr>
-							<td width="140px" style="border: 0px solid red; ">
-								<%= t :"activerecord.attributes.budget.payment_condition" %>
+							<td width="340px" style="border: 0px solid red; ">
+								<b><%= t :"activerecord.attributes.budget.payment_condition" %></b>
+							
+								<%= f.input :initial_payment,
+														input_html: { value: budget_initial_payment, style: 'margin-left: 5px; width: 70px; '},
+														label_html: {style: 'margin-left: 20px; '},
+	              						wrapper: :basic %>
+
 							</td>
 
-							<% @budget.payment_conditions.each do |payment_condition| %>
+
+							
+
+
+
+							<% @budget_payment_conditions = @budget.payment_conditions.sort_by(&:id) %>
+
+							<% @budget_payment_conditions.each do |payment_condition| %>
 		      			<%= f.simple_fields_for "payment_condition[]", payment_condition do |p| %>
 
 
-		      				<% @price_per_month = @price_total / payment_condition.num_monthly_payments if payment_condition.num_monthly_payments %>
+		      				<% @price_per_month = (@price_total - @budget.initial_payment) / payment_condition.num_monthly_payments if payment_condition.num_monthly_payments %>
 
 		      				<% if payment_condition.num_monthly_payments %>
 										<% label1 = "#{payment_condition.num_monthly_payments}x #{number_to_currency(@price_per_month)}" %>

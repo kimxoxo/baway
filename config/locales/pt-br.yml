@@ -299,6 +299,7 @@ pt-BR:
         instalation: instalação
         instalation_observations: cond. instalação
         payment_condition: cond. pagamento
+        initial_payment: entrada (R$)
       supplier:
         name: nome
         street: rua

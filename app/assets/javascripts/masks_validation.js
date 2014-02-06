@@ -317,6 +317,8 @@ $(document).ready(function($) {
 
 
 	$(".product_freight_input").mask("0.000,00", {reverse: true});
+	$("#budget_initial_payment").mask("0.000.000,00", {reverse: true});
+
 
 
   $("#supplier_cnpj").mask("99.999.999/9999-99", {reverse: true});

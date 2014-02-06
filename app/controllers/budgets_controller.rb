@@ -131,6 +131,7 @@ class BudgetsController < ApplicationController
 		end
 
 
+
     #budget details changed so status must be always = 1
     @budget.status = 1
     @budget.save
@@ -231,6 +232,8 @@ class BudgetsController < ApplicationController
     @budget = Budget.new(params[:budget])
     @budget.status = 1
     @budget.discount = 0
+    @budget.initial_payment = 0
+
 
     respond_to do |format|
       if @budget.save
@@ -270,9 +273,19 @@ class BudgetsController < ApplicationController
     @products_search_list = []
     @budgets_products = @budget.budgets_products
 
+
+    @suppliers = Supplier.all
+
+
     if params[:budget][:payment_condition]
 			PaymentCondition.update(params[:budget][:payment_condition].keys, params[:budget][:payment_condition].values)
 		end
+
+
+    if !params[:budget][:initial_payment].blank?
+			params[:budget][:initial_payment] = view_context.currency_to_number(params[:budget][:initial_payment])
+		end
+
 
     respond_to do |format|
       if @budget.update_attributes(params[:budget])

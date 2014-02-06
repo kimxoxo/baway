@@ -65,6 +65,7 @@ products = [[
 						"fornecedor",
 						"descrição",
 						"ambiente",
+						"frete",
 						"entrega",
 						"larg",
 						"alt",
@@ -109,6 +110,7 @@ products += @budget.budgets_products.map do |budget_product|
 		product.supplier.name,
 		product.description,
 		budget_product.house_area,
+		number_to_currency(budget_product.freight),
 		"#{budget_product.days_to_delivery} dia(s)",
 		product_width,
 		product_height,		
@@ -124,17 +126,18 @@ pdf.table(products, width: 770,
 				  								1 => 80,
 							  				  2 => 100,
 							  				  4 => 70,
-							  				  5 => 50,
+							  				  5 => 65,
 							  				  6 => 50,
-							  				  7 => 60,
-							  				  8 => 30,
-							  				  9 => 80},
+							  				  7 => 50,
+							  				  8 => 40,
+							  				  9 => 30,
+							  				  10 => 80},
 		 		  header: true) do |product|
 
 	#product.row(0).font_style = :bold
 	#ticket.row(0).column(0).align = :right
 
-	product.column(0..9).border_width = 0
+	product.column(0..10).border_width = 0
 	product.row(0).style(:background_color => "F4F3F3")
 end
 
@@ -262,8 +265,51 @@ end
 
 
 
-
 pdf.move_down 90
+
+
+pdf.float do
+
+
+	@budget_payment_conditions = @budget.payment_conditions.sort_by(&:id)
+
+
+
+	###PAYMENT CONDITIONS TABLE###
+	payment_conditions = [ ["condições de pagamento"] ]
+	payment_conditions += [ ["entrada: #{number_to_currency(@budget.initial_payment)}"] ]
+
+
+	@budget_payment_conditions.each do |pc|
+
+		if pc.active
+
+			payment_conditions += [["#{pc.num_monthly_payments}  x  #{number_to_currency((totals_price - @budget.initial_payment)/pc.num_monthly_payments)}"]]
+
+		end
+	end
+
+
+	pdf.table(payment_conditions,
+						width: 200,
+			 		  header: true, position: :left) do |payment_conditions_cell|
+
+		payment_conditions_cell.row(0).font_style = :bold
+		payment_conditions_cell.column(0).border_width = 0
+
+
+	end
+end
+
+
+
+
+
+
+
+
+
+pdf.move_down 190
 
 
 
@@ -409,46 +455,7 @@ end
 
 
 
-
-
-
-
-
-
 pdf.move_down 90
-
-
-
-# pdf.float do
-
-
-
-# 		###PAYMENT CONDITIONS TABLE###
-# 		payment_conditions = [["condições de pagamento",
-# 													 ""]]
-
-# 		payment_conditions += @budget.payment_conditions.map do |payment_condition|
-
-# 			[
-# 			"condições de pagamento",
-# 			payment_condition.id
-# 			]
-# 		end
-
-
-# 		pdf.table(payment_conditions,
-# 							width: 200,
-# 						  row_colors: ["FFFFFF","F4F3F3"],
-# 						  column_widths:  {},
-# 				 		  header: true, position: :left) do |payment_conditions_cell|
-
-# 			payment_conditions_cell.row(0).font_style = :bold
-# 			payment_conditions_cell.column(0).align = :right
-
-# 			payment_conditions_cell.row(0).border_width = 0
-# 		end
-# 	end
-
 
 
 
