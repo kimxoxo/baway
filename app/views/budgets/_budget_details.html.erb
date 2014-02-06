@@ -58,6 +58,39 @@
 
 
 					<table style="width: 100%; margin-top: 5px; ">
+
+
+						<tr>
+							<td style="border: 0px solid red; " colspan="5">
+								<%= f.input :observations,
+														wrapper: :basic,
+														label_html: { style: 'width: 80px;
+	              																	padding-right: 10px;
+	              																	text-align: left; '},
+	              						input_html: { rows: 1,
+	              													style: 'width: 875px; ' } %>
+							</td>
+
+
+
+	            <td width="80px" style="border: 0px solid red; ">
+	              <button style="float: right; " class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
+	                <b>confirmar</b>
+	                <i id="icon-loading-confirm-customer" class=""></i>
+	              </button>
+	            </td>
+						</tr>
+
+
+
+
+
+
+
+
+
+
+
 						<tr>
 							<td width="340px" style="border: 0px solid red; ">
 								<b><%= t :"activerecord.attributes.budget.payment_condition" %></b>
@@ -71,6 +104,12 @@
 
 
 							
+							<!-- format initial_payment -->
+							<% if @budget.initial_payment %>
+								<% budget_initial_payment = @budget.initial_payment %>
+							<% else %>
+								<% budget_initial_payment = 0 %>
+							<% end %>
 
 
 
@@ -80,7 +119,7 @@
 		      			<%= f.simple_fields_for "payment_condition[]", payment_condition do |p| %>
 
 
-		      				<% @price_per_month = (@price_total - @budget.initial_payment) / payment_condition.num_monthly_payments if payment_condition.num_monthly_payments %>
+		      				<% @price_per_month = (@price_total - budget_initial_payment) / payment_condition.num_monthly_payments if payment_condition.num_monthly_payments %>
 
 		      				<% if payment_condition.num_monthly_payments %>
 										<% label1 = "#{payment_condition.num_monthly_payments}x #{number_to_currency(@price_per_month)}" %>
@@ -95,12 +134,22 @@
 																wrapper: :basic,
 																label: label1 %>
 
-										<% if !payment_condition.num_monthly_payments %>
-											<%= p.input :num_monthly_payments,
-																	wrapper: :basic,
-																	input_html: { style: 'width: 10px; ' },
-																	label: false %>
-										<% end %>
+											<% if !payment_condition.num_monthly_payments %>
+												<% display_input = "" %>
+											<% else %>
+												<% display_input = "display: none; " %>
+											<% end %>
+
+
+
+											<% if !payment_condition.num_monthly_payments || payment_condition.num_monthly_payments > 4 %>
+
+												<%= p.input :num_monthly_payments,
+																		wrapper: :basic,
+																		input_html: { style: "width: 15px; #{display_input} ", id: "custom_monthly_payment_option" },
+																		label: false %>
+											<% end %>
+
 
 										<% if !payment_condition.num_monthly_payments %>
 											<span>
@@ -108,30 +157,25 @@
 											</span>
 										<% end %>
 
-										<a href="#">
-											<i class="icon icon-pencil icon-white" onclick="enable_payment_condition_input(); "></i>
-										</a>
+
+										<% if !payment_condition.num_monthly_payments || payment_condition.num_monthly_payments > 4 %>
+											<a href="#">
+												<i class="icon icon-pencil icon-white" onclick="enable_payment_condition_input(); "></i>
+											</a>
+										<% end %>
 									</td>
 
 								<% end %>
 							<% end %>
 
 
-							<td>
+							<td width="80px" style="border: 0px solid red; ">
 								<%#= p.input %>
 								<%#= @payment_condition1.num_monthly_payments %>
 								<%#= @payment_condition2.num_monthly_payments %>
 								<%#= @payment_condition3.num_monthly_payments %>
 								<%#= @payment_condition4.num_monthly_payments %>
 							</td>
-
-
-	            <td>
-	              <button style="float: right; " class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
-	                <b>confirmar</b>
-	                <i id="icon-loading-confirm-customer" class=""></i>
-	              </button>
-	            </td>
 						</tr>
 					</table>
 					

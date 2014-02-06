@@ -50,6 +50,10 @@ end
 
 
 
+
+
+
+
 pdf.move_down 80
 
 
@@ -146,7 +150,7 @@ end
 
 
 
-pdf.move_down 10
+pdf.move_down 40
 
 
 
@@ -165,24 +169,6 @@ pdf.float do
 						]]
 
 
-	# users += [[
-	# 					"entrada",
-	# 					"R$ 100,00"
-	# 					]]
-
-	# users += [[
-	# 					"opções pag",
-	# 					"R$ 100,00"
-	# 					]]
-
-
-
-	# users += [[
-	# 					"opções pag",
-	# 					"R$ 100,00"
-	# 					]]
-
-
 	pdf.table(users,
 						width: 300,
 					  column_widths:  {0 => 70},
@@ -196,6 +182,11 @@ pdf.float do
 		users_cell.column(0).font_style = :bold
 	end
 end
+
+
+
+
+
 
 
 
@@ -265,7 +256,55 @@ end
 
 
 
-pdf.move_down 90
+
+
+
+
+pdf.move_down 50
+
+
+
+pdf.float do
+
+
+	#set freight
+	if @budget.freight
+		budget_freight = "sim"
+	else
+		budget_freight = "não"
+	end
+
+
+	#set instalation
+	if @budget.instalation
+		budget_instalation = "sim"
+	else
+		budget_instalation = "não"
+	end
+
+
+
+	###budget_details TABLE###
+	budget_details = [ ["frete", budget_freight] ]
+	budget_details += [ ["instalação", budget_instalation] ]
+
+
+	pdf.table(budget_details,
+						width: 100,
+			 		  header: true, position: :left) do |budget_details_cell|
+
+		budget_details_cell.column(0).font_style = :bold
+		budget_details_cell.column(0..1).border_width = 0
+	end
+end
+
+
+
+
+pdf.move_down 50
+
+
+
 
 
 pdf.float do
@@ -277,7 +316,9 @@ pdf.float do
 
 	###PAYMENT CONDITIONS TABLE###
 	payment_conditions = [ ["condições de pagamento"] ]
-	payment_conditions += [ ["entrada: #{number_to_currency(@budget.initial_payment)}"] ]
+	payment_conditions += [ [
+													"entrada: #{number_to_currency(@budget.initial_payment)}"
+													] ]
 
 
 	@budget_payment_conditions.each do |pc|
@@ -291,11 +332,16 @@ pdf.float do
 
 
 	pdf.table(payment_conditions,
-						width: 200,
+						width: 130,
 			 		  header: true, position: :left) do |payment_conditions_cell|
 
 		payment_conditions_cell.row(0).font_style = :bold
-		payment_conditions_cell.column(0).border_width = 0
+		payment_conditions_cell.row(0).padding_top = 8
+		payment_conditions_cell.row(0).padding_bottom = 8
+
+
+		payment_conditions_cell.column(0).border_width = 1
+		payment_conditions_cell.column(0).border_right_width = 0
 
 
 	end
@@ -309,29 +355,11 @@ end
 
 
 
-pdf.move_down 190
-
-
 
 
 
 
 pdf.float do
-
-	#set freight
-	if @budget.freight
-		budget_freight = "sim"
-	else
-		budget_freight = ""
-	end
-
-
-	#set instalation
-	if @budget.instalation
-		budget_instalation = "não"
-	else
-		budget_instalation = ""
-	end
 
 
 	#set budget observations
@@ -409,12 +437,12 @@ pdf.float do
 
 
 	pdf.table(users,
-						width: 780,
+						width: 640,
 					  column_widths: {
-					  								1 => 200,
-					  								2 => 200
+					  								1 => 100,
+					  								2 => 100
 					  								},
-			 		  header: false, position: :left) do |users_cell|
+			 		  header: false, position: :right) do |users_cell|
 
 		users_cell.row(0).border_width = 0
 		users_cell.row(1).border_width = 0
@@ -444,13 +472,14 @@ pdf.float do
 		users_cell.row(5).border_bottom_width = 1
 		users_cell.column(0).border_left_width = 1
 		users_cell.column(0).border_right_width = 1
-		users_cell.column(1).border_right_width = 1
+		users_cell.column(1).border_right_width = 0
 		users_cell.column(2).border_right_width = 1
 		users_cell.column(0).row(3).border_bottom_width = 1
 
 
 	end
 end
+
 
 
 

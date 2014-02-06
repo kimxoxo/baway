@@ -5,9 +5,11 @@
 
 function enable_payment_condition_input() {
 
-		h = $(this).parent('a').parent('td').find('span').attr('class');
 
-alert(h);
+	$('#custom_monthly_payment_option').show();
+
+
+
 }
 
 
