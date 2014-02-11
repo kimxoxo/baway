@@ -52,13 +52,17 @@ class Budget < ActiveRecord::Base
 
 
 
-  validate :budget_is_valid?, :if => Proc.new { |b| b.status == 2 }
+  validate :budget_is_valid_status1to2
+
+  validate :budget_is_valid_status2to3
 
 
 
-  def budget_is_valid?
+  def budget_is_valid_status1to2
     
-    #for the given budget validates product by product
+
+if self.status == 2
+
     self.budgets_products.each do |bp|
       if bp.house_area.blank?
         errors.add(:house_area, "")
@@ -71,14 +75,78 @@ class Budget < ActiveRecord::Base
       if bp.freight.nil?
         errors.add(:freight, "")
       end
+
+      if bp.days_to_delivery.nil?
+        errors.add(:days_to_delivery, "")
+      end
+
     end
 
-    #has at least one product
-    if self.budgets_products.count == 0
-			self.errors.add(:errors ,"")
-    end
+	  #has at least one product
+	  if self.budgets_products.count == 0
+	   	self.errors.add(:id, "")
+	  end
+
+end
+
 
   end
+
+
+
+
+
+
+  def budget_is_valid_status2to3
+
+if self.status == 3
+
+
+    #has at least one payment condition
+    if self.payment_conditions.find_all_by_active(true).count == 0
+    	self.errors.add(:id, "")
+    end
+
+    #validates customer
+    if self.customer.name.blank?
+    	self.errors.add(:id, "")
+    end
+
+    if self.customer.tax_number.blank?
+    	self.errors.add(:id, "")
+    end
+
+    if self.customer.street_number.blank?
+    	self.errors.add(:id, "")
+    end
+
+    if self.customer.postal_code.blank?
+    	self.errors.add(:id, "")
+    end
+
+    if self.customer.city.blank?
+    	self.errors.add(:id, "")
+    end
+
+    if self.customer.city.blank?
+    	self.errors.add(:id, "")
+    end
+
+    if self.customer.mobile.blank?
+    	self.errors.add(:id, "")
+    end
+
+    if self.customer.neighbourhood.blank?
+    	self.errors.add(:id, "")
+    end
+
+end
+
+  end
+
+
+
+
 
 
 

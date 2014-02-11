@@ -28,12 +28,22 @@ class Customer < ActiveRecord::Base
   has_many :budgets
 
 
-	validates :name, :street, :street_number, :postal_code, :city, :mobile, :tax_number, :neighbourhood,
+	validates :name, :mobile, :email,
     	presence: true
 
 
-  validates_length_of :tax_number, is: 14, :if => Proc.new { |c| c.tax_number_type == 1 }
-  validates_length_of :tax_number, is: 18, :if => Proc.new { |c| c.tax_number_type == 2 }
+
+	#validates_presence_of :name, :street, :street_number, :postal_code, :city, :mobile, :tax_number, :neighbourhood,
+    	 #:if => Proc.new { |c| !Budget.find_by_customer_id(c.id).nil? &&  Budget.find_by_customer_id(c.id).status == 2 }
+
+
+
+  #validates_length_of :tax_number, is: 14, :if => Proc.new { |c| c.tax_number_type == 1 }
+  #validates_length_of :tax_number, is: 18, :if => Proc.new { |c| c.tax_number_type == 2 }
+
+
+
+
 
 
 end

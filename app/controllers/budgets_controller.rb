@@ -92,7 +92,7 @@ class BudgetsController < ApplicationController
     else
     	#budget details changed so status must be always = 1
     	@budget.status = 1
-    	@budget.save
+    	@budget.save!
 
 	    @product.budgets << @budget
 
@@ -279,6 +279,8 @@ class BudgetsController < ApplicationController
 
     if params[:budget][:payment_condition]
 			PaymentCondition.update(params[:budget][:payment_condition].keys, params[:budget][:payment_condition].values)
+			@budget.status = 1
+			@budget.save
 		end
 
 
