@@ -1,6 +1,37 @@
 						<% product = Product.find(budget_product.product_id) %>
 
 						<tr id='<%= "product_id_#{budget_product.id}" %>'>
+							<td class="td_checkbox">
+		            <%= simple_form_for budget_product,
+		            										url: update_product_attributes_budgets_path,
+							            					method: :get,
+							            					remote: true,
+							            					html: {class: 'form-inline',
+										            					 style: 'margin: 0;
+										            									 padding: 0;
+										            									 height: 15px;
+										            									 border: 0px solid red; ',
+																					 id: "form_product_active_#{budget_product.id}"} do |f| %>
+
+		              <%= f.hidden_field :id, value: budget_product.id %>
+
+
+		              <% if @budget.status == 1 %>
+		              	<% disable_checkbox = true %>
+		              <% else %>
+		              	<% disable_checkbox = false %>
+		              <% end %>
+
+
+		              <%= f.input_field :active,
+		                          			onclick: '$(this).closest("form").submit(); ',
+		                          			disabled: disable_checkbox,
+					                          style: 'padding: 0;			 
+					                                  margin: 0; ' %>          
+		            <% end %>
+							</td>
+
+
 							<td class="td_code">
 								<%= product.code %>
 							</td>

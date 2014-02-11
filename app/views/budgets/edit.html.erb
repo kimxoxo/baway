@@ -63,42 +63,51 @@
 		<div id="budgets_products_list" class="well no_borders_shadow">
 			<table id="table_budgets_products_list">
 				<tr>
+					<th class="td_checkbox">
+						<form style="margin: 0; padding: 0; ">
+							<input type="checkbox">
+						</form>
+					</th>
+
+
 					<th class="td_code">
 						<%= t :"activerecord.attributes.product.code" %>
 					</th>
+
 
 					<th class="td_product_type">
 						<%= t :"activerecord.attributes.product.product_type" %>
 					</th>
 
+
 					<th class="td_supplier">
 						<%= t :"activerecord.attributes.product.supplier_id" %>
 					</th>
+
 
 					<th class="td_description">
 						<%= t :"activerecord.attributes.product.description" %>
 					</th>
 
 
-
 					<th class="td_pencil_product_observations">
 						<i class="icon icon-pencil icon-white"></i>
 					</th>
+
 
 					<th class="td_product_observations">
 						<%= t :"activerecord.attributes.product.product_observations" %>
 					</th>
 
 
-
 					<th class="td_pencil_house_area">
 						<i class="icon icon-pencil icon-white"></i>
 					</th>
 
+
 					<th class="td_house_area">
 						<%= t :"activerecord.attributes.product.house_area" %>
 					</th>
-
 
 
 					<th class="td_pencil_freight">
@@ -159,7 +168,7 @@
 
 
 				<tr id="flash_messages">
-					<td colspan="20" style="display: none; border: 0; padding-top: 10px; ">
+					<td colspan="21" style="display: none; border: 0; padding-top: 10px; ">
 						<div class="alert" style="text-align:center; padding: 2px; margin: 0; ">
 						</div>
 					</td>
@@ -188,12 +197,6 @@
 
 
 		<div style="margin-top: 10px; ">
-
-			<button style="float: right; " id="button_see_pdf" class="btn btn-small btn-success" name="commit" type="submit" onclick="">
-	     	<%= link_to 'ver pdf', budget_path(@budget.id, format: 'pdf'), style: 'color: #fff; ', target: '_blank' %>
-	  	</button>
-
-
 	    <%= simple_form_for @budget,
 	    										url: {controller: 'budgets', action: 'validate_budget'},
 	    										method: :get,
@@ -203,14 +206,29 @@
 	    	<%= f.hidden_field :id %>
 
 	    	<%= f.hidden_field :status,
-	    										 value: 2 %>
+	    										 value: (@budget.status + 1) %>
+
 
 				<button style="float: right; " id="button_close_budget" class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
-	      	<b>fechar orçamento</b>
+	      	<b>
+	      		<% if @budget.status == 1 %>
+	      			<%= t :"fix_budget_errors" %>
+	      		<% elsif @budget.status == 2 %>
+	      			<%= t :"save_request" %>
+	      		<% end %>
+
+	      	</b>
 	        <i id="icon-loading-confirm-customer" class=""></i>
 	      </button>
-
 		  <% end %>
+
+
+			<button style="float: right; margin-right: 10px; " id="button_see_pdf" class="btn btn-small btn-success" name="commit" type="submit" onclick="">
+	     	<%= link_to 'ver orçamento',
+	     							budget_path(@budget.id, format: 'pdf'),
+	     							style: 'color: #fff; ',
+	     							target: '_blank' %>
+	  	</button>
 		</div>
 
 
@@ -285,14 +303,14 @@
 
 	<script type="text/javascript">
 		$('#button_see_pdf').show();
-		$('#button_close_budget').hide();
+		//$('#button_close_budget').hide();
 	</script>
 
 <% else %>
 
 	<script type="text/javascript">
 		$('#button_see_pdf').hide();
-		$('#button_close_budget').show();
+		//$('#button_close_budget').show();
 	</script>
 
 <% end %>
