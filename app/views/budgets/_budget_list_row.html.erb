@@ -16,16 +16,9 @@
 		              <%= f.hidden_field :id, value: budget_product.id %>
 
 
-		              <% if @budget.status == 1 %>
-		              	<% disable_checkbox = true %>
-		              <% else %>
-		              	<% disable_checkbox = false %>
-		              <% end %>
-
-
 		              <%= f.input_field :active,
 		                          			onclick: '$(this).closest("form").submit(); ',
-		                          			disabled: disable_checkbox,
+		                          			class: 'budget_list_row_select_field',
 					                          style: 'padding: 0;			 
 					                                  margin: 0; ' %>          
 		            <% end %>

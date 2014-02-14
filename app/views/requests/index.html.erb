@@ -1,0 +1,40 @@
+<div class="left_menu">
+
+  <ul id="filter_list">
+    <li class="header">
+      header
+    </li>
+  </ul>
+
+</div>
+
+
+
+<div class="main_content_indexes">
+  <table class="table">
+    <tr>
+      <th><%= t :"activerecord.attributes.budget.id" %></th>
+      <th><%= t :"activerecord.attributes.budget.customer_id" %></th>
+      <th width="1px"></th>
+      <th><%= t :"activerecord.attributes.budget.status" %></th>
+      <th><%= t :"activerecord.attributes.budget.seller" %></th>
+      <th><%= t :"activerecord.attributes.budget.architect_id" %></th>
+      <!--<th>Payment condition</th>-->
+      <!--<th><%= t :"activerecord.attributes.budget.description" %></th>-->
+      <th>pdf</th>
+      <th><%= content_tag(:i, '', class: "icon-pencil") %></th>
+      <!--<th></th>-->
+    </tr>
+
+  <%# @budgets.each do |budget| %>
+
+  <%# end %>
+
+    <tr>
+      <td colspan="12" align="center" style="text-align: center; ">
+        <%#= will_paginate @budgets, inner_window: 1, outer_window: 0 %>
+      </td>
+    </tr>
+
+  </table>
+</div>

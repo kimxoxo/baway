@@ -16,8 +16,11 @@ $('#div_table_results').html('<%= escape_javascript(render partial: "table_resul
 
 $('#div_budget_more_details_show').show();
 
+$('#form_save_request').hide();
 
-$('#button_see_pdf').hide();
-$('#button_close_budget').show();
+$('#button_see_pdf').show();
+$('#form_close_budget').hide();
+$('#form_save_request').show();
+
 
 make_td_same_width_for_budget_tables();

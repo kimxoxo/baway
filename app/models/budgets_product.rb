@@ -14,8 +14,9 @@ class BudgetsProduct < ActiveRecord::Base
 									:product_observations, :active
 
 
-
   belongs_to :budget
   belongs_to :product
+  belongs_to :request_id
+
 
 end

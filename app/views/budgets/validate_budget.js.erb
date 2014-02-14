@@ -15,8 +15,7 @@
 	$('#flash_messages').find('td').find('div').html('<%= t :"budget_closed_successfully" %>');
 
 	$('#button_see_pdf').show();
-	$('#button_close_budget').find('b').html('<%= t :"save_request" %>');
-
-	//$('#button_close_budget').hide();
-
+	$('#form_close_budget').hide();
+	$('#form_save_request').show();
+	$('.budget_list_row_select_field').prop('disabled', false);
 <% end %>
