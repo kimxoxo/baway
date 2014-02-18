@@ -99,7 +99,7 @@ class BudgetsController < ApplicationController
 	    flash.now[:success] = (t :"flash_messages.added_product_to_budget_list_successfully")
 
 			@budget_product = @budget.budgets_products.order("id DESC").find_by_product_id(@product.id)
-			@budget_product.update_attributes(active: true)
+			#@budget_product.update_attributes(active: true)
 
 			#in case product is a carpet only width and height will be add, quantity must be 1 and not editable
 			if @product.product_type == 2
@@ -132,8 +132,10 @@ class BudgetsController < ApplicationController
 
 
     #budget details changed so status must be always = 1
-    @budget.status = 1
-    @budget.save
+    if !params[:budgets_product][:budget_status_dont_change]
+    	@budget.status = 1
+    	@budget.save
+    end
 
 
 
@@ -169,6 +171,9 @@ class BudgetsController < ApplicationController
 		end
 
 
+		#if params[:budgets_product][:active] == false
+			#params[:budgets_product][:request_id] = nil
+		#end
 
 
 

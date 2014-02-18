@@ -1,0 +1,62 @@
+
+		<% if @budget.status == 1 %>
+	    <%= simple_form_for @budget,
+	    										url: {controller: 'budgets', action: 'validate_budget'},
+	    										method: :get,
+	    										remote: true,
+	    										html: {class: 'form-inline',
+	    													 style: 'margin: 0; padding: 0; ',
+	    													 id: 'form_close_budget'} do |f| %>
+
+	    	<%= f.hidden_field :id %>
+
+	    	<%= f.hidden_field :status,
+	    										 value: (@budget.status + 1) %>
+
+
+				<button style="float: right; " id="button_close_budget" class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
+	      	<b>
+	    			<%= t :"close_budget" %>
+	      	</b>
+	        <i id="icon-loading-confirm-customer" class=""></i>
+	      </button>
+	    <% end %>
+
+	  <% elsif @budget.status == 2 %>
+	    <%= simple_form_for Request.new,
+	    										url: {controller: 'requests', action: 'create'},
+	    										method: :post,
+	    										remote: true,
+	    										html: {class: 'form-inline',
+	    											     style: 'margin: 0; padding: 0; ',
+	    											     id: 'form_save_request'} do |f| %>
+
+	    	<%= f.hidden_field :budget_id,
+	    										 value: @budget.id %>
+
+
+				<button style="float: right; " id="button_save_request" class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
+	      	<b>
+	    			<%= t :"save_request" %>	      		
+	      	</b>
+	        <i id="icon-loading-confirm-customer" class=""></i>
+	      </button>
+	    <% end %>
+
+
+			<button style="float: right; margin-right: 10px; display: none; " id="button_see_request" class="btn btn-small btn-success" name="commit" type="submit" onclick="">
+	     	<%= link_to 'ver pedido',
+	     							'',
+	     							style: 'color: #fff; ',
+	     							target: '_blank' %>
+	  	</button>
+
+
+			<button style="float: right; margin-right: 10px; " id="button_see_pdf" class="btn btn-small btn-success" name="commit" type="submit" onclick="">
+	     	<%= link_to 'ver orçamento',
+	     							budget_path(@budget.id, format: 'pdf'),
+	     							style: 'color: #fff; ',
+	     							target: '_blank' %>
+	  	</button>
+
+	  <% end %>

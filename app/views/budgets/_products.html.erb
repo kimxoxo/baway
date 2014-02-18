@@ -29,7 +29,7 @@
 
 			<td>
 				<%#= product.ipi %>
-				<%= link_to content_tag(:i, '', class: "icon-plus"),
+				<%= link_to content_tag(:i, '', class: "fa fa-plus success_text"),
                     update_products_list_budgets_path(budget_id: @budget.id, product_id: product.id),
                     remote: true %>
 			</td>

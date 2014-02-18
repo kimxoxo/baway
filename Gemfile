@@ -57,7 +57,7 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'bootstrap-sass', '~> 2.3.2.2'
 
-  gem 'font-awesome-rails', '=3.2.0'
+  gem 'font-awesome-rails'
   gem 'uglifier', '>= 1.0.3'
 end
 

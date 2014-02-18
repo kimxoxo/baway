@@ -10,7 +10,7 @@
 	//if customer was found
 	<% if @customer %>
 
-		$('#icon-loading-customer-search').addClass("icon-ok success_text");
+		$('#icon-loading-customer-search').addClass("fa fa-check success_text");
 		$('#budget_customer_attributes_name').val('<%= @customer.name %>');
 		$('#budget_customer_attributes_street').val('<%= @customer.street %>');
 		$('#budget_customer_attributes_street_number').val('<%= @customer.street_number %>');

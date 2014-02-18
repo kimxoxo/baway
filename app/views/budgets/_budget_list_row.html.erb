@@ -2,26 +2,32 @@
 
 						<tr id='<%= "product_id_#{budget_product.id}" %>'>
 							<td class="td_checkbox">
-		            <%= simple_form_for budget_product,
-		            										url: update_product_attributes_budgets_path,
-							            					method: :get,
-							            					remote: true,
-							            					html: {class: 'form-inline',
-										            					 style: 'margin: 0;
-										            									 padding: 0;
-										            									 height: 15px;
-										            									 border: 0px solid red; ',
-																					 id: "form_product_active_#{budget_product.id}"} do |f| %>
+								<% if budget_product.request_id %>
+									<%= budget_product.request.request_number %>
+								<% else %>
+									<%= simple_form_for budget_product,
+			            										url: update_product_attributes_budgets_path,
+								            					method: :get,
+								            					remote: true,
+								            					html: {class: 'form-inline',
+											            					 style: 'margin: 0;
+											            									 padding: 0;
+											            									 height: 15px;
+											            									 border: 0px solid red; ',
+																						 id: "form_product_active_#{budget_product.id}"} do |f| %>
 
-		              <%= f.hidden_field :id, value: budget_product.id %>
+			              <%= f.hidden_field :id, value: budget_product.id %>
 
 
-		              <%= f.input_field :active,
-		                          			onclick: '$(this).closest("form").submit(); ',
-		                          			class: 'budget_list_row_select_field',
-					                          style: 'padding: 0;			 
-					                                  margin: 0; ' %>          
-		            <% end %>
+			              <%= f.hidden_field :budget_status_dont_change, value: true %>
+
+			              <%= f.input_field :active,
+			                          			onclick: '$(this).closest("form").submit(); ',
+			                          			class: 'budget_list_row_select_field',
+						                          style: 'padding: 0;			 
+						                                  margin: 0; ' %>
+			            <% end %>
+								<% end %>
 							</td>
 
 
@@ -48,7 +54,7 @@
 
 							<td class="td_pencil_product_observations">
 								<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'product_observations'); " %>'>
-									<i class="icon icon-pencil"></i>
+									<i class="fa fa-pencil"></i>
 								</a>
 							</td>
 
@@ -87,7 +93,7 @@
 									</span>
 								<% end %>
 
-								<i class="icon" style="font-size: 14px; "></i>
+								<i class="fa" style="font-size: 14px; "></i>
 							</td>
 
 
@@ -96,7 +102,7 @@
 
 							<td class="td_pencil_house_area">
 								<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'house_area'); " %>'>
-									<i class="icon icon-pencil"></i>
+									<i class="fa fa-pencil"></i>
 								</a>
 							</td>
 
@@ -135,7 +141,7 @@
 									</span>
 								<% end %>
 
-								<i class="icon" style="font-size: 14px; "></i>
+								<i class="fa" style="font-size: 14px; "></i>
 							</td>
 
 
@@ -146,7 +152,7 @@
 
 							<td class="td_pencil_freight">
 								<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'freight'); " %>'>
-									<i class="icon icon-pencil"></i>
+									<i class="fa fa-pencil"></i>
 								</a>
 							</td>
 
@@ -193,7 +199,7 @@
 									</span>
 								<% end %>
 
-								<i class="icon" style="font-size: 14px; "></i>
+								<i class="fa" style="font-size: 14px; "></i>
 							</td>
 
 
@@ -214,7 +220,7 @@
 
 							<td class="td_pencil_days_to_delivery">
 								<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'days_to_delivery'); " %>'>
-									<i class="icon icon-pencil"></i>
+									<i class="fa fa-pencil"></i>
 								</a>
 							</td>
 
@@ -251,7 +257,7 @@
 									</span>
 								<% end %>
 
-								<i class="icon" style="font-size: 14px; "></i>
+								<i class="fa" style="font-size: 14px; "></i>
 							</td>
 
 
@@ -262,7 +268,7 @@
 
 								<% else %>
 									<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'width'); " %>'>
-										<i class="icon icon-pencil"></i>
+										<i class="fa fa-pencil"></i>
 									</a>
 								<% end %>
 							</td>
@@ -312,7 +318,7 @@
 
 								<% end %>
 
-								<i class="icon" style="font-size: 14px; "></i>
+								<i class="fa" style="font-size: 14px; "></i>
 
 							</td>
 
@@ -323,7 +329,7 @@
 
 								<% else %>
 									<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'height'); " %>'>
-										<i class="icon icon-pencil"></i>
+										<i class="fa fa-pencil"></i>
 									</a>
 								<% end %>
 							</td>
@@ -370,7 +376,7 @@
 
 								<% end %>
 
-								<i class="icon" style="font-size: 14px; "></i>
+								<i class="fa" style="font-size: 14px; "></i>
 							</td>
 
 
@@ -379,7 +385,7 @@
 								
 								<% else %>
 									<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'quantity'); " %>'>
-										<i class="icon icon-pencil"></i>
+										<i class="fa fa-pencil"></i>
 									</a>
 								<% end %>
 							</td>
@@ -436,13 +442,13 @@
 									<% end %>
 								</span>
 
-								<i class="icon" style="font-size: 14px; "></i>
+								<i class="fa" style="font-size: 18px; "></i>
 							</td>
 
 
 
 							<td class="td_delete">
-								<%= link_to content_tag(:i, '', class: "icon-trash", style: "font-size: 14px; "),
+								<%= link_to content_tag(:i, '', class: "fa fa-trash-o", style: "font-size: 14px; "),
 	                    			update_products_list_budgets_path(budget_id: @budget.id,
 	                    																				product_id: product.id,
 	                    																				budget_product_id: budget_product.id,

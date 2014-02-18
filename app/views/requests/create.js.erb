@@ -1,4 +1,4 @@
-<% if @budget.errors.count > 0 %>
+<% if @request.errors.count > 0 %>
 
 	$('#flash_messages').find('td').show();
 	
@@ -8,15 +8,19 @@
 
 <% else %>
 
+
 	$('#flash_messages').find('td').show();
 	
 	$('#flash_messages').find('td').find('div').removeClass();
 	$('#flash_messages').find('td').find('div').addClass('alert alert-success');
-	$('#flash_messages').find('td').find('div').html('<%= t :"budget_closed_successfully" %>');
+	$('#flash_messages').find('td').find('div').html('<%= t :"request_saved_successfully" %>');
 
 
+
+	$('#button_see_request').find('a').prop("href", '<%= "/requests/#{@request.id}.pdf" %>');
+
+
+	$('#button_see_request').show();
 	$('.budget_list_row_select_field').prop('disabled', false);
+
 <% end %>
-
-
-$('#div_buttons').html('<%= escape_javascript(render partial: "buttons") %>');

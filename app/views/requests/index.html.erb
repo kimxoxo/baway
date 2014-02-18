@@ -22,13 +22,25 @@
       <!--<th>Payment condition</th>-->
       <!--<th><%= t :"activerecord.attributes.budget.description" %></th>-->
       <th>pdf</th>
-      <th><%= content_tag(:i, '', class: "icon-pencil") %></th>
+      <th><%= content_tag(:i, '', class: "fa fa-pencil") %></th>
       <!--<th></th>-->
     </tr>
 
-  <%# @budgets.each do |budget| %>
+  <% @requests.each do |request| %>
 
-  <%# end %>
+  	<tr>
+  		<td>
+  			<%= request.id %>
+  		</td>
+
+  		<td>
+				<%= link_to content_tag(:i, '', class: "fa fa-trash-o", style: 'color: #3f7db2; '), request_path(request), method: :delete, data: {confirm: (t :"dialog_text.confirm.prompt")} %>
+  		</td>
+
+
+  	</tr>
+
+  <% end %>
 
     <tr>
       <td colspan="12" align="center" style="text-align: center; ">

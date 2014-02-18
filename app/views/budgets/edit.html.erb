@@ -32,7 +32,6 @@
 		<div class="clearfix"></div>
 
 
-
 		<%= render 'form' %>
 
 		<%= render 'budget_customer_view' %>
@@ -47,7 +46,7 @@
 
           <td style="text-align: right; ">
             <a href="#" onclick="enable_form_budget_more_details(); ">  
-              <i style="cursor: pointer; padding-right: 5px; " class="icon icon-pencil"></i>
+              <i style="cursor: pointer; padding-right: 5px; " class="fa fa-pencil"></i>
             </a>
           </td>
         </tr>
@@ -65,7 +64,7 @@
 				<tr>
 					<th class="td_checkbox">
 						<form style="margin: 0; padding: 0; ">
-							<input type="checkbox">
+							<input type="checkbox" onclick="$('.budget_list_row_select_field').prop('checked',$('.budget_list_row_select_field').is(':checked') ? null:'checked'); ">
 						</form>
 					</th>
 
@@ -91,7 +90,7 @@
 
 
 					<th class="td_pencil_product_observations">
-						<i class="icon icon-pencil icon-white"></i>
+						<i class="fa fa-pencil fa-white"></i>
 					</th>
 
 
@@ -101,7 +100,7 @@
 
 
 					<th class="td_pencil_house_area">
-						<i class="icon icon-pencil icon-white"></i>
+						<i class="fa fa-pencil fa-white"></i>
 					</th>
 
 
@@ -111,7 +110,7 @@
 
 
 					<th class="td_pencil_freight">
-						<i class="icon icon-pencil icon-white"></i>
+						<i class="fa fa-pencil fa-white"></i>
 					</th>
 
 
@@ -121,7 +120,7 @@
 
 
 					<th class="td_pencil_days_to_delivery">
-						<i class="icon icon-pencil icon-white"></i>
+						<i class="fa fa-pencil fa-white"></i>
 					</th>
 
 
@@ -131,7 +130,7 @@
 
 
 					<th class="td_pencil_width">
-						<i class="icon icon-pencil icon-white"></i>
+						<i class="fa fa-pencil fa-white"></i>
 					</th>
 
 
@@ -141,7 +140,7 @@
 
 
 					<th class="td_pencil_height">
-						<i class="icon icon-pencil icon-white"></i>
+						<i class="fa fa-pencil fa-white"></i>
 					</th>
 
 
@@ -150,7 +149,7 @@
 					</th>
 
 					<th class="td_pencil_quantity">
-						<i class="icon icon-pencil icon-white"></i>
+						<i class="fa fa-pencil fa-white"></i>
 					</th>
 
 					<th class="td_quantity">
@@ -162,7 +161,7 @@
 					</th>
 
 					<th class="td_delete">
-						<%= content_tag(:i, '', class: "icon-trash icon-white") %>
+						<%= content_tag(:i, '', class: "fa fa-trash-o fa-white") %>
 					</th>
 				</tr>
 
@@ -196,58 +195,8 @@
 		<div class="clearfix"></div>
 
 
-		<div style="margin-top: 10px; border: 0px solid red; ">
-	    <%= simple_form_for @budget,
-	    										url: {controller: 'budgets', action: 'validate_budget'},
-	    										method: :get,
-	    										remote: true,
-	    										html: {class: 'form-inline',
-	    													 style: 'margin: 0; padding: 0; ',
-	    													 id: 'form_close_budget'} do |f| %>
-
-	    	<%= f.hidden_field :id %>
-
-	    	<%= f.hidden_field :status,
-	    										 value: (@budget.status + 1) %>
-
-
-				<button style="float: right; " id="button_close_budget" class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
-	      	<b>
-      			<%= t :"close_budget" %>
-	      	</b>
-	        <i id="icon-loading-confirm-customer" class=""></i>
-	      </button>
-	    <% end %>
-	    <%= simple_form_for @budget,
-	    										url: {controller: 'budgets', action: 'validate_budget'},
-	    										method: :get,
-	    										remote: true,
-	    										html: {class: 'form-inline',
-	    											     style: 'margin: 0; padding: 0; ',
-	    											     id: 'form_save_request'} do |f| %>
-
-	    	<%= f.hidden_field :id %>
-
-	    	<%= f.hidden_field :status,
-	    										 value: (@budget.status + 1) %>
-
-
-				<button style="float: right; " id="button_save_request" class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
-	      	<b>
-      			<%= t :"save_request" %>	      		
-	      	</b>
-	        <i id="icon-loading-confirm-customer" class=""></i>
-	      </button>
-	    <% end %>
-
-
-
-			<button style="float: right; margin-right: 10px; " id="button_see_pdf" class="btn btn-small btn-success" name="commit" type="submit" onclick="">
-	     	<%= link_to 'ver orçamento',
-	     							budget_path(@budget.id, format: 'pdf'),
-	     							style: 'color: #fff; ',
-	     							target: '_blank' %>
-	  	</button>
+		<div id="div_buttons" style="margin-top: 10px; border: 0px solid red; ">
+			<%= render partial: 'buttons' %>
 		</div>
 
 
@@ -284,7 +233,7 @@
 							</th>
 
 							<th>
-								<%= content_tag(:i, '', class: "icon-plus") %>
+								<%= content_tag(:i, '', class: "fa fa-plus") %>
 							</th>
 						</tr>
 
@@ -317,26 +266,6 @@
 	<%#= link_to 'Show', @budget %> 
 	<%#= link_to 'Back', budgets_path %>
 </center>
-
-
-<% if @budget.status == 1 %>
-
-	<script type="text/javascript">
-		$('#button_see_pdf').hide();
-		$('#form_close_budget').show();
-		$('#form_save_request').hide();
-		$('.budget_list_row_select_field').prop('disabled', true);
-	</script>
-
-<% elsif @budget.status == 2 %>
-
-	<script type="text/javascript">
-		$('#button_see_pdf').show();
-		$('#form_close_budget').hide();
-		$('#form_save_request').show();
-	</script>
-
-<% end %>
 
 
 <% if @budget.customer.errors.count > 0 %>

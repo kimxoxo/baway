@@ -11,22 +11,22 @@
         <ul class="nav pull-right">
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="icon-plus icon-large" style="color:#f5d91a; "></i>
+              <i class="fa fa-plus" style="font-size: 16px; color:#f5d91a; "></i>
                 <%= (t :"add") %>
             </a>
 
 
             <ul class="dropdown-menu">
               <li>
-                <%= link_to (content_tag(:i, '', class: "icon-reorder") + (t :"activerecord.models.budget")), new_budget_path %>
+                <%= link_to (content_tag(:i, '', class: "fa fa-bars") + (t :"activerecord.models.budget")), new_budget_path %>
               </li>
 
               <!--<li>
-                <%= link_to (content_tag(:i, '', class: "icon-truck") + (t :"activerecord.models.supplier")), new_supplier_path %>
+                <%= link_to (content_tag(:i, '', class: "fa fa-truck") + (t :"activerecord.models.supplier")), new_supplier_path %>
               </li>-->
 
               <li>
-                <%= link_to (content_tag(:i, '', class: "icon-user") + (t :"activerecord.attributes.budget.architect_id")), new_architect_users_path %>
+                <%= link_to (content_tag(:i, '', class: "fa fa-user") + (t :"activerecord.attributes.budget.architect_id")), new_architect_users_path %>
               </li>                                                     
             </ul>
           </li>
@@ -34,14 +34,14 @@
 
           <li class="dropdown">
             <a href="#" class="dropdown-toggle word_wrap shrink_text" data-toggle="dropdown">
-              <i class="icon-user icon-large" style="color:#396c98; "></i>
+              <i class="fa fa-user" style="font-size: 16px; color:#396c98; "></i>
               <%= current_user.name %>
             </a>
             
             <ul class="dropdown-menu">
               <li>
 	              <%= link_to edit_user_path(current_user) do %>
-	                <i class="icon-user"></i>
+	                <i class="fa fa-user"></i>
 	                perfil
 	                <br />
 	                <span style="color: #666; font-size: 11px; padding-left: 25px; ">
@@ -54,7 +54,7 @@
               
               
               <li>
-                <%= link_to content_tag(:i, '', class: "icon-off")+(t :"link_text.logout"), destroy_user_session_path, method: "delete" %>
+                <%= link_to content_tag(:i, '', class: "fa fa-off")+(t :"link_text.logout"), destroy_user_session_path, method: "delete" %>
               </li>
             </ul>
           </li>

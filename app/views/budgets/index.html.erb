@@ -22,7 +22,7 @@
       <!--<th>Payment condition</th>-->
       <!--<th><%= t :"activerecord.attributes.budget.description" %></th>-->
       <th>pdf</th>
-      <th><%= content_tag(:i, '', class: "icon-pencil") %></th>
+      <th><%= content_tag(:i, '', class: "fa fa-pencil") %></th>
       <!--<th></th>-->
     </tr>
 
@@ -48,10 +48,10 @@
 				<% if budget.status < 2 %>
           <%= 'feche orç.' %>
         <% else %>
-          <%= link_to content_tag(:i, '', class: "icon-download", style: 'font-size: 19px; '), budget_path(budget.id, format: 'pdf'), target: '_blank' %>
+          <%= link_to content_tag(:i, '', class: "fa fa-download", style: 'font-size: 19px; '), budget_path(budget.id, format: 'pdf'), target: '_blank' %>
         <% end %>
       </td>
-      <td><%= link_to content_tag(:i, '', class: "icon-pencil"), edit_budget_path(budget) %></td>
+      <td><%= link_to content_tag(:i, '', class: "fa fa-pencil"), edit_budget_path(budget) %></td>
       <!--<td><%= link_to 'Destroy', budget, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
     </tr>
   <% end %>

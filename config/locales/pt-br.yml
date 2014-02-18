@@ -14,6 +14,7 @@ pt-BR:
   "fix_budget_errors": "corriga erros"
   "budget_closed_successfully": "orçamento fechado com sucesso"
   "save_request": "cadastrar pedido"
+  "request_saved_successfully": "pedido cadastrado com sucesso"
   search: pesquisar
   save: cadastrar
   date:
@@ -284,6 +285,7 @@ pt-BR:
       supplier: fornecedor
       suppliers: fornecedores
       product: produto
+      request: pedido
     attributes:
       budget:
         id: nº
@@ -328,6 +330,8 @@ pt-BR:
         mobile: celular
         tax_number_type1: cpf
         tax_number_type2: cnpj
+      request:
+        id: nº
       product:
         product_type: tipo
         product_type1: PP
