@@ -10,6 +10,7 @@ class CreateBudgets < ActiveRecord::Migration
       t.decimal :discount
       t.boolean :freight
       t.boolean :instalation
+      t.decimal :initial_payment
 
       t.timestamps
     end

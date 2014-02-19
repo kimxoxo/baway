@@ -8,6 +8,11 @@ class AddBudgetsAndProducts < ActiveRecord::Migration
       t.decimal :freight
       t.decimal :height
       t.decimal :width
+      t.boolean :active
+      t.integer :request_id
+      t.decimal :computed_price
+      t.string :product_observations
+
     end
   end
 

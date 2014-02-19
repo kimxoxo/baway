@@ -1,7 +1,7 @@
 class CreateProducts < ActiveRecord::Migration
   def change
     create_table :products do |t|
-      t.string :supplier_id
+      t.integer :supplier_id
       t.text :description
       t.string :brand
       t.string :code
@@ -11,6 +11,7 @@ class CreateProducts < ActiveRecord::Migration
       t.decimal :width
       t.integer :product_type
       t.decimal :markup
+      t.decimal :supplier_table_discount
 
       t.timestamps
     end
