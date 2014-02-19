@@ -6,4 +6,4 @@ stdout_path "#{root}/log/unicorn.log"
 
 listen "/tmp/unicorn.baway.sock"
 worker_processes 1
-timeout 30
+timeout 300
