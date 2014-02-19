@@ -23,9 +23,9 @@ ActiveRecord::Schema.define(:version => 20140214160040) do
     t.decimal  "discount"
     t.boolean  "freight"
     t.boolean  "instalation"
+    t.decimal  "initial_payment"
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
-    t.decimal  "initial_payment"
   end
 
   create_table "budgets_products", :force => true do |t|
@@ -37,10 +37,10 @@ ActiveRecord::Schema.define(:version => 20140214160040) do
     t.decimal "freight"
     t.decimal "height"
     t.decimal "width"
-    t.decimal "computed_price"
-    t.string  "product_observations"
     t.boolean "active"
     t.integer "request_id"
+    t.decimal "computed_price"
+    t.string  "product_observations"
   end
 
   create_table "customers", :force => true do |t|
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(:version => 20140214160040) do
   end
 
   create_table "products", :force => true do |t|
-    t.string   "supplier_id"
+    t.integer  "supplier_id"
     t.text     "description"
     t.string   "brand"
     t.string   "code"
@@ -80,9 +80,9 @@ ActiveRecord::Schema.define(:version => 20140214160040) do
     t.decimal  "width"
     t.integer  "product_type"
     t.decimal  "markup"
+    t.decimal  "supplier_table_discount"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
-    t.decimal  "supplier_table_discount"
   end
 
   create_table "requests", :force => true do |t|
