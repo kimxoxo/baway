@@ -52,12 +52,19 @@ class Product < ActiveRecord::Base
 
     CSV.foreach(file.path, headers: true) do |row|
 
-      product_hash = row.to_hash # exclude the price field
-      product = Product.find_by_code(row["code"])
+      product_hash = row.to_hash
+
+      @product = Product.new
+      @product.code = product_hash["code"].strip
+      @product.supplier_id = product_hash["supplier_id"].strip
+
+
+      product = Product.where(code: @product.code).where(supplier_id: @product.supplier_id)
 
 
       #format code
       product_hash["code"] = product_hash["code"].strip
+      product_hash["supplier_id"] = product_hash["supplier_id"].strip
 
       #format ipi
       product_hash["markup"] = product_hash["markup"].strip
@@ -83,14 +90,12 @@ class Product < ActiveRecord::Base
       product_hash["description"] = product_hash["description"].strip
       
 
-
+      #if the query returns more than one product then the update_attributes will return an error
+      #undefined method `update_attributes!' for #<ActiveRecord::Relation:0x000001048c6860>
+      #which means there are two or more items for the same supplier_id with the same code
       if product
-      	if product.supplier_id == product_hash["supplier_id"]
-        	product.update_attributes!(product_hash)
-				else
-        	Product.create!(product_hash)
-        end
-      else
+        product.update_attributes!(product_hash)
+      elsif
         Product.create!(product_hash)
       end
     end

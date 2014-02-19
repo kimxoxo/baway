@@ -27,9 +27,5 @@ backup perform --trigger baway_dropbox_backup
 ###rails console remove array objects
 Record.all.each { |r| r.destroy }
 
-
-<%# @products_search_list.each do |product| %>
-
-	//$('#products table').append('<%= escape_javascript(render partial: "products", locals: {product: product}) %>');
-
-<%# end %>
+###excel, replace dot to comma
+=SUBSTITUTE(C5,".",",")

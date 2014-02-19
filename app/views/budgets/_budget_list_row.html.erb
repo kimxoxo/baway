@@ -2,8 +2,8 @@
 
 						<tr id='<%= "product_id_#{budget_product.id}" %>'>
 							<td class="td_checkbox">
-								<% if budget_product.request_id %>
-									<%= budget_product.request.request_number %>
+								<% if budget_product.id %>
+									<%#= budget_product.request.request_number %>
 								<% else %>
 									<%= simple_form_for budget_product,
 			            										url: update_product_attributes_budgets_path,
