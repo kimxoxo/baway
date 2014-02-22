@@ -2,8 +2,8 @@
 
 						<tr id='<%= "product_id_#{budget_product.id}" %>'>
 							<td class="td_checkbox">
-								<% if budget_product.id %>
-									<%#= budget_product.request.request_number %>
+								<% if budget_product.request %>
+									<%= link_to budget_product.request.request_number, request_path(budget_product.request.id, format: 'pdf'), target: '_blank' %>
 								<% else %>
 									<%= simple_form_for budget_product,
 			            										url: update_product_attributes_budgets_path,
@@ -23,7 +23,7 @@
 
 			              <%= f.input_field :active,
 			                          			onclick: '$(this).closest("form").submit(); ',
-			                          			class: 'budget_list_row_select_field',
+			                          			class: 'budget_list_row_checkbox_field',
 						                          style: 'padding: 0;			 
 						                                  margin: 0; ' %>
 			            <% end %>

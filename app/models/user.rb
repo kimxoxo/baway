@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :name, :surname, :role
+                  :name, :surname, :role, :mobile
 
 
   has_many :budgets, foreign_key: :architect_id, dependent: :destroy
@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   #has_many :budgets
 
 
-  validates :name, :surname, :role, :email, :password, :password_confirmation,
+  validates :name, :surname, :role, :email, :password, :password_confirmation, :mobile,
     	presence: true
 
 

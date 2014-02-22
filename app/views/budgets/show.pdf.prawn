@@ -1,8 +1,10 @@
 ###HEADER###
 ###HEADER###
+###HEADER###
+###HEADER###
+###HEADER###
+###HEADER###
 pdf.font_size = 10
-
-
 
 
 pdf.float do
@@ -13,45 +15,37 @@ pdf.float do
 end
 
 
-
 pdf.move_down 20
 
 architech_name = User.find(@budget.architect_id).name + ' ' + User.find(@budget.architect_id).surname
 
-
+##cliente
+##cliente
+##cliente
 pdf.float do
-	#pdf.text "Cliente", style: :bold, align: :left, inline_format: true
-	pdf.move_down 15
+  pdf.move_down 15
 	pdf.text "Cliente: #{@budget.customer.name}", style: :normal, align: :left
 	pdf.text "#{@budget.customer.street}, #{@budget.customer.street_number}", style: :normal, align: :left
 	pdf.text "#{@budget.customer.city}, #{@budget.customer.postal_code} #{@budget.customer.neighbourhood}", style: :normal, align: :left
 	pdf.text "#{@budget.customer.mobile} #{@budget.customer.landline}", style: :normal, align: :left
 	pdf.text "#{@budget.customer.email}", style: :normal, align: :left
 	pdf.move_down 5
-	#pdf.text "Arquiteto(a)", style: :bold, align: :left, inline_format: true
-	#pdf.text "#{architech_name}", style: :normal, align: :left, inline_format: true
 end
+
+##cliente
+##cliente
+##cliente
 
 
 seller_name = User.find(@budget.seller_id).name
 
 pdf.float do
-	#pdf.text "Cuiabá, #{@budget.updated_at.strftime('%d/%m/%Y')}", style: :normal, align: :right, inline_format: true
 	pdf.move_down 15
-	#pdf.text "Emporio do Arquiteto", style: :normal, align: :right, inline_format: true
 	pdf.text "Avenida Senador Filinto Müller, 920", style: :normal, align: :right, inline_format: true
 	pdf.text "Cuiabá, MT, 78043-400, Goiabeiras", style: :normal, align: :right, inline_format: true
 	pdf.text "(65) 3321-1257", style: :normal, align: :right, inline_format: true 
 	pdf.move_down 5
-	#pdf.text "Vendedor(a)", style: :bold, align: :right, inline_format: true
-	#pdf.text "#{seller_name}", style: :normal, align: :right, inline_format: true
 end
-
-
-
-
-
-
 
 
 pdf.move_down 80
@@ -61,7 +55,9 @@ totals_quantity = 0
 totals_price = 0
 
 
-
+###PRODUCTS TABLE###
+###PRODUCTS TABLE###
+###PRODUCTS TABLE###
 ###PRODUCTS TABLE###
 products = [[
 						"tipo",
@@ -146,13 +142,13 @@ pdf.table(products, width: 770,
 end
 
 ###END PRODUCTS TABLE###
+###END PRODUCTS TABLE###
+###END PRODUCTS TABLE###
+###END PRODUCTS TABLE###
 
 
 
-
-pdf.move_down 40
-
-
+pdf.move_down 20
 
 
 pdf.float do
@@ -182,12 +178,6 @@ pdf.float do
 		users_cell.column(0).font_style = :bold
 	end
 end
-
-
-
-
-
-
 
 
 
@@ -233,8 +223,6 @@ pdf.float do
 	end
 
 
-
-
 	pdf.table(products_totals,
 						width: 300,
 					  column_widths:  {1 => 80},
@@ -260,91 +248,85 @@ end
 
 
 
-pdf.move_down 50
+#start_new_page
+
+
+# pdf.float do
+
+
+# 	#set freight
+# 	if @budget.freight
+# 		budget_freight = "sim"
+# 	else
+# 		budget_freight = "não"
+# 	end
+
+
+# 	#set instalation
+# 	if @budget.instalation
+# 		budget_instalation = "sim"
+# 	else
+# 		budget_instalation = "não"
+# 	end
 
 
 
-pdf.float do
+# 	###budget_details TABLE###
+# 	budget_details = [ ["frete", budget_freight] ]
+# 	budget_details += [ ["instalação", budget_instalation] ]
 
 
-	#set freight
-	if @budget.freight
-		budget_freight = "sim"
-	else
-		budget_freight = "não"
-	end
+# 	pdf.table(budget_details,
+# 						width: 100,
+# 			 		  header: true, position: :left) do |budget_details_cell|
 
-
-	#set instalation
-	if @budget.instalation
-		budget_instalation = "sim"
-	else
-		budget_instalation = "não"
-	end
+# 		budget_details_cell.column(0).font_style = :bold
+# 		budget_details_cell.column(0..1).border_width = 0
+# 	end
+# end
 
 
 
-	###budget_details TABLE###
-	budget_details = [ ["frete", budget_freight] ]
-	budget_details += [ ["instalação", budget_instalation] ]
+
+pdf.move_down 60
 
 
-	pdf.table(budget_details,
-						width: 100,
-			 		  header: true, position: :left) do |budget_details_cell|
 
-		budget_details_cell.column(0).font_style = :bold
-		budget_details_cell.column(0..1).border_width = 0
+
+
+
+
+payment_conditions_active = ""
+
+@budget.payment_conditions.each do |pc|
+	if pc.active
+			payment_conditions_active = payment_conditions_active + "               #{pc.num_monthly_payments}  x  #{number_to_currency((totals_price - @budget.initial_payment)/pc.num_monthly_payments)}"
 	end
 end
 
 
-
-
-pdf.move_down 50
-
-
-
-
-
-pdf.float do
-
-
-	@budget_payment_conditions = @budget.payment_conditions.sort_by(&:id)
+payment_conditions = [[
+	          					"opções de pagamento",
+  										"entrada: #{number_to_currency(@budget.initial_payment)}",
+  										payment_conditions_active
+											]]
 
 
 
-	###PAYMENT CONDITIONS TABLE###
-	payment_conditions = [ ["condições de pagamento"] ]
-	payment_conditions += [ [
-													"entrada: #{number_to_currency(@budget.initial_payment)}"
-													] ]
 
 
-	@budget_payment_conditions.each do |pc|
+pdf.table(payment_conditions,
+					width: 770,
+					column_widths:  {0 => 140,
+													 1 => 120},
+		 		  header: true) do |payment_condition_cell|
 
-		if pc.active
+	#product.row(0).font_style = :bold
+	#ticket.row(0).column(0).align = :right
 
-			payment_conditions += [["#{pc.num_monthly_payments}  x  #{number_to_currency((totals_price - @budget.initial_payment)/pc.num_monthly_payments)}"]]
-
-		end
-	end
-
-
-	pdf.table(payment_conditions,
-						width: 130,
-			 		  header: true, position: :left) do |payment_conditions_cell|
-
-		payment_conditions_cell.row(0).font_style = :bold
-		payment_conditions_cell.row(0).padding_top = 8
-		payment_conditions_cell.row(0).padding_bottom = 8
-
-
-		payment_conditions_cell.column(0).border_width = 1
-		payment_conditions_cell.column(0).border_right_width = 0
-
-
-	end
+	payment_condition_cell.column(0..10).border_width = 0
+	payment_condition_cell.column(0).font_style = :bold
+	payment_condition_cell.row(0).style(:background_color => "F4F3F3")
 end
 
 
@@ -353,154 +335,153 @@ end
 
 
 
+# pdf.float do
+
+
+# 	@budget_payment_conditions = @budget.payment_conditions.sort_by(&:id)
+
+# 	budget_payment_conditions_active = [["kim", "mane"]]
+
+
+
+# 	budget_payment_conditions_active += @budget.payment_conditions.sort_by(&:id).map do |pc|
+
+# 		if pc.active
+# 			#["#{pc.num_monthly_payments}  x  #{number_to_currency((totals_price - @budget.initial_payment)/pc.num_monthly_payments)}"]
+# 			["kim", "tono"]
+# 		end
+# 	end
+
+
+
+
+
+# 	###PAYMENT CONDITIONS TABLE###
+# 	payment_conditions = [[
+# 												 "opções de pagamento",
+# 												 "entrada: #{number_to_currency(@budget.initial_payment)}"
+												 
+# 												]]
+												
+
+
+
+
+# 	pdf.table(budget_payment_conditions_active,
+						
+# 			 		  header: true, position: :left) do |payment_conditions_cell|
+
+# 		payment_conditions_cell.column(0).font_style = :bold
+# 		#payment_conditions_cell.row(0).padding_top = 8
+# 		#payment_conditions_cell.row(0).padding_bottom = 8
+
+# 		#payment_conditions_cell.column(0).border_width = 1
+# 		#payment_conditions_cell.column(0).border_right_width = 0
+
+
+# 	end
+# end
 
 
 
 
 
 
-pdf.float do
-
-
-	#set budget observations
-	if @budget.instalation_observations.blank?
-		budget_instalation = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx sem condições xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-
-	else
-		budget_instalation = "- #{@budget.instalation_observations}"
-	end
-
-	###PRODUCTS TOTALS TABLE###	
-	users = [[
-						"Condições de instalação:",
-						"",
-						""
-						]]
-
-
-	users += [[
-						"Fica o cliente que para as devidas instalações dos produtos acima deverá tomar as seguintes providências:",
-						"",
-						""
-						]]
 
 
 
-	users += [[
-						budget_instalation,
-						"",
-						""
-						]]
-
-
-	users += [[
-						"assinatura:",
-						"",
-						""
-						]]
+pdf.move_down 20
 
 
 
-	users += [[
-						"recibo: recebi a importância de R$                       , referente a aquisição dos produtos acima, conforme condição acordada em cima.",
-						"",
-						""
-						]]
+# pdf.float do
+
+
+# 	pdf.text "<b>Recebi a importância de R$                       , referente a aquisição dos produtos acima, conforme condição acordada em cima.</b>", style: :normal, align: :left, inline_format: true
+
+
+# 	#set budget observations
+# 	if @budget.instalation_observations.blank?
+# 		budget_instalation = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx sem condições xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# 	else
+# 		budget_instalation = "- #{@budget.instalation_observations}"
+# 	end
+
+# 	###PRODUCTS TOTALS TABLE###	
+# 	users = [[
+# 						"Condições de instalação:",
+# 						"",
+# 						""
+# 						]]
+
+
+# 	users += [[
+# 						"Fica o cliente que para as devidas instalações dos produtos acima deverá tomar as seguintes providências:",
+# 						"",
+# 						""
+# 						]]
 
 
 
-	users += [[
-						"assinatura:",
-						"",
-						""
-						]]
+# 	users += [[
+# 						budget_instalation,
+# 						"",
+# 						""
+# 						]]
+
+
+# 	users += [[
+# 						"assinatura:",
+# 						"",
+# 						""
+# 						]]
 
 
 
-
-	# users += [[
-	# 					"entrada",
-	# 					"R$ 100,00"
-	# 					]]
-
-	# users += [[
-	# 					"opções pag",
-	# 					"R$ 100,00"
-	# 					]]
+# 	users += [[
+# 						"recibo: recebi a importância de R$                       , referente a aquisição dos produtos acima, conforme condição acordada em cima.",
+# 						"",
+# 						""
+# 						]]
 
 
 
-	# users += [[
-	# 					"opções pag",
-	# 					"R$ 100,00"
-	# 					]]
-
-
-	pdf.table(users,
-						width: 640,
-					  column_widths: {
-					  								1 => 100,
-					  								2 => 100
-					  								},
-			 		  header: false, position: :right) do |users_cell|
-
-		users_cell.row(0).border_width = 0
-		users_cell.row(1).border_width = 0
-		users_cell.row(2).border_width = 0
-		users_cell.row(3).border_width = 0
-		users_cell.row(4).border_width = 0
-		users_cell.row(5).border_width = 0
+# 	users += [[
+# 						"assinatura:",
+# 						"",
+# 						""
+# 						]]
 
 
 
-		users_cell.row(0).padding_top = 0
-		users_cell.row(0).padding_bottom = 0
-
-
-		users_cell.row(1).padding_top = 0
-		users_cell.row(1).padding_bottom = 0
-
-
-		users_cell.row(2).padding_top = 7
-
-		users_cell.row(0).font_style = :bold
-		users_cell.row(3).font_style = :bold
-		users_cell.row(5).font_style = :bold
-
-
-		users_cell.row(0).border_top_width = 1
-		users_cell.row(5).border_bottom_width = 1
-		users_cell.column(0).border_left_width = 1
-		users_cell.column(0).border_right_width = 1
-		users_cell.column(1).border_right_width = 0
-		users_cell.column(2).border_right_width = 1
-		users_cell.column(0).row(3).border_bottom_width = 1
-
-
-	end
-end
+# end
 
 
 
 
 
-pdf.move_down 90
+# pdf.move_down 90
 
 
 
-
+###FOOTER###
+###FOOTER###
+###FOOTER###
+###FOOTER###
 repeat(:all, :dynamic => true) do
 	pdf.image "#{Rails.root}/app/assets/images/baway_logo_pdf.png", at: [0, 4.5], width: 40, align: :left
 end
 
 
-###FOOTER###
 pdf.bounding_box([0,0], :width =>780) do
-
 
 	number_pages "gestão de orçamentos inteligente", { :start_count_at => 0, :page_filter => :all, :at => [bounds.left + 45, 0], :align => :left, :size => 8 }
 	number_pages "página <page> de <total>", { :start_count_at => 0, :page_filter => :all, :at => [bounds.right - 50, 0], :align => :right, :size => 8 }
 end
+###END FOOTER###
+###END FOOTER###
+###END FOOTER###
 ###END FOOTER###
 
 

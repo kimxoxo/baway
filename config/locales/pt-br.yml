@@ -368,6 +368,7 @@ pt-BR:
         surname: sobrenome
         role: nível de acesso
         email: email
+        mobile: celular
         password: senha
         password_confirmation: confirme senha
     errors:

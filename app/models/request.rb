@@ -14,45 +14,45 @@ class Request < ActiveRecord::Base
 
     #has at least one payment condition
     if budget.payment_conditions.find_all_by_active(true).count == 0
-    	errors.add(:id, "")
+    	errors.add(:id, "selecione um metodo de pagamento")
     end
 
 		if budget.budgets_products.where(active: !nil).where("request_id IS NULL").count == 0
-			errors.add(:id, "")
+			errors.add(:id, "selecione pelo menos 1 item")
 		end
 
 
     #validates customer
     if budget.customer.name.blank?
-    	errors.add(:id, "")
+    	errors.add(:id, "preencha nome cliente")
     end
 
     if budget.customer.tax_number.blank?
-    	errors.add(:id, "")
+    	errors.add(:id, "preencha cpf/cnpj")
     end
 
     if budget.customer.street_number.blank?
-    	errors.add(:id, "")
+    	errors.add(:id, "preencha numero da rua do cliente")
     end
 
     if budget.customer.postal_code.blank?
-    	errors.add(:id, "")
+    	errors.add(:id, "preencha cep do cliente")
     end
 
     if budget.customer.city.blank?
-    	errors.add(:id, "")
+    	errors.add(:id, "preencha cidade do cliente")
     end
 
-    if budget.customer.city.blank?
-    	errors.add(:id, "")
+    if budget.customer.street.blank?
+    	errors.add(:id, "preencha endereco do cliente")
     end
 
     if budget.customer.mobile.blank?
-    	errors.add(:id, "")
+    	errors.add(:id, "preencha celular do cliente")
     end
 
     if budget.customer.neighbourhood.blank?
-    	errors.add(:id, "")
+    	errors.add(:id, "preencha bairro do cliente")
     end
 
   end

@@ -63,9 +63,10 @@
 			<table id="table_budgets_products_list">
 				<tr>
 					<th class="td_checkbox">
-						<form style="margin: 0; padding: 0; ">
+						p
+						<!--<form style="margin: 0; padding: 0; ">
 							<input type="checkbox" onclick="$('.budget_list_row_select_field').prop('checked',$('.budget_list_row_select_field').is(':checked') ? null:'checked'); ">
-						</form>
+						</form>-->
 					</th>
 
 
@@ -167,10 +168,7 @@
 
 
 				<tr id="flash_messages">
-					<td colspan="21" style="display: none; border: 0; padding-top: 10px; ">
-						<div class="alert" style="text-align:center; padding: 2px; margin: 0; ">
-						</div>
-					</td>
+					<%= render partial: 'flash_messages' %>
 				</tr>
 			</table>
 
@@ -268,6 +266,15 @@
 </center>
 
 
+<% if @budget.status == 1 %>
+
+	<script type="text/javascript">
+		disable_checkboxs();
+	</script>
+
+<% end %>
+
+
 <% if @budget.customer.errors.count > 0 %>
 
 	<script type="text/javascript">
@@ -284,10 +291,8 @@
 
 
 <script type="text/javascript">
-
 	$('.hide_this_form').hide();
 	make_td_same_width_for_budget_tables();
-
 </script>
 
 

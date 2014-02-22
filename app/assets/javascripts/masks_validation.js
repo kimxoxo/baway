@@ -329,6 +329,10 @@ $(document).ready(function($) {
   $("#supplier_landline").mask("(99) 9999-9999");
   $("#supplier_mobile").mask("(99) 9999-9999");
 
+
+  $("#user_mobile").mask("(99) 9999-9999");
+
+
   $(".product_height_input").mask("999999.99", {reverse: true});
   $(".product_width_input").mask("999999.99", {reverse: true});
 

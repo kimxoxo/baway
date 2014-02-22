@@ -34,6 +34,18 @@ function sets_filter_div_height() {
 
 
 
+
+function disable_checkboxs() {
+	$('.budget_list_row_checkbox_field').prop("disabled", "disabled");
+}
+
+
+function enable_checkboxs() {
+	$('.budget_list_row_checkbox_field').prop("disabled", "");
+}
+
+
+
 //define and tooltips
 $(function() {
 

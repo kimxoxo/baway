@@ -6,7 +6,7 @@ pdf.font_size = 10
 
 
 pdf.float do
-	pdf.text "<b>Orçamento nº</b> #{@budget.id}", style: :normal, align: :left, inline_format: true
+	pdf.text "<b>Pedido nº</b> #{@request.request_number}", style: :normal, align: :left, inline_format: true
 	pdf.text "#{@budget.updated_at.strftime('%d/%m/%Y')}", style: :normal, align: :left, inline_format: true
 
 	pdf.image "#{Rails.root}/app/assets/images/emporio_logo.png", at: [670, 530], width: 100
@@ -77,7 +77,7 @@ products = [[
 						"preço"]]
 
 
-products += @budget.budgets_products.map do |budget_product|
+products += @request.budgets_products.map do |budget_product|
 
 	product = Product.find(budget_product.product_id)
 
