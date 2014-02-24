@@ -31,6 +31,9 @@
       <th><%= t :"activerecord.attributes.product.supplier_table_discount" %></th>      
       <th><%= t :"activerecord.attributes.product.ipi" %></th>     
       <th><%= t :"activerecord.attributes.product.price" %></th>
+      <% if current_user.role == -1 %>
+      	<th><%= content_tag(:i, '', class: "fa fa-pencil") %></th>
+      <% end %>
     </tr>
 
   <% @products.each do |product| %>
@@ -51,6 +54,12 @@
       <td><%= "#{product.supplier_table_discount}%" %></td>
       <td><%= "#{product.ipi}%" %></td>
       <td><%= number_to_currency(product.supplier_price) %></td>
+
+      <% if current_user.role == -1 %>
+      	<td>
+      		<%= link_to content_tag(:i, '', class: "fa fa-pencil"), edit_product_path(product) %>
+      	</td>
+      <% end %>
     </tr>
   <% end %>
 
