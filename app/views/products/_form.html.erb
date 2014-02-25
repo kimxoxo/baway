@@ -16,8 +16,10 @@
   <%= f.input :description,
               input_html: { rows: 3 } %>
 
+
   <%= f.input :supplier_price,
-              as: :string %>
+              as: :string,
+              input_html: {value: number_to_currency(@product.supplier_price)} %>
 
   <%= f.input :ipi,
               as: :string %>
