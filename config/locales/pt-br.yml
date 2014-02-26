@@ -356,6 +356,7 @@ pt-BR:
         um2: tecido
         quantity: qt
         price: preço
+        price_per_unit_or_squara_meter: preço (uni ou metro)
         house_area: ambiente
         product_observations: observações
         days_to_delivery: ent

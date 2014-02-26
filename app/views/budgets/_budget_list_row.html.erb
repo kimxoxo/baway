@@ -35,9 +35,47 @@
 								<%= product.code %>
 							</td>
 
+
 							<td class="td_product_type">
+
+<!-- Link que receberá o evento do popover ao ser clicado.-->
+<a href="#" id='<%= "#{budget_product.id}" %>' class="btn btn-success">Abrir popover</a>
+<!-- Div oculta que será exibida dentro do popover. -->
+<div id="div-popover" class="hide">
+   Conteúdo do popover.
+   <br />
+   <br />
+   <!-- Botão dentro do popover responsável por abrir o modal. -->
+   <button id="btn-modal" class="btn btn-primary">Abrir modal</button>
+   <!-- Botão dentro do popover responsável por fechar o popover. -->
+   <button id="btn-fechar" class="btn btn-danger" data-dismiss="clickover">Fechar</button>
+</div>
+<!-- Div oculta utilizada para montar o modal. -->
+<div class="modal hide" id="div-modal">
+   <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h3>Título modal</h3>
+   </div>
+   <div class="modal-body">
+      Conteúdo do modal.
+   </div>
+   <div class="modal-footer">
+     <!-- Botão dentro do modal responsável por fechar o modal. -->
+     <button class="btn" data-dismiss="modal">Fechar modal</button>
+   </div>
+</div>
+
+
+
+
+
+
+
+
 								<b>
-									<%= t :"activerecord.attributes.product.product_type#{product.product_type}" %>
+									<a href="">
+										<%= t :"activerecord.attributes.product.product_type#{product.product_type}" %>
+									</a>
 								</b>
 							</td>
 
@@ -322,7 +360,7 @@
 
 
 							<td class="td_height">
-								<% if (product.product_type == 1 || product.product_type == 3) %>
+								<% if (product.product_type == 1 || product.product_type == 3 || product.product_type == 4) %>
 									n/a							
 								<% else %>
 

@@ -1,9 +1,27 @@
+<%
+if (product.product_type == 1 || product.product_type == 3 || product.product_type == 4)
+						
+	computed_price = compute_price_product_type_1(product.supplier_price,
+																								product.ipi,
+																								product.markup,
+																								product.supplier_table_discount,
+																								1,
+																								0)
 
-		<%# price_computed = compute_price(product.supplier_price,
-																			product.ipi,
-																			product.markup,
-																			1,
-																			0) %>
+elsif product.product_type == 2
+						
+	computed_price = compute_price_product_type_2(product.supplier_price,
+																								product.ipi,
+																								product.markup,
+																								1,
+																								0,
+																								1,
+																								1)
+
+elsif product.product_type == 3
+
+end
+%>
 
 		<tr>
 			<td>
@@ -23,8 +41,8 @@
 			</td>
 
 			<td>
-				<%= number_to_currency(product.supplier_price) %>
-				<%#= number_to_currency(price_computed) %>
+				<%= number_to_currency(computed_price) %>
+				<%#= number_to_currency(product.supplier_price) %>
 			</td>
 
 			<td>

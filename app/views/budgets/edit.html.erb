@@ -227,7 +227,7 @@
 							</th>
 
 							<th>
-								<%= t :"activerecord.attributes.product.price" %>
+								<%= t :"activerecord.attributes.product.price_per_unit_or_squara_meter" %>
 							</th>
 
 							<th>
@@ -298,4 +298,34 @@
 
 <script type="text/javascript">
 	vertical_menu_height_fix();
+</script>
+
+
+<script type="text/javascript">
+
+
+
+$('.td_product_type:not(:eq(0))').each(function() {
+
+
+	id = $(this).find('a').attr('id');
+	alert(id);
+
+	})
+
+
+    // Associa o evento do popover ao clicar no link.
+    $('#1').popover({
+       trigger: 'manual',
+       html: true,
+       title: 'Título popover',
+       content: $('#div-popover').html() // Adiciona o conteúdo da div oculta para dentro do popover.
+    }).click(function (e) {
+       e.preventDefault();
+       // Exibe o popover.
+       $(this).popover('show');
+    });
+
+
+
 </script>
