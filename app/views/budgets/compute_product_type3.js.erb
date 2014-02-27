@@ -1,0 +1,11 @@
+
+$('#product_id_<%= @budgets_product.id %>').replaceWith('<%= escape_javascript(render partial: "budget_list_row", locals: {budget_product: @budgets_product, budget: @budget}) %>');
+
+$('#product_id_<%= @budgets_product.id %>').find('.td_price').find('i').addClass('fa fa-check success_text');
+
+
+$('.hide_this_form').hide();
+
+create_popovers();
+
+disable_checkboxs();

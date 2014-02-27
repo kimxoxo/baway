@@ -188,6 +188,42 @@ function enable_form() {
 
 
 
+function create_popovers() {
+
+	$('.td_product_type:not(:eq(0))').each(function() {
+
+		id = $(this).find('a').attr('id');
+
+	  // Associa o evento do popover ao clicar no link.
+	  $('#' + id).popover({
+	     trigger: 'manual',
+	     html: true,
+	     class: 'popover',
+	     title: 'Cálculo Cortina',
+	     content: $('#div_popover' + id).html() // Adiciona o conteúdo da div oculta para dentro do popover.
+	  }).click(function (e) {
+	     e.preventDefault();
+	     // Exibe o popover.
+	     $(this).popover('show');
+	  });
+
+
+		$('#btn_fechar' + id).on('click', function (e) {
+    	$('#' + id).popover('hide');
+		});
+
+	})
+
+}
+
+
+function close_please(id) {
+	$('#' + id).popover('hide');
+}
+
+
+
+
 
 jQuery(document).ready(function($) {
 

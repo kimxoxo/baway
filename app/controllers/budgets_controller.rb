@@ -334,4 +334,49 @@ class BudgetsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+
+	def compute_product_type3
+		
+		if !params[:window_width].blank? && !params[:window_number_parts].blank? && !params[:wave_factor].blank? && !params[:fabric_width].blank?
+
+
+			@budgets_product = BudgetsProduct.find(params[:budget_product])
+			@budget = Budget.find_by_id(@budgets_product.budget_id)
+
+			window_width = (params[:window_width].gsub(',', '.')).to_f
+			window_height = (params[:window_height].gsub(',', '.')).to_f			
+			window_number_parts = (params[:window_number_parts].gsub(',', '.')).to_i
+			wave_factor = (params[:wave_factor].gsub(',', '.')).to_f
+			fabric_width = (params[:fabric_width].gsub(',', '.')).to_f
+
+			@number_items = window_width / window_number_parts
+			@number_items = @number_items * wave_factor
+			@number_items = @number_items / fabric_width
+
+			@number_items = @number_items.round
+
+			@number_items = @number_items * window_number_parts
+			@number_items = @number_items * window_height
+
+
+			@budgets_product.quantity = @number_items
+			@budgets_product.save
+
+			@product = @budgets_product.product
+			@product.product_type = 5
+			@product.save
+		end
+
+    respond_to do |format|
+      format.js
+    end
+
+	end
+
+
+
+
+
 end

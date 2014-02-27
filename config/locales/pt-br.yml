@@ -337,7 +337,8 @@ pt-BR:
         product_type1: PP
         product_type2: TP
         product_type3: TC
-        product_type4: MO        
+        product_type4: MO
+        product_type5: CR 
         product_type_full_1: papel parede
         product_type_full_2: tapete
         product_type_full_3: cortina    

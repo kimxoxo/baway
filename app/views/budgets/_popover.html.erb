@@ -1,7 +1,35 @@
 
 <div id='<%= "div_popover#{budget_product.id}" %>' class="hide">
-   Conteúdo do popover.
-   <br />
-   <br />
-   <button onclick="<%= "close_please(#{budget_product.id}); " %>" id='<%= "btn_fechar#{budget_product.id}" %>' class="btn btn-danger" data-dismiss="clickover">Fechar</button>
+   
+	<%= form_tag "/budgets/compute_product_type3", style: 'border: 0px solid red; padding: 0; margin: 0; ', remote: true do %>
+
+		<%= hidden_field_tag "budget_product", "#{budget_product.id}" %>
+
+	  <%= text_field_tag "window_width", "", style: 'width: 50px; ' %>
+	  <span style="padding-left: 10px; font-weight: normal; ">larg janela</span>
+	  <br />
+
+	  <%= text_field_tag "window_height", "", style: 'width: 50px; ' %>
+	  <span style="padding-left: 10px; font-weight: normal; ">alt janela</span>
+	  <br />
+
+		<%= text_field_tag "window_number_parts", "", style: 'width: 50px; ' %>
+	  <span style="padding-left: 10px; font-weight: normal; ">nº folhas</span>
+		<br />
+
+		<%= text_field_tag "wave_factor", "", style: 'width: 50px; ' %>
+	  <span style="padding-left: 10px; font-weight: normal; ">fator ondulação</span>
+		<br />
+
+		<%= text_field_tag "fabric_width", "", style: 'width: 50px; ' %>
+	  <span style="padding-left: 10px; font-weight: normal; ">larg tecido</span>
+	  <br />
+	  <br />
+	  
+	  <%= submit_tag "calcular", class: "btn btn-small btn-success" %>
+
+	<% end %>
+
+	<button style="position: absolute; margin-top: -22px; margin-left: 205px; padding: 0 5px 0 5px; " onclick="<%= "close_please(#{budget_product.id}); " %>" id='<%= "btn_fechar#{budget_product.id}" %>' class="btn btn-small btn-danger" data-dismiss="clickover">fechar</button>
+   
 </div>
