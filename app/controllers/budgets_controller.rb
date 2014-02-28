@@ -365,8 +365,8 @@ class BudgetsController < ApplicationController
 			@budgets_product.save
 
 			@product = @budgets_product.product
-			@product.product_type = 5
-			@product.save
+			#@product.product_type = 5
+			#@product.save
 		end
 
     respond_to do |format|
