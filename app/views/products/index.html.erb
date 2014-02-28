@@ -38,11 +38,30 @@
 
   <% @products.each do |product| %>
 		
-		<%# price_computed = compute_price(product.supplier_price,
-																			product.ipi,
-																			product.markup,
-																			1,
-																			0) %>
+		<%
+		if (product.product_type == 1 || product.product_type == 3 || product.product_type == 4)
+								
+			computed_price = compute_price_product_type_1(product.supplier_price,
+																										product.ipi,
+																										product.markup,
+																										product.supplier_table_discount,
+																										1,
+																										0)
+
+		elsif product.product_type == 2
+								
+			computed_price = compute_price_product_type_2(product.supplier_price,
+																										product.ipi,
+																										product.markup,
+																										1,
+																										0,
+																										1,
+																										1)
+
+		elsif product.product_type == 3
+
+		end
+		%>
 
     <tr>
     	<td><%= t :"activerecord.attributes.product.product_type#{product.product_type}" %></td>
@@ -53,7 +72,7 @@
       <td><%= product.markup %></td>
       <td><%= "#{product.supplier_table_discount}%" %></td>
       <td><%= "#{product.ipi}%" %></td>
-      <td><%= number_to_currency(product.supplier_price) %></td>
+      <td><%= number_to_currency(computed_price) %></td>
 
       <% if current_user.role == -1 %>
       	<td>

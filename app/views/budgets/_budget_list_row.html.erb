@@ -37,11 +37,17 @@
 
 
 							<td class="td_product_type">
-								<b>
-									<a href="#" id='<%= "#{budget_product.id}" %>'>
+								<% if product.product_type == 3 %>
+									<b>
+										<a href="#" id='<%= "#{budget_product.id}" %>'>
+											<%= t :"activerecord.attributes.product.product_type#{product.product_type}" %>
+										</a>
+									</b>
+								<% else %>
+									<b>
 										<%= t :"activerecord.attributes.product.product_type#{product.product_type}" %>
-									</a>
-								</b>
+									</b>
+								<% end %>
 
 								<%= render 'popover', budget_product: budget_product %>
 							</td>
@@ -257,7 +263,7 @@
 								<% if (product.product_type == 1 || product.product_type == 3) %>
 
 								<% else %>
-									<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'width'); " %>'>
+									<a href="#" class="hide_if_product_type5" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'width'); " %>'>
 										<i class="fa fa-pencil"></i>
 									</a>
 								<% end %>
@@ -301,7 +307,7 @@
 											<%= "#{budget_product.width} m" %>
 										</span>
 									<% else %>
-										<span style="color: red; ">
+										<span class="hide_if_product_type5" style="color: red; ">
 											<%= t :"activerecord.attributes.product.please_fill" %>
 										</span>
 									<% end %>
@@ -318,7 +324,7 @@
 								<% if (product.product_type == 1 || product.product_type == 3) %>
 
 								<% else %>
-									<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'height'); " %>'>
+									<a href="#" class="hide_if_product_type5" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'height'); " %>'>
 										<i class="fa fa-pencil"></i>
 									</a>
 								<% end %>
@@ -359,7 +365,7 @@
 											<%= "#{budget_product.height} m" %>
 										</span>
 									<% else %>
-										<span style="color: red; ">
+										<span class="hide_if_product_type5" style="color: red; ">
 											<%= t :"activerecord.attributes.product.please_fill" %>
 										</span>
 									<% end %>
@@ -374,7 +380,7 @@
 								<% if product.product_type == 2 %>
 								
 								<% else %>
-									<a href="#" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'quantity'); " %>'>
+									<a href="#" class="hide_if_product_type5" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'quantity'); " %>'>
 										<i class="fa fa-pencil"></i>
 									</a>
 								<% end %>
@@ -474,3 +480,9 @@
   $(".product_width_input").mask("999999.99", {reverse: true});
 
 </script>
+
+<% if product.product_type == 5 %>
+	<script type="text/javascript">
+		$('.hide_if_product_type5').hide();
+	</script>
+<% end %>
