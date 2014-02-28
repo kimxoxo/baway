@@ -360,6 +360,7 @@ class BudgetsController < ApplicationController
 			@number_items = @number_items * window_number_parts
 			@number_items = @number_items * window_height
 
+			@number_items = @number_items.ceil
 
 			@budgets_product.quantity = @number_items
 			@budgets_product.save
