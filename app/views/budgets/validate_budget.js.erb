@@ -15,9 +15,8 @@
 	$('#flash_messages').find('td').find('div').html('<%= t :"budget_closed_successfully" %>');
 
 
+	$('#div_buttons').html('<%= escape_javascript(render partial: "buttons") %>');
+
 	enable_checkboxs();
 
 <% end %>
-
-
-$('#div_buttons').html('<%= escape_javascript(render partial: "buttons") %>');

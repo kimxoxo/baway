@@ -64,19 +64,19 @@ class Budget < ActiveRecord::Base
 
 		    self.budgets_products.each do |bp|
 		      if bp.house_area.blank?
-		        errors.add(:house_area, "")
+		        self.errors.add(:id, "")
 		      end
 
 		      if bp.quantity.nil?
-		        errors.add(:quantity, "")
+		        self.errors.add(:id, "")
 		      end
 
 		      if bp.freight.nil?
-		        errors.add(:freight, "")
+		        self.errors.add(:id, "")
 		      end
 
 		      if bp.days_to_delivery.nil?
-		        errors.add(:days_to_delivery, "")
+		        self.errors.add(:id, "")
 		      end
 
 		    end

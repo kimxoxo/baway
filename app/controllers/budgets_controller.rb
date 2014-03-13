@@ -214,7 +214,7 @@ class BudgetsController < ApplicationController
   def edit
     @budget = Budget.find(params[:id])
     @product = Product.new
-    @products = @budget.products.order('created_at DESC')
+    @products = @budget.products.order('created_at ASC')
     @products_search_list = []
 
     @budgets_products = @budget.budgets_products.order('id ASC')
@@ -316,8 +316,7 @@ class BudgetsController < ApplicationController
     	respond_to do |format|
     	  format.js
     	end
-    end  
-
+    end
 	end
 
 
@@ -368,6 +367,41 @@ class BudgetsController < ApplicationController
 			@product = @budgets_product.product
 			#@product.product_type = 5
 			#@product.save
+
+
+
+
+	 		if (@product.product_type == 1 || @product.product_type == 3 || @product.product_type == 4 || @product.product_type == 5)
+
+				if (@product.supplier_price && @product.ipi && @product.markup && @product.supplier_table_discount && @budgets_product.quantity && @budgets_product.freight)
+										
+				@budgets_product.computed_price = view_context.compute_price_product_type_1(@product.supplier_price,
+																					@product.ipi,
+																					@product.markup,
+																					@product.supplier_table_discount,
+																					@budgets_product.quantity,
+																					@budgets_product.freight)
+
+				end
+
+			elsif @product.product_type == 2
+
+				if(@product.supplier_price && @product.ipi && @product.markup && @budgets_product.quantity && @budgets_product.freight && @budgets_product.width && @budgets_product.height)
+										
+					@budgets_product.computed_price = view_context.compute_price_product_type_2(@product.supplier_price,
+																						@product.ipi,
+																						@product.markup,
+																						@budgets_product.quantity,
+																						@budgets_product.freight,
+																						@budgets_product.width,
+																						@budgets_product.height)
+
+					end
+
+			elsif @product.product_type == 3
+
+			end
+
 		end
 
     respond_to do |format|

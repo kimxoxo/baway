@@ -24,8 +24,9 @@ $('#div_buttons').html('<%= escape_javascript(render partial: "buttons") %>');
 
 make_td_same_width_for_budget_tables();
 
-
 sets_filter_div_height();
+
+create_popovers();
 
 
 <% if !params[:budgets_product][:budget_status_dont_change] %>

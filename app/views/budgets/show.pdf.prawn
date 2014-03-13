@@ -8,10 +8,10 @@ pdf.font_size = 10
 
 
 pdf.float do
-	pdf.text "<b>Orçamento nº</b> #{@budget.id}", style: :normal, align: :left, inline_format: true
+	pdf.text "<b>Orçamento nº</b> #{@budget.id}", size: 13, style: :normal, align: :left, inline_format: true
 	pdf.text "#{@budget.updated_at.strftime('%d/%m/%Y')}", style: :normal, align: :left, inline_format: true
 
-	pdf.image "#{Rails.root}/app/assets/images/emporio_logo.png", at: [670, 530], width: 100
+	pdf.image "#{Rails.root}/app/assets/images/emporio_logo.png", at: [665, 530], width: 105
 end
 
 
@@ -24,10 +24,42 @@ architech_name = User.find(@budget.architect_id).name + ' ' + User.find(@budget.
 ##cliente
 pdf.float do
   pdf.move_down 15
-	pdf.text "Cliente: #{@budget.customer.name}", style: :normal, align: :left
-	pdf.text "#{@budget.customer.street}, #{@budget.customer.street_number}", style: :normal, align: :left
-	pdf.text "#{@budget.customer.city}, #{@budget.customer.postal_code} #{@budget.customer.neighbourhood}", style: :normal, align: :left
-	pdf.text "#{@budget.customer.mobile} #{@budget.customer.landline}", style: :normal, align: :left
+	pdf.text "<b>cliente</b> #{@budget.customer.name}", size: 13 , style: :normal, align: :left, inline_format: true
+	
+	if @budget.customer.street != ""
+		pdf.text "#{@budget.customer.street}, #{@budget.customer.street_number}", style: :normal, align: :left
+	end
+	
+
+	city_postalCode_neighbourhood = @budget.customer.city
+
+	if @budget.customer.city != ""
+		city_postalCode_neighbourhood = city_postalCode_neighbourhood + ", #{@budget.customer.city}"
+	end
+
+	if @budget.customer.postal_code != ""
+		city_postalCode_neighbourhood = city_postalCode_neighbourhood + ", #{@budget.customer.postal_code}"
+	end
+
+	if @budget.customer.neighbourhood != ""
+		city_postalCode_neighbourhood = city_postalCode_neighbourhood + ", #{@budget.customer.neighbourhood}"
+	end
+
+
+	if city_postalCode_neighbourhood != ""
+		pdf.text city_postalCode_neighbourhood, style: :normal, align: :left
+	end
+
+
+	if @budget.customer.mobile
+		pdf.text "#{@budget.customer.mobile}", style: :normal, align: :left
+	end
+
+	if @budget.customer.landline
+		pdf.text "#{@budget.customer.landline}", style: :normal, align: :left
+	end
+
+
 	pdf.text "#{@budget.customer.email}", style: :normal, align: :left
 	pdf.move_down 5
 end
@@ -148,50 +180,17 @@ end
 
 
 
-pdf.move_down 20
-
-
-pdf.float do
-
-	###PRODUCTS TOTALS TABLE###	
-	users = [[
-						"Arquiteto(a)",
-						 architech_name
-						]]
-
-	users += [[
-						"Vendedor(a)",
-						current_user.name
-						]]
-
-
-	pdf.table(users,
-						width: 300,
-					  column_widths:  {0 => 70},
-			 		  header: false, position: :left) do |users_cell|
-
-		users_cell.row(0).border_width = 0
-		users_cell.row(1).border_width = 0
-		users_cell.row(2).border_width = 0
-		users_cell.row(3).border_width = 0
-
-		users_cell.column(0).font_style = :bold
-	end
-end
-
-
-
 pdf.float do
 
 
 	###PRODUCTS TOTALS TABLE###	
+	#products_totals = #[[
+											#{}"quantidade itens",
+											#totals_quantity
+										#]]
+
+
 	products_totals = [[
-											"quantidade itens",
-											totals_quantity
-										]]
-
-
-	products_totals += [[
 											"sub-total",
 											number_to_currency(totals_price)
 										]]
@@ -314,11 +313,38 @@ payment_conditions = [[
 
 
 
+if payment_conditions_active != ""
+	pdf.table(payment_conditions,
+						width: 770,
+						column_widths:  {0 => 140,
+														 1 => 120},
+			 		  header: true) do |payment_condition_cell|
 
-pdf.table(payment_conditions,
-					width: 770,
-					column_widths:  {0 => 140,
-													 1 => 120},
+		#product.row(0).font_style = :bold
+		#ticket.row(0).column(0).align = :right
+
+		payment_condition_cell.column(0..10).border_width = 0
+		payment_condition_cell.column(0).font_style = :bold
+		payment_condition_cell.row(0).style(:background_color => "F4F3F3")
+	end
+end
+
+
+
+pdf.move_down 10
+
+
+date_plus_30days =  @budget.updated_at + 30.days
+date_plus_30days = date_plus_30days.strftime('%d/%m/%Y')
+
+budget_is_valid_up_to = [[
+	          						"Este orçamento tem validade de 30dias, após a sua emissão. É válido até #{date_plus_30days}."
+												]]
+
+
+pdf.table(budget_is_valid_up_to,
+					width: 769,
+					column_widths:  {},
 		 		  header: true) do |payment_condition_cell|
 
 	#product.row(0).font_style = :bold
@@ -328,6 +354,25 @@ pdf.table(payment_conditions,
 	payment_condition_cell.column(0).font_style = :bold
 	payment_condition_cell.row(0).style(:background_color => "F4F3F3")
 end
+
+
+
+pdf.move_down 20
+
+
+
+@seller = User.find(@budget.seller_id)
+
+
+pdf.float do
+	pdf.text "<b>Arquiteto(a)</b> #{architech_name}", style: :normal, align: :left, inline_format: true
+	pdf.move_down 5
+	pdf.text "<b>Vendedor(a)</b> #{@seller.name} #{@seller.surname}     <b>phone</b> #{@seller.mobile}    <b>email</b> #{@seller.email}", style: :normal, align: :left, inline_format: true
+end
+
+
+
+
 
 
 

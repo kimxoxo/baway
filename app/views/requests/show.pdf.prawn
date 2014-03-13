@@ -195,13 +195,13 @@ pdf.float do
 
 
 	###PRODUCTS TOTALS TABLE###	
+	#products_totals = #[[
+											#{}"quantidade itens",
+											#totals_quantity
+										#]]
+
+
 	products_totals = [[
-											"quantidade itens",
-											totals_quantity
-										]]
-
-
-	products_totals += [[
 											"sub-total",
 											number_to_currency(totals_price)
 										]]
