@@ -157,11 +157,10 @@ end
 products = [products_row]
 
 
-products += @budget.budgets_products.map do |budget_product|
-
+#products += @budget.budgets_products.map do |budget_product|
+@budget.budgets_products.each do |budget_product|
+	
 	product = Product.find(budget_product.product_id)
-
-
 
 	#define width
 	if product.width != 0
@@ -179,43 +178,91 @@ products += @budget.budgets_products.map do |budget_product|
 	end
 
 
-
-
 		#compute totals_quantity
 		totals_quantity = totals_quantity + budget_product.quantity
 
 		#compute totals_price
 		totals_price = totals_price + budget_product.computed_price
 
-	
-	[
-		(t :"activerecord.attributes.product.product_type#{product.product_type}"),
-		product.code,
-		product.supplier.name,
-		product.description,
-		budget_product.house_area,
-		number_to_currency(budget_product.freight),
-		"#{budget_product.days_to_delivery} dia(s)",
-		product_width,
-		product_height,		
-		budget_product.quantity,
-		number_to_currency(budget_product.computed_price)
-	]
+products_row = [
+								(t :"activerecord.attributes.product.product_type#{product.product_type}")
+								]
+
+
+
+	if params[:code]
+		products_row += [
+										product.code
+										]
+	end
+
+
+	if params[:supplier]
+		products_row += [
+										product.supplier.name
+										]
+	end
+
+	products_row += [
+									product.description,
+									budget_product.house_area
+									]
+
+
+
+	if params[:freight]
+		products_row += [
+										number_to_currency(budget_product.freight)
+										]
+	end
+
+
+
+	products_row += [
+									"#{budget_product.days_to_delivery} dia(s)"
+									]
+
+
+
+	if params[:width]
+		products_row += [
+										product_width
+										]
+	end
+
+
+
+
+	if params[:height]
+		products_row += [
+										product_height
+										]
+	end
+
+
+
+	if params[:quantity]
+		products_row += [
+										budget_product.quantity
+										]
+	end
+
+
+
+	products_row += [
+									number_to_currency(budget_product.computed_price)
+									]
+
+
+
+	products += [products_row]
+
 end
 
 
 
 pdf.table(products, width: 770,
-				  column_widths: {0 => 30,
-				  								1 => 80,
-							  				  2 => 100,
-							  				  4 => 70,
-							  				  5 => 65,
-							  				  6 => 50,
-							  				  7 => 50,
-							  				  8 => 40,
-							  				  9 => 30,
-							  				  10 => 80},
+				  column_widths: {},
 		 		  header: true) do |product|
 
 	#product.row(0).font_style = :bold
