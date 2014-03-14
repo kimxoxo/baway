@@ -37,8 +37,7 @@
 
 				<button style="float: right; " id="button_save_request" class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
 	      	<b>
-	    			<%= t :"save_request" %>
-	    			<%= @budget.status %>	      		
+	    			<%= t :"save_request" %>      		
 	      	</b>
 	        <i id="icon-loading-confirm-customer" class=""></i>
 	      </button>
@@ -60,4 +59,114 @@
 	     							target: '_blank' %>
 	  	</button>
 
+
+			<button style="float: right; margin-right: 10px; " id="popover_see_pdf" class="btn btn-small btn-success" name="commit" type="submit" onclick="">
+	     	pop up
+	  	</button>
+
+
+
+
+
+<div id="div_popover_see_pdf" class="hide">
+   
+	<%= form_tag "/budgets/#{@budget.id}.pdf", style: 'border: 0px solid red; padding: 0; margin: 0; ', method: :get, target: "_blank" do %>
+
+		<%#= hidden_field_tag "budget_product", "#{budget_product.id}" %>
+
+	  <%= check_box_tag "code", "", style: 'width: 50px; ' %>
+	  <span style="padding-left: 10px; font-weight: normal; ">código</span>
+	  <br />
+
+	  <%= check_box_tag "supplier", "", style: 'width: 50px; ' %>
+	  <span style="padding-left: 10px; font-weight: normal; ">fornecedor</span>
+	  <br />
+
+		<%= check_box_tag "freight", "", style: 'width: 50px; ' %>
+	  <span style="padding-left: 10px; font-weight: normal; ">frete</span>
+		<br />
+
+		<%= check_box_tag "width", "", style: 'width: 50px; ' %>
+	  <span style="padding-left: 10px; font-weight: normal; ">largura</span>
+		<br />
+
+		<%= check_box_tag "height", "", style: 'width: 50px; ' %>
+	  <span style="padding-left: 10px; font-weight: normal; ">altura</span>
+	  <br />
+
+		<%= check_box_tag "quantity", "", style: 'width: 50px; ' %>
+	  <span style="padding-left: 10px; font-weight: normal; ">quantidade</span>
+	  <br />
+
+	  <br />
+	  
+	  <%= submit_tag "ver", class: "btn btn-small btn-success" %>
+
+	<% end %>
+
+	<button style="position: absolute; margin-top: -22px; margin-left: 205px; padding: 0 5px 0 5px; " onclick="$('#popover_see_pdf').popover('hide'); " class="btn btn-small btn-danger" data-dismiss="clickover">fechar</button>
+   
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 	  <% end %>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		// Associa o evento do popover ao clicar no link.
+    $('#popover_see_pdf').popover({
+    	trigger: 'manual',
+      html: true,
+      title: 'escolha colunas',
+      content: $('#div_popover_see_pdf').html() // Adiciona o conteúdo da div oculta para dentro do popover.
+			}).click(function (e) {
+      	e.preventDefault();
+        // Exibe o popover.
+        $(this).popover('show');
+      	});
+ 
+      $('#btn-fechar').live('click', function (e) {
+      	// Oculta o popover ao clicar no botão fechar.
+        $('#a-popover').popover('hide');
+      	});
+ 
+      $('#btn-modal').live('click', function (e) {
+      	// Oculta o popover ao clicar no botão abrir modal.
+        $('#a-popover').popover('hide');
+        // Abre o modal.
+        $('#div-modal').modal();
+      	});
+		});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

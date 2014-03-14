@@ -410,8 +410,4 @@ class BudgetsController < ApplicationController
 
 	end
 
-
-
-
-
 end

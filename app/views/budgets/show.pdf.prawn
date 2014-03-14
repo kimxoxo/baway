@@ -91,18 +91,70 @@ totals_price = 0
 ###PRODUCTS TABLE###
 ###PRODUCTS TABLE###
 ###PRODUCTS TABLE###
-products = [[
-						"tipo",
-						"código",
-						"fornecedor",
-						"descrição",
-						"ambiente",
-						"frete",
-						"entrega",
-						"larg",
-						"alt",
-						"qt",
-						"preço"]]
+	products_row = [
+									"tipo"
+									]
+
+
+if params[:code]
+	products_row += [
+									"código"
+									]
+end
+
+
+if params[:supplier]
+	products_row += [
+									"fornecedor"
+									]
+end
+
+
+	products_row += [
+									"descrição",
+									"ambiente"
+									]
+
+
+if params[:freight]
+	products_row += [
+									"fornecedor"
+									]
+end
+
+
+
+	products_row += [
+									"entrega"
+									]
+
+if params[:width]
+	products_row += [
+									"larg"
+									]
+end
+
+
+if params[:height]
+	products_row += [
+									"alt"
+									]
+end
+
+
+if params[:quantity]
+	products_row += [
+									"qt"
+									]
+end
+
+
+	products_row += [
+									"preço"
+									]
+
+
+products = [products_row]
 
 
 products += @budget.budgets_products.map do |budget_product|
