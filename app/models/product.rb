@@ -73,6 +73,7 @@ class Product < ActiveRecord::Base
       	@product.supplier_table_discount = string_to_float(product_hash["supplier_table_discount"].strip)
       	@product.description             = product_hash["description"].strip
       	@product.product_type            = product_hash["product_type"].strip
+      	@product.updated_at							 = Date.today
 
       	@product.save!
 
