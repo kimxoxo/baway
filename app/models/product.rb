@@ -23,7 +23,7 @@ class Product < ActiveRecord::Base
 
   attr_accessible :brand, :code, :description, :ipi, :ncm,
   								:supplier_id, :supplier_price, :width, :product_type, :markup,
-  								:supplier_table_discount
+  								:supplier_table_discount, :visible
 
 
 	attr_accessor :search_phrase, :budget_id
@@ -61,6 +61,8 @@ class Product < ActiveRecord::Base
 
       @product = Product.where(code: "#{code_from_cell}", supplier_id: supplier_id_from_cell.to_i).first
 
+      @supplier_id = supplier_id_from_cell.to_i
+
 
       if @product
 
@@ -74,6 +76,7 @@ class Product < ActiveRecord::Base
       	@product.description             = product_hash["description"].strip
       	@product.product_type            = product_hash["product_type"].strip
       	@product.updated_at							 = Date.today
+      	@product.visible								 = true
 
       	@product.save!
 
@@ -90,6 +93,7 @@ class Product < ActiveRecord::Base
       	@product.supplier_table_discount = string_to_float(product_hash["supplier_table_discount"].strip)
       	@product.description             = product_hash["description"].strip
       	@product.product_type            = product_hash["product_type"].strip
+      	@product.visible								 = true
 
       	@product.save!
 

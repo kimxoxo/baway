@@ -3,15 +3,14 @@ class ProductsController < ApplicationController
 
 	def import
 	  
-	  if Product.import(params[:file])
-	  	@products = Product.find_by_supplier_id(@product.supplier_id)
+	  Product.import(params[:file])
+	  
+	  @products = Product.where(supplier_id: @supplier_id)
 
-	  	@products.each do |product|
-	  		if product.updated_date.strftime("%Y%m%d") != Date.today.strftime("%Y%m%d")
-	  			product.update_attributes(visible: false)
-	  		end
+	  @products.each do |product|
+	  	if product.updated_at.strftime("%Y%m%d") != Date.today.strftime("%Y%m%d")
+	  		product.update_attributes(visible: false)
 	  	end
-
 	  end
 
 	  redirect_to products_path, notice: "Products imported."
