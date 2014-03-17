@@ -61,9 +61,6 @@ class Product < ActiveRecord::Base
 
       @product = Product.where(code: "#{code_from_cell}", supplier_id: supplier_id_from_cell.to_i).first
 
-      @supplier_id = supplier_id_from_cell.to_i
-
-
       if @product
 
       	@product.code        = product_hash["code"].strip
@@ -103,6 +100,15 @@ class Product < ActiveRecord::Base
       #undefined method `update_attributes!' for #<ActiveRecord::Relation:0x000001048c6860>
       #which means there are two or more items for the same supplier_id with the same code
     end
+
+	  @products = Product.where(supplier_id: @product.supplier_id)
+
+	  @products.each do |product|
+	  	if product.updated_at.strftime("%Y%m%d") != Date.today.strftime("%Y%m%d")
+	  		product.visible = false
+	  		product.save
+	  	end
+	  end
   end
 
 
