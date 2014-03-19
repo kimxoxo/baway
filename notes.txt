@@ -29,3 +29,10 @@ Record.all.each { |r| r.destroy }
 
 ###excel, replace dot to comma
 =SUBSTITUTE(C5,".",",")
+
+###product_type
+papel parede -> 1
+tapete -> 2
+tecido -> 3
+mao obra -> 4
+revestimento e couro -> 5

@@ -164,15 +164,15 @@ products = [products_row]
 
 	#define width
 	if product.width != 0
-		product_width = "#{product.width} cm"
+		product_width = "#{product.width} m"
 	else
-		product_width = "#{budget_product.width} cm"
+		product_width = "#{budget_product.width} m"
 	end
 
 
 	#define height
 	if budget_product.height
-		product_height = "#{budget_product.height} cm"
+		product_height = "#{budget_product.height} m"
 	else
 		product_height = "n/a"
 	end

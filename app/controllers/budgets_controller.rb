@@ -219,7 +219,7 @@ class BudgetsController < ApplicationController
 
     @budgets_products = @budget.budgets_products.order('id ASC')
 
-    @suppliers = Supplier.all
+    @suppliers = Supplier.order('name ASC')
 
     #@payment_condition1 = @budget.payment_conditions.order('id ASC').first
     #@payment_condition2 = @budget.payment_conditions.order('id ASC').second
