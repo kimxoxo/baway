@@ -4,6 +4,12 @@
     <li class="header">
       header
     </li>
+
+    <li class="first_filter">
+			<%= link_to budgets_path(deleted: true) do %>
+				orçamentos deletados
+      <% end %>
+    </li>
   </ul>
 
 </div>
@@ -23,7 +29,7 @@
       <!--<th><%= t :"activerecord.attributes.budget.description" %></th>-->
       <th>pdf</th>
       <th><%= content_tag(:i, '', class: "fa fa-pencil") %></th>
-      <!--<th></th>-->
+      <th><%= content_tag(:i, '', class: "fa fa-trash-o") %></th>
     </tr>
 
   <% @budgets.each do |budget| %>
@@ -54,7 +60,11 @@
       <td>
       	<%= link_to content_tag(:i, '', class: "fa fa-pencil"), edit_budget_path(budget) %>
       </td>
-      <!--<td><%= link_to 'Destroy', budget, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+      <td>
+      	<%#= link_to 'Destroy', budget, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+				<%= link_to content_tag(:i, '', class: "fa fa-trash-o", style: 'color: #3f7db2; '), budget, method: :delete, data: {confirm: (t :"dialog_text.confirm.prompt")} %>
+      </td>
     </tr>
   <% end %>
 

@@ -9,10 +9,14 @@ class BudgetsController < ApplicationController
   def index
 
 		#if params[:budget_id]
-			@budgets = Budget.paginate(page: params[:page], per_page: 10).order('created_at DESC')
+			@budgets = Budget.where(deleted: nil).paginate(page: params[:page], per_page: 10).order('created_at DESC')
 		#else
     	#@budgets = Budget.paginate(page: params[:page], per_page: 10).order('created_at DESC')
 		#end
+
+		if params[:deleted]
+			@budgets = Budget.where(deleted: true).paginate(page: params[:page], per_page: 10).order('created_at DESC')
+		end	
 
 
     respond_to do |format|
@@ -326,11 +330,14 @@ class BudgetsController < ApplicationController
   # DELETE /budgets/1.json
   def destroy
     @budget = Budget.find(params[:id])
-    @budget.destroy
+    #@budget.destroy
 
-    respond_to do |format|
-      format.html { redirect_to budgets_url }
-      format.json { head :no_content }
+
+    @budget.deleted = true
+    @budget.save
+
+	  respond_to do |format|
+     	format.html { redirect_to budgets_path }
     end
   end
 

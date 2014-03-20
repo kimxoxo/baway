@@ -17,15 +17,27 @@ class ProductsController < ApplicationController
   def index
 
 
-  	if params[:product]
-    	@products = Product.where("lower(code) LIKE ?", "#{params[:product][:code].downcase}").paginate(page: params[:page], per_page: 12)
-  	else
-    	@products = Product.paginate(page: params[:page], per_page: 10).order('created_at DESC')
+   	@products = Product.paginate(page: params[:page], per_page: 10).order('created_at DESC')
+
+
+
+
+    if params[:product][:search_phrase] && !params[:product][:search_phrase].blank?
+	    ##query for code
+	    @products_search_list1 = Product.where(supplier_id: params[:product][:supplier_id], visible: true).where("lower(code) LIKE ? ", "#{params[:product][:search_phrase].downcase}%").limit(25)
+	    ##query for description
+	    @products_search_list2 = Product.where(supplier_id: params[:product][:supplier_id], visible: true).where("lower(description) LIKE ?", "%#{params[:product][:search_phrase].downcase}%").limit(25)
+
+	    ##merge results
+			@products = (@products_search_list1 + @products_search_list2).uniq
+
+			@products = @products.paginate(page: params[:page], per_page: 10)
     end
 
 
-
     @product = Product.new
+
+    @suppliers = Supplier.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -103,4 +115,5 @@ class ProductsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 end

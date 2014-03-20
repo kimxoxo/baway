@@ -5,15 +5,51 @@
       header
     </li>
 
-    <li class="first_filter">
+    <!--<li class="first_filter">
       <%= simple_form_for @product , html: {id: "", style: ""}, url: products_path, method: :get do |f| %>
         <%= f.input_field :code,
         						      wrapper: 'basic',
         									style: 'width: 175px; box-shadow: none; ',
         									placeholder: (t :"activerecord.attributes.product.filters.product_code") %>
       <% end %>
-    </li>
+    </li>-->
 
+
+
+
+
+    <li class="first_filter">
+			<%= simple_form_for @product,
+												url: {controller: 'products',
+															action: 'index'},
+												method: :get,
+												html: {class: '',
+															 style: 'float: left; height: 10px; border: 0px solid green; ',
+															 id: ""} do |f| %>
+
+				
+				<%= f.input :supplier_id,
+                          as: :select,
+                          label: false,
+                          wrapper: 'basic',
+                          collection: @suppliers,
+                          include_blank: 'selecione fornecedor',
+                          input_html: {style: 'width: 200px; float: left; '} %>
+
+
+			  <%= f.input_field :search_phrase,
+			  									as: :string,
+													placeholder: 'código/descrição do produto',
+      										style: 'width: 185px; margin-left: 0px; ' %>
+
+				<%= f.submit 'procurar',
+        						 	class: 'btn btn-primary btn-small',
+        						  style: 'font-weight: bold;
+        						  				padding: 2px 0px 2px 0px;
+        						  				width: 200px; ' %>
+
+			<% end %>
+    </li>
   </ul>
 </div>
 

@@ -68,56 +68,45 @@
 
 
 
-<div id="div_popover_see_pdf" class="hide">
-   
-	<%= form_tag "/budgets/#{@budget.id}.pdf", style: 'border: 0px solid red; padding: 0; margin: 0; ', method: :get, target: "_blank" do %>
+			<div id="div_popover_see_pdf" class="hide">
+			   
+				<%= form_tag "/budgets/#{@budget.id}.pdf", style: 'border: 0px solid red; padding: 0; margin: 0; ', method: :get, target: "_blank" do %>
 
-		<%#= hidden_field_tag "budget_product", "#{budget_product.id}" %>
+					<%#= hidden_field_tag "budget_product", "#{budget_product.id}" %>
 
-	  <%= check_box_tag "code", "", style: 'width: 50px; ' %>
-	  <span style="padding-left: 10px; font-weight: normal; ">código</span>
-	  <br />
+				  <%= check_box_tag "code", "", style: 'width: 50px; ' %>
+				  <span style="padding-left: 10px; font-weight: normal; ">código</span>
+				  <br />
 
-	  <%= check_box_tag "supplier", "", style: 'width: 50px; ' %>
-	  <span style="padding-left: 10px; font-weight: normal; ">fornecedor</span>
-	  <br />
+				  <%= check_box_tag "supplier", "", style: 'width: 50px; ' %>
+				  <span style="padding-left: 10px; font-weight: normal; ">fornecedor</span>
+				  <br />
 
-		<%= check_box_tag "freight", "", style: 'width: 50px; ' %>
-	  <span style="padding-left: 10px; font-weight: normal; ">frete</span>
-		<br />
+					<%= check_box_tag "freight", "", style: 'width: 50px; ' %>
+				  <span style="padding-left: 10px; font-weight: normal; ">frete</span>
+					<br />
 
-		<%= check_box_tag "width", "", style: 'width: 50px; ' %>
-	  <span style="padding-left: 10px; font-weight: normal; ">largura</span>
-		<br />
+					<%= check_box_tag "width", "", style: 'width: 50px; ' %>
+				  <span style="padding-left: 10px; font-weight: normal; ">largura</span>
+					<br />
 
-		<%= check_box_tag "height", "", style: 'width: 50px; ' %>
-	  <span style="padding-left: 10px; font-weight: normal; ">altura</span>
-	  <br />
+					<%= check_box_tag "height", "", style: 'width: 50px; ' %>
+				  <span style="padding-left: 10px; font-weight: normal; ">altura</span>
+				  <br />
 
-		<%= check_box_tag "quantity", "", style: 'width: 50px; ' %>
-	  <span style="padding-left: 10px; font-weight: normal; ">quantidade</span>
-	  <br />
+					<%= check_box_tag "quantity", "", style: 'width: 50px; ' %>
+				  <span style="padding-left: 10px; font-weight: normal; ">quantidade</span>
+				  <br />
 
-	  <br />
-	  
-	  <%= submit_tag "ver", class: "btn btn-small btn-success" %>
+				  <br />
+				  
+				  <%= submit_tag "ver", class: "btn btn-small btn-success" %>
 
-	<% end %>
+				<% end %>
 
-	<button style="position: absolute; margin-top: -26px; margin-left: 55px;  " onclick="$('#popover_see_pdf').popover('hide'); " class="btn btn-small btn-danger" data-dismiss="clickover">fechar</button>
-   
-</div>
-
-
-
-
-
-
-
-
-
-
-
+				<button style="position: absolute; margin-top: -26px; margin-left: 55px;  " onclick="$('#popover_see_pdf').popover('hide'); " class="btn btn-small btn-danger" data-dismiss="clickover">fechar</button>
+			   
+			</div>
 
 	  <% end %>
 

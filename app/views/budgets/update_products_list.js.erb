@@ -12,7 +12,6 @@
 
 	enable_this_tr_forms('<%= @product.id %>');
 
-	$('#div_buttons').html('<%= escape_javascript(render partial: "buttons") %>');
 
 
 <% end %>
@@ -39,7 +38,6 @@
 
 	$('#product_id_<%= params[:budget_product_id] %>').remove();
 
-	$('#div_buttons').html('<%= escape_javascript(render partial: "buttons") %>');
 
 <% end %>
 
@@ -51,3 +49,5 @@ sets_filter_div_height();
 create_popovers();
 
 disable_checkboxs();
+
+$('#div_buttons').html('<%= escape_javascript(render partial: "buttons") %>');

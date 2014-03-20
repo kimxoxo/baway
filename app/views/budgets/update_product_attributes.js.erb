@@ -19,7 +19,6 @@ $('#div_budget_more_details_show').show();
 $('#form_save_request').hide();
 
 
-$('#div_buttons').html('<%= escape_javascript(render partial: "buttons") %>');
 
 
 make_td_same_width_for_budget_tables();
@@ -32,3 +31,5 @@ create_popovers();
 <% if !params[:budgets_product][:budget_status_dont_change] %>
 	disable_checkboxs();
 <% end %>
+
+$('#div_buttons').html('<%= escape_javascript(render partial: "buttons") %>');
