@@ -20,9 +20,7 @@ class ProductsController < ApplicationController
    	@products = Product.paginate(page: params[:page], per_page: 10).order('created_at DESC')
 
 
-
-
-    if params[:product][:search_phrase] && !params[:product][:search_phrase].blank?
+    if params[:product]
 	    ##query for code
 	    @products_search_list1 = Product.where(supplier_id: params[:product][:supplier_id], visible: true).where("lower(code) LIKE ? ", "#{params[:product][:search_phrase].downcase}%").limit(25)
 	    ##query for description
