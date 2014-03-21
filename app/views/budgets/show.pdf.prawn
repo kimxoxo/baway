@@ -118,7 +118,7 @@ end
 
 if params[:freight]
 	products_row += [
-									"fornecedor"
+									"frete"
 									]
 end
 
