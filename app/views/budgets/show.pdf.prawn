@@ -430,6 +430,35 @@ end
 
 
 
+
+
+pdf.move_down 10
+
+
+date_plus_30days =  @budget.updated_at + 30.days
+date_plus_30days = date_plus_30days.strftime('%d/%m/%Y')
+
+budget_is_valid_up_to = [[
+													"Observações      #{@budget.observations}"
+												]]
+
+
+pdf.table(budget_is_valid_up_to,
+					width: 769,
+					column_widths:  {},
+		 		  header: true) do |payment_condition_cell|
+
+	#product.row(0).font_style = :bold
+	#ticket.row(0).column(0).align = :right
+
+	payment_condition_cell.column(0..10).border_width = 0
+	#payment_condition_cell.column(0).font_style = :bold
+	payment_condition_cell.row(0).style(:background_color => "F4F3F3")
+end
+
+
+
+
 pdf.move_down 10
 
 
