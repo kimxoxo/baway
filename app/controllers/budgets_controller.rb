@@ -221,7 +221,7 @@ class BudgetsController < ApplicationController
     @products = @budget.products.order('created_at ASC')
     @products_search_list = []
 
-    @budgets_products = @budget.budgets_products.order('id ASC')
+    @budgets_products = @budget.budgets_products.order('created_at DESC')
 
     @suppliers = Supplier.order('name ASC')
 
