@@ -437,7 +437,7 @@ date_plus_30days =  @budget.updated_at + 30.days
 date_plus_30days = date_plus_30days.strftime('%d/%m/%Y')
 
 budget_is_valid_up_to = [[
-	          						"Este orçamento tem validade de 30dias, após a sua emissão. É válido até #{date_plus_30days}."
+	          						"Este orçamento tem validade de 30dias, após a sua emissão."
 												]]
 
 
