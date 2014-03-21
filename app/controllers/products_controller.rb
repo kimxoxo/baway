@@ -35,7 +35,7 @@ class ProductsController < ApplicationController
 
     @product = Product.new
 
-    @suppliers = Supplier.all
+    @suppliers = Supplier.order('name ASC')
 
     respond_to do |format|
       format.html # index.html.erb

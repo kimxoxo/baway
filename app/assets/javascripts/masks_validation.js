@@ -308,8 +308,8 @@ $(document).ready(function($) {
 
 
   $("#budget_customer_attributes_postal_code").mask("99999-999");
-  $("#budget_customer_attributes_landline").mask("(99) 9999-9999");
-  $("#budget_customer_attributes_mobile").mask("(99) 9999-9999");
+  $("#budget_customer_attributes_landline").mask("(99) 999999999");
+  $("#budget_customer_attributes_mobile").mask("(99) 999999999");
 
 
   $("#product_supplier_price").mask("0.000,00", {reverse: true});
@@ -326,11 +326,11 @@ $(document).ready(function($) {
   $("#supplier_postal_code").mask("99999-999");
 
 
-  $("#supplier_landline").mask("(99) 9999-9999");
-  $("#supplier_mobile").mask("(99) 9999-9999");
+  $("#supplier_landline").mask("(99) 999999999");
+  $("#supplier_mobile").mask("(99) 999999999");
 
 
-  $("#user_mobile").mask("(99) 9999-9999");
+  $("#user_mobile").mask("(99) 999999999");
 
 
   $(".product_height_input").mask("999999.99", {reverse: true});

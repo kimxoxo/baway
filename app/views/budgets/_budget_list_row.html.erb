@@ -260,7 +260,7 @@
 
 
 							<td class="td_pencil_width">
-								<% if (product.product_type == 1 || product.product_type == 3) %>
+								<% if (product.product_type == 1 || product.product_type == 3 || product.product_type == 6) %>
 
 								<% else %>
 									<a href="#" class="hide_if_product_type5" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'width'); " %>'>
@@ -273,7 +273,7 @@
 
 
 							<td class="td_width">
-								<% if (product.product_type == 1 || product.product_type == 3) %>
+								<% if (product.product_type == 1 || product.product_type == 3 || product.product_type == 6) %>
 									
 									<%= "#{product.width} m" %>
 								
@@ -321,7 +321,7 @@
 
 
 							<td class="td_pencil_height">
-								<% if (product.product_type == 1 || product.product_type == 3) %>
+								<% if (product.product_type == 1 || product.product_type == 3 || product.product_type == 6) %>
 
 								<% else %>
 									<a href="#" class="hide_if_product_type5" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'height'); " %>'>

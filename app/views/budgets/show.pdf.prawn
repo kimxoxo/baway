@@ -185,7 +185,7 @@ products = [products_row]
 		totals_price = totals_price + budget_product.computed_price
 
 products_row = [
-								(t :"activerecord.attributes.product.product_type#{product.product_type}")
+								(t :"activerecord.attributes.product.product_type_full#{product.product_type}")
 								]
 
 
@@ -466,7 +466,7 @@ pdf.move_down 20
 pdf.float do
 	pdf.text "<b>Arquiteto(a)</b> #{architech_name}", style: :normal, align: :left, inline_format: true
 	pdf.move_down 5
-	pdf.text "<b>Vendedor(a)</b> #{@seller.name} #{@seller.surname}     <b>phone</b> #{@seller.mobile}    <b>email</b> #{@seller.email}", style: :normal, align: :left, inline_format: true
+	pdf.text "<b>Consultor(a)</b> #{@seller.name} #{@seller.surname}     <b>phone</b> #{@seller.mobile}    <b>email</b> #{@seller.email}", style: :normal, align: :left, inline_format: true
 end
 
 
