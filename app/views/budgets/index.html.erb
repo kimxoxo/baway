@@ -27,7 +27,7 @@
       <th><%= t :"activerecord.attributes.budget.architect_id" %></th>
       <!--<th>Payment condition</th>-->
       <!--<th><%= t :"activerecord.attributes.budget.description" %></th>-->
-      <th>pdf</th>
+      <!--<th>pdf</th>-->
       <th><%= content_tag(:i, '', class: "fa fa-pencil") %></th>
       <th><%= content_tag(:i, '', class: "fa fa-trash-o") %></th>
     </tr>
@@ -50,13 +50,13 @@
       <td><%= (User.find(budget.architect_id).name + ' ' + User.find(budget.architect_id).surname) if budget.architect_id %></td>
       <!--<td><%#= budget.payment_condition_id %></td>-->
       <!--<td><%#= budget.description %></td>-->
-      <td>
+      <!--<td>
 				<% if budget.status < 2 %>
           <%= 'feche orç.' %>
         <% else %>
           <%= link_to content_tag(:i, '', class: "fa fa-download", style: 'font-size: 19px; '), budget_path(budget.id, format: 'pdf'), target: '_blank' %>
         <% end %>
-      </td>
+      </td>-->
       <td>
       	<%= link_to content_tag(:i, '', class: "fa fa-pencil"), edit_budget_path(budget) %>
       </td>

@@ -28,13 +28,20 @@
 															 id: ""} do |f| %>
 
 				
-				<%= f.input :supplier_id,
+				<% if params[:product] %>
+					<% supplier_id = params[:product][:supplier_id] %>
+				<% else %>
+					<% supplier_id = nil %>
+				<% end %>
+
+				<%= f.input_field :supplier_id,
                           as: :select,
                           label: false,
                           wrapper: 'basic',
                           collection: @suppliers,
                           include_blank: 'selecione fornecedor',
-                          input_html: {style: 'width: 200px; float: left; '} %>
+                          selected: supplier_id,
+                          style: 'width: 200px; float: left; ' %>
 
 
 			  <%= f.input_field :search_phrase,

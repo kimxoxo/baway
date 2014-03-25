@@ -83,6 +83,10 @@ class BudgetsController < ApplicationController
 		@budget  = Budget.find(params[:budget_id])
 		@product = Product.find(params[:product_id])
 
+    @budgets_products = @budget.budgets_products
+
+    @suppliers = Supplier.order('name ASC')
+
     #delete product from budget list
     if params[:delete]
       #@budget.products.find(@product.id).destroy      
