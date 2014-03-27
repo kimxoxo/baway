@@ -147,7 +147,7 @@ class BudgetsController < ApplicationController
 
 
 
- 		if (@product.product_type == 1 || @product.product_type == 3 || @product.product_type == 4 || @product.product_type == 5 || @product.product_type == 6)
+ 		if (@product.product_type == 0 || @product.product_type == 1 || @product.product_type == 3 || @product.product_type == 5 || @product.product_type == 6)
 
 			if (@product.supplier_price && @product.ipi && @product.markup && @product.supplier_table_discount && @budgets_product.quantity && @budgets_product.freight)
 									
@@ -382,7 +382,7 @@ class BudgetsController < ApplicationController
 
 
 
-	 		if (@product.product_type == 1 || @product.product_type == 3 || @product.product_type == 4 || @product.product_type == 5)
+	 		if (@product.product_type == 0 || @product.product_type == 1 || @product.product_type == 3 || @product.product_type == 5)
 
 				if (@product.supplier_price && @product.ipi && @product.markup && @product.supplier_table_discount && @budgets_product.quantity && @budgets_product.freight)
 										

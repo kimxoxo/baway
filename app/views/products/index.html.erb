@@ -82,7 +82,7 @@
   <% @products.each do |product| %>
 		
 		<%
-		if (product.product_type == 1 || product.product_type == 3 || product.product_type == 4)
+		if (product.product_type == 0 || product.product_type == 1 || product.product_type == 3)
 								
 			computed_price = compute_price_product_type_1(product.supplier_price,
 																										product.ipi,
