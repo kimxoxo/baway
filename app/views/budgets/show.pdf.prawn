@@ -110,8 +110,22 @@ if params[:supplier]
 end
 
 
+
+if params[:description]
 	products_row += [
-									"descrição",
+									"descrição"
+									]
+end
+
+
+if params[:observations]
+	products_row += [
+									"observações"
+									]
+end
+
+
+	products_row += [
 									"ambiente"
 									]
 
@@ -204,8 +218,23 @@ products_row = [
 										]
 	end
 
+
+
+	if params[:description]
+		products_row += [
+										product.description
+										]
+	end
+
+
+	if params[:observations]
+		products_row += [
+										budget_product.product_observations
+										]
+	end
+
+
 	products_row += [
-									product.description,
 									budget_product.house_area
 									]
 
@@ -269,7 +298,7 @@ pdf.table(products, width: 770,
 	#product.row(0).font_style = :bold
 	#ticket.row(0).column(0).align = :right
 
-	product.column(0..10).border_width = 0
+	product.column(0..13).border_width = 0
 	product.row(0).style(:background_color => "F4F3F3")
 end
 

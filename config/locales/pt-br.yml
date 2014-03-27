@@ -340,12 +340,12 @@ pt-BR:
         product_type4: MO
         product_type5: CR
         product_type6: RC        
-        product_type_full1: revestimento parede
-        product_type_full2: tapete
-        product_type_full3: tecido
-        product_type_full4: mão obra
-        product_type_full5: cortina
-        product_type_full6: placas/couro        
+        product_type_full1: REVESTIMENTO PAREDE
+        product_type_full2: TAPETE
+        product_type_full3: TECIDO
+        product_type_full4: MÃO OBRA
+        product_type_full5: CORTINA
+        product_type_full6: PLACAS/COURO        
         code: código
         supplier_id: fornecedor
         brand: marca
