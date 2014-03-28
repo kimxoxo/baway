@@ -412,7 +412,11 @@
 
 								<% if budget_product.quantity %>
 									<span>
-										<%= budget_product.quantity %>
+										<% if (budget_product.quantity - budget_product.quantity.to_i) == 0 %>
+											<%= budget_product.quantity.to_i %>
+										<% else %>
+											<%= budget_product.quantity %>
+										<% end %>
 									</span>
 								<% else %>
 									<span style="color: red; ">

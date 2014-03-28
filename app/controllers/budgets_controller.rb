@@ -370,7 +370,13 @@ class BudgetsController < ApplicationController
 			@number_items = @number_items * window_number_parts
 			@number_items = @number_items * window_height
 
-			@number_items = @number_items.ceil
+			if (@number_items.ceil - @number_items) > 0.5
+				@number_items = @number_items.to_i + 0.5
+			else
+				@number_items = @number_items.ceil
+			end
+
+			#@number_items = @number_items.ceil
 
 			@budgets_product.quantity = @number_items
 			@budgets_product.save

@@ -12,7 +12,6 @@ class AddBudgetsAndProducts < ActiveRecord::Migration
       t.integer :request_id
       t.decimal :computed_price
       t.string :product_observations
-
     end
   end
 

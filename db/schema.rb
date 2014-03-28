@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140319160325) do
+ActiveRecord::Schema.define(:version => 20140328022515) do
 
   create_table "budgets", :force => true do |t|
     t.integer  "customer_id"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(:version => 20140319160325) do
     t.integer "budget_id"
     t.integer "product_id"
     t.string  "house_area"
-    t.integer "quantity"
+    t.decimal "quantity"
     t.integer "days_to_delivery"
     t.decimal "freight"
     t.decimal "height"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20140319160325) do
     t.integer "request_id"
     t.decimal "computed_price"
     t.string  "product_observations"
+    t.integer "product_type"
   end
 
   create_table "customers", :force => true do |t|
