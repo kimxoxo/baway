@@ -1,6 +1,8 @@
 BudgetsProduct.find_all_by_budget_id(11).each { |bp| pt = Product.find(bp.product_id).product_type; bp.product_type = pt; bp.save  }
 
 
+BudgetsProduct.find_all_by_product_type(4).each { |bp|  bp.product_type = 0; bp.save  }
+
 
 ###access server
 ssh deployer@192.241.247.215

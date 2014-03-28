@@ -113,6 +113,8 @@ class BudgetsController < ApplicationController
 		    @budget_product.update_attributes(quantity: 1)
 			end
 
+	    @budget_product.update_attributes(product_type: @product.product_type)
+
     end
 
 
