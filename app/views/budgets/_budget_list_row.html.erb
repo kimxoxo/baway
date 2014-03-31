@@ -31,8 +31,10 @@
 							</td>
 
 
-							<td class="td_code">
-								<%= product.code %>
+							<td class="td_code" style="text-overflow: ellipsis; max-width: 90px; overflow:hidden; ">
+								<div class="" style="text-overflow: ellipsis; overflow:hidden; ">
+									<%= product.code %>
+								</div>
 							</td>
 
 
@@ -52,15 +54,18 @@
 								<%= render '/budgets/popover', budget_product: budget_product %>
 							</td>
 
-							<td class="td_supplier">
-								<%= product.supplier.name %>
+							<td class="td_supplier" style="text-overflow: ellipsis; max-width: 100px; overflow:hidden; ">
+								<div class="" style="text-overflow: ellipsis; overflow:hidden; ">
+									<%= product.supplier.name %>
+								</div>
 							</td>
 
-							<td class="td_description" style="word-wrap:break-word; ">
-								<%= product.description %>
+
+							<td class="td_description" style="text-overflow: ellipsis; max-width: 120px; overflow:hidden; ">
+								<div class="" style="text-overflow: ellipsis; overflow:hidden; ">
+									<%= product.description %>
+								</div>
 							</td>
-
-
 
 
 							<td class="td_pencil_product_observations">

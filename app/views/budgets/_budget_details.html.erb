@@ -82,34 +82,29 @@
 						</tr>
 
 
-
-
-
-
-
-
-
-
-
 						<tr>
 							<td width="340px" style="border: 0px solid red; ">
+								<br />
 								<b><%= t :"activerecord.attributes.budget.payment_condition" %></b>
-							
-								<%= f.input :initial_payment,
-														input_html: { value: budget_initial_payment, style: 'margin-left: 5px; width: 70px; '},
-														label_html: {style: 'margin-left: 20px; '},
-	              						wrapper: :basic %>
-
 							</td>
+						</tr>
 
-
-							
+						<tr>
 							<!-- format initial_payment -->
 							<% if @budget.initial_payment %>
 								<% budget_initial_payment = @budget.initial_payment %>
 							<% else %>
 								<% budget_initial_payment = 0 %>
 							<% end %>
+
+
+
+
+						<td style="border: 0px solid red; " colspan="4">
+							<%= f.input :initial_payment,
+											input_html: { value: budget_initial_payment, style: 'margin-left: 5px; width: 70px; '},
+											label_html: {style: 'margin-left: 20px; '},
+          						wrapper: :basic %>
 
 
 
@@ -129,9 +124,10 @@
 										<% label2 = "x" %>
 									<% end %>
 
-									<td style="border: 0px solid red; ">
+
 										<%= p.input :active,
 																wrapper: :basic,
+																input_html: {style: "margin-left: 30px; "},
 																label: label1 %>
 
 											<% if !payment_condition.num_monthly_payments %>
@@ -163,10 +159,10 @@
 												<i class="fa fa-pencil fa-white" onclick="enable_payment_condition_input(); "></i>
 											</a>
 										<% end %>
-									</td>
 
+									<% end %>
 								<% end %>
-							<% end %>
+							</td>
 
 
 							<td width="80px" style="border: 0px solid red; ">
