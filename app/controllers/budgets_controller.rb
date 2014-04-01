@@ -140,6 +140,10 @@ class BudgetsController < ApplicationController
 		end
 
 
+    if !params[:budgets_product][:computed_price].blank?
+			params[:budgets_product][:computed_price] = view_context.currency_to_number(params[:budgets_product][:computed_price])
+		end
+
 
     #budget details changed so status must be always = 1
     if !params[:budgets_product][:budget_status_dont_change]

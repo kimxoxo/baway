@@ -42,3 +42,4 @@ tapete -> 2
 tecido -> 3
 mao obra -> 4
 revestimento e couro -> 5
+custos adicionais -> 6

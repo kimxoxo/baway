@@ -436,16 +436,63 @@
 											 	   			  budget_product: budget_product} %>
 
 
+							<td class="td_pencil_price">
+								<% if product.product_type == 7 %>
+									<a href="#" class="hide_if_product_type5" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'price'); " %>'>
+										<i class="fa fa-pencil"></i>
+									</a>								
+								<% else %>
+
+								<% end %>
+							</td>
+
+
+
 							<td class="td_price">
-								<span>
-									<% if budget_product.computed_price %>
-										<%= number_to_currency(budget_product.computed_price) %>
-									<% else %>
-										<span style="color: red; ">
-											<%= t :"activerecord.attributes.product.please_fill" %>
-										</span>
-									<% end %>
-								</span>
+								<% if product.product_type == 7 %>
+									<%= simple_form_for budget_product,
+			            										url: update_product_attributes_budgets_path,
+								            					method: :get,
+								            					remote: true,
+								            					html: {class: 'hide_this_form',
+								            					style: 'margin: 0;
+								            									padding: 0;
+								            									border: 0px solid red; ',
+																			id: "form_price_#{budget_product.id}"} do |f| %>
+
+			              <%= f.hidden_field :id %>
+
+			              <%= f.input_field :computed_price,
+			                          			as: :string,
+			                       					onblur: '$(this).closest("form").submit(); ',
+			                          			style: 'float: left;
+			                          							width: 60px;
+			                          							margin: 0;
+			                          							padding: 2px; ' %>          
+			            <% end %>
+
+
+									<span>
+										<% if budget_product.computed_price %>
+											<%= number_to_currency(budget_product.computed_price) %>
+										<% else %>
+											<span style="color: red; ">
+												<%= t :"activerecord.attributes.product.please_fill" %>
+											</span>
+										<% end %>
+									</span>
+
+			        	<% else %>
+									<span>
+										<% if budget_product.computed_price %>
+											<%= number_to_currency(budget_product.computed_price) %>
+										<% else %>
+											<span style="color: red; ">
+												<%= t :"activerecord.attributes.product.please_fill" %>
+											</span>
+										<% end %>
+									</span>
+		            <% end %>				
 
 								<i class="fa" style="font-size: 18px; "></i>
 							</td>

@@ -41,7 +41,11 @@ end
 			</td>
 
 			<td>
-				<%= number_to_currency(computed_price) %>
+				<% if product.product_type == 7 %>
+					<%= 'digite' %>
+				<% else %>
+					<%= number_to_currency(computed_price) %>
+				<% end %>
 				<%#= number_to_currency(product.supplier_price) %>
 			</td>
 
