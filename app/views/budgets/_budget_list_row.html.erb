@@ -448,8 +448,18 @@
 
 
 
+
+
 							<td class="td_price">
 								<% if product.product_type == 7 %>
+
+									<% if budget_product.computed_price %>
+										<% computed_price_input_value = number_to_currency(budget_product.computed_price).gsub(/[^0-9,.]/, '') %>
+									<% else %>
+										<% computed_price_input_value = nil %>
+									<% end %>
+
+
 									<%= simple_form_for budget_product,
 			            										url: update_product_attributes_budgets_path,
 								            					method: :get,
@@ -464,6 +474,7 @@
 
 			              <%= f.input_field :computed_price,
 			                          			as: :string,
+			                          			value: computed_price_input_value,
 			                       					onblur: '$(this).closest("form").submit(); ',
 			                          			style: 'float: left;
 			                          							width: 60px;

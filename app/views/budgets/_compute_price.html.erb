@@ -30,10 +30,12 @@
 
 									<% end %>
 
-								<%# elsif product.product_type == 3 %>
+								<% elsif product.product_type == 7 %>
+								
+									<% if !budget_product.computed_price == nil %>
 
-									
-
-
+										<% @price = @price + budget_product.computed_price %>
+										
+									<% end %>
 
 								<% end %>

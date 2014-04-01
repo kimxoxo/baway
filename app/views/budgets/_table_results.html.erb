@@ -7,12 +7,12 @@
 
 					<% product = Product.find(budget_product.product_id) %>
 
-					<%= render partial: 'compute_price',
+					<%#= render partial: 'compute_price',
 										 locals: {product: product,
 									 	   			  budget_product: budget_product} %>
 
 						<!-- compute totals for price column -->
-						<% (@price_total = @price_total + @price) if @price %>
+						<% (@price_total = @price_total + budget_product.computed_price) if budget_product.computed_price %>
 
 						<% (@quantity_total = @quantity_total + budget_product.quantity) if budget_product.quantity %>
 
@@ -174,15 +174,11 @@
 			          <% end %>
 			        </span>
 
-
 			        <span id="span_pencil_discount_show" style="float: right; font-weight: normal; padding-right: 10px; ">
 								<a href="#" onclick='<%= "enable_this_form_discount(); " %>'>
 									<i class="fa fa-pencil"></i>
 								</a>
 			        </span>
-
-
-
 
 			        <span style="float: right; font-weight: normal; padding-right: 10px; ">
 			        	<%= (t :"activerecord.attributes.budget.discount") %>
