@@ -19,7 +19,7 @@
 
 
 
-    <div style="padding: 5px; margin: 0; margin-bottom: 5px; display: none; " id="div_budget_more_details_edit" class="well no_borders_shadow">
+    <div style="padding: 5px; margin: 0; margin-bottom: 5px; display: _none; " id="div_budget_more_details_edit" class="well no_borders_shadow">
 
    	    <%= simple_form_for @budget, html: {class: 'form-inline', style: 'margin: 0; padding: 0; '} do |f| %>
 	        <table style="padding: 0; margin: 0; border: 0px solid red; width: 100%; ">
@@ -58,8 +58,6 @@
 
 
 					<table style="width: 100%; margin-top: 5px; ">
-
-
 						<tr>
 							<td style="border: 0px solid red; " colspan="5">
 								<%= f.input :observations,
@@ -89,6 +87,28 @@
 							</td>
 						</tr>
 
+
+						<tr>
+							<td colspan="6">
+								<%= f.input :instant_payment,
+														wrapper: :basic,
+														label: 'à vista',
+														input_html: { value: budget_initial_payment, style: 'margin-left: 0px; '},
+														label_html: {style: 'margin-left: 0px; '},
+						          			wrapper: :basic %>
+
+								<%= f.input :instant_payment_discount,
+														wrapper: :basic,
+														label: 'desconto',
+														input_html: { value: budget_initial_payment,
+																					style: 'margin-left: 10px; width: 40px; '},
+														label_html: {style: 'margin-left: 30px; '},
+						          			wrapper: :basic %>
+
+							</td>
+						</tr>
+
+
 						<tr>
 							<!-- format initial_payment -->
 							<% if @budget.initial_payment %>
@@ -98,31 +118,28 @@
 							<% end %>
 
 
+							<td style="border: 0px solid red; padding-top: 10px; " colspan="4">
+								<%= f.input :initial_payment,
+												input_html: { value: budget_initial_payment, style: 'margin-left: 5px; width: 70px; '},
+												label_html: {style: 'margin-left: 0px; '},
+	          						wrapper: :basic %>
 
 
-						<td style="border: 0px solid red; " colspan="4">
-							<%= f.input :initial_payment,
-											input_html: { value: budget_initial_payment, style: 'margin-left: 5px; width: 70px; '},
-											label_html: {style: 'margin-left: 20px; '},
-          						wrapper: :basic %>
+								<% @budget_payment_conditions = @budget.payment_conditions.sort_by(&:id) %>
+
+								<% @budget_payment_conditions.each do |payment_condition| %>
+			      			<%= f.simple_fields_for "payment_condition[]", payment_condition do |p| %>
 
 
+			      				<% @price_per_month = (@price_total - budget_initial_payment) / payment_condition.num_monthly_payments if payment_condition.num_monthly_payments %>
 
-							<% @budget_payment_conditions = @budget.payment_conditions.sort_by(&:id) %>
-
-							<% @budget_payment_conditions.each do |payment_condition| %>
-		      			<%= f.simple_fields_for "payment_condition[]", payment_condition do |p| %>
-
-
-		      				<% @price_per_month = (@price_total - budget_initial_payment) / payment_condition.num_monthly_payments if payment_condition.num_monthly_payments %>
-
-		      				<% if payment_condition.num_monthly_payments %>
-										<% label1 = "#{payment_condition.num_monthly_payments}x #{number_to_currency(@price_per_month)}" %>
-										<% label2 = false %>
-									<% else %>
-										<% label1 = false %>
-										<% label2 = "x" %>
-									<% end %>
+			      				<% if payment_condition.num_monthly_payments %>
+											<% label1 = "#{payment_condition.num_monthly_payments}x #{number_to_currency(@price_per_month)}" %>
+											<% label2 = false %>
+										<% else %>
+											<% label1 = false %>
+											<% label2 = "x" %>
+										<% end %>
 
 
 										<%= p.input :active,
