@@ -284,8 +284,6 @@ class BudgetsController < ApplicationController
   def update
     @budget = Budget.find(params[:id])
 
-		params[:budget][:discount] = view_context.currency_to_number(params[:budget][:discount])
-
     @product = Product.new    
     @products = @budget.products.order('created_at DESC')
     @products_search_list = []
@@ -293,6 +291,10 @@ class BudgetsController < ApplicationController
 
 
     @suppliers = Supplier.all
+
+    if !params[:budget][:discount].blank?
+			params[:budget][:discount] = view_context.currency_to_number(params[:budget][:discount])
+		end
 
 
     if params[:budget][:payment_condition]

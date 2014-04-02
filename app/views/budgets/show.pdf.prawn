@@ -460,7 +460,7 @@ end
 
 
 
-if @budget.observations != nil
+if @budget.observations != nil && !@budget.observations.blank?
 
 	pdf.move_down 10
 

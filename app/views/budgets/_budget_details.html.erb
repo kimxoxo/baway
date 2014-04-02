@@ -6,12 +6,12 @@
 
 				<% product = Product.find(budget_product.product_id) %>
 
-				<%= render partial: 'compute_price',
+				<%#= render partial: 'compute_price',
 									 locals: {product: product,
 								 	   			  budget_product: budget_product} %>
 
 					<!-- compute totals for price column -->
-					<% (@price_total = @price_total + @price) if @price %>
+					<% (@price_total = @price_total + budget_product.computed_price) if budget_product.computed_price %>
 
 					<% (@quantity_total = @quantity_total + budget_product.quantity) if budget_product.quantity %>
 
@@ -48,15 +48,6 @@
 	        </table>
 
 
-
-				<% if @budget.initial_payment %>
-					<% budget_initial_payment = number_to_currency(@budget.initial_payment).gsub(/[^0-9,.]/, '') %>
-				<% else %>
-					<% budget_initial_payment = nil %>
-				<% end %>
-
-
-
 					<table style="width: 100%; margin-top: 5px; ">
 						<tr>
 							<td style="border: 0px solid red; " colspan="5">
@@ -68,15 +59,6 @@
 	              						input_html: { rows: 1,
 	              													style: 'width: 875px; ' } %>
 							</td>
-
-
-
-	            <td width="80px" style="border: 0px solid red; ">
-	              <button style="float: right; " class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
-	                <b>confirmar</b>
-	                <i id="icon-loading-confirm-customer" class=""></i>
-	              </button>
-	            </td>
 						</tr>
 
 
@@ -93,15 +75,14 @@
 								<%= f.input :instant_payment,
 														wrapper: :basic,
 														label: 'à vista',
-														input_html: { value: budget_initial_payment, style: 'margin-left: 0px; '},
-														label_html: {style: 'margin-left: 0px; '},
+														input_html: { style: 'margin-left: 0px; '},
+														label_html: { style: 'margin-left: 0px; '},
 						          			wrapper: :basic %>
 
 								<%= f.input :instant_payment_discount,
 														wrapper: :basic,
 														label: 'desconto',
-														input_html: { value: budget_initial_payment,
-																					style: 'margin-left: 10px; width: 40px; '},
+														input_html: { style: 'margin-left: 10px; width: 40px; '},
 														label_html: {style: 'margin-left: 30px; '},
 						          			wrapper: :basic %>
 
@@ -112,6 +93,7 @@
 						<tr>
 							<!-- format initial_payment -->
 							<% if @budget.initial_payment %>
+								<%# budget_initial_payment = @budget.initial_payment.gsub(/[^0-9,.]/, '') %>
 								<% budget_initial_payment = @budget.initial_payment %>
 							<% else %>
 								<% budget_initial_payment = 0 %>
@@ -120,9 +102,10 @@
 
 							<td style="border: 0px solid red; padding-top: 10px; " colspan="4">
 								<%= f.input :initial_payment,
-												input_html: { value: budget_initial_payment, style: 'margin-left: 5px; width: 70px; '},
-												label_html: {style: 'margin-left: 0px; '},
-	          						wrapper: :basic %>
+														input_html: { value: number_to_currency(budget_initial_payment),
+																					style: 'margin-left: 5px; width: 70px; '},
+														label_html: { style: 'margin-left: 0px; '},
+			          						wrapper: :basic %>
 
 
 								<% @budget_payment_conditions = @budget.payment_conditions.sort_by(&:id) %>
@@ -131,7 +114,7 @@
 			      			<%= f.simple_fields_for "payment_condition[]", payment_condition do |p| %>
 
 
-			      				<% @price_per_month = (@price_total - budget_initial_payment) / payment_condition.num_monthly_payments if payment_condition.num_monthly_payments %>
+			      				<% @price_per_month = (@price_total - @budget.discount - budget_initial_payment) / payment_condition.num_monthly_payments if payment_condition.num_monthly_payments %>
 
 			      				<% if payment_condition.num_monthly_payments %>
 											<% label1 = "#{payment_condition.num_monthly_payments}x #{number_to_currency(@price_per_month)}" %>
@@ -182,13 +165,12 @@
 							</td>
 
 
-							<td width="80px" style="border: 0px solid red; ">
-								<%#= p.input %>
-								<%#= @payment_condition1.num_monthly_payments %>
-								<%#= @payment_condition2.num_monthly_payments %>
-								<%#= @payment_condition3.num_monthly_payments %>
-								<%#= @payment_condition4.num_monthly_payments %>
-							</td>
+	            <td width="80px" style="border: 0px solid red; ">
+	              <button style="float: right; margin-top: 10px; " class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
+	                <b>confirmar</b>
+	                <i id="icon-loading-confirm-customer" class=""></i>
+	              </button>
+	            </td>
 						</tr>
 					</table>
 					

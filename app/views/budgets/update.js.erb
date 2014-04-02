@@ -1,8 +1,4 @@
-alert('<%= @budgets_products.length %>');
-
-
 $('#div_table_results').html('<%= escape_javascript(render partial: "table_results", locals: {budgets_products: @budgets_products, budget: @budget}) %>');
-
 
 hide_all_forms();
 
