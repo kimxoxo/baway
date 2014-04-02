@@ -371,52 +371,43 @@ end
 
 
 
+pdf.move_down 70
 
 
 
 
 
-#start_new_page
+
+if @budget.instant_payment
 
 
-# pdf.float do
+	budget_total = 0
+	budget_total = totals_price - @budget.discount
 
 
-# 	#set freight
-# 	if @budget.freight
-# 		budget_freight = "sim"
-# 	else
-# 		budget_freight = "não"
-# 	end
+	budget_total_with_discount = budget_total - (budget_total * (@budget.instant_payment_discount/100))
+
+	payment_conditions = [[
+		          					"opções de pagamento",
+	  										"#{number_to_currency(budget_total_with_discount)} à vista (#{@budget.instant_payment_discount}% desconto)"
+												]]
 
 
-# 	#set instalation
-# 	if @budget.instalation
-# 		budget_instalation = "sim"
-# 	else
-# 		budget_instalation = "não"
-# 	end
+		pdf.table(payment_conditions,
+							width: 770,
+							column_widths:  {0 => 140},
+				 		  header: true) do |payment_condition_cell|
 
+			#product.row(0).font_style = :bold
+			#ticket.row(0).column(0).align = :right
 
+			payment_condition_cell.column(0..10).border_width = 0
+			payment_condition_cell.column(0).font_style = :bold
+			payment_condition_cell.row(0).style(:background_color => "F4F3F3")
+		end
 
-# 	###budget_details TABLE###
-# 	budget_details = [ ["frete", budget_freight] ]
-# 	budget_details += [ ["instalação", budget_instalation] ]
+end
 
-
-# 	pdf.table(budget_details,
-# 						width: 100,
-# 			 		  header: true, position: :left) do |budget_details_cell|
-
-# 		budget_details_cell.column(0).font_style = :bold
-# 		budget_details_cell.column(0..1).border_width = 0
-# 	end
-# end
-
-
-
-
-pdf.move_down 60
 
 
 
@@ -428,7 +419,7 @@ payment_conditions_active = ""
 
 @budget.payment_conditions.each do |pc|
 	if pc.active
-			payment_conditions_active = payment_conditions_active + "               #{pc.num_monthly_payments}  x  #{number_to_currency((totals_price - @budget.initial_payment)/pc.num_monthly_payments)}"
+			payment_conditions_active = payment_conditions_active + "               #{pc.num_monthly_payments}  x  #{number_to_currency((totals_price - @budget.initial_payment - @budget.discount)/pc.num_monthly_payments)}"
 	end
 end
 
