@@ -1,27 +1,16 @@
-<%
-if (product.product_type == 0 || product.product_type == 1 || product.product_type == 3 || product.product_type == 6)
-						
-	computed_price = compute_price_product_type_1(product.supplier_price,
-																								product.ipi,
-																								product.markup,
-																								product.supplier_table_discount,
-																								1,
-																								0)
+		<% budget_product = BudgetsProduct.new %>
 
-elsif product.product_type == 2
-						
-	computed_price = compute_price_product_type_2(product.supplier_price,
-																								product.ipi,
-																								product.markup,
-																								1,
-																								0,
-																								1,
-																								1)
+		<% budget_product.quantity = 1 %>
+		<% budget_product.freight = 1 %>
+		<% budget_product.width = 1 %>
+		<% budget_product.height = 1 %>
+		<% budget_product.computed_price = 0 %>
 
-elsif product.product_type == 3
 
-end
-%>
+		<%= render partial: 'compute_price',
+							 locals: {product: product,
+						 	   			  budget_product: budget_product} %>
+
 
 		<tr>
 			<td>
@@ -44,7 +33,7 @@ end
 				<% if product.product_type == 7 %>
 					<%= 'digite' %>
 				<% else %>
-					<%= number_to_currency(computed_price) %>
+					<%= number_to_currency(@price) %>
 				<% end %>
 				<%#= number_to_currency(product.supplier_price) %>
 			</td>
