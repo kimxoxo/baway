@@ -1,7 +1,19 @@
 
 <div id='<%= "div_popover#{budget_product.id}" %>' class="hide">
    
-	<%= form_tag "/budgets/compute_product_type3", style: 'border: 0px solid red; padding: 0; margin: 0; ', remote: true do %>
+
+	<% if budget_product.curtain %>
+		<% @curtain = budget_product.curtain %>
+	<% else %>
+		<% @curtain = Curtain.new %>
+	<% end %>
+
+
+	<%= simple_form_for Curtain.new, url: {controller: 'budgets', action: 'index'}, html: {class: 'form-inline', style: 'margin: 0; padding: 0; '} do |f| %>
+
+
+
+	<%#= form_tag "/budgets/compute_product_type3", style: 'border: 0px solid red; padding: 0; margin: 0; ', remote: true do %>
 
 		<%= hidden_field_tag "budget_product", "#{budget_product.id}" %>
 

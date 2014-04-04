@@ -1,12 +1,15 @@
 # == Schema Information
 #
-# Table name: requests
+# Table name: curtains
 #
-#  id             :integer          not null, primary key
-#  budget_id      :integer
-#  request_number :decimal(, )
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  id                  :integer          not null, primary key
+#  window_width        :decimal(, )
+#  window_height       :decimal(, )
+#  window_number_parts :integer
+#  wave_factor         :integer
+#  fabric_width        :decimal(, )
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

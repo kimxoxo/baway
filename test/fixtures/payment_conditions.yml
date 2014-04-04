@@ -3,9 +3,9 @@
 # Table name: payment_conditions
 #
 #  id                   :integer          not null, primary key
-#  name                 :string(255)
-#  discount             :float
+#  budget_id            :integer
 #  num_monthly_payments :integer
+#  active               :boolean
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #

@@ -2,16 +2,22 @@
 #
 # Table name: budgets
 #
-#  id                   :integer          not null, primary key
-#  customer_id          :integer
-#  status               :integer
-#  seller_id            :integer
-#  architect_id         :integer
-#  payment_condition_id :integer
-#  description          :text
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
-#  markup               :float
+#  id                       :integer          not null, primary key
+#  customer_id              :integer
+#  status                   :integer
+#  seller_id                :integer
+#  architect_id             :integer
+#  observations             :text
+#  instalation_observations :text
+#  discount                 :decimal(, )
+#  freight                  :boolean
+#  instalation              :boolean
+#  initial_payment          :decimal(, )
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  deleted                  :boolean
+#  instant_payment          :boolean
+#  instant_payment_discount :decimal(, )
 #
 
 class Budget < ActiveRecord::Base
