@@ -7,10 +7,6 @@
 
 					<% product = Product.find(budget_product.product_id) %>
 
-					<%#= render partial: 'compute_price',
-										 locals: {product: product,
-									 	   			  budget_product: budget_product} %>
-
 						<!-- compute totals for price column -->
 						<% (@price_total = @price_total + budget_product.computed_price) if budget_product.computed_price %>
 

@@ -1,12 +1,27 @@
-								<!-- if no earlier condition was applied -->
+<!-- 								<!-- if no earlier condition was applied -->
 								<!-- unset @price variable -->
 								<% @price = nil %> 								
 
- 								<% if product.product_type == 0 || product.product_type == 1 || product.product_type == 3 || product.product_type == 5 || product.product_type == 6 %>
+
+								<% @price = compute_price(product.product_type,
+																				  product.supplier_price,
+																				  product.ipi,
+																				  product.markup,
+																				  product.supplier_table_discount,
+																				  budget_product.quantity,
+																				  budget_product.freight,
+																				  budget_product.width,
+																				  budget_product.height,
+																				  budget_product.computed_price) %>
+
+ -->
+
+
+ <!-- 								<% if product.product_type == 0 || product.product_type == 1 || product.product_type == 3 || product.product_type == 5 || product.product_type == 6 %>
 
 									<% if(product.supplier_price && product.ipi && product.markup && product.supplier_table_discount && budget_product.quantity && budget_product.freight) %>
 									
-										<% @price = compute_price_product_type_1(product.supplier_price,
+										<% @price = compute_price_product_type_1(product.product_type, product.supplier_price,
 																													  product.ipi,
 																													  product.markup,
 																													  product.supplier_table_discount,
@@ -38,4 +53,4 @@
 										
 									<% end %>
 
-								<% end %>
+								<% end %> -->

@@ -7,9 +7,17 @@
 		<% budget_product.computed_price = 0 %>
 
 
-		<%= render partial: 'compute_price',
-							 locals: {product: product,
-						 	   			  budget_product: budget_product} %>
+
+		<% @price = compute_price(product.product_type,
+														  product.supplier_price,
+														  product.ipi,
+														  product.markup,
+														  product.supplier_table_discount,
+														  budget_product.quantity,
+														  budget_product.freight,
+														  budget_product.width,
+														  budget_product.height,
+														  budget_product.computed_price) %>
 
 
 		<tr>

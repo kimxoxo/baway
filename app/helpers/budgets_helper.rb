@@ -1,45 +1,55 @@
 module BudgetsHelper
 
 
-	def compute_price_product_type_1 (supplier_price, ipi, markup, supplier_table_discount, quantity, freight)
+
+
+
+
+
+	def compute_price(product_type, supplier_price, ipi, markup, supplier_table_discount, quantity, freight, width, height, computed_price)
+	
+
+		if (product_type == 0 || product_type == 1 || product_type == 3 || product_type == 5 || product_type == 6)
+
+			if supplier_price && ipi && markup && supplier_table_discount && quantity && freight
+
+
+				price_per_unit = ((supplier_price - (supplier_price * (supplier_table_discount/100))) + (supplier_price * (ipi/100))) * markup
+				price = price_per_unit * quantity
+				
+
+				price_plus_freight = price + freight
+
+				return price_plus_freight
 			
-		price_per_unit = ((supplier_price - (supplier_price * (supplier_table_discount/100))) + (supplier_price * (ipi/100))) * markup
-		price = price_per_unit * quantity
-		
+			end
 
-		price_plus_freight = price + freight
+		elsif product_type == 2
+			
+			if supplier_price && ipi && markup && quantity && freight && width && height
 
-		return price_plus_freight
-	end
+				size_square_meters = (width * height)
 
+				price_per_square_meter = size_square_meters * supplier_price
 
-	def compute_price_product_type_2 (supplier_price, ipi, markup, quantity, freight, width, height)
+				price_per_unit = (price_per_square_meter + (price_per_square_meter * (ipi/100))) * markup
 
+				price_plus_freight = price_per_unit + freight
 
-		size_square_meters = (width * height)
+				return price_plus_freight
 
-		price_per_square_meter = size_square_meters * supplier_price
+			end
 
-		price_per_unit = (price_per_square_meter + (price_per_square_meter * (ipi/100))) * markup
+		elsif product_type == 7
 
-		price_plus_freight = price_per_unit + freight
+			if computed_price != nil
+								
+				return budget_product.computed_price
 
-		return price_plus_freight
-	end
+			end
 
+		end
 
-	def compute_price_product_type_3 (supplier_price, ipi, markup, quantity, freight, width, height)
-
-
-		size_square_meters = (width * height)
-
-		price_per_square_meter = size_square_meters * supplier_price
-
-		price_per_unit = (price_per_square_meter + (price_per_square_meter * (ipi/100))) * markup
-
-		price_plus_freight = price_per_unit + freight
-
-		return price_plus_freight
 	end
 
 
@@ -47,6 +57,9 @@ module BudgetsHelper
 
 
 
+
+
+	
   def currency_to_number(currency)
 
     #converts currency x.xxx,xx type to decimal
@@ -58,7 +71,6 @@ module BudgetsHelper
 
     return currency
   end
-
 
 
 end

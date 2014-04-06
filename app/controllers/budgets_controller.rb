@@ -153,41 +153,18 @@ class BudgetsController < ApplicationController
 
 
 
- 		if (@product.product_type == 0 || @product.product_type == 1 || @product.product_type == 3 || @product.product_type == 5 || @product.product_type == 6)
-
-			if (@product.supplier_price && @product.ipi && @product.markup && @product.supplier_table_discount && @budgets_product.quantity && @budgets_product.freight)
-									
-			@budgets_product.computed_price = view_context.compute_price_product_type_1(@product.supplier_price,
+ 		@price = view_context.compute_price(@product.product_type,
+ 																				@product.supplier_price,
 																				@product.ipi,
 																				@product.markup,
 																				@product.supplier_table_discount,
 																				@budgets_product.quantity,
-																				@budgets_product.freight)
+																				@budgets_product.freight,
+																				@budgets_product.width,
+																				@budgets_product.height,
+																				@budgets_product.computed_price)																				
 
-			end
-
-		elsif @product.product_type == 2
-
-			if(@product.supplier_price && @product.ipi && @product.markup && @budgets_product.quantity && @budgets_product.freight && @budgets_product.width && @budgets_product.height)
-									
-				@budgets_product.computed_price = view_context.compute_price_product_type_2(@product.supplier_price,
-																					@product.ipi,
-																					@product.markup,
-																					@budgets_product.quantity,
-																					@budgets_product.freight,
-																					@budgets_product.width,
-																					@budgets_product.height)
-
-				end
-
-		elsif @product.product_type == 3
-
-		end
-
-
-		#if params[:budgets_product][:active] == false
-			#params[:budgets_product][:request_id] = nil
-		#end
+ 		params[:budgets_product][:computed_price] = @price
 
 
 
@@ -384,51 +361,27 @@ class BudgetsController < ApplicationController
 				@number_items = @number_items.ceil
 			end
 
-			#@number_items = @number_items.ceil
 
 			@budgets_product.quantity = @number_items
 			@budgets_product.save
 
 			@product = @budgets_product.product
-			#@product.product_type = 5
-			#@product.save
 
 
+ 			@budgets_product.computed_price = view_context.compute_price(@product.product_type,
+ 																				@product.supplier_price,
+																				@product.ipi,
+																				@product.markup,
+																				@product.supplier_table_discount,
+																				@budgets_product.quantity,
+																				@budgets_product.freight,
+																				@budgets_product.width,
+																				@budgets_product.height,
+																				@budgets_product.computed_price)	
 
 
-	 		if (@product.product_type == 0 || @product.product_type == 1 || @product.product_type == 3 || @product.product_type == 5)
-
-				if (@product.supplier_price && @product.ipi && @product.markup && @product.supplier_table_discount && @budgets_product.quantity && @budgets_product.freight)
-										
-				@budgets_product.computed_price = view_context.compute_price_product_type_1(@product.supplier_price,
-																					@product.ipi,
-																					@product.markup,
-																					@product.supplier_table_discount,
-																					@budgets_product.quantity,
-																					@budgets_product.freight)
-
-				end
-
-			elsif @product.product_type == 2
-
-				if(@product.supplier_price && @product.ipi && @product.markup && @budgets_product.quantity && @budgets_product.freight && @budgets_product.width && @budgets_product.height)
-										
-					@budgets_product.computed_price = view_context.compute_price_product_type_2(@product.supplier_price,
-																						@product.ipi,
-																						@product.markup,
-																						@budgets_product.quantity,
-																						@budgets_product.freight,
-																						@budgets_product.width,
-																						@budgets_product.height)
-
-					end
-
-			elsif @product.product_type == 3
-
-			end
 
 			@budgets_product.save
-
 
 		end
 
