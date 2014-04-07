@@ -14,8 +14,8 @@
 
 class Curtain < ActiveRecord::Base
 
-	attr_accessible :window_width, :window_height, :window_number_parts, :wave_factor,
-									:fabric_width
+	attr_accessible :budgets_product_id, :window_width, :window_height, :window_number_parts,
+									:wave_factor,	:fabric_width
 
 
 	belongs_to :budgets_product

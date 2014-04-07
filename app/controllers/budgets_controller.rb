@@ -334,26 +334,33 @@ class BudgetsController < ApplicationController
 
 	def compute_product_type3
 		
-		if !params[:window_width].blank? && !params[:window_number_parts].blank? && !params[:wave_factor].blank? && !params[:fabric_width].blank?
+
+		params[:curtain][:window_width] = (params[:curtain][:window_width].gsub(',', '.')).to_f
+		params[:curtain][:window_height] = (params[:curtain][:window_height].gsub(',', '.')).to_f			
+		params[:curtain][:window_number_parts] = (params[:curtain][:window_number_parts].gsub(',', '.')).to_i
+		params[:curtain][:wave_factor] = (params[:curtain][:wave_factor].gsub(',', '.')).to_f
+		params[:curtain][:fabric_width] = (params[:curtain][:fabric_width].gsub(',', '.')).to_f
 
 
-			@budgets_product = BudgetsProduct.find(params[:budget_product])
-			@budget = Budget.find_by_id(@budgets_product.budget_id)
+		if params[:curtain][:id] != ""
+			@curtain = Curtain.find(params[:curtain][:id])
+		else
+			@curtain = Curtain.new(params[:curtain])
+		end
 
-			window_width = (params[:window_width].gsub(',', '.')).to_f
-			window_height = (params[:window_height].gsub(',', '.')).to_f			
-			window_number_parts = (params[:window_number_parts].gsub(',', '.')).to_i
-			wave_factor = (params[:wave_factor].gsub(',', '.')).to_f
-			fabric_width = (params[:fabric_width].gsub(',', '.')).to_f
+		@budgets_product = BudgetsProduct.find(params[:curtain][:budgets_product_id])
 
-			@number_items = window_width / window_number_parts
-			@number_items = @number_items * wave_factor
-			@number_items = @number_items / fabric_width
+		@budget = Budget.find_by_id(@budgets_product.budget_id)
 
-			@number_items = @number_items.round
+		if params[:curtain][:window_width] != "" && params[:curtain][:window_height] != "" && params[:curtain][:window_number_parts] != "" && params[:curtain][:wave_factor] != "" && params[:curtain][:fabric_width] != ""
+			@number_items = @curtain.window_width / @curtain.window_number_parts
+			@number_items = @number_items * @curtain.wave_factor
+			@number_items = @number_items / @curtain.fabric_width
 
-			@number_items = @number_items * window_number_parts
-			@number_items = @number_items * window_height
+			@number_items = (@number_items).round
+
+			@number_items = @number_items * @curtain.window_number_parts
+			@number_items = @number_items * @curtain.window_height
 
 			if (@number_items.ceil - @number_items) > 0.5
 				@number_items = @number_items.to_i + 0.5
@@ -367,9 +374,9 @@ class BudgetsController < ApplicationController
 
 			@product = @budgets_product.product
 
-
- 			@budgets_product.computed_price = view_context.compute_price(@product.product_type,
- 																				@product.supplier_price,
+		
+			@budgets_product.computed_price = view_context.compute_price(@product.product_type,
+																				@product.supplier_price,
 																				@product.ipi,
 																				@product.markup,
 																				@product.supplier_table_discount,
@@ -379,15 +386,20 @@ class BudgetsController < ApplicationController
 																				@budgets_product.height,
 																				@budgets_product.computed_price)	
 
-
-
 			@budgets_product.save
+			
+			if params[:curtain][:id] != ""
+				@curtain.update_attributes!(params[:curtain])
+			else
+				@curtain.save!
+			end
+
+
+			respond_to do |format|
+			  format.js
+			end
 
 		end
-
-    respond_to do |format|
-      format.js
-    end
 
 	end
 

@@ -4,44 +4,57 @@
 
 	<% if budget_product.curtain %>
 		<% @curtain = budget_product.curtain %>
+		<% curtain_id = @curtain.id %>
 	<% else %>
 		<% @curtain = Curtain.new %>
+		<% curtain_id = nil %>
 	<% end %>
 
 
-	<%= simple_form_for @curtain, url: {controller: 'budgets', action: 'compute_product_type3'}, html: {class: 'form-inline', style: 'margin: 0; padding: 0; '} do |f| %>
+	<%= simple_form_for @curtain, remote: true, method: :post, url: {controller: 'budgets', action: 'compute_product_type3'}, html: {class: 'form-inline', style: 'margin: 0; padding: 0; '} do |f| %>
 
 
+		<%= f.hidden_field :id,
+											 value: curtain_id %>
 
-	<%#= form_tag "/budgets/compute_product_type3", style: 'border: 0px solid red; padding: 0; margin: 0; ', remote: true do %>
+		<%= f.hidden_field :budgets_product_id,
+											 value: budget_product.id %>
 
-		<%= hidden_field_tag "budget_product", "#{budget_product.id}" %>
+	  <%= f.input :window_width,
+	  						as: :string,
+	  						wrapper: 'bootstrap',
+	  						label: 'larg janela (m)',
+	  						input_html: {style: 'margin-right: 5px; width: 50px; '} %>
 
-	  <%= text_field_tag "window_width", "", style: 'width: 50px; ' %>
-	  <span style="padding-left: 10px; font-weight: normal; ">larg janela (m)</span>
-	  <br />
+	  <%= f.input :window_height,
+	  						as: :string,
+	  						wrapper: 'bootstrap',
+	  						label: 'alt janela (m)',
+	  						input_html: {style: 'margin-right: 5px; width: 50px; '} %>
 
-	  <%= text_field_tag "window_height", "", style: 'width: 50px; ' %>
-	  <span style="padding-left: 10px; font-weight: normal; ">alt janela (m)</span>
-	  <br />
+	  <%= f.input :window_number_parts,
+	  						as: :string,
+	  						wrapper: 'bootstrap',
+	  						label: 'nº folhas',
+	  						input_html: {style: 'margin-right: 5px; width: 50px; '} %>
 
-		<%= text_field_tag "window_number_parts", "", style: 'width: 50px; ' %>
-	  <span style="padding-left: 10px; font-weight: normal; ">nº folhas</span>
-		<br />
+	  <%= f.input :wave_factor,
+	  						as: :string,
+	  						wrapper: 'bootstrap',
+	  						label: 'fator ondulação',
+	  						input_html: {style: 'margin-right: 5px; width: 50px; '} %>
 
-		<%= text_field_tag "wave_factor", "", style: 'width: 50px; ' %>
-	  <span style="padding-left: 10px; font-weight: normal; ">fator ondulação</span>
-		<br />
+	  <%= f.input :fabric_width,
+	  						as: :string,
+	  						wrapper: 'bootstrap',
+	  						label: 'larg tecido (m)',
+	  						input_html: {style: 'margin-right: 5px; width: 50px; '} %>
 
-		<%= text_field_tag "fabric_width", "", style: 'width: 50px; ' %>
-	  <span style="padding-left: 10px; font-weight: normal; ">larg tecido (m)</span>
-	  <br />
-	  <br />
 	  
 	  <%= submit_tag "calcular", class: "btn btn-small btn-success" %>
 
 	<% end %>
 
-	<button style="position: absolute; margin-top: -25px; margin-left: 130px; " onclick="<%= "close_please(#{budget_product.id}); " %>" id='<%= "btn_fechar#{budget_product.id}" %>' class="btn btn-small btn-danger" data-dismiss="clickover">fechar</button>
+	<button style="position: absolute; margin-top: -25px; margin-left: 120px; " onclick="<%= "close_please(#{budget_product.id}); " %>" id='<%= "btn_fechar#{budget_product.id}" %>' class="btn btn-small btn-danger" data-dismiss="clickover">fechar</button>
    
 </div>
