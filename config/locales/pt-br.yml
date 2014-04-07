@@ -291,7 +291,7 @@ pt-BR:
         id: nº
         customer_id: cliente
         status: estado
-        seller: vendedor(a)
+        seller: consultor(a)
         architect_id: arquiteto(a)
         description: descrição
         markup: markup

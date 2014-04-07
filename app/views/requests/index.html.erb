@@ -15,14 +15,13 @@
     <tr>
       <th><%= t :"activerecord.attributes.budget.id" %></th>
       <th><%= t :"activerecord.attributes.budget.customer_id" %></th>
-      <th width="1px"></th>
-      <th><%= t :"activerecord.attributes.budget.status" %></th>
+      <!--<th><%= t :"activerecord.attributes.budget.status" %></th>-->
       <th><%= t :"activerecord.attributes.budget.seller" %></th>
       <th><%= t :"activerecord.attributes.budget.architect_id" %></th>
       <!--<th>Payment condition</th>-->
       <!--<th><%= t :"activerecord.attributes.budget.description" %></th>-->
       <th>pdf</th>
-      <th><%= content_tag(:i, '', class: "fa fa-pencil") %></th>
+      <th><%= content_tag(:i, '', class: "fa fa-trash-o") %></th>
       <!--<th></th>-->
     </tr>
 
@@ -33,11 +32,32 @@
   			<%= request.id %>
   		</td>
 
+
   		<td>
-				<%= link_to content_tag(:i, '', class: "fa fa-trash-o", style: 'color: #3f7db2; '), request_path(request), method: :delete, data: {confirm: (t :"dialog_text.confirm.prompt")} %>
+  			<%= request.budget.customer.name %>
   		</td>
 
 
+  		<td>
+  			<% @seller = User.find(request.budget.seller_id) %>
+  			<%= @seller.name %>
+  		</td>
+
+
+  		<td>
+				<%= architech_name = User.find(request.budget.architect_id).name + ' ' + User.find(request.budget.architect_id).surname %>
+			</td>
+
+
+			<td>
+				<%= link_to content_tag(:i, '', class: "fa fa-download", style: 'font-size: 19px; '), request_path(request.id, format: 'pdf'), target: '_blank' %>
+			</td>
+
+
+
+  		<td>
+				<%= link_to content_tag(:i, '', class: "fa fa-trash-o", style: 'color: #3f7db2; '), request_path(request), method: :delete, data: {confirm: (t :"dialog_text.confirm.prompt")} %>
+  		</td>
   	</tr>
 
   <% end %>

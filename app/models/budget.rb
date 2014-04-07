@@ -32,7 +32,7 @@ class Budget < ActiveRecord::Base
   has_many :budgets_products
   has_many :products, through: :budgets_products
 
-
+  has_many :requests
 
   belongs_to :user, foreign_key: :architect_id
 

@@ -44,7 +44,7 @@ module BudgetsHelper
 
 			if computed_price != nil
 								
-				return budget_product.computed_price
+				return computed_price
 
 			end
 
