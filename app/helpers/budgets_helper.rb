@@ -9,7 +9,7 @@ module BudgetsHelper
 	def compute_price(product_type, supplier_price, ipi, markup, supplier_table_discount, quantity, freight, width, height, computed_price)
 	
 
-		if (product_type == 0 || product_type == 1 || product_type == 3 || product_type == 5 || product_type == 6)
+		if (product_type == 0 || product_type == 1 || product_type == 3 || product_type == 5)
 
 			if supplier_price && ipi && markup && supplier_table_discount && quantity && freight
 
@@ -40,7 +40,7 @@ module BudgetsHelper
 
 			end
 
-		elsif product_type == 7
+		elsif product_type == 6
 
 			if computed_price != nil
 								

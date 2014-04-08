@@ -81,30 +81,16 @@
 
   <% @products.each do |product| %>
 		
-		<%
-		if (product.product_type == 0 || product.product_type == 1 || product.product_type == 3)
-								
-			computed_price = compute_price_product_type_1(product.supplier_price,
-																										product.ipi,
-																										product.markup,
-																										product.supplier_table_discount,
-																										1,
-																										0)
-
-		elsif product.product_type == 2
-								
-			computed_price = compute_price_product_type_2(product.supplier_price,
-																										product.ipi,
-																										product.markup,
-																										1,
-																										0,
-																										1,
-																										1)
-
-		elsif product.product_type == 3
-
-		end
-		%>
+		<% computed_price = compute_price(product.product_type,
+ 																			product.supplier_price,
+																			product.ipi,
+																			product.markup,
+																			product.supplier_table_discount,
+																			1,
+																			0,
+																			1,
+																			1,
+																			nil) %>
 
     <tr>
     	<td><%= t :"activerecord.attributes.product.product_type#{product.product_type}" %></td>
@@ -115,7 +101,14 @@
       <td><%= product.markup %></td>
       <td><%= "#{product.supplier_table_discount}%" %></td>
       <td><%= "#{product.ipi}%" %></td>
-      <td><%= number_to_currency(computed_price) %></td>
+
+      <td>
+	      <% if !computed_price.nil? %>
+	      	<%= number_to_currency(computed_price) %>
+	      <% else %>
+	      	<%= 'digite' %>
+	      <% end %>
+	    </td>
 
       <% if current_user.role == -1 %>
       	<td>
