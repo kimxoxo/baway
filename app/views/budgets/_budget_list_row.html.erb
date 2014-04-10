@@ -433,7 +433,7 @@
 
 
 							<td class="td_pencil_price">
-								<% if product.product_type == 7 %>
+								<% if product.product_type == 6 %>
 									<a href="#" class="hide_if_product_type5" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'price'); " %>'>
 										<i class="fa fa-pencil"></i>
 									</a>								
@@ -446,7 +446,7 @@
 
 
 							<td class="td_price">
-								<% if product.product_type == 7 %>
+								<% if product.product_type == 6 %>
 
 									<% if budget_product.computed_price %>
 										<% computed_price_input_value = number_to_currency(budget_product.computed_price).gsub(/[^0-9,.]/, '') %>
