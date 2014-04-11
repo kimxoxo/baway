@@ -6,7 +6,7 @@ module BudgetsHelper
 
 
 
-	def compute_price(product_type, supplier_price, ipi, markup, supplier_table_discount, quantity, freight, width, height, computed_price)
+	def compute_price(product_type, supplier_price, ipi, markup, supplier_table_discount, quantity, freight, width, height, computed_price, up)
 	
 
 		if (product_type == 0 || product_type == 1 || product_type == 3 || product_type == 5)
@@ -19,6 +19,11 @@ module BudgetsHelper
 				
 
 				price_plus_freight = price + freight
+
+				#compute with "up" constant
+				if up
+					price_plus_freight = price_plus_freight + (up/100 * price_plus_freight)
+				end
 
 				return price_plus_freight
 			
@@ -36,6 +41,11 @@ module BudgetsHelper
 
 				price_plus_freight = price_per_unit + freight
 
+				#compute with "up" constant
+				if up
+					price_plus_freight = price_plus_freight + (up/100 * price_plus_freight)
+				end
+
 				return price_plus_freight
 
 			end
@@ -44,7 +54,15 @@ module BudgetsHelper
 
 			if computed_price != nil
 								
-				return computed_price
+
+				price_plus_freight = computed_price + freight
+
+				#compute with "up" constant
+				if up
+					price_plus_freight = price_plus_freight + (up/100 * price_plus_freight)
+				end
+
+				return price_plus_freight
 
 			end
 

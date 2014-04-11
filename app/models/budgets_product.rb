@@ -21,7 +21,7 @@
 class BudgetsProduct < ActiveRecord::Base
 	attr_accessible :quantity, :house_area, :days_to_delivery, :freight, :height, :width,
 									:product_observations, :active, :budget_status_dont_change,
-									:product_type, :computed_price
+									:product_type, :computed_price, :up
 
 
 	attr_accessor :budget_status_dont_change

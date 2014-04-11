@@ -505,6 +505,49 @@
 
 
 
+							<td class="td_pencil_up">
+								<a href="#" class="hide_if_product_type5" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'up'); " %>'>
+									<i class="fa fa-pencil"></i>
+								</a>
+							</td>
+
+
+							<td class="td_up">
+								<%= simple_form_for budget_product,
+		            										url: update_product_attributes_budgets_path,
+							            					method: :get,
+							            					remote: true,
+							            					html: {class: 'hide_this_form',
+							            					style: 'margin: 0;
+							            									padding: 0;
+							            									border: 0px solid red; ',
+																		id: "form_up_#{budget_product.id}"} do |f| %>
+
+		              <%= f.hidden_field :id %>
+
+		              <%= f.input_field :up,
+		                          			as: :string,
+		                       					onblur: '$(this).closest("form").submit(); ',
+		                          			style: 'float: left;
+		                          							width: 30px;
+		                          							margin: 0;
+		                          							padding: 2px; ' %>          
+		            <% end %>
+
+		            <span>
+		            	<% if budget_product.up %>
+										<% if (budget_product.up - budget_product.up.to_i) == 0 %>
+											<%= "#{budget_product.up.to_i}%" %>
+										<% else %>
+											<%= "#{budget_product.up}%" %>
+										<% end %>										
+									<% else %>
+										<%= "0%" %>
+									<% end %>
+								</span>
+							</td>
+
+
 							<td class="td_delete">
 								<%= link_to content_tag(:i, '', class: "fa fa-trash-o", style: "font-size: 14px; "),
 	                    			update_products_list_budgets_path(budget_id: @budget.id,
@@ -527,20 +570,17 @@
   $("#product_supplier_price").mask("0.000,00", {reverse: true});
   $("#budget_discount").mask("0.000,00", {reverse: true});
 
-
 	$(".product_freight_input").mask("0.000,00", {reverse: true});
-
 
   $("#supplier_cnpj").mask("999.999.999-99", {reverse: true});
 
   $("#supplier_postal_code").mask("99999-999");
 
-
   $("#supplier_landline").mask("(99) 9999-9999");
   $("#supplier_mobile").mask("(99) 9999-9999");
 
-  $(".product_height_input").mask("999999.99", {reverse: true});
-  $(".product_width_input").mask("999999.99", {reverse: true});
+  //$(".product_height_input").mask("999999.99", {reverse: true});
+  //$(".product_width_input").mask("999999.99", {reverse: true});
 
 </script>
 

@@ -162,11 +162,19 @@ class BudgetsController < ApplicationController
 																				@budgets_product.freight,
 																				@budgets_product.width,
 																				@budgets_product.height,
-																				@budgets_product.computed_price)																				
+																				@budgets_product.computed_price,
+																				@budgets_product.up)																				
 
  		params[:budgets_product][:computed_price] = @price
 
 
+		if !params[:budgets_product][:width].blank?
+			params[:budgets_product][:width] = (params[:budgets_product][:width].gsub(',', '.')).to_f
+		end
+
+		if !params[:budgets_product][:height].blank?
+			params[:budgets_product][:height] = (params[:budgets_product][:height].gsub(',', '.')).to_f
+		end
 
     @budgets_product.update_attributes(params[:budgets_product])
 

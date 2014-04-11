@@ -332,7 +332,7 @@ $(document).ready(function($) {
   $("#user_mobile").mask("(99) 999999999");
 
 
-  $(".product_height_input").mask("999999.99", {reverse: true});
-  $(".product_width_input").mask("999999.99", {reverse: true});
+  //$(".product_height_input").mask("999999.99", {reverse: true});
+  //$(".product_width_input").mask("999999.99", {reverse: true});
 
 })
