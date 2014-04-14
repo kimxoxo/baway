@@ -5,7 +5,7 @@
 		<% budget_product.width = 1 %>
 		<% budget_product.height = 1 %>
 		<% budget_product.computed_price = 0 %>
-
+		<% budget_product.up = 0 %>
 
 
 		<% @price = compute_price(product.product_type,
@@ -17,7 +17,8 @@
 														  budget_product.freight,
 														  budget_product.width,
 														  budget_product.height,
-														  budget_product.computed_price) %>
+														  budget_product.computed_price,
+														  budget_product.up) %>
 
 
 		<tr>
