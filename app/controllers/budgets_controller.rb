@@ -109,7 +109,7 @@ class BudgetsController < ApplicationController
 			#@budget_product.update_attributes(active: true)
 
 			#in case product is a carpet only width and height will be add, quantity must be 1 and not editable
-			if @product.product_type == 2
+			if @product.product_type == 2 || @product.product_type == 6
 		    @budget_product.update_attributes(quantity: 1)
 			end
 
@@ -150,6 +150,12 @@ class BudgetsController < ApplicationController
     	@budget.status = 1
     	@budget.save
     end
+
+
+    #in case product_type == 6 the computed_price must be inserted into the DB before calculating the price
+    if params[:budgets_product][:computed_price]
+			@budgets_product.update_attributes(params[:budgets_product])
+		end
 
 
 

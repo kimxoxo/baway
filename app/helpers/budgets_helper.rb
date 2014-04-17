@@ -52,7 +52,7 @@ module BudgetsHelper
 
 		elsif product_type == 6
 
-			if computed_price != nil
+			if computed_price != nil && freight != nil
 								
 
 				price_plus_freight = computed_price + freight

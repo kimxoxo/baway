@@ -382,7 +382,7 @@
 
 
 							<td class="td_pencil_quantity">
-								<% if product.product_type == 2 %>
+								<% if product.product_type == 2 || product.product_type == 6 %>
 								
 								<% else %>
 									<a href="#" class="hide_if_product_type5" onclick='<%= "enable_this_tr_forms(#{budget_product.id}, 'quantity'); " %>'>
@@ -586,6 +586,6 @@
 
 <% if product.product_type == 5 %>
 	<script type="text/javascript">
-		$('.hide_if_product_type5').hide();
+		//$('.hide_if_product_type5').hide();
 	</script>
 <% end %>
