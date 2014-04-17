@@ -1,7 +1,7 @@
 						<% product = Product.find(budget_product.product_id) %>
 
 						<tr id='<%= "product_id_#{budget_product.id}" %>'>
-							<td class="td_checkbox">
+							<td class="td_checkbox" style="padding-left: 0px; padding-right: 3px; ">
 								<% if budget_product.request %>
 									<%= link_to budget_product.request.request_number, request_path(budget_product.request.id, format: 'pdf'), target: '_blank' %>
 								<% else %>
@@ -31,14 +31,14 @@
 							</td>
 
 
-							<td class="td_code" style="text-overflow: ellipsis; max-width: 90px; overflow:hidden; ">
+							<td class="td_code" style="text-overflow: ellipsis; max-width: 90px; overflow:hidden; padding-left: 0px; padding-right: 3px; ">
 								<div class="" style="text-overflow: ellipsis; overflow:hidden; ">
 									<%= product.code %>
 								</div>
 							</td>
 
 
-							<td class="td_product_type">
+							<td class="td_product_type" style="padding-left: 0px; padding-right: 3px; ">
 								<% if product.product_type == 3 %>
 									<b>
 										<a href="#" id='<%= "#{budget_product.id}" %>'>
