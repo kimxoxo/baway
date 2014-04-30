@@ -28,6 +28,7 @@
       <!--<th>Payment condition</th>-->
       <!--<th><%= t :"activerecord.attributes.budget.description" %></th>-->
       <!--<th>pdf</th>-->
+      <th>criado em</th>
       <th><%= content_tag(:i, '', class: "fa fa-pencil") %></th>
       <th><%= content_tag(:i, '', class: "fa fa-trash-o") %></th>
     </tr>
@@ -48,6 +49,13 @@
      	</td>
       <td><%= User.find(budget.seller_id).name %></td>
       <td><%= (User.find(budget.architect_id).name + ' ' + User.find(budget.architect_id).surname) if budget.architect_id %></td>
+
+      <td>
+				<%= budget.created_at.strftime("%d") %>
+        <%= I18n.t("date.abbr_month_names")[budget.created_at.strftime("%m").to_i] %>
+        <%= budget.created_at.strftime("%Y") %>
+      </td>
+
       <!--<td><%#= budget.payment_condition_id %></td>-->
       <!--<td><%#= budget.description %></td>-->
       <!--<td>
