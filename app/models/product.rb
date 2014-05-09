@@ -108,12 +108,12 @@ class Product < ActiveRecord::Base
 
 	  @products = Product.where(supplier_id: @product.supplier_id)
 
-	  #@products.each do |product|
-	  	#if product.updated_at.strftime("%Y%m%d") != Date.today.strftime("%Y%m%d")
-	  		#product.visible = false
-	  		#product.save
-	  	#end
-	  #end
+	  @products.each do |product|
+	  	if product.updated_at.strftime("%Y%m%d") != Date.today.strftime("%Y%m%d")
+	  		product.visible = false
+	  		product.save
+	  	end
+	  end
   end
 
 
