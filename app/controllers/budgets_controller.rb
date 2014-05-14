@@ -389,16 +389,19 @@ class BudgetsController < ApplicationController
 			@product = @budgets_product.product
 
 		
-			@budgets_product.computed_price = view_context.compute_price(@product.product_type,
-																				@product.supplier_price,
-																				@product.ipi,
-																				@product.markup,
-																				@product.supplier_table_discount,
-																				@budgets_product.quantity,
-																				@budgets_product.freight,
-																				@budgets_product.width,
-																				@budgets_product.height,
-																				@budgets_product.computed_price)	
+			@budgets_product.computed_price = view_context.compute_price(
+																					@product.product_type,
+																					@product.supplier_price,
+																					@product.ipi,
+																					@product.markup,
+																					@product.supplier_table_discount,
+																					@budgets_product.quantity,
+																					@budgets_product.freight,
+																					@budgets_product.width,
+																					@budgets_product.height,
+																					@budgets_product.computed_price,
+																					@budgets_product.up
+																					)	
 
 			@budgets_product.save
 			
