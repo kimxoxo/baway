@@ -145,6 +145,12 @@ class BudgetsController < ApplicationController
 		end
 
 
+    if !params[:budgets_product][:quantity].blank?
+			params[:budgets_product][:quantity] = params[:budgets_product][:quantity].gsub(',', '.')
+		end
+
+
+
     #budget details changed so status must be always = 1
     if !params[:budgets_product][:budget_status_dont_change]
     	@budget.status = 1
