@@ -205,7 +205,8 @@ class BudgetsController < ApplicationController
     @architect = User.new
 
 
-    @architects = User.where(deleted: nil).where(role: 2).order('name ASC')
+    @architects = User.where(id: 2)
+    @architects += User.where(deleted: nil).where(role: 2).where("id != ?", 2).order('name ASC')
 
 
     if params[:tax_number]
@@ -236,13 +237,8 @@ class BudgetsController < ApplicationController
 
     @suppliers = Supplier.order('name ASC')
 
-    @architects = User.where(deleted: nil).where(role: 2).order('name ASC')
-
-    #@payment_condition1 = @budget.payment_conditions.order('id ASC').first
-    #@payment_condition2 = @budget.payment_conditions.order('id ASC').second
-    #@payment_condition3 = @budget.payment_conditions.order('id ASC').third
-    #@payment_condition4 = @budget.payment_conditions.order('id ASC').fourth
-
+    @architects = User.where(id: 2)
+    @architects += User.where(deleted: nil).where(role: 2).where("id != ?", 2).order('name ASC')
   end
 
 
