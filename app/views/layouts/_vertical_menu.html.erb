@@ -31,5 +31,11 @@
       <%= link_to content_tag(:i, '', class: "fa fa-shopping-cart", style: "font-size: 20px; "), products_path, rel: 'tooltip', title: (t :"activerecord.models.product").pluralize %>
     </li>
 
+
+
+    <li class="first_filter <%#= menu_active_link('tickets') %>" style="">
+      <%= link_to content_tag(:i, '', class: "fa fa-user", style: "font-size: 18px; "), users_path, rel: 'tooltip', title: (t :"activerecord.models.user").pluralize %>
+    </li>
+
   </ul>
 <% end %>

@@ -2,7 +2,11 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.where(role: 2).where("id != ?", 2).where(deleted: nil).paginate(page: params[:page], per_page: 10).order('name DESC')
+
+		if params[:deleted]
+    	@users = User.where(role: 2).where("id != ?", 2).where(deleted: true).paginate(page: params[:page], per_page: 10).order('name DESC')
+		end	
 
     respond_to do |format|
       format.html # index.html.erb
@@ -45,6 +49,24 @@ class UsersController < ApplicationController
   end
 
 
+  def edit_architect
+	  @user = User.find(params[:id])
+  end
+
+
+  def update_architect
+    @user = User.find(params[:id])
+
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit_architect" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
 
 
@@ -97,7 +119,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to action: "index"}
+        #format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

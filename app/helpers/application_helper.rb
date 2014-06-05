@@ -3,7 +3,7 @@ module ApplicationHelper
 
 
   def filter_list_not_present
-    if (params[:action] == 'new' || params[:action] == 'edit' || params[:action] == 'show' || params[:action] == 'update' || params[:action] == 'create' || params[:action] == 'new_architect' || params[:action] == 'create_architect')
+    if (params[:action] == 'new' || params[:action] == 'edit' || params[:action] == 'show' || params[:action] == 'update' || params[:action] == 'create' || params[:action] == 'new_architect' || params[:action] == 'create_architect' || params[:action] == 'edit_architect')
       not_present = true
 
     else

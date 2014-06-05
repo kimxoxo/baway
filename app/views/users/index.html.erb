@@ -1,35 +1,51 @@
-<h1>Listing users</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Surname</th>
-    <th>Email</th>
-    <th>Encrypted password</th>
-    <th>Landline</th>
-    <th>Mobile</th>
-    <th>Role</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="left_menu">
 
-<% @users.each do |user| %>
-  <tr>
-    <td><%= user.name %></td>
-    <td><%= user.surname %></td>
-    <td><%= user.email %></td>
-    <td><%= user.encrypted_password %></td>
-    <td><%= user.landline %></td>
-    <td><%= user.mobile %></td>
-    <td><%= user.role %></td>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+  <ul id="filter_list" style="">
+    <li class="header">
+      header
+    </li>
 
-<br />
+    <li class="first_filter">
+			<%= link_to users_path(deleted: true) do %>
+				arquitetos deletados
+      <% end %>
+    </li>
+  </ul>
+</div>
 
-<%= link_to 'New User', new_user_path %>
+
+
+<div class="main_content_indexes">
+  <table class="table">
+    <tr>
+    	<th><%= t :"activerecord.models.user" %></th>
+    	<th><%= t :"activerecord.attributes.user.email" %></th>
+      <th><%= t :"activerecord.attributes.user.mobile" %></th>
+     	<th><%= content_tag(:i, '', class: "fa fa-pencil") %></th>
+     	<th><%= content_tag(:i, '', class: "fa fa-trash-o") %></th>
+    </tr>
+
+  <% @users.each do |user| %>
+    <tr>
+    	<td><%= user.name + ' ' + user.surname %></td>
+    	<td><%= user.email %></td>
+    	<td><%= user.mobile %></td>
+    	<td>
+      	<%= link_to content_tag(:i, '', class: "fa fa-pencil"), edit_architect_user_path(user.id) %>
+      </td>
+      <td>
+				<%= link_to content_tag(:i, '', class: "fa fa-trash-o", style: 'color: #3f7db2; '), user_path(user, user: {deleted: true}), method: :put, data: {confirm: (t :"dialog_text.confirm.prompt")} %>
+      </td>
+    </tr>
+  <% end %>
+
+
+    <tr>
+      <td colspan="12" align="center" style="text-align: center; ">
+        <%= will_paginate @budgets, inner_window: 1, outer_window: 0 %>
+      </td>
+    </tr>
+  </table>
+</div>
+

@@ -50,18 +50,7 @@ class Budget < ActiveRecord::Base
       presence: true
 
 
-  #validates :markup,
-      #presence: true,
-      #numericality: { greater_than: 0, less_than_or_equal_to: 100 }
-
-
-
-
-
   validate :budget_is_valid_status1to2
-
-  #validate :budget_is_valid_status2to3
-
 
 
   def budget_is_valid_status1to2

@@ -286,6 +286,7 @@ pt-BR:
       suppliers: fornecedores
       product: produto
       request: pedido
+      user: arquiteto
     attributes:
       budget:
         id: nº

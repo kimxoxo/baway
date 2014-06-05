@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :name, :surname, :role, :mobile
+                  :name, :surname, :role, :mobile, :deleted
 
 
   has_many :budgets, foreign_key: :architect_id, dependent: :destroy
@@ -41,7 +41,9 @@ class User < ActiveRecord::Base
 
 
   validates :name, :surname, :role, :email, :password, :password_confirmation, :mobile,
-    	presence: true
+    	presence: true, unless: lambda{|user| user.role == 2}
 
+  validates :name, :surname, :role, :email, :mobile,
+    	presence: true
 
 end

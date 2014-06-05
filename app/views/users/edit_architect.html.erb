@@ -1,0 +1,46 @@
+<div class="container" style="margin-top: 50px; ">
+	<div class="row">
+		<div class="well" style="margin-left: 221px; width: 500px; ">
+
+			<div id="legend" style="padding-bottom: 30px; ">
+			    <legend class="">Editar Arquiteto(a)</legend>
+			</div>
+				<%= simple_form_for(@user,
+														url: {controller: 'users', action: 'update_architect'},
+														method: :put,
+														html: { class: "form-horizontal" }) do |f| %>
+
+				  <%= f.hidden_field :role,
+				  									 value: 2 %>
+
+
+				  <%= f.input :name %>
+
+				  <%= f.input :surname %>
+
+				  <%= f.input :email %>
+
+				  <%= f.input :mobile %>
+
+
+				  <%= f.hidden_field :password,
+				  									 value: 'asdfkewokwerok' %>
+
+				  <%= f.hidden_field :password_confirmation,
+				  									 value: 'asdfkewokwerok' %>
+
+
+				  <%= button_tag(type: 'submit',
+				                class: 'btn btn-primary',
+				                style: 'margin-top: 10px;
+				                        margin-left: 175px;
+				                        width: 220px;
+				                        font-weight: bold; ') do %>
+				    cadastrar
+				    <i id="icon-loading"></i>
+				  <% end %>
+				<% end %>
+		</div>
+	</div>
+</div>
+

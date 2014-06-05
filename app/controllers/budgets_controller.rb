@@ -204,6 +204,10 @@ class BudgetsController < ApplicationController
     @customer = Customer.new
     @architect = User.new
 
+
+    @architects = User.where(deleted: nil).where(role: 2).order('id ASC')
+
+
     if params[:tax_number]
       @customer = Customer.find_by_tax_number(params[:tax_number])
     end
@@ -231,6 +235,8 @@ class BudgetsController < ApplicationController
     @budgets_products = @budget.budgets_products.order('id DESC')
 
     @suppliers = Supplier.order('name ASC')
+
+    @architects = User.where(deleted: nil).where(role: 2).order('id ASC')
 
     #@payment_condition1 = @budget.payment_conditions.order('id ASC').first
     #@payment_condition2 = @budget.payment_conditions.order('id ASC').second

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140410230105) do
+ActiveRecord::Schema.define(:version => 20140605153614) do
 
   create_table "budgets", :force => true do |t|
     t.integer  "customer_id"
@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(:version => 20140410230105) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "mobile"
+    t.boolean  "deleted"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
