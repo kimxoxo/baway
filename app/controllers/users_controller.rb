@@ -2,10 +2,10 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.where(role: 2).where("id != ?", 2).where(deleted: nil).paginate(page: params[:page], per_page: 10).order('name DESC')
+    @users = User.where(role: 2).where("id != ?", 2).where(deleted: nil).paginate(page: params[:page], per_page: 10).order('name ASC')
 
 		if params[:deleted]
-    	@users = User.where(role: 2).where("id != ?", 2).where(deleted: true).paginate(page: params[:page], per_page: 10).order('name DESC')
+    	@users = User.where(role: 2).where("id != ?", 2).where(deleted: true).paginate(page: params[:page], per_page: 10).order('name ASC')
 		end	
 
     respond_to do |format|

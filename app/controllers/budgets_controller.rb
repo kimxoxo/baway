@@ -205,7 +205,7 @@ class BudgetsController < ApplicationController
     @architect = User.new
 
 
-    @architects = User.where(deleted: nil).where(role: 2).order('id ASC')
+    @architects = User.where(deleted: nil).where(role: 2).order('name ASC')
 
 
     if params[:tax_number]
@@ -236,7 +236,7 @@ class BudgetsController < ApplicationController
 
     @suppliers = Supplier.order('name ASC')
 
-    @architects = User.where(deleted: nil).where(role: 2).order('id ASC')
+    @architects = User.where(deleted: nil).where(role: 2).order('name ASC')
 
     #@payment_condition1 = @budget.payment_conditions.order('id ASC').first
     #@payment_condition2 = @budget.payment_conditions.order('id ASC').second
