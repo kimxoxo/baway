@@ -67,10 +67,10 @@ class Product < ActiveRecord::Base
     	i = i + 1
     	
     	if i == 1
-    		@products = Product.find_all_by_supplier_id(supplier_id_from_cell.to_i)
-    		@products.each do |p|
-    			p.update_attributes(visible: false)
-    		end
+    		#@products = Product.find_all_by_supplier_id(supplier_id_from_cell.to_i)
+    		#@products.each do |p|
+    			#p.update_attributes(visible: false)
+    		#end
     	end
 
 
