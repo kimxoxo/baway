@@ -53,14 +53,25 @@ class Product < ActiveRecord::Base
 
 	def self.import(file)
 
+	  i = 0
 
     CSV.foreach(file.path, headers: true) do |row|
 
       product_hash = row.to_hash
-
-      
+    
       code_from_cell = product_hash["code"].strip
       supplier_id_from_cell = product_hash["supplier_id"].strip
+
+
+      #make all products visible = false first, then visible the updated products and new products
+    	i = i + 1
+    	
+    	if i == 1
+    		@products = Product.find_all_by_supplier_id(supplier_id_from_cell.to_i)
+    		@products.each do |p|
+    			p.update_attributes(visible: false)
+    		end
+    	end
 
 
       @product = Product.where(code: "#{code_from_cell}", supplier_id: supplier_id_from_cell.to_i).first
@@ -106,14 +117,14 @@ class Product < ActiveRecord::Base
       #which means there are two or more items for the same supplier_id with the same code
     end
 
-	  @products = Product.where(supplier_id: @product.supplier_id)
+	  #@products = Product.where(supplier_id: @product.supplier_id)
 
-	  @products.each do |product|
-	  	if product.updated_at.strftime("%Y%m%d") != Date.today.strftime("%Y%m%d")
-	  		product.visible = false
-	  		product.save
-	  	end
-	  end
+	  #@products.each do |product|
+	  	#if product.updated_at.strftime("%Y%m%d") != Date.today.strftime("%Y%m%d")
+	  		#product.visible = false
+	  		#product.save
+	  	#end
+	  #end
   end
 
 
