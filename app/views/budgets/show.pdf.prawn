@@ -175,7 +175,7 @@ products = [products_row]
 
 
 #products += @budget.budgets_products.map do |budget_product|
-@budget.budgets_products.order("house_area ASC").order("product_type DESC").each do |budget_product|
+@budget.budgets_products.where(show: [nil, true]).order("house_area ASC").order("product_type DESC").each do |budget_product|
 
 	product = Product.find(budget_product.product_id)
 

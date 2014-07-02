@@ -8,16 +8,37 @@
 					<% product = Product.find(budget_product.product_id) %>
 
 						<!-- compute totals for price column -->
-						<% (@price_total = @price_total + budget_product.computed_price) if budget_product.computed_price %>
+						<% (@price_total = @price_total + budget_product.computed_price) if (budget_product.computed_price && budget_product.show != false) %>
 
-						<% (@quantity_total = @quantity_total + budget_product.quantity) if budget_product.quantity %>
+						<% (@quantity_total = @quantity_total + budget_product.quantity) if (budget_product.quantity && budget_product.show != false) %>
 
 				<% end %>
 
 
 				<table id="table_results" style="border: 0px solid green; ">
 					<tr>
-						<th class="product_type">
+						<th width="" style="font-weight: normal; ">
+							<%= simple_form_for @budget,
+																	url: {controller: 'budgets',
+																				action: 'show_hidden_products'},
+																	method: :get,
+																	html: {class: 'form-inline',
+																				 style: 'margin: 0; padding: 0; '} do |f| %>
+
+								<%= f.input_field :id,
+																	as: :hidden %>
+
+
+								<%= f.input :show_hidden_products,
+														as: :boolean,
+														label: 'mostrar itens desabilitados',
+														wrapper: :basic,
+														input_html: {style: 'border: 1px solid red; ',
+																				 onclick: '$(this).closest("form").submit(); ' } %>
+
+							<% end %>
+						</th>
+						<!--<th class="product_type">
 						</th>
 
 						<th class="td_code" width="1px">
@@ -54,18 +75,34 @@
 						</th>
 
 						<th class="td_pencil_quantity">
-						</th>
+						</th>-->
 
-						<th class="td_quantity" style="">
+						<th class="td_quantity_" align="left" width="30px" style="">
 							<%= @quantity_total %>
 						</th>
 
-						<th class="td_price" align="left">
+						<th class="td_price_" align="right" width="180px" style="">
 							<%= number_to_currency(@price_total) %>
 						</th>
 
-						<th class="td_delete" width="1px">
+						<!--
+						<th class="td_pencil_up" width="1px">
 						</th>	
+
+						<th class="td_up" width="1px">
+						</th>	
+
+
+						<th class="td_up" width="1px">
+						</th>
+
+
+						<th class="td_show" width="1px">
+						</th>	
+
+
+						<th class="td_delete" width="1px">
+						</th>-->
 					</tr>
 				</table>
 

@@ -443,4 +443,16 @@ class BudgetsController < ApplicationController
 	end
 
 
+
+	def show_hidden_products
+
+		@budget = Budget.find(params[:budget][:id])
+		@budget.update_attributes!(show_hidden_products: params[:budget][:show_hidden_products])
+
+		respond_to do |format|
+    	format.html { redirect_to action: 'edit', id: @budget.id }
+		end
+	end
+
+
 end

@@ -24,7 +24,8 @@ class Budget < ActiveRecord::Base
   attr_accessible :architect_id, :customer_id, :description, :payment_condition_id,
   				  			:seller_id, :status, :customer_attributes, :user, :discount, :freight,
   				  			:instalation, :instalation_observations, :payment_condition, :initial_payment,
-  				  			:observations, :deleted, :instant_payment, :instant_payment_discount
+  				  			:observations, :deleted, :instant_payment, :instant_payment_discount,
+  				  			:show_hidden_products
 
 
   #this is similar to has_and_belongs_to_many

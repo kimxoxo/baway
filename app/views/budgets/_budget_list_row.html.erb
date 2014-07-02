@@ -555,14 +555,13 @@
 							</td>
 
 
-							<td class="td_view">
+							<td class="td_show">
 								<% if budget_product.show == false %>
 									<%= link_to content_tag(:i, '', class: "fa fa-eye", style: "font-size: 14px; color: #31a549; "),
 		                    			update_products_list_show_hide_budgets_path(budget_id: @budget.id,
 		                    																									product_id: product.id,
 							                    																				budget_product_id: budget_product.id,
-							                    																				show: true),
-							                    																				remote: true %>
+							                    																				show: true) %>
 							  <% else %>
 									<%= link_to content_tag(:i, '', class: "fa fa-eye", style: "font-size: 14px; color: #ff4e4e; "),
 		                    			update_products_list_show_hide_budgets_path(budget_id: @budget.id,
