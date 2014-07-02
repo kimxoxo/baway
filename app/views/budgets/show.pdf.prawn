@@ -92,6 +92,12 @@ totals_price = 0
 ###PRODUCTS TABLE###
 ###PRODUCTS TABLE###
 	products_row = [
+									"ambiente"
+									]
+
+
+
+	products_row += [
 									"tipo"
 									]
 
@@ -124,10 +130,6 @@ if params[:observations]
 									]
 end
 
-
-	products_row += [
-									"ambiente"
-									]
 
 
 if params[:freight]
@@ -199,9 +201,18 @@ products = [products_row]
 		#compute totals_price
 		totals_price = totals_price + budget_product.computed_price
 
-products_row = [
-								(t :"activerecord.attributes.product.product_type_full#{product.product_type}")
-								]
+
+
+
+	products_row = [
+									budget_product.house_area
+									]
+
+
+
+	products_row += [
+									(t :"activerecord.attributes.product.product_type_full#{product.product_type}")
+									]
 
 
 
@@ -214,7 +225,7 @@ products_row = [
 
 	if params[:supplier]
 		products_row += [
-										product.supplier.name
+										product.supplier.name.downcase
 										]
 	end
 
@@ -222,7 +233,7 @@ products_row = [
 
 	if params[:description]
 		products_row += [
-										product.description
+										product.description.downcase
 										]
 	end
 
@@ -232,12 +243,6 @@ products_row = [
 										budget_product.product_observations
 										]
 	end
-
-
-	products_row += [
-									budget_product.house_area
-									]
-
 
 
 	if params[:freight]

@@ -9,6 +9,7 @@ Baway::Application.routes.draw do
   resources :budgets do
     collection { get :products_search }
     collection { get :update_products_list }
+    collection { get :update_products_list_show_hide }    
     collection { get :update_product_attributes }
     collection { get :validate_budget }
     collection { post :compute_product_type3 }

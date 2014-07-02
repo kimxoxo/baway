@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140605153614) do
+ActiveRecord::Schema.define(:version => 20140701235257) do
 
   create_table "budgets", :force => true do |t|
     t.integer  "customer_id"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20140605153614) do
     t.string  "product_observations"
     t.integer "product_type"
     t.decimal "up"
+    t.boolean "show"
   end
 
   create_table "curtains", :force => true do |t|

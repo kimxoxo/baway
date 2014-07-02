@@ -1,6 +1,13 @@
 						<% product = Product.find(budget_product.product_id) %>
 
-						<tr id='<%= "product_id_#{budget_product.id}" %>'>
+						<% if budget_product.show == false %>
+							<% tr_color = 'background-color: #ffa8a8; ' %>
+						<% else %>
+							<% tr_color = 'background-color: none; ' %>
+						<% end %>
+
+
+						<tr id='<%= "product_id_#{budget_product.id}" %>' style='<%= "#{tr_color}" %>'>
 							<td class="td_checkbox" style="padding-left: 0px; padding-right: 3px; ">
 								<% if budget_product.request %>
 									<%= link_to budget_product.request.request_number, request_path(budget_product.request.id, format: 'pdf'), target: '_blank' %>
@@ -63,7 +70,7 @@
 
 							<td class="td_description" style="text-overflow: ellipsis; max-width: 120px; overflow:hidden; ">
 								<div class="" style="text-overflow: ellipsis; overflow:hidden; ">
-									<%= product.description %>
+									<%= product.description.downcase %>
 								</div>
 							</td>
 
@@ -91,7 +98,7 @@
 
 		              <%= f.input_field :product_observations,
 		                          			as: :string,
-		                          			maxlength: 10,
+		                          			maxlength: 20,
 		                       					onblur: '$(this).closest("form").submit(); ',
 		                          			style: 'float: left;
 		                          							width: 70px;
@@ -548,13 +555,31 @@
 							</td>
 
 
+							<td class="td_view">
+								<% if budget_product.show == false %>
+									<%= link_to content_tag(:i, '', class: "fa fa-eye", style: "font-size: 14px; color: #31a549; "),
+		                    			update_products_list_show_hide_budgets_path(budget_id: @budget.id,
+		                    																									product_id: product.id,
+							                    																				budget_product_id: budget_product.id,
+							                    																				show: true),
+							                    																				remote: true %>
+							  <% else %>
+									<%= link_to content_tag(:i, '', class: "fa fa-eye", style: "font-size: 14px; color: #ff4e4e; "),
+		                    			update_products_list_show_hide_budgets_path(budget_id: @budget.id,
+		                    																									product_id: product.id,
+							                    																				budget_product_id: budget_product.id,
+							                    																				show: false) %>
+							  <% end %>
+		 						</td>
+
+
 							<td class="td_delete">
 								<%= link_to content_tag(:i, '', class: "fa fa-trash-o", style: "font-size: 14px; "),
-	                    			update_products_list_budgets_path(budget_id: @budget.id,
-	                    																				product_id: product.id,
-	                    																				budget_product_id: budget_product.id,
-	                    																				delete: true),
-	                    																				remote: true %>
+		                   			update_products_list_budgets_path(budget_id: @budget.id,
+								                   														product_id: product.id,
+								                   														budget_product_id: budget_product.id,
+								                   														delete: true),
+								                   														remote: true %>
 	 						</td>
 						</tr>
 
