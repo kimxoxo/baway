@@ -252,6 +252,10 @@ class BudgetsController < ApplicationController
     @budget.initial_payment = 0
 
 
+    @architects = User.where(id: 2)
+    @architects += User.where(deleted: nil).where(role: 2).where("id != ?", 2).order('name ASC')
+
+
     respond_to do |format|
       if @budget.save
 
@@ -261,6 +265,94 @@ class BudgetsController < ApplicationController
     		PaymentCondition.new(budget_id: @budget.id, num_monthly_payments: "3x").save
     		PaymentCondition.new(budget_id: @budget.id, num_monthly_payments: "").save
     
+
+				#create delivery for 6 types of products, each delivery with 2 to 4 options
+    		DeliveryOption.new(budget_id: @budget.id,
+    											 name: "rev. parede",
+    											 option1: false,
+    											 option1_label: "15d",
+    											 option2: false,
+    											 option2_label: "30d",
+    											 option3: false,
+    											 option3_label: "45d",
+    											 option4: false,
+    											 option4_label: "60d",
+    											 observations: "").save
+
+
+    		DeliveryOption.new(budget_id: @budget.id,
+    											 name: "tec. importado",
+    											 option1: false,
+    											 option1_label: "30d",
+    											 option2: false,
+    											 option2_label: "45d",
+    											 option3: false,
+    											 option3_label: "60d",
+    											 option4: false,
+    											 option4_label: "",
+    											 observations: "").save
+
+
+    		DeliveryOption.new(budget_id: @budget.id,
+    											 name: "tec. nacional",
+    											 option1: false,
+    											 option1_label: "15d",
+    											 option2: false,
+    											 option2_label: "30d",
+    											 option3: false,
+    											 option3_label: "45d",
+    											 option4: false,
+    											 option4_label: "",
+    											 observations: "").save
+
+
+
+    		DeliveryOption.new(budget_id: @budget.id,
+    											 name: "tapete",
+    											 option1: false,
+    											 option1_label: "20d",
+    											 option2: false,
+    											 option2_label: "30d",
+    											 option3: false,
+    											 option3_label: "45d",
+    											 option4: false,
+    											 option4_label: "60d",
+    											 observations: "").save
+
+
+
+    		DeliveryOption.new(budget_id: @budget.id,
+    											 name: "persianas",
+    											 option1: false,
+    											 option1_label: "30d",
+    											 option2: false,
+    											 option2_label: "45d",
+    											 option3: false,
+    											 option3_label: "",
+    											 option4: false,
+    											 option4_label: "",
+    											 observations: "").save
+
+
+
+    		DeliveryOption.new(budget_id: @budget.id,
+    											 name: "toldo",
+    											 option1: false,
+    											 option1_label: "30d",
+    											 option2: false,
+    											 option2_label: "45d",
+    											 option3: false,
+    											 option3_label: "60d",
+    											 option4: false,
+    											 option4_label: "",
+    											 observations: "").save
+
+
+
+
+
+
+
 
         #format.html { redirect_to @budget, notice: 'Budget was successfully created.' }
         format.html { redirect_to action: 'edit', id: @budget.id }

@@ -3,6 +3,7 @@
 # Table name: curtains
 #
 #  id                  :integer          not null, primary key
+#  budgets_product_id  :integer
 #  window_width        :decimal(, )
 #  window_height       :decimal(, )
 #  window_number_parts :integer

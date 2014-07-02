@@ -23,6 +23,16 @@ function enable_form_budget_more_details() {
 
 
 
+function enable_form_budget_delivery_details() {
+
+	$('#div_budget_delivery_details_show').hide();
+	$('#div_budget_delivery_details_edit').fadeIn(500);
+
+}
+
+
+
+
 function hide_all_forms() {
 	//$('#table_budgets_products_list tr form').hide();
 	$('.hide_this_form').hide();

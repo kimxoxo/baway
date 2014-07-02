@@ -140,9 +140,9 @@ end
 
 
 
-	products_row += [
-									"entrega"
-									]
+	#products_row += [
+									#"entrega"
+									#]
 
 if params[:width]
 	products_row += [
@@ -253,9 +253,9 @@ products = [products_row]
 
 
 
-	products_row += [
-									"#{budget_product.days_to_delivery} dia(s)"
-									]
+	#products_row += [
+									#"#{budget_product.days_to_delivery} dia(s)"
+									#]
 
 
 
@@ -275,10 +275,16 @@ products = [products_row]
 	end
 
 
+	if product.product_type != 2
+		unit = "m"
+	else
+		unit = ""
+	end
+
 
 	if params[:quantity]
 		products_row += [
-										budget_product.quantity
+										"#{budget_product.quantity} #{unit}"
 										]
 	end
 

@@ -16,6 +16,8 @@
 #  computed_price       :decimal(, )
 #  product_observations :string(255)
 #  product_type         :integer
+#  up                   :decimal(, )
+#  show                 :boolean
 #
 
 class BudgetsProduct < ActiveRecord::Base

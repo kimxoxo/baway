@@ -19,6 +19,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  mobile                 :string(255)
+#  deleted                :boolean
 #
 
 class User < ActiveRecord::Base

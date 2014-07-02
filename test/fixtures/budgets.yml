@@ -18,6 +18,7 @@
 #  deleted                  :boolean
 #  instant_payment          :boolean
 #  instant_payment_discount :decimal(, )
+#  show_hidden_products     :boolean
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
