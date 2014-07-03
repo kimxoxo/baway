@@ -382,11 +382,114 @@ end
 
 
 
-pdf.move_down 70
+pdf.move_down 40
 
 
 
 
+
+
+
+
+
+
+
+
+
+	@delivery_options = @budget.delivery_options.sort_by(&:id)
+
+
+	header = false
+
+	#fills the header
+	@delivery_options.each do |d|
+		if d.option1 || d.option2 || d.option3 || d.option4
+ 			header = true
+		end
+	end
+
+
+
+	if header
+		delivery_options = [[
+		          					"Entrega",
+		          					"",
+		          					""
+												]]
+	end
+
+
+
+	delivery_option_phrase = ""
+
+	@delivery_options.each do |d|
+
+
+		delivery_option_phrase = ""
+
+
+		if d.option1 || d.option2 || d.option3 || d.option4
+ 
+			if d.option1
+				delivery_option_phrase += "#{d.option1_label[0..-2]} dias        "
+			end
+
+			if d.option2
+				delivery_option_phrase += "#{d.option2_label[0..-2]} dias        "
+			end
+
+			if d.option3
+				delivery_option_phrase += "#{d.option3_label[0..-2]} dias        "
+			end
+
+			if d.option4
+				delivery_option_phrase += "#{d.option4_label[0..-2]} dias        "
+			end
+
+			if d.observations != ""
+				delivery_observation_phrase = "<u>observação</u>    #{d.observations}"
+			end
+
+
+
+			delivery_options += [[
+				          					d.name,
+				          					delivery_option_phrase,
+				          					delivery_observation_phrase
+														]]
+		end
+	end
+
+
+	if header
+
+		pdf.table(delivery_options,
+							width: 770,
+							column_widths:  {0 => 80,
+															 1 => 230},
+
+							:cell_style => { :inline_format => true },
+
+
+				 		  header: true) do |delivery_option_cell|
+
+			#product.row(0).font_style = :bold
+			#ticket.row(0).column(0).align = :right
+
+			delivery_option_cell.column(0..10).border_width = 0
+			delivery_option_cell.row(0).font_style = :bold
+			delivery_option_cell.row(0).style(:background_color => "F4F3F3")
+		end
+	end
+
+
+
+
+
+
+
+
+pdf.move_down 10
 
 
 if @budget.instant_payment
@@ -395,12 +498,28 @@ if @budget.instant_payment
 	budget_total = 0
 	budget_total = totals_price - @budget.discount
 
+	if !@budget.instant_payment_discount
+		@budget.instant_payment_discount = 0
+	end
+
 
 	budget_total_with_discount = budget_total - (budget_total * (@budget.instant_payment_discount/100))
 
+
+	budget_total_with_discount_phrase = "#{number_to_currency(budget_total_with_discount)}      à vista"
+
+	if @budget.instant_payment_discount > 0
+
+		budget_total_with_discount_phrase += " (#{@budget.instant_payment_discount}% desconto)"
+
+	end
+
+
+
+
 	payment_conditions = [[
-		          					"opções de pagamento",
-	  										"#{number_to_currency(budget_total_with_discount)} à vista (#{@budget.instant_payment_discount}% desconto)"
+		          					"opção de pagamento",
+	  										budget_total_with_discount_phrase
 												]]
 
 
@@ -498,7 +617,7 @@ date_plus_30days =  @budget.updated_at + 30.days
 date_plus_30days = date_plus_30days.strftime('%d/%m/%Y')
 
 budget_is_valid_up_to = [[
-	          						"Este orçamento tem validade de 30dias, após a sua emissão."
+	          						"Este orçamento tem validade de 30 dias, após a sua emissão."
 												]]
 
 
