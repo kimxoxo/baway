@@ -5,67 +5,73 @@
 
 
 
-					<% @budget_payment_conditions = @budget.payment_conditions.sort_by(&:id) %>
+					<% @delivery_options = @budget.delivery_options.sort_by(&:id) %>
 
-					<% @budget_payment_conditions.each do |payment_condition| %>
-			      <%= f.simple_fields_for "payment_condition[]", payment_condition do |p| %>
+					<% @delivery_options.each do |delivery_option| %>
+				
 
+		        <table style="padding: 0; margin: 0; border: 0px solid blue; width: 100%; ">
+						  <%= f.simple_fields_for "delivery_option[]", delivery_option do |d| %>
+			          <tr>
+			            <td width="100px" style="border: 0px solid red; padding: 5px; ">
+			            	<%= delivery_option.name %>
+			            </td>
 
-			    <% end %>
+			            <td width="70px" style="border: 0px solid red; ">
+			            	<%= d.input :option1,
+			            							wrapper: :basic,
+			            							label: delivery_option.option1_label %>
+			            </td>
 
+			            <td width="70px" style="border: 0px solid red; ">
+				            <%= d.input :option2,
+				            						wrapper: :basic,
+				            						label: delivery_option.option2_label %>
+			            	
+			            </td>
 
-	        <table style="padding: 0; margin: 0; border: 0px solid red; width: 100%; ">
-	          <tr>
-	            <td width="70px">
+			            <td width="70px" style="border: 0px solid red; ">
+			            	<% if delivery_option.option3_label != "" %>
+				            	<%= d.input :option3,
+				            							wrapper: :basic,
+				            							label: delivery_option.option3_label %>
+				            <% end %>							
+			            </td>
 
-	            </td>
+			            <td width="70px" style="border: 0px solid red; ">
+ 			            	<% if delivery_option.option4_label != "" %>
+				            	<%= d.input :option4,
+				            							wrapper: :basic,
+				            							label: delivery_option.option4_label %>
+				            <% end %>
+			            </td>
 
-	            <td width="90px">
-	            </td>
+			            <td>
+			            	<%= d.input :observations,
+			            							wrapper: :basic,
+			            							label_html: { style: 'width: 80px;
+	              																	padding-right: 10px;
+	              																	text-align: left; '},
+	              								input_html: { rows: 1,
+	              															style: 'width: 675px; ' } %>
+			            </td>
+			          </tr>
+				    	<% end %>
+				    </table>
+				  <% end %>
 
+						<table style="width: 100%; margin: 0; border: 0px solid red; ">
+							<tr>
+								<td style="border: 0px solid red; padding-top: 10px; " colspan="4">								
+								</td>
 
-	            <td width="" style="border: 0px solid red; ">
-
-	            </td>
-	          </tr>
-	        </table>
-
-
-					<table style="width: 100%; margin-top: 5px; ">
-						<tr>
-							<td style="border: 0px solid red; " colspan="5">
-
-							</td>
-						</tr>
-
-
-						<tr>
-							<td width="340px" style="border: 0px solid red; ">
-
-							</td>
-						</tr>
-
-
-						<tr>
-							<td colspan="6">
-							</td>
-						</tr>
-
-
-						<tr>
-							<td style="border: 0px solid red; padding-top: 10px; " colspan="4">
-							
-							</td>
-
-
-	            <td width="80px" style="border: 0px solid red; ">
-	              <button style="float: right; margin-top: 10px; " class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
-	                <b>confirmar</b>
-	                <i id="icon-loading-confirm-customer" class=""></i>
-	              </button>
-	            </td>
-						</tr>
-					</table>
-					
+		            <td width="80px" style="border: 0px solid red; ">
+		              <button style="float: right; margin: 3px 10px 0 0; " class="btn btn-small btn-primary" name="commit" type="submit" onclick="">
+		                <b>confirmar</b>
+		                <i id="icon-loading-confirm-customer" class=""></i>
+		              </button>
+		            </td>
+							</tr>
+						</table>
        	<% end %>
       </div>

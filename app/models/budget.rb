@@ -26,7 +26,7 @@ class Budget < ActiveRecord::Base
   				  			:seller_id, :status, :customer_attributes, :user, :discount, :freight,
   				  			:instalation, :instalation_observations, :payment_condition, :initial_payment,
   				  			:observations, :deleted, :instant_payment, :instant_payment_discount,
-  				  			:show_hidden_products
+  				  			:show_hidden_products, :delivery_option
 
 
   #this is similar to has_and_belongs_to_many
@@ -39,13 +39,14 @@ class Budget < ActiveRecord::Base
   belongs_to :user, foreign_key: :architect_id
 
   has_many  :payment_conditions
+  has_many  :delivery_options
 
   belongs_to :customer
 
   accepts_nested_attributes_for :customer
 
 
-  attr_accessor :user, :payment_condition
+  attr_accessor :user, :payment_condition, :delivery_option
 
 	
   validates :architect_id,

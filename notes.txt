@@ -43,3 +43,18 @@ tecido -> 3
 mao obra -> 4
 revestimento e couro -> 5
 custos adicionais -> 6
+
+
+
+#migration das delivery options
+DeliveryOption.new(budget_id: 3, name: "rev. parede", option1: false, option1_label: "15d", option2: false, option2_label: "30d", option3: false, option3_label: "45d", option4: false, option4_label: "60d", observations: "").save
+
+DeliveryOption.new(budget_id: 3, name: "tec. importado", option1: false, option1_label: "30d", option2: false, option2_label: "45d", option3: false, option3_label: "60d", option4: false, option4_label: "", observations: "").save
+
+DeliveryOption.new(budget_id: 3, name: "tec. nacional", option1: false, option1_label: "15d", option2: false, option2_label: "30d", option3: false, option3_label: "45d", option4: false, option4_label: "", observations: "").save
+
+DeliveryOption.new(budget_id: 3, name: "tapete", option1: false, option1_label: "20d", option2: false, option2_label: "30d", option3: false, option3_label: "45d", option4: false, option4_label: "60d", observations: "").save
+
+DeliveryOption.new(budget_id: 3, name: "persianas", option1: false, option1_label: "30d", option2: false, option2_label: "45d", option3: false, option3_label: "", option4: false, option4_label: "", observations: "").save
+
+DeliveryOption.new(budget_id: 3, name: "toldo", option1: false, option1_label: "30d", option2: false, option2_label: "45d", option3: false, option3_label: "60d", option4: false, option4_label: "", observations: "").save

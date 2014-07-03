@@ -381,6 +381,10 @@ class BudgetsController < ApplicationController
     @budgets_products = @budget.budgets_products
 
 
+    @architects = User.where(id: 2)
+    @architects += User.where(deleted: nil).where(role: 2).where("id != ?", 2).order('name ASC')
+
+
     @suppliers = Supplier.all
 
     if !params[:budget][:discount].blank?
@@ -390,6 +394,14 @@ class BudgetsController < ApplicationController
 
     if params[:budget][:payment_condition]
 			PaymentCondition.update(params[:budget][:payment_condition].keys, params[:budget][:payment_condition].values)
+			@budget.status = 1
+			@budget.save
+		end
+
+
+
+    if params[:budget][:delivery_option]
+			DeliveryOption.update(params[:budget][:delivery_option].keys, params[:budget][:delivery_option].values)
 			@budget.status = 1
 			@budget.save
 		end
