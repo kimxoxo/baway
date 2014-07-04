@@ -73,9 +73,9 @@ class Budget < ActiveRecord::Base
 		        self.errors.add(:id, "")
 		      end
 
-		      if bp.days_to_delivery.nil?
-		        self.errors.add(:id, "")
-		      end
+		      #if bp.days_to_delivery.nil?
+		        #self.errors.add(:id, "")
+		      #end
 
 		    end
 
