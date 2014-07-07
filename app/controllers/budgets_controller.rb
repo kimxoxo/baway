@@ -559,4 +559,33 @@ class BudgetsController < ApplicationController
 	end
 
 
+
+
+
+	def make_pair
+		
+
+	end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 end

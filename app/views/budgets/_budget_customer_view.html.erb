@@ -1,7 +1,7 @@
       <div style="" id="budget_client_div_show" class="well no_borders_shadow">
       <%#= f.error_notification class: "alert alert-error" %>
 
-        <table style="padding: 0; margin: 0; ">
+        <!--<table style="padding: 0; margin: 0; ">
           <tr>
             <th width="50px">
               <%= t :"activerecord.attributes.customer.tax_number_type#{@budget.customer.tax_number_type}" %>
@@ -17,17 +17,23 @@
               </a>
             </td>
           </tr>
-        </table>
+        </table>-->
 
         <table>
           <tr>
             <th width="50px">
-              nome
+              cliente
             </th>
 
             <td>
               <%= @budget.customer.name %>
             </td>
+
+            <td style="text-align: right; ">
+              <a href="#" onclick="enable_form(); ">  
+                <i style="cursor: pointer; " class="fa fa-pencil" onclick="enable_form(); "></i>
+              </a>
+            </td>            
           </tr>
         </table>
       </div>

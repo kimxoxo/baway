@@ -96,6 +96,9 @@
 						<%= t :"activerecord.attributes.product.code" %>
 					</th>
 
+					<th class="td_make_pair">
+						<i class="fa fa-link" style="font-size: 16px; color: #fff; "></i>
+					</th>
 
 					<th class="td_product_type" style="padding-left: 0px; padding-right: 3px; ">
 						<%= t :"activerecord.attributes.product.product_type" %>
@@ -317,6 +320,18 @@
 
 	<%#= link_to 'Show', @budget %> 
 	<%#= link_to 'Back', budgets_path %>
+
+
+
+	<!-- hidden form for pair product and mão de obra -->
+	<%= form_tag( { controller: 'budgets', action: 'make_pair' }, multipart: true, remote: true, id: 'make_pair_form' ) do %>
+
+		<%= hidden_field_tag 'product_id', '' %>
+		<%= hidden_field_tag 'labor_id', '' %>
+
+	<% end %>
+	<!-- end of hidden form -->
+
 </center>
 
 

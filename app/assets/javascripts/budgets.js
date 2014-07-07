@@ -2,14 +2,39 @@
 // All this logic will automatically be available in application.js.
 
 
+//disabling not labour chain icons
+function disable_not_labour() {
+
+	
+
+	
+}
+
+
+
+function make_pair_and_submit(budget_product_id, product_type) {
+	
+	if(product_type != 0) {
+
+		$('#product_id').val(budget_product_id);
+
+	}
+	else if(product_type == 0) {
+
+		$('#labor_id').val(budget_product_id);
+
+	}
+
+	teste = $('#product_id').val();
+	alert(teste);
+
+}
+
+
 
 function enable_payment_condition_input() {
 
-
 	$('#custom_monthly_payment_option').show();
-
-
-
 }
 
 
