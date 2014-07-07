@@ -22,7 +22,7 @@ function make_pair_and_submit(budget_product_id, product_type) {
 
 
 	if((product_id_val != "") && (labor_id_val != "")) {
-
+		$('#make_pair_form').submit();
 	}
 
 }

@@ -233,7 +233,12 @@ class BudgetsController < ApplicationController
     @products = @budget.products.order('created_at ASC')
     @products_search_list = []
 
+
     @budgets_products = @budget.budgets_products.order('id DESC')
+
+    #@budgets_products = @budget.budgets_products.where("product_type != ?", 0).order('id DESC')
+    #@budgets_products += @budget.budgets_products.where(product_type: 0).where(pair_id: nil).order('id DESC')
+
 
     @suppliers = Supplier.order('name ASC')
 
@@ -500,20 +505,20 @@ class BudgetsController < ApplicationController
 
 			@product = @budgets_product.product
 
-		
-			@budgets_product.computed_price = view_context.compute_price(
-																					@product.product_type,
-																					@product.supplier_price,
-																					@product.ipi,
-																					@product.markup,
-																					@product.supplier_table_discount,
-																					@budgets_product.quantity,
-																					@budgets_product.freight,
-																					@budgets_product.width,
-																					@budgets_product.height,
-																					@budgets_product.computed_price,
-																					@budgets_product.up
-																					)	
+	
+
+			@budgets_product.computed_price = view_context.compute_price(@product.product_type,
+																																	 @product.supplier_price,
+																																	 @product.ipi,
+																																	 @product.markup,
+																																	 @product.supplier_table_discount,
+																																	 @budgets_product.quantity,
+																																	 @budgets_product.freight,
+																																	 @budgets_product.width,
+																																	 @budgets_product.height,
+																																	 @budgets_product.computed_price,
+																																	 @budgets_product.up)
+																																		
 
 			@budgets_product.save
 			
@@ -563,7 +568,21 @@ class BudgetsController < ApplicationController
 
 
 	def make_pair
-		
+		if params[:product_id] != "" && params[:labor_id] != ""
+
+		end
+
+		@budget_product_product = BudgetsProduct.find(params[:product_id])
+		@budget_product_labor = BudgetsProduct.find(params[:labor_id])
+
+
+		@budget_product_product.update_attributes(pair_id: params[:labor_id])
+		@budget_product_labor.update_attributes(pair_id: params[:product_id])
+
+
+		#respond_to do |format|
+    	#format.html { redirect_to action: 'edit', id: @budget.id }
+		#end
 
 	end
 

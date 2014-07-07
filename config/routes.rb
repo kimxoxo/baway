@@ -14,7 +14,7 @@ Baway::Application.routes.draw do
     collection { get :update_product_attributes }
     collection { get :validate_budget }
     collection { post :compute_product_type3 }
-    collection { get :make_pair }
+    collection { post :make_pair }
   end
 
 

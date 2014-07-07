@@ -205,7 +205,7 @@ products = [products_row]
 
 
 	products_row = [
-									budget_product.house_area
+									"<b>#{budget_product.house_area}</b>"
 									]
 
 
@@ -304,6 +304,7 @@ end
 
 pdf.table(products, width: 770,
 				  column_widths: {},
+				  :cell_style => { :inline_format => true },
 		 		  header: true) do |product|
 
 	#product.row(0).font_style = :bold
@@ -311,6 +312,7 @@ pdf.table(products, width: 770,
 
 	product.column(0..13).border_width = 0
 	product.row(0).style(:background_color => "F4F3F3")
+	#product.column(0).align = :right
 end
 
 ###END PRODUCTS TABLE###
