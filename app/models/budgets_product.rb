@@ -18,6 +18,7 @@
 #  product_type         :integer
 #  up                   :decimal(, )
 #  show                 :boolean
+#  pair_id              :integer
 #
 
 class BudgetsProduct < ActiveRecord::Base

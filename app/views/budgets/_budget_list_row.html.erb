@@ -44,11 +44,18 @@
 								</div>
 							</td>
 
-							<% chain_icon_visible = "" %>
-							<% chain_icon_visible = "display:none; " if product.product_type == 0 %>
+							<% if budget_product.pair_id %>
+								<% chain_icon_color = "color: #569257; " %>
+							<% else %>
+								<% if product.product_type == 0 %>
+									<% chain_icon_color = "color: #ff4e4e; " %>
+								<% else %>
+									<% chain_icon_color = "color: #c5a162; " %>
+								<% end %>
+							<% end %>
 
 							<td class="td_make_pair">
-								<i class="fa fa-link" style="font-size: 16px; color: #007ea2; cursor: pointer; <%= chain_icon_visible %>" onclick='make_pair_and_submit(<%= budget_product.id %>, <%= product.product_type %>); '></i>
+								<i class="fa fa-link" style="font-size: 16px; color: #007ea2; cursor: pointer; <%= chain_icon_color %>" onclick='make_pair_and_submit(<%= budget_product.id %>, <%= product.product_type %>); '></i>
 							</td>
 
 

@@ -2,14 +2,6 @@
 // All this logic will automatically be available in application.js.
 
 
-//disabling not labour chain icons
-function disable_not_labour() {
-
-	
-
-	
-}
-
 
 
 function make_pair_and_submit(budget_product_id, product_type) {
@@ -25,8 +17,13 @@ function make_pair_and_submit(budget_product_id, product_type) {
 
 	}
 
-	teste = $('#product_id').val();
-	alert(teste);
+	product_id_val = $('#product_id').val();
+	labor_id_val = $('#labor_id').val();
+
+
+	if((product_id_val != "") && (labor_id_val != "")) {
+
+	}
 
 }
 
