@@ -36,5 +36,4 @@ class BudgetsProduct < ActiveRecord::Base
 
   has_one :curtain
 
-
 end

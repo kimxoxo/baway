@@ -234,10 +234,33 @@ class BudgetsController < ApplicationController
     @products_search_list = []
 
 
-    @budgets_products = @budget.budgets_products.order('id DESC')
+    #@budgets_products = @budget.budgets_products.order('id DESC')
 
-    #@budgets_products = @budget.budgets_products.where("product_type != ?", 0).order('id DESC')
-    #@budgets_products += @budget.budgets_products.where(product_type: 0).where(pair_id: nil).order('id DESC')
+    @budgets_products_with_paired_labor = @budget.budgets_products.where("product_type != ?", 0).order("house_area ASC").order("product_type DESC")
+    @budgets_products_with_paired_labor += @budget.budgets_products.where(product_type: 0).where(pair_id: nil).order("house_area ASC").order("product_type DESC")
+
+
+    @budgets_products_with_unpaired_labor = @budget.budgets_products.where(product_type: 0).where("pair_id IS NOT NULL")
+
+
+    @budgets_products = []
+
+    @budgets_products_with_paired_labor.each do |bp|
+			#add bp to new array    	
+   		@budgets_products << bp
+
+   		#if there's labor paired add again, right under it
+    	if bp.pair_id
+
+
+    		bp_pair = @budgets_products_with_unpaired_labor.find { |labor| labor.id == bp.pair_id }
+
+    		@budgets_products << bp_pair
+
+    	end
+
+    end
+
 
 
     @suppliers = Supplier.order('name ASC')
@@ -568,17 +591,12 @@ class BudgetsController < ApplicationController
 
 
 	def make_pair
-		if params[:product_id] != "" && params[:labor_id] != ""
-
-		end
 
 		@budget_product_product = BudgetsProduct.find(params[:product_id])
 		@budget_product_labor = BudgetsProduct.find(params[:labor_id])
 
-
 		@budget_product_product.update_attributes(pair_id: params[:labor_id])
 		@budget_product_labor.update_attributes(pair_id: params[:product_id])
-
 
 		#respond_to do |format|
     	#format.html { redirect_to action: 'edit', id: @budget.id }

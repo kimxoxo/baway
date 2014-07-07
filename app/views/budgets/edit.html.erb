@@ -96,9 +96,11 @@
 						<%= t :"activerecord.attributes.product.code" %>
 					</th>
 
-					<!--<th class="td_make_pair">
+					
+					<th class="td_make_pair">
 						<i class="fa fa-link" style="font-size: 16px; color: #fff; "></i>
-					</th>-->
+					</th>
+
 
 					<th class="td_product_type" style="padding-left: 0px; padding-right: 3px; ">
 						<%= t :"activerecord.attributes.product.product_type" %>
@@ -235,18 +237,7 @@
 							<%= render partial: 'budget_list_row',
 												 locals: {budget_product: budget_product,
 												 				  budget: @budget} if budget_product.show != false %>
-
-
-							<% if budget_product.pair_id %>
-
-
-								<%#= render partial: 'budget_list_row',
-												 locals: {budget_product: BudgetsProduct.find_by_pair_id(budget_product.pair_id).id,
-												 				  budget: @budget} if budget_product.show != false %>
-							<% end %>
-
 						<% end %>
-
 					<% end %>
 				</table>
 			</div>
