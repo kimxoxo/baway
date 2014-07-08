@@ -324,10 +324,13 @@
 
 
 	<!-- hidden form for pair product and mão de obra -->
-	<%= form_tag( { controller: 'budgets', action: 'make_pair' }, multipart: true, remote: true, id: 'make_pair_form' ) do %>
+	<%= form_tag( { controller: 'budgets', action: 'make_pair' }, multipart: true, id: 'make_pair_form' ) do %>
+
+		<%= hidden_field_tag 'budget_id', @budget.id %>
 
 		<%= hidden_field_tag 'product_id', '' %>
-		<%= hidden_field_tag 'labor_id', '' %>
+		<%= hidden_field_tag 'labor_id1', '' %>
+		<%= hidden_field_tag 'labor_id2', '' %>
 
 	<% end %>
 	<!-- end of hidden form -->

@@ -5,6 +5,12 @@
 
 
 function make_pair_and_submit(budget_product_id, product_type) {
+
+
+	product_id_val = $('#product_id').val();
+	labor_id1_val  = $('#labor_id1').val();
+	labor_id2_val  = $('#labor_id2').val();
+	
 	
 	if(product_type != 0) {
 
@@ -13,16 +19,43 @@ function make_pair_and_submit(budget_product_id, product_type) {
 	}
 	else if(product_type == 0) {
 
-		$('#labor_id').val(budget_product_id);
+		if((labor_id1_val == "")) {
+		
+			$('#labor_id1').val(budget_product_id);
+		
+		} else if((labor_id1_val != "") && (labor_id2_val == "")) {
+			
+			$('#labor_id2').val(budget_product_id);
+		
+		} else if((labor_id1_val != "") && (labor_id2_val != "")) {
+
+			$('#labor_id1').val(budget_product_id);
+			$('#labor_id2').val('');
+		}
 
 	}
 
 	product_id_val = $('#product_id').val();
-	labor_id_val = $('#labor_id').val();
+	labor_id1_val = $('#labor_id1').val();
+	labor_id2_val = $('#labor_id2').val();
+	
 
 
-	if((product_id_val != "") && (labor_id_val != "")) {
+	if(product_type != 0) {
 		$('#make_pair_form').submit();
+
+		$('#product_id').val('');
+		$('#labor_id1').val('');
+		$('#labor_id2').val('');
+	}
+
+	if ((labor_id1_val == labor_id2_val)) {
+
+		$('#make_pair_form').submit();
+
+		$('#product_id').val('');
+		$('#labor_id1').val('');
+		$('#labor_id2').val('');
 	}
 
 }

@@ -234,33 +234,30 @@ class BudgetsController < ApplicationController
     @products_search_list = []
 
 
-    #@budgets_products = @budget.budgets_products.order('id DESC')
 
-    @budgets_products_with_paired_labor = @budget.budgets_products.where("product_type != ?", 0).order("house_area ASC").order("product_type DESC")
-    @budgets_products_with_paired_labor += @budget.budgets_products.where(product_type: 0).where(pair_id: nil).order("house_area ASC").order("product_type DESC")
+    @budgets_products_raw = @budget.budgets_products.order('house_area ASC')
+		
 
+   	@budgets_products = []
+    @budgets_products_raw.each do |bpr|
 
-    @budgets_products_with_unpaired_labor = @budget.budgets_products.where(product_type: 0).where("pair_id IS NOT NULL")
+    	
 
-
-    @budgets_products = []
-
-    @budgets_products_with_paired_labor.each do |bp|
-			#add bp to new array    	
-   		@budgets_products << bp
-
-   		#if there's labor paired add again, right under it
-    	if bp.pair_id
+    		@budgets_products << bpr
 
 
-    		bp_pair = @budgets_products_with_unpaired_labor.find { |labor| labor.id == bp.pair_id }
 
-    		@budgets_products << bp_pair
 
-    	end
+
+   
+
+
+
+
+
+
 
     end
-
 
 
     @suppliers = Supplier.order('name ASC')
@@ -592,15 +589,28 @@ class BudgetsController < ApplicationController
 
 	def make_pair
 
+		@budget = Budget.find(params[:budget_id])
+
 		@budget_product_product = BudgetsProduct.find(params[:product_id])
-		@budget_product_labor = BudgetsProduct.find(params[:labor_id])
+		@budget_product_labor1 = BudgetsProduct.find(params[:labor_id1])
 
-		@budget_product_product.update_attributes(pair_id: params[:labor_id])
-		@budget_product_labor.update_attributes(pair_id: params[:product_id])
 
-		#respond_to do |format|
-    	#format.html { redirect_to action: 'edit', id: @budget.id }
-		#end
+		if params[:labor_id1] != "" && params[:product_id] != ""
+			
+			@budget_product_labor1.update_attributes(pair_id: params[:product_id])
+		
+
+			if params[:labor_id2] != ""
+				@budget_product_labor2 = BudgetsProduct.find(params[:labor_id2])
+				@budget_product_labor2.update_attributes(pair_id: params[:product_id])
+			end
+		end
+
+
+
+		respond_to do |format|
+    	format.html { redirect_to action: 'edit', id: @budget.id }
+		end
 
 	end
 
