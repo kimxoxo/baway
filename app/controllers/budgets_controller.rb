@@ -235,22 +235,33 @@ class BudgetsController < ApplicationController
 
 
 
-    @budgets_products_raw = @budget.budgets_products.order('house_area ASC')
+    @budgets_products_raw = @budget.budgets_products.order('house_area ASC').order('product_type DESC')
 		
 
    	@budgets_products = []
     @budgets_products_raw.each do |bpr|
 
     	
+    	if bpr.product_type == 0 && bpr.pair_id != nil
+
+
+    	else
 
     		@budgets_products << bpr
 
+    		if bpr.pair_id != nil
 
+    			pairs = @budget.budgets_products.find_all_by_pair_id(bpr.pair_id)
+    			
+    			pairs.each do |pair|
 
+    				if pair.product_type == 0
+    					@budgets_products << pair
+    				end
+    			end
+    		end
 
-
-   
-
+    	end
 
 
 
@@ -596,7 +607,8 @@ class BudgetsController < ApplicationController
 
 
 		if params[:labor_id1] != "" && params[:product_id] != ""
-			
+
+			@budget_product_product.update_attributes(pair_id: params[:product_id])			
 			@budget_product_labor1.update_attributes(pair_id: params[:product_id])
 		
 
