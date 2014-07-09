@@ -1,3 +1,54 @@
+						<%#####################%>
+						<%#####################%>
+						<%# define tr color due to pairs or non pairs %>
+						<%#####################%>
+						<%#####################%>
+
+
+							<% if budget_product.pair_id != nil %>
+
+
+								<% if !@color1 && !@color2 %>
+
+									<% @tr_color_due_to_pairs = @color1_color %>
+									<% @color1 = true %>
+
+									<% @pair_id = budget_product.pair_id %>
+
+								<% end %>
+
+
+								<% if budget_product.pair_id == @pair_id %>
+
+								<% elsif budget_product.pair_id != @pair_id %>
+									
+
+									<% if @color1 %>
+										<% @tr_color_due_to_pairs = @color2_color %>
+										<% @color2 = true %>
+									<% else %>
+										<% @tr_color_due_to_pairs = @color1_color %>
+										<% @color1 = true %>
+									<% end %>
+
+									<% @pair_id = budget_product.pair_id %>
+
+								<% end %>
+
+
+							<% else %>
+
+								<% @tr_color_due_to_pairs = "" %>
+								<% @pair_id = budget_product.pair_id %>
+
+							<% end %>
+
+
+						<%#####################%>
+						<%#####################%>
+						<%#####################%>
+						<%#####################%>
+
 
 						<% product = Product.find(budget_product.product_id) %>
 
@@ -8,7 +59,7 @@
 						<% end %>
 
 
-						<tr id='<%= "product_id_#{budget_product.id}" %>' style='<%= "#{tr_color}" %>'>
+						<tr id='<%= "product_id_#{budget_product.id}" %>' style='<%= "#{tr_color}" %><%= "#{@tr_color_due_to_pairs}" %>'>
 							<td class="td_checkbox" style="padding-left: 0px; padding-right: 3px; ">
 								<% if budget_product.request %>
 									<%= link_to budget_product.request.request_number, request_path(budget_product.request.id, format: 'pdf'), target: '_blank' %>

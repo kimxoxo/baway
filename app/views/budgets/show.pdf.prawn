@@ -87,6 +87,20 @@ totals_quantity = 0
 totals_price = 0
 
 
+
+
+	@color1 = false
+	@color1_color = "background-color: #f4faff; "
+
+	@color2 = false
+	@color2_color = "background-color: #f2fff3; "
+
+	@tr_color_due_to_pairs = ""
+	@i = 0
+	@i_list_color = []
+
+
+
 ###PRODUCTS TABLE###
 ###PRODUCTS TABLE###
 ###PRODUCTS TABLE###
@@ -176,6 +190,68 @@ products = [products_row]
 
 #products += @budget.budgets_products.map do |budget_product|
 @budget.budgets_products.where(show: [nil, true]).order("house_area ASC").order("product_type DESC").each do |budget_product|
+
+
+	#####################
+	#####################
+	### define tr color due to pairs or non pairs ###
+	#####################
+	#####################
+
+
+	if budget_product.pair_id != nil
+
+
+		if !@color1 && !@color2
+
+			@tr_color_due_to_pairs = @color1_color
+			@i_list_color << @color1_color
+			@color1 = true
+
+			@pair_id = budget_product.pair_id
+
+		end
+
+
+		if budget_product.pair_id == @pair_id
+
+		elsif budget_product.pair_id != @pair_id
+									
+
+		if @color1
+		
+			@tr_color_due_to_pairs = @color2_color
+			@i_list_color << @color2_color
+			@color2 = true
+		else
+			
+			@tr_color_due_to_pairs = @color1_color
+			@i_list_color << @color1_color
+			@color1 = true
+		end
+
+		@pair_id = budget_product.pair_id
+
+
+
+	end
+
+
+	else
+
+		@tr_color_due_to_pairs = ""
+		@i_list_color <<  ""	
+		@pair_id = budget_product.pair_id
+
+	end
+
+
+	#####################
+	#####################
+	#####################
+	#####################
+
+
 
 	product = Product.find(budget_product.product_id)
 
@@ -298,6 +374,7 @@ products = [products_row]
 
 	products += [products_row]
 
+
 end
 
 
@@ -307,12 +384,21 @@ pdf.table(products, width: 770,
 				  :cell_style => { :inline_format => true },
 		 		  header: true) do |product|
 
-	#product.row(0).font_style = :bold
-	#ticket.row(0).column(0).align = :right
+
 
 	product.column(0..13).border_width = 0
 	product.row(0).style(:background_color => "F4F3F3")
-	#product.column(0).align = :right
+
+
+
+
+
+	@i_list_color.each_with_index do |color, i|
+
+		product.row(5).style(:background_color => "#{color}")
+
+	end
+
 end
 
 ###END PRODUCTS TABLE###
@@ -378,6 +464,7 @@ pdf.float do
 		products_totals_cell.row(1).border_width = 0
 		products_totals_cell.row(2).border_width = 0
 		products_totals_cell.row(3).border_width = 0
+		
 	end
 end
 
