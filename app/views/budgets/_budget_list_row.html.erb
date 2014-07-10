@@ -8,14 +8,14 @@
 							<% if budget_product.pair_id != nil %>
 
 
-								<% if !@color1 && !@color2 %>
+								<%# if !@color1 && !@color2 %>
 
-									<% @tr_color_due_to_pairs = @color1_color %>
-									<% @color1 = true %>
+									<%# @tr_color_due_to_pairs = @color1_color %>
+									<%# @color1 = true %>
+									<%# @color2 = false %>
+									<%# @pair_id = budget_product.pair_id %>
 
-									<% @pair_id = budget_product.pair_id %>
-
-								<% end %>
+								<%# end %>
 
 
 								<% if budget_product.pair_id == @pair_id %>
@@ -26,9 +26,11 @@
 									<% if @color1 %>
 										<% @tr_color_due_to_pairs = @color2_color %>
 										<% @color2 = true %>
+										<% @color1 = false %>										
 									<% else %>
 										<% @tr_color_due_to_pairs = @color1_color %>
 										<% @color1 = true %>
+										<% @color2 = false %>
 									<% end %>
 
 									<% @pair_id = budget_product.pair_id %>

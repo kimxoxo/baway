@@ -37,6 +37,42 @@ class BudgetsController < ApplicationController
     prawnto prawn: {page_size: "A4", page_layout: :landscape}, inline: true
 
 
+
+    @budgets_products_raw = @budget.budgets_products.order('house_area ASC').order('product_type DESC')
+		
+
+   	@budgets_products = []
+    @budgets_products_raw.each do |bpr|
+
+    	
+    	if bpr.product_type == 0 && bpr.pair_id != nil
+
+
+    	else
+
+    		@budgets_products << bpr
+
+    		if bpr.pair_id != nil
+
+    			pairs = @budget.budgets_products.find_all_by_pair_id(bpr.pair_id)
+    			
+    			pairs.each do |pair|
+
+    				if pair.product_type == 0
+    					@budgets_products << pair
+    				end
+    			end
+    		end
+
+    	end
+
+    end
+
+
+
+
+
+
     #respond_to do |format|
       #format.html # show.html.erb
       #format.json { render json: @budget }
@@ -262,11 +298,6 @@ class BudgetsController < ApplicationController
     		end
 
     	end
-
-
-
-
-
 
     end
 

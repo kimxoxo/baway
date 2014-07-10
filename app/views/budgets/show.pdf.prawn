@@ -89,16 +89,17 @@ totals_price = 0
 
 
 
-	@color1 = false
-	@color1_color = "background-color: #f4faff; "
+@color1 = false
+@color1_color = "fafafa"
 
-	@color2 = false
-	@color2_color = "background-color: #f2fff3; "
+@color2 = false
+@color2_color = "e7e6e6"
 
-	@tr_color_due_to_pairs = ""
-	@i = 0
-	@i_list_color = []
+@color_transparent = "FFFFFF"
 
+@i_list_color = []
+
+@i = 0
 
 
 ###PRODUCTS TABLE###
@@ -189,7 +190,8 @@ products = [products_row]
 
 
 #products += @budget.budgets_products.map do |budget_product|
-@budget.budgets_products.where(show: [nil, true]).order("house_area ASC").order("product_type DESC").each do |budget_product|
+#@budget.budgets_products.where(show: [nil, true]).order("house_area ASC").order("product_type DESC").each do |budget_product|
+@budgets_products.each do |budget_product|
 
 
 	#####################
@@ -199,51 +201,50 @@ products = [products_row]
 	#####################
 
 
+@teste = "#{@pair_id}/#{budget_product.pair_id}"
+
+
+	@z = 0
+
 	if budget_product.pair_id != nil
 
 
-		if !@color1 && !@color2
+		if budget_product.pair_id == @pair_id
+		
 
-			@tr_color_due_to_pairs = @color1_color
-			@i_list_color << @color1_color
-			@color1 = true
+			if @color1
+				@i_list_color << @color1_color
+			elsif @color2
+				@i_list_color << @color2_color
+			end
+
+
+
+		elsif budget_product.pair_id != @pair_id
+										
+
+			if @color1
+				@i_list_color << @color2_color
+				@color2 = true
+				@color1 = false
+			else
+				@i_list_color << @color1_color
+				@color1 = true
+				@color2 = false
+			end
 
 			@pair_id = budget_product.pair_id
 
 		end
 
 
-		if budget_product.pair_id == @pair_id
+	elsif budget_product.pair_id == nil
 
-		elsif budget_product.pair_id != @pair_id
-									
-
-		if @color1
-		
-			@tr_color_due_to_pairs = @color2_color
-			@i_list_color << @color2_color
-			@color2 = true
-		else
-			
-			@tr_color_due_to_pairs = @color1_color
-			@i_list_color << @color1_color
-			@color1 = true
-		end
-
-		@pair_id = budget_product.pair_id
-
-
-
-	end
-
-
-	else
-
-		@tr_color_due_to_pairs = ""
-		@i_list_color <<  ""	
+		@i_list_color << @color_transparent
 		@pair_id = budget_product.pair_id
 
 	end
+
 
 
 	#####################
@@ -281,7 +282,7 @@ products = [products_row]
 
 
 	products_row = [
-									"<b>#{budget_product.house_area}</b>"
+									"<i>#{budget_product.house_area}</i>"
 									]
 
 
@@ -373,7 +374,7 @@ products = [products_row]
 
 
 	products += [products_row]
-
+@i = @i + 1
 
 end
 
@@ -385,21 +386,17 @@ pdf.table(products, width: 770,
 		 		  header: true) do |product|
 
 
-
 	product.column(0..13).border_width = 0
-	product.row(0).style(:background_color => "F4F3F3")
-
-
-
+	product.row(0).style(:background_color => "bbbbbb")
+	#product.row(0).font_style = :bold
 
 
 	@i_list_color.each_with_index do |color, i|
-
-		product.row(5).style(:background_color => "#{color}")
-
+		product.row(i+1).style(:background_color => color)
 	end
 
 end
+
 
 ###END PRODUCTS TABLE###
 ###END PRODUCTS TABLE###
@@ -419,7 +416,7 @@ pdf.float do
 
 
 	products_totals = [[
-											"sub-total",
+											"TOTAL",
 											number_to_currency(totals_price)
 										]]
 
@@ -428,7 +425,7 @@ pdf.float do
 
 		###PRODUCTS TOTALS TABLE###	
 		products_totals += [[
-												"desconto",
+												"DESCONTO",
 												number_to_currency(@budget.discount)
 											]]
 
@@ -443,7 +440,7 @@ pdf.float do
 
 
 		products_totals += [[
-												"total",
+												"TOTAL C/ DESCONTO",
 												number_to_currency(budget_total)
 											]]
 
