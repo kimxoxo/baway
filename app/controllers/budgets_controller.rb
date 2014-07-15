@@ -633,8 +633,13 @@ class BudgetsController < ApplicationController
 
 		@budget = Budget.find(params[:budget_id])
 
-		@budget_product_product = BudgetsProduct.find(params[:product_id])
-		@budget_product_labor1 = BudgetsProduct.find(params[:labor_id1])
+		if params[:product_id] != ""
+			@budget_product_product = BudgetsProduct.find(params[:product_id])
+		end
+		
+		if params[:labor_id1] != ""
+			@budget_product_labor1 = BudgetsProduct.find(params[:labor_id1])
+		end
 
 
 		if params[:labor_id1] != "" && params[:product_id] != ""
@@ -647,6 +652,28 @@ class BudgetsController < ApplicationController
 				@budget_product_labor2 = BudgetsProduct.find(params[:labor_id2])
 				@budget_product_labor2.update_attributes(pair_id: params[:product_id])
 			end
+		end
+
+
+		if params[:labor_id1] == params[:labor_id2] && params[:labor_id1] != ""
+
+
+			@budget_product_product = BudgetsProduct.find(params[:labor_id1])
+
+			@budget_products = BudgetsProduct.find_all_by_pair_id(@budget_product_product.pair_id)
+
+			if @budget_products.size == 1
+				
+				@budget_products.update_attributes(pair_id: nil)
+			
+			elsif @budget_products.size > 1
+
+				@budget_products.each do |budget_product|
+					budget_product.update_attributes(pair_id: nil)
+				end
+
+			end				
+
 		end
 
 

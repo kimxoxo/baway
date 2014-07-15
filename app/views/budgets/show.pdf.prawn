@@ -93,7 +93,7 @@ totals_price = 0
 @color1_color = "fafafa"
 
 @color2 = false
-@color2_color = "e7e6e6"
+@color2_color = "ededed"
 
 @color_transparent = "FFFFFF"
 
@@ -387,7 +387,7 @@ pdf.table(products, width: 770,
 
 
 	product.column(0..13).border_width = 0
-	product.row(0).style(:background_color => "bbbbbb")
+	product.row(0).style(:background_color => "b3b3b3")
 	#product.row(0).font_style = :bold
 
 
