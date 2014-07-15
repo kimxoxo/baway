@@ -1,5 +1,12 @@
 
 
+
+tr_color_before_update = $('#product_id_<%= @budgets_product.id %>').css('backgroundColor');
+
+
+
+
+
 $('#div_budget_more_details_edit').replaceWith('<%= escape_javascript(render partial: "budget_details", locals: {budget_product: @budgets_product, budget: @budget}) %>');
 
 $('#product_id_<%= @budgets_product.id %>').replaceWith('<%= escape_javascript(render partial: "budget_list_row", locals: {budget_product: @budgets_product, budget: @budget}) %>');
@@ -31,5 +38,9 @@ create_popovers();
 <% if !params[:budgets_product][:budget_status_dont_change] %>
 	disable_checkboxs();
 <% end %>
+
+
+$('#product_id_<%= @budgets_product.id %>').css('background-color', tr_color_before_update);
+
 
 $('#div_buttons').html('<%= escape_javascript(render partial: "buttons") %>');

@@ -171,6 +171,7 @@ class BudgetsController < ApplicationController
     @suppliers = Supplier.all
 
 
+
     if !params[:budgets_product][:freight].blank?
 			params[:budgets_product][:freight] = view_context.currency_to_number(params[:budgets_product][:freight])
 		end
