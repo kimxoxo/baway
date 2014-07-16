@@ -38,7 +38,7 @@ class BudgetsController < ApplicationController
 
 
 
-    @budgets_products_raw = @budget.budgets_products.order('house_area ASC').order('product_type DESC')
+    @budgets_products_raw = @budget.budgets_products.where(show: [true, nil]).order('house_area ASC').order('product_type DESC')
 		
 
    	@budgets_products = []
