@@ -61,13 +61,13 @@ class Product < ActiveRecord::Base
     
       code_from_cell = product_hash["code"].strip
       supplier_id_from_cell = product_hash["supplier_id"].strip
-
+      product_type = product_hash["product_type"].strip
 
       #make all products visible = false first, then visible the updated products and new products
     	i = i + 1
     	
     	if i == 1
-    		@products = Product.find_all_by_supplier_id(supplier_id_from_cell.to_i)
+    		@products = Product.where(supplier_id: supplier_id_from_cell.to_i).where(product_type: product_type.to_i)
     		@products.each do |p|
     			p.update_attributes(visible: false)
     		end

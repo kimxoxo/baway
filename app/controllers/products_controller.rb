@@ -22,9 +22,9 @@ class ProductsController < ApplicationController
 
     if params[:product]
 	    ##query for code
-	    @products_search_list1 = Product.where(supplier_id: params[:product][:supplier_id], visible: true).where("lower(code) LIKE ? ", "#{params[:product][:search_phrase].downcase}%").limit(25)
+	    @products_search_list1 = Product.where(supplier_id: params[:product][:supplier_id], visible: true).where("lower(code) LIKE ? ", "#{params[:product][:search_phrase].downcase}%")
 	    ##query for description
-	    @products_search_list2 = Product.where(supplier_id: params[:product][:supplier_id], visible: true).where("lower(description) LIKE ?", "%#{params[:product][:search_phrase].downcase}%").limit(25)
+	    @products_search_list2 = Product.where(supplier_id: params[:product][:supplier_id], visible: true).where("lower(description) LIKE ?", "%#{params[:product][:search_phrase].downcase}%")
 
 	    ##merge results
 			@products = (@products_search_list1 + @products_search_list2).uniq
