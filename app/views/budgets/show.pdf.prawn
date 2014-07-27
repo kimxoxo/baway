@@ -352,11 +352,7 @@ products = [products_row]
 	end
 
 
-	if product.product_type != 2
-		unit = "m"
-	else
-		unit = ""
-	end
+	unit = (t :"activerecord.attributes.product.unit#{budget_product.unit}")
 
 
 	if params[:quantity]

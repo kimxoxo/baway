@@ -147,6 +147,7 @@ class BudgetsController < ApplicationController
 			#in case product is a carpet only width and height will be add, quantity must be 1 and not editable
 			if @product.product_type == 2 || @product.product_type == 6
 		    @budget_product.update_attributes(quantity: 1)
+		    @budget_product.update_attributes(unit: 2)		    
 			end
 
 	    @budget_product.update_attributes(product_type: @product.product_type)
@@ -342,7 +343,7 @@ class BudgetsController < ApplicationController
     											 option2: false,
     											 option2_label: "30d",
     											 option3: false,
-    											 option3_label: "45d",
+    											 option3_label: "50d",
     											 option4: false,
     											 option4_label: "60d",
     											 observations: "").save
@@ -353,7 +354,7 @@ class BudgetsController < ApplicationController
     											 option1: false,
     											 option1_label: "30d",
     											 option2: false,
-    											 option2_label: "45d",
+    											 option2_label: "50d",
     											 option3: false,
     											 option3_label: "60d",
     											 option4: false,

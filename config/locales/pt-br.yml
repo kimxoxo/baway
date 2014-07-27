@@ -362,6 +362,11 @@ pt-BR:
         um1: rolo
         um2: tecido
         quantity: qt
+        unit: ""
+        unit1: m
+        unit2: m²
+        unit3: rl
+        unit4: uni
         price: preço
         up: up
         price_per_unit_or_squara_meter: preço (uni ou metro)

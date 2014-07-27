@@ -469,14 +469,15 @@
 							</td>
 
 
-							<td class="td_quantity" style="padding: 0 5px 0 5px; margin:0; ">
+							<td class="td_quantity" style="padding: 0 5px 0 5px; margin:0; border: 0px solid red; ">
 		            <%= simple_form_for budget_product,
 		            										url: update_product_attributes_budgets_path,
 							            					method: :get,
 							            					remote: true,
-							            					html: {class: 'hide_this_form',
+							            					html: {class: 'hide_this_form form-inline',
 							            					style: 'margin: 0;
 							            									padding: 0;
+							            									width: 80px;							            									
 							            									border: 0px solid red; ',
 																		id: "form_quantity_#{budget_product.id}"} do |f| %>
 
@@ -484,11 +485,24 @@
 
 		              <%= f.input_field :quantity,
 		                          			as: :string,
-		                       					onblur: '$(this).closest("form").submit(); ',
 		                          			style: 'float: left;
 		                          							width: 30px;
 		                          							margin:0;
-		                          							padding:2px; ' %>          
+		                          							padding:2px; ' %>
+
+		              
+									<%= f.input_field :unit,
+												            as: :select,
+												            collection: units_collection,
+												            onchange: '$(this).closest("form").submit(); ',
+												            include_blank: '-',
+												            style: 'width: 50px;
+												            				height: 20px;
+												            				margin-top: 4px;
+												            				background-color: none;
+												            				font-size: 12px; ' %>
+
+
 		            <% end %>
 
 
@@ -496,8 +510,10 @@
 									<span>
 										<% if (budget_product.quantity - budget_product.quantity.to_i) == 0 %>
 											<%= budget_product.quantity.to_i %>
+											<%= t :"activerecord.attributes.product.unit#{budget_product.unit}" %>
 										<% else %>
-											<%= budget_product.quantity %>
+											<%= budget_product.quantity.to_i %>
+											<%= t :"activerecord.attributes.product.unit#{budget_product.unit}" %>
 										<% end %>
 									</span>
 								<% else %>

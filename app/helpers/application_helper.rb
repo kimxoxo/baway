@@ -21,4 +21,14 @@ module ApplicationHelper
 	end
 
 
+
+
+
+	def units_collection
+		
+		options = ({(t :"activerecord.attributes.product.unit1") => 1, (t :"activerecord.attributes.product.unit2") => 2, (t :"activerecord.attributes.product.unit3") => 3, (t :"activerecord.attributes.product.unit4") => 4})
+
+	end
+
+
 end

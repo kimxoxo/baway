@@ -8,11 +8,6 @@ module BudgetsProductHelper
 
 
 
-
-
-
-
-
 	# def compute_price_product_type_2 (supplier_price, ipi, markup, quantity, freight, width, height)
 
 
