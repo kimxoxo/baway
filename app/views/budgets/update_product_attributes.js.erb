@@ -1,10 +1,5 @@
 
-
-
 tr_color_before_update = $('#product_id_<%= @budgets_product.id %>').css('backgroundColor');
-
-
-
 
 
 $('#div_budget_more_details_edit').replaceWith('<%= escape_javascript(render partial: "budget_details", locals: {budget_product: @budgets_product, budget: @budget}) %>');

@@ -185,6 +185,8 @@ class BudgetsController < ApplicationController
 
     if !params[:budgets_product][:quantity].blank?
 			params[:budgets_product][:quantity] = params[:budgets_product][:quantity].gsub(',', '.')
+
+    	@budgets_product.update_attributes(params[:budgets_product])
 		end
 
 
@@ -214,6 +216,7 @@ class BudgetsController < ApplicationController
 																				@budgets_product.height,
 																				@budgets_product.computed_price,
 																				@budgets_product.up)																				
+
 
  		params[:budgets_product][:computed_price] = @price
 
