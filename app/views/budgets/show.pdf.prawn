@@ -272,12 +272,6 @@ products = [products_row]
 	end
 
 
-		#compute totals_quantity
-		totals_quantity = totals_quantity + budget_product.quantity
-
-		#compute totals_price
-		totals_price = totals_price + budget_product.computed_price
-
 
 
 
@@ -286,16 +280,56 @@ products = [products_row]
 									]
 
 
+	#join tecido and mão de obra
+	if product.product_type == 3 && budget_product.pair_id != nil
+		
+		price_pairs_sum = 0
+
+		@bps_paired = BudgetsProduct.find_all_by_pair_id(budget_product.pair_id)
+
+		@bps_paired.each do |bps_pair|
+			price_pairs_sum = price_pairs_sum + bps_pair.computed_price
+
+
+			@budgets_products.delete_if {|bp| bp[:id] == bps_pair.id } 
+
+
+		end		
+
+
+		product_price = price_pairs_sum
+		product_price_phrase = number_to_currency(price_pairs_sum)
+
+		product_type_phrase = (t :"activerecord.attributes.product.product_type_full#{product.product_type}") + " + mão obra"
+
+	else
+
+		product_type_phrase = (t :"activerecord.attributes.product.product_type_full#{product.product_type}")
+		product_price = budget_product.computed_price
+		product_price_phrase = number_to_currency(budget_product.computed_price)
+	end
+
+
+
+
+
+		#compute totals_quantity
+		totals_quantity = totals_quantity + budget_product.quantity
+
+		#compute totals_price
+		totals_price = totals_price + product_price
+
+
 
 	products_row += [
-									(t :"activerecord.attributes.product.product_type_full#{product.product_type}")
+									product_type_phrase
 									]
 
 
 
 	if params[:code]
 		products_row += [
-										product.code
+										product.code + " #{budget_product.pair_id}"
 										]
 	end
 
@@ -364,7 +398,7 @@ products = [products_row]
 
 
 	products_row += [
-									number_to_currency(budget_product.computed_price)
+									product_price_phrase
 									]
 
 
