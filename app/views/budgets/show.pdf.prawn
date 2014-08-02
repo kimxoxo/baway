@@ -280,6 +280,9 @@ products = [products_row]
 									]
 
 
+	@bps_paired = []
+	@nn = nil
+
 	#join tecido and mão de obra
 	if product.product_type == 3 && budget_product.pair_id != nil
 		
@@ -287,11 +290,13 @@ products = [products_row]
 
 		@bps_paired = BudgetsProduct.find_all_by_pair_id(budget_product.pair_id)
 
+		@nn = BudgetsProduct.find_all_by_pair_id(budget_product.pair_id).count
+
 		@bps_paired.each do |bps_pair|
 			price_pairs_sum = price_pairs_sum + bps_pair.computed_price
 
 
-			@budgets_products.delete_if {|bp| bp[:id] == bps_pair.id } 
+			@budgets_products.delete_if {|bp| bp[:pair_id] == budget_product.pair_id && bp[:product_type] == 0 } 
 
 
 		end		
@@ -329,7 +334,8 @@ products = [products_row]
 
 	if params[:code]
 		products_row += [
-										product.code + " #{budget_product.pair_id}"
+										#product.code + " #{@nn} #{budget_product.pair_id}"
+										product.code
 										]
 	end
 

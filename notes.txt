@@ -40,6 +40,6 @@ Record.all.each { |r| r.destroy }
 papel parede -> 1
 tapete -> 2
 tecido -> 3
-mao obra -> 4
+mao obra -> 0
 revestimento e couro -> 5
 custos adicionais -> 6
