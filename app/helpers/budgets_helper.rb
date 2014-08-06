@@ -26,7 +26,7 @@ module BudgetsHelper
 				end
 
 				return price_plus_freight
-			
+
 			end
 
 		elsif product_type == 2
@@ -37,7 +37,7 @@ module BudgetsHelper
 
 				price_per_square_meter = size_square_meters * supplier_price
 
-				price_per_unit = (price_per_square_meter + (price_per_square_meter * (ipi/100))) * markup
+				price_per_unit = (price_per_square_meter - (supplier_price * (supplier_table_discount/100)) + (price_per_square_meter * (ipi/100))) * markup
 
 				price_plus_freight = price_per_unit + freight
 
