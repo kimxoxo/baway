@@ -70,8 +70,15 @@
       <th><%= t :"activerecord.attributes.product.supplier_id" %></th>
       <th><%= t :"activerecord.attributes.product.description" %></th>
       <th><%= t :"activerecord.attributes.product.width" %></th>
-      <th><%= t :"activerecord.attributes.product.markup" %></th>
-      <th><%= t :"activerecord.attributes.product.supplier_table_discount" %></th>      
+
+      <% if current_user.role == -1 %>    
+        <th><%= t :"activerecord.attributes.product.markup" %></th>
+      <% end %>
+
+      <% if current_user.role == -1 %>    
+        <th><%= t :"activerecord.attributes.product.supplier_table_discount" %></th>      
+      <% end %>
+
       <th><%= t :"activerecord.attributes.product.ipi" %></th>     
       <th><%= t :"activerecord.attributes.product.price" %></th>
       <% if current_user.role == -1 %>
@@ -99,8 +106,15 @@
       <td><%= product.supplier.name %></td>
       <td><%= product.description %></td>
       <td><%= "#{product.width} m" %></td>
-      <td><%= product.markup %></td>
-      <td><%= "#{product.supplier_table_discount}%" %></td>
+
+      <% if current_user.role == -1 %>    
+        <td><%= product.markup %></td>
+      <% end %>
+
+      <% if current_user.role == -1 %>    
+        <td><%= "#{product.supplier_table_discount}%" %></td>
+      <% end %>
+
       <td><%= "#{product.ipi}%" %></td>
 
       <td>
